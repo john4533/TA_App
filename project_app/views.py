@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import User
+from .models import Users
 # Create your views here.
 class Login(View):
     def get(self,request):
@@ -9,7 +9,7 @@ class Login(View):
         noSuchUser = False
         badPassword = False
         try:
-            m = User.objects.get(name=request.POST['name'])
+            m = Users.objects.get(name=request.POST['name'])
             badPassword = (m.password != request.POST['password'])
         except:
             noSuchUser = True
