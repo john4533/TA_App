@@ -19,5 +19,11 @@ class Course():
     def edit_TA(self, id, TA, graderstatus):
         pass
 
+    def assigninstructor_tocourse(self, coursename, instructorname):
+        pass
+
+    def assignTA_tocourse(self, coursename, TAname):
+        pass
+
     def delete_course(self, id):
         pass
