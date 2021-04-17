@@ -25,16 +25,16 @@ def login(name, password):
 def createLab(labId, labName):
     pass
 
-def setLabId_toLab(labId, lab):
+def setLabId(labId, labIdOriginal):
     pass
 
-def setLabName_toLab(labName, lab):
+def setLabName(labName, labId):
     pass
 
-def setSchedule_toLab(schedule, lab):
+def setLabSchedule(schedule, labId):
     pass
 
-def setTA_toLab(ta, lab):
+def setLabTA(ta, labId):
     pass
 
     # create accounts Anton
