@@ -1,4 +1,4 @@
-from project_app.models import Users
+from project_app.models import Users, Course, Lab
 
 def login(name, password):
     noSuchUser = False
@@ -13,11 +13,41 @@ def login(name, password):
     else:
         return True
 
+def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""):
+    #precondition: courseid does not currently exist
+    #postcondition: course is created with unique ID and name
+    pass
+
+def setCourseId(courseId, courseIdOriginal):
+    #precondition: course with the old ID exists, new ID does not exist
+    #postcondition: course ID is updated
+    pass
+
+def setCourseName(courseName, courseId):
+    #precondition: course with the ID exists
+    #postcondition: course name is updated
+    pass
+
+def setCourseSchedule(courseSchedule, courseId):
+    # precondition: course with the ID exists
+    # postcondition: course schedule is updated
+    pass
+
+def setCourseCredits(courseCredits, courseId):
+    #precondition: course with the ID exists
+    #postcondition: course credits are updated
+    pass
 
 
-    # create courses Bryce
-    # create labs Charlie
+# MAYBE IMPLEMENT THESE LATER
+# def setCourseInstructor(courseInstructor, courseId):
+#     # precondition: course with the ID exists
+#     # postcondition: course instructor is updated
+#     pass
+#
+# def setCourseTA(courseTA, courseId):
+#     # precondition: course with the ID exists
+#     # postcondition: course TA is updated
+#     pass
 
-    # create accounts Anton
-    # delete accounts Mohammed
 
