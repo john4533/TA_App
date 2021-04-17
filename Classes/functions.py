@@ -88,3 +88,6 @@ def setLabTA(ta, labId):
     # Precondition: correct two inputs, and labId needs to exist already
     # Postcondition: ta is assigned to the lab
     pass
+
+def deleteaccount(username):
+    pass
