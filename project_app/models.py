@@ -9,20 +9,21 @@ class Users(models.Model):
     role = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)
     address = models.CharField(max_length=20)
-
+    officehours = models.CharField(max_length=20)
 
 class Lab(models.Model):
     labid = models.CharField(max_length=20)
     labname = models.CharField(max_length=20)
-    schedule = models.CharField(max_length=20)
+    labschedule = models.CharField(max_length=20)
     labTA = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
 
 
 class Course(models.Model):
     courseid = models.CharField(max_length=20)
     coursename = models.CharField(max_length=20)
-    schedule = models.CharField(max_length=20)
-    # instructor = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
+    courseschedule = models.CharField(max_length=20)
+    coursecredits = models.CharField(max_length=20)
+    # courseinstructor = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
     courseTA = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
-    graderstatus = models.CharField(max_length=20)
+    graders = models.CharField(max_length=20)
     labs = models.ForeignKey(Lab, on_delete=models.CASCADE, null=True)
