@@ -60,3 +60,31 @@ def setCourseCredits(courseCredits, courseId):
 #     pass
 
 
+def createLab(labId, labName):
+    # Precondition: correct two inputs, and labId does not already belong to a lab
+    # Postcondition: lab is created with the given labId and labName
+    pass
+
+
+def setLabId(labIdNew, labIdOriginal):
+    # Precondition: correct two inputs, labIdOriginal needs to exist already, and labIdNew needs to not exist already
+    # Postcondition: new labId is assigned to the lab
+    pass
+
+
+def setLabName(labName, labId):
+    # Precondition: correct two inputs, and labId needs to exist already
+    # Postcondition: labName is assigned to the lab
+    pass
+
+
+def setLabSchedule(schedule, labId):
+    # Precondition: correct two inputs,
+    # Postcondition: labSchedule is assigned to the lab
+    pass
+
+
+def setLabTA(ta, labId):
+    # Precondition: correct two inputs, and labId needs to exist already
+    # Postcondition: ta is assigned to the lab
+    pass
