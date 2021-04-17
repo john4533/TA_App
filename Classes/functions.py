@@ -16,7 +16,26 @@ def login(name, password):
 
 
     # create courses Bryce
-    # create labs Charlie
+
+# create labs: Charlie
+# ***
+# Notice how this can be created into a class quite possibly in the future?
+# This is the way we are trying to develop out app from the top down, instead of bottom up
+# ***
+def createLab(labId, labName):
+    pass
+
+def setLabId_toLab(labId, lab):
+    pass
+
+def setLabName_toLab(labName, lab):
+    pass
+
+def setSchedule_toLab(schedule, lab):
+    pass
+
+def setTA_toLab(ta, lab):
+    pass
 
     # create accounts Anton
     # delete accounts Mohammed
