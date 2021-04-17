@@ -42,3 +42,4 @@ class TestDeleteAccount(unittest.TestCase):
         with self.assertRaises(TypeError, "Not an user object") as context:
             self.admin.deleteaccount(None)
             self.assertTrue("Invalid argument by the admin")
+
