@@ -21,3 +21,11 @@ def login(name, password):
     # create accounts Anton
     # delete accounts Mohammed
 
+    #User to be deleted cannot be null
+    #User is an object
+    #return True or false if the account is deleted
+    def deleteaccount(User):
+        pass
+
+
+
