@@ -17,7 +17,6 @@ class Lab(models.Model):
     labschedule = models.CharField(max_length=20)
     labTA = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
 
-
 class Course(models.Model):
     courseid = models.CharField(max_length=20)
     coursename = models.CharField(max_length=20)

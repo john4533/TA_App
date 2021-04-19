@@ -1,4 +1,4 @@
-from project_app.models import Users, Course, Lab
+from project_app.models import *
 
 def login(name, password):
     noSuchUser = False
@@ -12,6 +12,15 @@ def login(name, password):
         return False
     else:
         return True
+
+def create_course(id, name, schedule, instructor, TA, graderstatues, labs):
+    try:
+        i = Course.objects.get(id)
+        return False
+
+    except:
+        return True
+
 
 def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""):
     #precondition: courseid does not currently exist
@@ -51,3 +60,34 @@ def setCourseCredits(courseCredits, courseId):
 #     pass
 
 
+def createLab(labId, labName):
+    # Precondition: correct two inputs, and labId does not already belong to a lab
+    # Postcondition: lab is created with the given labId and labName
+    pass
+
+
+def setLabId(labIdNew, labIdOriginal):
+    # Precondition: correct two inputs, labIdOriginal needs to exist already, and labIdNew needs to not exist already
+    # Postcondition: new labId is assigned to the lab
+    pass
+
+
+def setLabName(labName, labId):
+    # Precondition: correct two inputs, and labId needs to exist already
+    # Postcondition: labName is assigned to the lab
+    pass
+
+
+def setLabSchedule(schedule, labId):
+    # Precondition: correct two inputs,
+    # Postcondition: labSchedule is assigned to the lab
+    pass
+
+
+def setLabTA(ta, labId):
+    # Precondition: correct two inputs, and labId needs to exist already
+    # Postcondition: ta is assigned to the lab
+    pass
+
+def deleteaccount(username):
+    pass
