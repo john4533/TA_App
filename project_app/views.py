@@ -13,15 +13,15 @@ class Login(View):
     def post(self, request):
         result = login(request.POST['name'], request.POST['password'])
         if not result:
-            return render(request, "login.html", {"message": "information is incorrect"})
+            return render(request, "sup_home.html", {"message": "information is incorrect"})
         else:
             request.session["name"] = request.POST['name']
-            return redirect("/things/")
+            return redirect("sup_home.html")
 
 
 class CreateCourse(View):
     def get(self, request):
-        return render(request, "creatcourse.html", {})
+        return render(request, "CreatCourse.html", {})
 
     def post(self, request):
         result = CreateCourse(request.POST['courseid'], request.POST['coursename'])
@@ -30,3 +30,28 @@ class CreateCourse(View):
         else:
 
             return
+
+
+class SupHome(View):
+    def get(self, request):
+        return render(request, "sup_home.html", {})
+
+
+class SupAccounts(View):
+    def get(self, request):
+        return render(request, "sup_accounts.html", {})
+
+
+class SupCourses(View):
+    def get(self, request):
+        return render(request, "sup_courses.html", {})
+
+
+class SupEmail(View):
+    def get(self, request):
+        return render(request, "sup_email.html", {})
+
+
+class Account(View):
+    def get(self, request):
+        return render(request, "account.html", {})
