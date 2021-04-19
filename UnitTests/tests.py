@@ -1,16 +1,18 @@
 import unittest
 import os
-from Classes.functions import *
-from Classes.supervisor import Supervisor
-from Classes.user import User
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
-from project_app.models import Users, Course, Lab
+from project_app.models import Users
 
-if __name__ == '__main__':
-    unittest.main()
+from Classes.user import User
+
+
+
+
+
 
 class TestDeleteAccount(unittest.TestCase):
 
@@ -18,6 +20,8 @@ class TestDeleteAccount(unittest.TestCase):
         self.user1= User("xyz@uwm.edu", "password123")
         self.user2=User("xyz@gmail.com","password123")
         self.user3=User("xyz@uwm.edu","pass")
+        self.user4=User("aa@uwm.edu","123pass")
+        self.user5=User("zz@uwm.edu","345two")
 
     def test_valid_user(self):
         self.assertEqual(True,self.deleteaccount(self.user1))
@@ -27,6 +31,24 @@ class TestDeleteAccount(unittest.TestCase):
 
     def test_invalid_password(self):
         self.assertEqual(False, self.deleteaccount(self.user3))
+
+    def test_user_deleted1(self):
+        self.assertEqual(True,self.deleteaccount(self.user4))
+        c=False
+        try:
+             b=Users.objects.get(username="aa@uwm.edu")
+        except:
+            c=True
+            self.assertEqual(c,True)
+
+    def test_user_deleted2(self):
+        self.assertEqual(True, self.deleteaccount(self.user5))
+        c = False
+        try:
+            b = Users.objects.get(username="zz@uwm.edu")
+        except:
+            c = True
+            self.assertEqual(c, True)
 
     def test_invalid_argument(self):
         with self.assertRaises(TypeError,"Not an user object") as context:
