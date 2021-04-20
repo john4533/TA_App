@@ -3,23 +3,26 @@
 Team 1
 Availability for meeting expectations
 Daily Meeting:
-Less than 15 minute meetings 5:30pm
+-Less than 15 minute meetings 5:30pm
 
 Long Meeting:
-30 minutes - 1 hour meetings Tuesday at 5:00pm
+-30 minutes - 1 hour meetings Tuesday at 5:00pm
 
 Response time to communication expectations
-Teams(prefered)
-Someone whould be able to respond in a timely manner if not busy. // make concrete
-                                                                  // notify members beforehand if not able to join
+-Teams(prefered)
+-Someone should be able to respond in 30 minutes- 1 hour. Hours: (9:00am - 9:00pm)
 
 Definition of done: when is a task complete? (hint: "I'm done with that but I didn't check it in to github" is not done.)
-When everyone is okay with the code review that has been submitted to the repository as a pull request. // acceptnce material has been met (dependant on trello board)
+-When everyone is okay with the code review that has been submitted to the repository as a pull request, and all of the acceptance material from the trello board has been met.
 
 Scrum meeting format/frequency and distribution of documentation tasks (meeting minutes, updating task board)
-// dont waste your time on notes.
+-Don't waste your time on notes.
+-Record meetings.
+-Summary at end of meeting.
 
-// how to resolve conflicts:
+How to resolve conflicts:
+After general overview:
+-Disagreement on how to implement something: If we have not came to an agreement in 30 minutes (outside of meetings) we will have to take a break on that, look online(youtube tutorial) and then afterwards if no solution by the nest meeting, contact Apoorv or Jayson.
 
 Procedure for adopting policies (e.g. code style, code check-in steps, documentation updates)
 No eating during the meeting.
@@ -31,10 +34,14 @@ if you adopt such a policy during the initial meeting, put it here
 If someone does not attend the meeting, then they should get in touch with someone who did attend. (provided that they have informed everyone beforehand)
 
 Procedure for handling a member who is not meeting expectations
-Three meetings is the max before contacting the instructor.       // distinguish major and minor offences
+Two meetings in one week missed is three points (without excuse).
+One meeting missed is one point.
+Missing meetings should be communicated to other group members the day before.
 
-must include at least 3 actions before involving the instructor
-Actions:not attending meeting, not doing work, ignoring messages.
+
+6 points before involving the instructor
+Actions: total of six points per sprint.
+Confront: after 3 points.
 
 
 Signatures: 
