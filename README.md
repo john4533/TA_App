@@ -3,32 +3,35 @@
 Team 1
 Availability for meeting expectations
 Daily Meeting:
-Less than 15 minute meetings 5:20pm
+Less than 15 minute meetings 5:30pm
 
 Long Meeting:
 30 minutes - 1 hour meetings Tuesday at 5:00pm
 
 Response time to communication expectations
 Teams(prefered)
-Someone whould be able to respond in a timely manner if not busy.
+Someone whould be able to respond in a timely manner if not busy. // make concrete
+                                                                  // notify members beforehand if not able to join
 
 Definition of done: when is a task complete? (hint: "I'm done with that but I didn't check it in to github" is not done.)
-When everyone is okay with the code review that has been submitted to the repository as a pull request.
+When everyone is okay with the code review that has been submitted to the repository as a pull request. // acceptnce material has been met (dependant on trello board)
 
 Scrum meeting format/frequency and distribution of documentation tasks (meeting minutes, updating task board)
+// dont waste your time on notes.
 
+// how to resolve conflicts:
 
 Procedure for adopting policies (e.g. code style, code check-in steps, documentation updates)
-You can eat as long as you mute your mic.
+No eating during the meeting.
 Indentation should be the same for each of us.
 Minimum of two people should participate in the code review and we will choose to commit or not after. Coder + 2 reviewers.
 During all of the meetings, we will update the documents during the meetings. Each person whould initial their notes.
 
 if you adopt such a policy during the initial meeting, put it here
-If someone does not attend the meeting, then they should get in touch with someone who did attend. 
+If someone does not attend the meeting, then they should get in touch with someone who did attend. (provided that they have informed everyone beforehand)
 
 Procedure for handling a member who is not meeting expectations
-Three meetings is the max before contacting the instructor.
+Three meetings is the max before contacting the instructor.       // distinguish major and minor offences
 
 must include at least 3 actions before involving the instructor
 Actions:not attending meeting, not doing work, ignoring messages.
