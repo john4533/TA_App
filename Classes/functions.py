@@ -4,7 +4,7 @@ def login(name, password):
     noSuchUser = False
     badPassword = False
     try:
-        m = User.objects.get(name)
+        m = User.objects.get(username=name)
         badPassword = (m.password != password)
     except:
         noSuchUser = True
