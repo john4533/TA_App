@@ -32,11 +32,12 @@
     <div class="container-fluid">
         <div class="row">
             <div lcass="col-lg-12">
-                <img src="/static/images/courses_image.svg">
-                <legend>Create Course</legend>
-                    <form action="/sup_courses/",method="post" id="form1">
+              <div class="img1"><img width="75" align="center"  src="/static/images/courses_image.svg"></div>
+                    <div  class="legend" align="center"><legend>Register Courses</legend></div>
+                  <div class="form" align="center"><form  class="course" action="/sup_courses/",method="post" id="form1">
                     {% csrf_token %}
-                     <table>  <tr>
+                     <table class="table1" cellspacing="50">
+                         <tr>
                                   <td>
                                     <div><label for="cor_name">Course Name</label></div>
                                     <div><input type="text" id="cor_name" name="cor_name" required></div>
@@ -71,9 +72,9 @@
                               </tr>
 
                     </table>
-                 </form>
-                <br>
-                <button type="submit" form="form1" value="Submit">Add Course</button>
+                 </form></div>
+                    <br>
+                    <div align="center"><button class="button" type="submit" form="form1" value="Submit">Add Course</button></div>
             </div>
         </div>
     </div>
