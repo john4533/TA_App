@@ -10,18 +10,20 @@ class Roles(models.TextChoices):
 class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
-    email = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, blank=True)
     role = models.CharField(max_length=10, choices=Roles.choices)
-    phone = models.CharField(max_length=20)
-    address = models.CharField(max_length=50)
+    phone = models.CharField(max_length=20, blank=True)
+    address = models.CharField(max_length=50, blank=True)
 
     # officehours may need to be a sort of datetime object
-    officehours = models.CharField(max_length=20)
+    officehours = models.CharField(max_length=20, blank=True)
 
 class Lab(models.Model):
     labid = models.CharField(max_length=20)
     labname = models.CharField(max_length=50)
-    # labschedule = models.CharField(max_length=20)
+
+    # labschedule may need to be a sort of datetime object
+    labschedule = models.CharField(max_length=20, blank=True)
     # labTA = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 class Course(models.Model):
@@ -29,7 +31,7 @@ class Course(models.Model):
     coursename = models.CharField(max_length=50)
 
     # courseschedule may need to be a sort of datetime object
-    courseschedule = models.CharField(max_length=20)
+    courseschedule = models.CharField(max_length=20, blank=True)
     coursecredits = models.CharField(max_length=2)
 
     # courseinstructor = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)

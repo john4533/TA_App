@@ -12,7 +12,7 @@ class Login(View):
     def post(self, request):
         result = login(request.POST['name'], request.POST['password'])
         if not result:
-            return render(request, "login.html", {"message": "information is incorrect"})
+            return render(request, "sup_home.html", {"message": "information is incorrect"})
         else:
             request.session["name"] = request.POST['name']
             return redirect("sup_home.html")
