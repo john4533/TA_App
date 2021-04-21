@@ -32,10 +32,60 @@
     <div class="container-fluid">
         <div class="row">
             <div lcass="col-lg-12">
-                <b>Sup courses .................................................................
-                    .........................................
-                    ......................................
-                    ................................................</b>
+                <img src="/static/images/courses_image.svg">
+                <legend>Create Course</legend>
+                    <form action="/sup_courses/",method="post" id="form1">
+                    {% csrf_token %}
+                     <table>
+                      <tr>
+                           <td>
+                               <label for="cor_name">Course name</label>
+                               <input type="text" id="c_name" name="c_name">
+                            </td>
+                            <td>
+                                <label for="cor_id">Course ID</label>
+                                <input type="text" id="cor_id" name="cor_id"><br>
+                            </td>
+
+                      </tr>
+                       <tr>
+                            <td>
+                                &nbsp;
+                                <!--you just need a space in a row-->
+                            </td>
+                        </tr>
+
+                      <tr>
+                          <td>
+                              <label for="cor_sched">Course Schedule</label>
+                              <input type="text" id="c_sc" name="c_sc">
+                           </td>
+                          <td>
+                              <label for="cor_cred">Course credits</label>
+                              <input type="text" id="sc_cd" name="sc_cd">
+                          </td>
+                      </tr>
+                         <tr>
+                            <td>
+                                &nbsp;
+                                <!--you just need a space in a row-->
+                            </td>
+                        </tr>
+                         <tr>
+                              <td>
+                                  <label for="cor_TA">Course TA</label>
+                                  <input type="text" id="c_ta" name="TA">
+                               </td>
+
+                                <td>
+                                <label for="cor_TA">Course Instructor</label>
+                                <input type="text" id="c_In" name="In">
+                               </td>
+                         </tr>
+                    </table>
+                 </form>
+                <br>
+                <button type="submit" form="form1" value="Submit">Add Course</button>
             </div>
         </div>
     </div>
