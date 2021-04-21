@@ -1,4 +1,4 @@
-from project_app.models import Users
+from project_app.models import User
 
 class User():
 

@@ -4,7 +4,7 @@ from Classes.functions import createCourse, setCourseId, setCourseName, setCours
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
-from project_app.models import Users, Course
+from project_app.models import User, Course
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):

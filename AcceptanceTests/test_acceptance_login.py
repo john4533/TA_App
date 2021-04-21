@@ -1,14 +1,14 @@
 import unittest
 from django.test import TestCase, Client
-from project_app.models import Users
+from project_app.models import User
 
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.client = Client()
-        self.user1 = Users.objects.create(username="Charlie", password="Password123", email=None, role="TA", phone=None, address=None, officehours=None)
-        self.user2 = Users.objects.create(username="Bob", password="Password123", email=None, role="Supervisor", phone=None, address=None, officehours=None)
-        self.user3 = Users.objects.create(username="Joe", password="Password123", email=None, role="Instructor", phone=None, address=None, officehours=None)
+        self.user1 = User.objects.create(username="Charlie", password="Password123", email=None, role="TA", phone=None, address=None, officehours=None)
+        self.user2 = User.objects.create(username="Bob", password="Password123", email=None, role="Supervisor", phone=None, address=None, officehours=None)
+        self.user3 = User.objects.create(username="Joe", password="Password123", email=None, role="Instructor", phone=None, address=None, officehours=None)
 
     def test_existingUser_ValidLoginTA(self):
         response = self.client.post("/", {"name": "Charlie", "password": "Password123"})

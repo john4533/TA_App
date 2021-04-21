@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Users
-from Classes.user import User
+from .models import User
 from Classes.functions import *
 
 
@@ -21,12 +20,12 @@ class Login(View):
 
 class CreateCourse(View):
     def get(self, request):
-        return render(request, "CreatCourse.html", {})
+        return render(request, "CreateCourse.html", {})
 
     def post(self, request):
         result = CreateCourse(request.POST['courseid'], request.POST['coursename'])
         if not result:
-            return render(request, "creatcourse.html", {"message": "must enter a unique course id and a course name"})
+            return render(request, "createcourse.html", {"message": "must enter a unique course id and a course name"})
         else:
 
             return

@@ -1,11 +1,10 @@
 from project_app.models import *
 
-
 def login(name, password):
     noSuchUser = False
     badPassword = False
     try:
-        m = Users.objects.get(name)
+        m = User.objects.get(name)
         badPassword = (m.password != password)
     except:
         noSuchUser = True
@@ -13,7 +12,6 @@ def login(name, password):
         return False
     else:
         return True
-
 
 def create_course(id, name, schedule, instructor, TA, graderstatues, labs):
     try:
@@ -25,38 +23,32 @@ def create_course(id, name, schedule, instructor, TA, graderstatues, labs):
 
 
 def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""):
-    # precondition: courseid does not currently exist
-    # postcondition: course is created with unique ID and name
+    #precondition: courseid does not currently exist
+    #postcondition: course is created with unique ID and name
     pass
-
 
 def setCourseId(courseId, courseIdOriginal):
-    # precondition: course with the old ID exists, new ID does not exist
-    # postcondition: course ID is updated
+    #precondition: course with the old ID exists, new ID does not exist
+    #postcondition: course ID is updated
     pass
-
 
 def setCourseName(courseName, courseId):
-    # precondition: course with the ID exists
-    # postcondition: course name is updated
+    #precondition: course with the ID exists
+    #postcondition: course name is updated
     pass
-
 
 def setCourseSchedule(courseSchedule, courseId):
     # precondition: course with the ID exists
     # postcondition: course schedule is updated
     pass
 
-
 def setCourseCredits(courseCredits, courseId):
-    # precondition: course with the ID exists
-    # postcondition: course credits are updated
+    #precondition: course with the ID exists
+    #postcondition: course credits are updated
     pass
 
 
-# MAYBE IMPLEMENT THESE LA
-#
-# TER
+# MAYBE IMPLEMENT THESE LATER
 # def setCourseInstructor(courseInstructor, courseId):
 #     # precondition: course with the ID exists
 #     # postcondition: course instructor is updated
@@ -96,7 +88,6 @@ def setLabTA(ta, labId):
     # Precondition: correct two inputs, and labId needs to exist already
     # Postcondition: ta is assigned to the lab
     pass
-
 
 def deleteaccount(username):
     pass

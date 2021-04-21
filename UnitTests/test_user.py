@@ -4,7 +4,7 @@ from Classes.user import User
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
-from project_app.models import Users
+from project_app.models import User
 
 class UserTestCase(unittest.TestCase):
 
@@ -32,7 +32,7 @@ class UserTestCase(unittest.TestCase):
     def test_usercreated(self):
         a = User("xyz@uwm.edu", "password1")
         self.assertEqual(a.create_user(), None)
-        b = Users.objects.get(username=a.name)
+        b = User.objects.get(username=a.name)
         self.assertEqual(a.name,
                          b.name)  ## We have several attributes for user database, so I dont know how will li[0] store all those attributes
         self.assertEqual(a.password, b.password)
@@ -46,7 +46,7 @@ class UserTestCase(unittest.TestCase):
         self.assertNotEqual(a.name, "xyzz@uwm.edu")
 
     def invalid_password(self):
-        self.assertNotEqual(Users.objects.get(name="xyz@uwm.edu"), "password2")
+        self.assertNotEqual(User.objects.get(name="xyz@uwm.edu"), "password2")
 
     def valid_login(self):
         pass
