@@ -36,52 +36,40 @@
                 <legend>Create Course</legend>
                     <form action="/sup_courses/",method="post" id="form1">
                     {% csrf_token %}
-                     <table>
-                      <tr>
-                           <td>
-                               <label for="cor_name">Course name</label>
-                               <input type="text" id="c_name" name="c_name">
-                            </td>
-                            <td>
-                                <label for="cor_id">Course ID</label>
-                                <input type="text" id="cor_id" name="cor_id"><br>
-                            </td>
+                     <table>  <tr>
+                                  <td>
+                                    <div><label for="cor_name">Course Name</label></div>
+                                    <div><input type="text" id="cor_name" name="cor_name" required></div>
+                                  </td>
+                                 <td>
+                                   <div> <label for="cor_id">Course ID</label></div>
+                                   <div><input type="number" id="cor_id" name="cor_id" required><br></div>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                    <div><label for="cor_cred">Course Credits</label></div>
+                                    <div><input type="number" id="cor_cred" name="cor_cred" required></div>
+                                   </td>
 
-                      </tr>
-                       <tr>
-                            <td>
-                                &nbsp;
-                                <!--you just need a space in a row-->
-                            </td>
-                        </tr>
+                                  <td>
+                                      <div><label for="cor_sched">Course Schedule</label></div>
+                                      <div><input type="text" id="cor_sched" name="cor_sched" required></div>
+                                  </td>
+                              </tr>
 
-                      <tr>
-                          <td>
-                              <label for="cor_sched">Course Schedule</label>
-                              <input type="text" id="c_sc" name="c_sc">
-                           </td>
-                          <td>
-                              <label for="cor_cred">Course credits</label>
-                              <input type="text" id="sc_cd" name="sc_cd">
-                          </td>
-                      </tr>
-                         <tr>
-                            <td>
-                                &nbsp;
-                                <!--you just need a space in a row-->
-                            </td>
-                        </tr>
-                         <tr>
-                              <td>
-                                  <label for="cor_TA">Course TA</label>
-                                  <input type="text" id="c_ta" name="TA">
-                               </td>
+                              <tr>
+                                  <td>
+                                       <div><label for="cor_In">Course Instructor</label></div>
+                                        <div><input type="text" id="cor_In" name="cor_In"></div>
+                                  </td>
 
-                                <td>
-                                <label for="cor_TA">Course Instructor</label>
-                                <input type="text" id="c_In" name="In">
-                               </td>
-                         </tr>
+                                   <td>
+                                      <div><label for="cor_TA">Course TA</label></div>
+                                      <div><input type="text" id="cor_TA" name="cor_TA"></div>
+                                  </td>
+                              </tr>
+
                     </table>
                  </form>
                 <br>
