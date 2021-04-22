@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import User
+from .models import User, Course
 from Classes.functions import *
 
 
@@ -16,20 +16,6 @@ class Login(View):
         else:
             request.session["name"] = request.POST['name']
             return redirect('/SupHome/')
-
-
-# class CreateCourse(View):
-#      def get(self, request):
-#         return render(request, "CreateCourse.html", {})
-#
-#      def post(self, request):
-#          result = CreateCourse(request.POST['courseid'], request.POST['coursename'])
-#          if not result:
-#              return render(request, "createcourse.html", {"message": "must enter a unique course id and a course name"})
-#          else:
-#
-#             return
-#
 
 class SupHome(View):
     def get(self, request):
@@ -51,10 +37,6 @@ class SupCourses(View):
         courseid = request.POST.get('cor_id', '')
         courseschedule = request.POST.get('cor_sched', '')
         coursecredits = request.POST.get('cor_cred', '')
-        print(coursename)
-        print(courseid)
-        print(courseschedule)
-        print(coursecredits)
         if coursename != '' and courseid != '' and courseschedule != '' and coursecredits != '':
             newCourse = Course(courseid=courseid, coursename=coursename, courseschedule=courseschedule, coursecredits=coursecredits)
             newCourse.save()

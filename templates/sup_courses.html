@@ -33,7 +33,7 @@
         <div class="row">
             <div lcass="col-lg-12">
                   <div align="center"><button class="open_b" onclick="openForm()">Register Courses</button></div>
-                  <div class="form-pop" id="c_form" align="center"><form  class="course" action="/sup_courses/",method="post" id="form1">
+                  <div class="form-pop" id="c_form" align="center"><form  class="course" action="/SupCourses/" method="post" id="form1">
                     {% csrf_token %}
                      <table class="table1" cellspacing="50">
                           <div class="img1"><img width="75" align="center"  src="/static/images/courses_image.svg"></div>
@@ -80,8 +80,20 @@
             </div>
         </div>
     </div>
-
-
+    <div class="form" method="post">
+        <table>
+         {% for course in courses %}
+            <tr>
+                <td>
+                    {{ course.coursename }}
+                    {{ course.courseid }}
+                    {{ course.courseschedule }}
+                    {{ course.coursecredits }}
+                </td>
+            </tr>
+         {% endfor %}
+        </table>
+    </div>
 
 <script>
     $("#menu-toggle").click(function (e) {
