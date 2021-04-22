@@ -18,17 +18,17 @@ class Login(View):
             return redirect('/SupHome/')
 
 
-# class CreateCourse(View):
-#     def get(self, request):
-#         return render(request, "CreateCourse.html", {})
-#
-#     def post(self, request):
-#         result = CreateCourse(request.POST['courseid'], request.POST['coursename'])
-#         if not result:
-#             return render(request, "createcourse.html", {"message": "must enter a unique course id and a course name"})
-#         else:
-#
-#             return
+class CreateCourse(View):
+     def get(self, request):
+        return render(request, "CreateCourse.html", {})
+
+     def post(self, request):
+         result = CreateCourse(request.POST['courseid'], request.POST['coursename'])
+         if not result:
+             return render(request, "createcourse.html", {"message": "must enter a unique course id and a course name"})
+         else:
+
+            return
 
 
 class SupHome(View):
