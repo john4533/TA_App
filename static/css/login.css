@@ -1,4 +1,30 @@
-h1{
-    color: red;
+.row{
+    background-color: #ffbd00;
 
+}
+.row img {
+    width: 10vh;
+}
+
+.row li{
+    list-style: none;
+}
+.navbar{
+    background-color: black;
+    padding-top: 2vh;
+}
+.row2{
+
+}
+.row3{
+    padding-top: 200px;
+    /*padding-bottom: 10px;*/
+}
+.row4{
+    background-color: black;
+    height: 3px;
+}
+footer{
+    background-color: #ffbd00;
+    height: 100px;
 }
