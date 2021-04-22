@@ -3,9 +3,9 @@ from django.db import models
 
 # Create your models here.
 class Roles(models.TextChoices):
-    supervisor = "supervisor"
-    TA = "TA"
-    instructor = "instructor"
+    sup = "Supervisor"
+    ta = "TA"
+    ins = "Instructor"
 
 class User(models.Model):
     username = models.CharField(max_length=20)
