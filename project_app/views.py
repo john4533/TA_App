@@ -15,7 +15,7 @@ class Login(View):
             return render(request, "login.html", {"message": "information is incorrect"})
         else:
             request.session["name"] = request.POST['name']
-            return redirect('/SupCourses/')
+            return redirect('/SupHome/')
 
 
 # class CreateCourse(View):
