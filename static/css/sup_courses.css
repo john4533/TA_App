@@ -51,10 +51,27 @@
 }
 
 .button {
-  background-color: deepskyblue;
-  color: darkblue;
-  margin-top: 25px;
 
+    margin-top: 25px;
+    position: relative;
+	display: inline-block;
+	background-color: green;
+	background-image: linear-gradient(green,lightgreen);
+    border-radius: 12px;
+
+	/* text styles */
+	text-decoration: none;
+	color: #fff;
+	font-size: 15px;
+	font-family: sans-serif;
+	font-weight: 100;
+
+}
+.button1{
+      margin-top: 25px;
+      background-color: red;
+      width: 7%;
+      border-radius: 12px;
 }
 
 label {
@@ -71,9 +88,17 @@ input{
 }
 
 .img1{
+  margin-top: 10px;
   text-align: center;
 }
 
 .form-pop{
   display: none;
+}
+
+.open_b{
+  border-radius: 12px;
+  width: 20%;
+  font-size: 25px;
+  background-color: yellow;
 }
