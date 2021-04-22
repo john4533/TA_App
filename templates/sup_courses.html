@@ -32,11 +32,12 @@
     <div class="container-fluid">
         <div class="row">
             <div lcass="col-lg-12">
-              <div class="img1"><img width="75" align="center"  src="/static/images/courses_image.svg"></div>
-                    <div  class="legend" align="center"><legend>Register Courses</legend></div>
-                  <div class="form" align="center"><form  class="course" action="/sup_courses/",method="post" id="form1">
+                  <div align="center"><button class="open_b" onclick="openForm()">Register Courses</button></div>
+                  <div class="form-pop" id="c_form" align="center"><form  class="course" action="/sup_courses/",method="post" id="form1">
                     {% csrf_token %}
                      <table class="table1" cellspacing="50">
+                          <div class="img1"><img width="75" align="center"  src="/static/images/courses_image.svg"></div>
+                          <div  class="legend" align="center"><legend>Register Courses</legend></div>
                          <tr>
                                   <td>
                                     <div><label for="cor_name">Course Name</label></div>
@@ -72,9 +73,10 @@
                               </tr>
 
                     </table>
+                      <div align="center"><button class="button" type="submit" form="form1" value="Submit">Add Course</button></div>
+                      <div align="center"><button type="button" class="button" onclick="closeForm()">Close</button></div>
                  </form></div>
-                    <br>
-                    <div align="center"><button class="button" type="submit" form="form1" value="Submit">Add Course</button></div>
+
             </div>
         </div>
     </div>
@@ -83,6 +85,13 @@
         e.preventDefault();
         $("#wrapper").toggleClass("menuDisplayed");
     })
+    function openForm() {
+        document.getElementById("c_form").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("c_form").style.display = "none";
+    }
+
 </script>
 
 </div>
