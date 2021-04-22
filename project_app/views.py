@@ -38,15 +38,13 @@ class SupAccounts(View):
             n = request.POST['username']
             p = request.POST['password']
             e = request.POST['email']
-            print(e)
             r = request.POST['role']
-            print(r)
 
             User.objects.create(username=n, password=p, email=e, role=r)
             return render(request, "sup_accounts.html", {"roles": Roles.choices})
 
         else:
-            return render(request, "sup_accounts.html", {"roles": Roles.choices, "message": "this user already exists"})
+            return render(request, "sup_accounts.html", {"roles": Roles.choices, "message": "User with that email already exists"})
 
 
 class SupCourses(View):
@@ -55,17 +53,12 @@ class SupCourses(View):
         return render(request, "sup_courses.html", {"courses": courses})
 
     def post(self, request):
-        coursename = request.POST.get('cor_name', '')
-        courseid = request.POST.get('cor_id', '')
-        courseschedule = request.POST.get('cor_sched', '')
-        coursecredits = request.POST.get('cor_cred', '')
+        courseid = request.POST['cor_id']
+        coursename = request.POST['cor_name']
+        courseschedule = request.POST['cor_sched']
+        coursecredits = request.POST['cor_cred']
 
-        if coursename != '' and courseid != '' and courseschedule != '' and coursecredits != '':
-            if len(list(Course.objects.filter(courseid=courseid))) == 0:
-                newCourse = Course(courseid=courseid, coursename=coursename, courseschedule=courseschedule, coursecredits=coursecredits)
-                newCourse.save()
-            else:
-                message = "Course with that ID already exists"
+        message = createCourse(courseid, coursename, courseschedule, coursecredits)
         courses = Course.objects.all
         return render(request, "sup_courses.html", {"courses": courses, "message": message})
 

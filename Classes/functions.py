@@ -13,19 +13,21 @@ def login(name, password):
     else:
         return True
 
-def create_course(id, name, schedule, instructor, TA, graderstatues, labs):
-    try:
-        i = Course.objects.get(id)
-        return False
-
-    except:
-        return True
-
+def createAccount(username="", password="", email="", role=""):
+    # precondition: user with provided email does not currently exist
+    # postcondition: user account is created with a unique email and role
+    pass
 
 def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""):
-    #precondition: courseid does not currently exist
-    #postcondition: course is created with unique ID and name
-    pass
+    # precondition: courseid does not currently exist
+    # postcondition: course is created with unique ID and name, message is returned if course with the id exists
+    if courseId != '' and courseName != '' and courseSchedule != '' and courseCredits != '':
+        if len(list(Course.objects.filter(courseid=courseId))) == 0:
+            Course.objects.create(courseid=courseId, coursename=courseName, courseschedule=courseSchedule, coursecredits=courseCredits)
+        else:
+            return "Course with that ID already exists"
+    else:
+        return "Please fill out all required entries"
 
 def setCourseId(courseId, courseIdOriginal):
     #precondition: course with the old ID exists, new ID does not exist
