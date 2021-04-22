@@ -16,13 +16,12 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li><a href="/SupHome/">
-                <img src="/static/images/uwm.svg" class="img-fluid" alt="">
+                <img src="/static/images/uwm.svg" class="img-fluid">
             </a></li>
             <li><a href="/Account/">Account</a></li>
             <li><a href="/SupAccounts/">Accounts</a></li>
             <li><a href="/SupCourses/">Courses </a></li>
-            <!-- <li><a href="/SupEmail/">Email </a></li> -->
-            <li><b class="btn" id="menu-toggle"> -></b></li>
+            {#            <li><a href="/SupEmail/">Email </a></li>#}
         </ul>
     </div>
 </div>
@@ -32,19 +31,19 @@
     <div class="container-fluid">
         <div class="row">
             <div>
-                <b>account  .................................................................
+                <b>account .................................................................
                     .........................................
                     ......................................
                     ................................................</b>
             </div>
         </div>
     </div>
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("menuDisplayed");
-    })
-</script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("menuDisplayed");
+        })
+    </script>
 
 </div>
 </body>

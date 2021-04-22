@@ -21,8 +21,7 @@
             <li><a href="/Account/">Account</a></li>
             <li><a href="/SupAccounts/">Accounts</a></li>
             <li><a href="/SupCourses/">Courses </a></li>
-            <!-- <li><a href="SupEmail">Email </a></li> -->
-            <li><b href="#" class="btn" id="menu-toggle"> -></b></li>
+            {#            <li><a href="/SupEmail/">Email </a></li>#}
         </ul>
     </div>
 </div>
@@ -39,12 +38,12 @@
             </div>
         </div>
     </div>
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("menuDisplayed");
-    })
-</script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("menuDisplayed");
+        })
+    </script>
 
 </div>
 </body>
