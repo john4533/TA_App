@@ -18,17 +18,17 @@ class Login(View):
             return redirect('/SupCourses/')
 
 
-class CreateCourse(View):
-    def get(self, request):
-        return render(request, "CreateCourse.html", {})
-
-    def post(self, request):
-        result = CreateCourse(request.POST['courseid'], request.POST['coursename'])
-        if not result:
-            return render(request, "createcourse.html", {"message": "must enter a unique course id and a course name"})
-        else:
-
-            return
+# class CreateCourse(View):
+#     def get(self, request):
+#         return render(request, "CreateCourse.html", {})
+#
+#     def post(self, request):
+#         result = CreateCourse(request.POST['courseid'], request.POST['coursename'])
+#         if not result:
+#             return render(request, "createcourse.html", {"message": "must enter a unique course id and a course name"})
+#         else:
+#
+#             return
 
 
 class SupHome(View):
@@ -43,8 +43,23 @@ class SupAccounts(View):
 
 class SupCourses(View):
     def get(self, request):
-        return render(request, "sup_courses.html", {})
+        courses = Course.objects.all
+        return render(request, "sup_courses.html", {"courses": courses})
 
+    def post(self, request):
+        coursename = request.POST.get('cor_name', '')
+        courseid = request.POST.get('cor_id', '')
+        courseschedule = request.POST.get('cor_sched', '')
+        coursecredits = request.POST.get('cor_cred', '')
+        print(coursename)
+        print(courseid)
+        print(courseschedule)
+        print(coursecredits)
+        if coursename != '' and courseid != '' and courseschedule != '' and coursecredits != '':
+            newCourse = Course(courseid=courseid, coursename=coursename, courseschedule=courseschedule, coursecredits=coursecredits)
+            newCourse.save()
+        courses = Course.objects.all
+        return render(request, "sup_courses.html", {"courses": courses})
 
 class SupEmail(View):
     def get(self, request):
