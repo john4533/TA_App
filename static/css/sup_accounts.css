@@ -1,4 +1,15 @@
 
+h1 {
+  color: red;
+}
+
+form-container {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
 #sidebar-wrapper{
   z-index: 1;
   position: absolute;
