@@ -18,7 +18,7 @@ from project_app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('CreateCourse/', CreateCourse.as_view()),
+    #path('CreateCourse/', CreateCourse.as_view()),
     path('SupHome/', SupHome.as_view()),
     path('SupAccounts/', SupAccounts.as_view()),
     path('SupCourses/', SupCourses.as_view()),
