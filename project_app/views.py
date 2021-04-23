@@ -27,26 +27,9 @@ class SupAccounts(View):
         return render(request, "sup_accounts.html", {"roles": Roles.choices})
 
     def post(self, request):
-        no_such_user = False
-
-        user_lst = list(User.objects.filter(email=request.POST['email']))
-
-        if user_lst.__len__() == 0:
-            no_such_user = True
-
-        if no_such_user:
-            n = request.POST['username']
-            p = request.POST['password']
-            e = request.POST['email']
-            print(e)
-            r = request.POST['role']
-            print(r)
-
-            User.objects.create(username=n, password=p, email=e, role=r)
-            return render(request, "sup_accounts.html", {"roles": Roles.choices})
-
-        else:
-            return render(request, "sup_accounts.html", {"roles": Roles.choices, "message": "this user already exists"})
+        message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'], request.POST['role'])
+        accounts = User.objects.all
+        return render(request, "sup_accounts.html", {"roles": Roles.choices, "accounts": accounts, "message": message})
 
 
 class SupCourses(View):
@@ -55,17 +38,7 @@ class SupCourses(View):
         return render(request, "sup_courses.html", {"courses": courses})
 
     def post(self, request):
-        coursename = request.POST.get('cor_name', '')
-        courseid = request.POST.get('cor_id', '')
-        courseschedule = request.POST.get('cor_sched', '')
-        coursecredits = request.POST.get('cor_cred', '')
-
-        if coursename != '' and courseid != '' and courseschedule != '' and coursecredits != '':
-            if len(list(Course.objects.filter(courseid=courseid))) == 0:
-                newCourse = Course(courseid=courseid, coursename=coursename, courseschedule=courseschedule, coursecredits=coursecredits)
-                newCourse.save()
-            else:
-                message = "Course with that ID already exists"
+        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'], request.POST['cor_cred'])
         courses = Course.objects.all
         return render(request, "sup_courses.html", {"courses": courses, "message": message})
 
