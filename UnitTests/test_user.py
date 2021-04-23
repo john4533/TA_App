@@ -1,4 +1,4 @@
-import unittest
+from django.test import TestCase
 import os
 from Classes.user import User
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
@@ -7,21 +7,30 @@ django.setup()
 from project_app.models import User, Course
 from Classes.functions import *
 
-class UserTestCase(unittest.TestCase):
+class UserTestCase(TestCase):
 
     def test_useralreadyexists(self):
         createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
-        with self.assertRaises(TypeError, msg="User with that email already exists") as context:
-            createAccount("abc", "password2", "xyz@uwm.edu", "instructor")
+        self.assertEqual(createAccount("abc", "password2", "xyz@uwm.edu", "supervisor"), "User with that email already exists")
 
     def test_usercreated(self):
         createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         b = User.objects.get(email="xyz@uwm.edu")
-        self.assertEqual("xyz", b.name)
+        self.assertEqual("xyz", b.username)
         self.assertEqual("password1", b.password)
-        self.assertEqual("xyz@uwm.edu", b.email)
         self.assertEqual("instructor", b.role)
 
+    def test_nousername(self):
+        self.assertEqual(createAccount("", "password1", "xyz@uwm.edu", "instructor"), "Please fill out all required entries")
+
+    def test_nopassword(self):
+        self.assertEqual(createAccount("xyz", "", "xyz@uwm.edu", "instructor"), "Please fill out all required entries")
+
+    def test_noemail(self):
+        self.assertEqual(createAccount("xyz", "password1", "", "instructor"), "Please fill out all required entries")
+
+    def test_role(self):
+        self.assertEqual(createAccount("xyz", "password1", "xyz@uwm.edu", ""), "Please fill out all required entries")
 
     def test_invalidusername(self):
         createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
@@ -34,7 +43,6 @@ class UserTestCase(unittest.TestCase):
     def test_validlogin(self):
         createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         self.assertTrue(login("xyz", "password1"))
-
 
 
     # def test_init(self):

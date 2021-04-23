@@ -1,24 +1,18 @@
-import unittest
+from django.test import TestCase
 import os
 from Classes.functions import createCourse, setCourseId, setCourseName, setCourseSchedule, setCourseCredits
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
-from project_app.models import User, Course
 
-class MyTestCase(unittest.TestCase):
+from project_app.models import Course
 
-    def test_nocourseid(self):
-        self.assertEqual(createCourse("", "Software Engineering", "TR - 10:00", "3"), "Please fill out all required entries")
 
-    def test_nocoursename(self):
-        self.assertEqual(createCourse("361", "", "TR - 10:00", "3"), "Please fill out all required entries")
+class MyTestCase(TestCase):
 
-    def test_nocourseschedule(self):
-        self.assertEqual(createCourse("361", "Software Engineering", "", "3"), "Please fill out all required entries")
-
-    def test_nocoursecredits(self):
-        self.assertEqual(createCourse("361", "Software Engineering", "TR - 10:00", ""), "Please fill out all required entries")
+    def test_courseIdexists(self):
+        createCourse("361", "Software Engineering", "TR - 10:00", "3")
+        self.assertEqual(createCourse("361", "Not Software Engineering", "MW - 12:00", "4"), "Course with that ID already exists")
 
     def test_courseCreated(self):
         createCourse("361", "Software Engineering", "TR - 10:00", "3")
@@ -27,9 +21,19 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual("TR - 10:00", b.courseschedule)
         self.assertEqual("3", b.coursecredits)
 
-    def test_courseIdexists(self):
-        createCourse("361", "Software Engineering", "TR - 10:00", "3")
-        self.assertEqual(createCourse("361", "Not Software Engineering", "MW - 12:00", "4"), "Course with that ID already exists")
+    def test_nocourseid(self):
+        self.assertEqual(createCourse("", "Software Engineering", "TR @ 10:00 - 10:50", "3"), "Please fill out all required entries")
+
+    def test_nocoursename(self):
+        self.assertEqual(createCourse("361", "", "TR @ 10:00 - 10:50", "3"), "Please fill out all required entries")
+
+    def test_nocourseschedule(self):
+        self.assertEqual(createCourse("361", "Software Engineering", "", "3"), "Please fill out all required entries")
+
+    def test_nocoursecredits(self):
+        self.assertEqual(createCourse("361", "Software Engineering", "TR @ 10:00 - 10:50", ""), "Please fill out all required entries")
+
+
 
     # def test_courseIdupdated(self):
     #     createCourse("361", "Software Engineering", "TR - 10:00", "3")

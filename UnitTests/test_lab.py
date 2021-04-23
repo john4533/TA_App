@@ -1,4 +1,4 @@
-import unittest
+from django.test import TestCase
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
@@ -6,7 +6,7 @@ django.setup()
 from project_app.models import User, Lab, Course
 from Classes.functions import *
 
-class MyTestCase(unittest.TestCase):
+class MyTestCase(TestCase):
 
     # invalid input
     def test_noLabId(self):

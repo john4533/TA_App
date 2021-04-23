@@ -44,7 +44,8 @@ class SupAccounts(View):
             return render(request, "sup_accounts.html", {"roles": Roles.choices})
 
         else:
-            return render(request, "sup_accounts.html", {"roles": Roles.choices, "message": "User with that email already exists"})
+            return render(request, "sup_accounts.html",
+                          {"roles": Roles.choices, "message": "User with that email already exists"})
 
 
 class SupCourses(View):
@@ -53,12 +54,7 @@ class SupCourses(View):
         return render(request, "sup_courses.html", {"courses": courses})
 
     def post(self, request):
-        courseid = request.POST['cor_id']
-        coursename = request.POST['cor_name']
-        courseschedule = request.POST['cor_sched']
-        coursecredits = request.POST['cor_cred']
-
-        message = createCourse(courseid, coursename, courseschedule, coursecredits)
+        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'], request.POST['cor_cred'])
         courses = Course.objects.all
         return render(request, "sup_courses.html", {"courses": courses, "message": message})
 
