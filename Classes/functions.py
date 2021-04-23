@@ -16,7 +16,13 @@ def login(name, password):
 def createAccount(username="", password="", email="", role=""):
     # precondition: user with provided email does not currently exist
     # postcondition: user account is created with a unique email and role
-    pass
+    if username != '' and password != '' and email != '' and role != '':
+        if len(list(User.objects.filter(email=email))) == 0:
+            User.objects.create(username=username, password=password, email=email, role=role)
+        else:
+            return "User with that email already exists"
+    else:
+        return "Please fill out all required entries"
 
 def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""):
     # precondition: courseid does not currently exist

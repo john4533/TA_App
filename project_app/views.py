@@ -27,25 +27,9 @@ class SupAccounts(View):
         return render(request, "sup_accounts.html", {"roles": Roles.choices})
 
     def post(self, request):
-        no_such_user = False
-
-        user_lst = list(User.objects.filter(email=request.POST['email']))
-
-        if user_lst.__len__() == 0:
-            no_such_user = True
-
-        if no_such_user:
-            n = request.POST['username']
-            p = request.POST['password']
-            e = request.POST['email']
-            r = request.POST['role']
-
-            User.objects.create(username=n, password=p, email=e, role=r)
-            return render(request, "sup_accounts.html", {"roles": Roles.choices})
-
-        else:
-            return render(request, "sup_accounts.html",
-                          {"roles": Roles.choices, "message": "User with that email already exists"})
+        message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'], request.POST['role'])
+        accounts = User.objects.all
+        return render(request, "sup_accounts.html", {"roles": Roles.choices, "accounts": accounts, "message": message})
 
 
 class SupCourses(View):
