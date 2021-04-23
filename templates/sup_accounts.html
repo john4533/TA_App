@@ -5,6 +5,8 @@
     <title>Sup Home</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/sup_accounts.css' %}"/>
 </head>
 <body>
@@ -18,8 +20,7 @@
             <li><a href="/Account/">Account</a></li>
             <li><a href="/SupAccounts/">Accounts</a></li>
             <li><a href="/SupCourses/">Courses </a></li>
-            <!-- <li><a href="SupEmail">Email </a></li> -->
-            <li><b href="#" class="btn" id="menu-toggle"> -></b></li>
+            {#            <li><a href="/SupEmail/">Email </a></li>#}
         </ul>
     </div>
 </div>
@@ -30,46 +31,64 @@
         <div class="row">
             <div class="col-lg-12">
 
-                <div class="form-container">
-                    <form action="/SupAccounts/" method="post">
-                        {% csrf_token %}
-                        <h1>Create an Account</h1><br>
-                        <div class="input-fields">
-                            Username:
-                            <input name="username" type="text" placeholder="username"required/><br><br>
-                            Password:
-                            <input name="password" type="password" placeholder="password" required/><br><br>
-                            Email:
-                            <input name="email" type="email" placeholder="email" required/><br><br>
-                            Role:
-                            <select name="role" required>
-                                {% for i in roles %}
-                                    <option value={{ i.0 }}>{{ i.0 }}</option>
-                                {% endfor %}
-                            </select><br><br>
-                            <!-- Not required -->
-                            Phone Number:
-                            <input name="phone" type="tel" placeholder="1-(234)-567-8910" pattern="[0-9]{1}-([0-9]{3})-[0-9]{3}-[0-9]{4}"/><br><br>
-                            Address:
-                            <input name="address" type="test" placeholder="address"/><br><br>
-                            Office Hours:
-                            <input name="officehours" type="test" placeholder="office hours"/><br><br>
-                            <input type="submit"/>
-                        </div>
-                    </form>
-                    {{ message }}
-                </div>
+                <div align="center"><form action="/SupAccounts/" method="post" id="form1">
+                    {% csrf_token %}
+                    <table class="table1" cellspacing="50">
+                        <div class="img1"><img height="75" width="75" align="center" src="/static/images/create_account.png"></div>
+                        <div class="legend" align="center"><legend>Register Accounts</legend></div>
 
-            </div>
+                        <tr>
+                            <td>
+                                <label>Username</label>
+                                <div><input name="username" type="text" placeholder="username"required/></div>
+                            </td>
+                            <td>
+                                <div> <label>Password</label></div>
+                                <div><input name="password" type="password" placeholder="password" required/><br></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><label>Email</label></div>
+                                <div><input name="email" type="email" placeholder="email" required/></div>
+                            </td>
+                            <td>
+                                <div> <label for="cor_sched">Role</label></div>
+                                <div><select name="role" required>
+                                        {% for i in roles %}
+                                            <option value={{ i.0 }}>{{ i.0 }}</option>
+                                        {% endfor %}
+                                     </select><br></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><label>Phone Number</label></div>
+                                <div><input name="phone" type="tel" placeholder="1-(234)-567-8910"/></div>
+                            </td>
+                            <td>
+                                <div><label>Address</label></div>
+                                <div><input name="address" type="test" placeholder="address"/><br></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><label>Office Hours</label></div>
+                                <div><input name="officehours" type="text" placeholder="office hours"/></div>
+                            </td>
+                        </tr>
+                    </table>
+                        <div align="center"><button class="button" type="submit" form="form1" value="Submit">Add Account</button></div>
+                            <div class="message">
+                                {% if message is not None %}
+                                    {{ message }}
+                                {% endif %}
+                            </div>
+                </form></div>
         </div>
     </div>
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("menuDisplayed");
-    })
-</script>
 
+</div>
 </div>
 
 <!-- Optional JavaScript -->
@@ -77,5 +96,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
