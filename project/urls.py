@@ -24,5 +24,6 @@ urlpatterns = [
     path('SupCourses/', SupCourses.as_view()),
     path('SupEmail/', SupEmail.as_view()),
     path('Account/', Account.as_view()),
+    path('SupCourseView/', SupCourseView.as_view()),
     path('', Login.as_view())
 ]

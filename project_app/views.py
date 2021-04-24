@@ -51,3 +51,8 @@ class SupEmail(View):
 class Account(View):
     def get(self, request):
         return render(request, "account.html", {})
+
+
+class SupCourseView(View):
+    def get(self,request):
+        return render(request,"sup_course_view.html", {})
