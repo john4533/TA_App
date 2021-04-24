@@ -20,12 +20,6 @@ class Login(View):
             return redirect('/SupHome/')
 
 
-class LogOut(View):
-    def get(self, request):
-        return render(request, "login.html", {})
-
-
-
 class SupHome(View):
     def get(self, request):
         return render(request, "sup_home.html", {})

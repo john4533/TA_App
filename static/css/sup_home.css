@@ -2,7 +2,9 @@
 #page-content-wrapper {
     width: 100%;
     postion: absolute;
-    padding: 150px;
+    padding-top: 40px;
+    padding-left: 100px;
+
 
 }
 
