@@ -7,28 +7,41 @@
 
 }
 /*side bar*/
-#sidebar-wrapper{
-  position: absolute;
-  width:95px;
-  height: 100%;
-  background: #000000;
+#sidebar-wrapper {
+    position: absolute;
+    width: 95px;
+    height: 100%;
+    background: #000;
 
 }
-.sidebar-nav{
-  padding:0px;
-  list-style: none
+
+.sidebar-nav {
+    padding: 0px;
+    list-style: none
 }
 
-.sidebar-nav li{
-  text-indents: 60px;
-  line-height: 40px;
-  text-decoration: none;
+.sidebar-nav li {
+    text-indents: 60px;
+    line-height: 80px;
+    text-decoration: none;
 }
 
 .sidebar-nav li a {
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  color: #ddd;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #ddd;
 }
 
+p {
+    line-height: 2px;
+}
+
+.sidebar-nav logOut a {
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    bottom: 17px;
+    color: #ddd;
+    padding-left: 7px;
+}
