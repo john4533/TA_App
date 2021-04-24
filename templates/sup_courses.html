@@ -31,7 +31,7 @@
     <div class="container-fluid">
         <div class="row">
             <div lcass="col-lg-12">
-                  <div align="center"><button class="open_b" onclick="openForm()">Register Courses</button></div>
+                  <div align="center"><button class="open_b">Register Courses</button></div>
                   <div class="form-pop" id="c_form" align="center"><form  class="course" action="/SupCourses/" method="post" id="form1">
                     {% csrf_token %}
                      <table class="table1" cellspacing="50">
@@ -39,41 +39,40 @@
                           <div  class="legend" align="center"><legend>Register Courses</legend></div>
                          <tr>
                                   <td>
-                                    <div><label for="cor_name">Course Name</label></div>
-                                    <div><input type="text" id="cor_name" name="cor_name" required></div>
+                                    <div><label for="cor_name">*Course Name</label></div>
+                                    <div><input type="text" id="cor_name" name="cor_name" placeholder="course name" required></div>
                                   </td>
                                  <td>
-                                   <div> <label for="cor_id">Course ID</label></div>
-                                   <div><input type="number" id="cor_id" name="cor_id" required><br></div>
+                                   <div> <label for="cor_id">*Course ID</label></div>
+                                   <div><input type="number" id="cor_id" name="cor_id" placeholder="course Id" required><br></div>
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                    <div><label for="cor_cred">Course Credits</label></div>
-                                    <div><input type="number" id="cor_cred" name="cor_cred" required></div>
+                                    <div><label for="cor_cred">*Course Credits</label></div>
+                                    <div><input type="number" id="cor_cred" name="cor_cred" placeholder="credits" required></div>
                                    </td>
 
                                   <td>
-                                      <div><label for="cor_sched">Course Schedule</label></div>
-                                      <div><input type="text" id="cor_sched" name="cor_sched" required></div>
+                                      <div><label for="cor_sched">*Course Schedule</label></div>
+                                      <div><input type="text" id="cor_sched" name="cor_sched"  placeholder="Day" required></div>
                                   </td>
                               </tr>
 
                               <tr>
                                   <td>
                                        <div><label for="cor_In">Course Instructor</label></div>
-                                        <div><input type="text" id="cor_In" name="cor_In"></div>
+                                        <div><input type="text" id="cor_In" placeholder="Instructor" name="cor_In"></div>
                                   </td>
 
                                    <td>
                                       <div><label for="cor_TA">Course TA</label></div>
-                                      <div><input type="text" id="cor_TA" name="cor_TA"></div>
+                                      <div><input type="text" id="cor_TA" placeholder="TA" name="cor_TA"></div>
                                   </td>
                               </tr>
 
                     </table>
                       <div align="center"><button class="button" type="submit" form="form1" value="Submit">Add Course</button></div>
-                      <div align="center"><button type="button" class="button1" onclick="closeForm()">Close</button></div>
                  </form></div>
 
             </div>
@@ -93,17 +92,6 @@
          {% endfor %}
         </table>
     </div>
-
-<script>
-    function openForm() {
-        document.getElementById("c_form").style.display = "block";
-    }
-    function closeForm() {
-        document.getElementById("c_form").style.display = "none";
-    }
-
-</script>
-
 </div>
 </body>
 </html>
