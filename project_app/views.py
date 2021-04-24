@@ -55,4 +55,6 @@ class Account(View):
 
 class SupCourseView(View):
     def get(self,request):
-        return render(request,"sup_course_view.html", {})
+        courses = list(Course.objects.all())
+        return render(request,"sup_course_view.html", {"courses":courses})
+

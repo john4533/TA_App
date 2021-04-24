@@ -31,9 +31,21 @@
     <div class="container-fluid">
         <div class="row">
             <div lcass="col-lg-12">
-
-
-
+            <div class="form" method="get">
+                        <div class="form" method="post">
+        <table>
+         {% for course in courses %}
+            <tr>
+                <td>
+                    {{ course.courseid }}
+                    {{ course.coursename }}
+                    {{ course.courseschedule }}
+                    {{ course.coursecredits }}
+                </td>
+            </tr>
+         {% endfor %}
+        </table>
+    </div>
 
             </div>
         </div>
