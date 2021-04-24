@@ -59,3 +59,4 @@ class SupCourses(View):
         return render(request, "sup_courses.html", {"courses":courses})
 
 
+
