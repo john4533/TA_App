@@ -52,12 +52,10 @@ class Account(View):
     def get(self, request):
         return render(request, "account.html", {})
 
-
 class SupCourses(View):
     def get(self,request):
         courses = list(Course.objects.all())
         return render(request, "sup_courses.html", {"courses":courses})
-
 
 
 
