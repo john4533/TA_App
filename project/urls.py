@@ -27,3 +27,4 @@ urlpatterns = [
     path('RegisterCourses/', RegisterCourses.as_view()),
     path('', Login.as_view())
 ]
+
