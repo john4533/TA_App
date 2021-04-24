@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sup Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register_courses.css' %}" type="text/css"/>
+</head>
+<body>
+<div id="wrapper">
+    <!-- side bar-->
+   <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li><a href="/SupHome/">
+                <img src="/static/images/uwm.svg" class="img-fluid">
+            </a></li>
+            <li><a href="/Account/">Account</a></li>
+            <li><a href="/SupAccounts/">Accounts</a></li>
+            <li><a href="/SupCourses/">Courses </a></li>
+{#            <li><a href="/SupEmail/">Email </a></li>#}
+        </ul>
+    </div>
+</div>
+
+<!--- page Content -->
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div lcass="col-lg-12">
+                  <div align="center"><button class="open_b">Register Courses</button></div>
+                  <div class="form-pop" id="c_form" align="center"><form  class="course" action="/RegisterCourses/" method="post" id="form1">
+                    {% csrf_token %}
+                     <table class="table1" cellspacing="50">
+                          <div class="img1"><img width="75" align="center"  src="/static/images/courses_image.svg"></div>
+                          <div  class="legend" align="center"><legend>Register Courses</legend></div>
+                         <tr>
+                                  <td>
+                                    <div><label for="cor_name">*Course Name</label></div>
+                                    <div><input type="text" id="cor_name" name="cor_name" placeholder="course name" required></div>
+                                  </td>
+                                 <td>
+                                   <div> <label for="cor_id">*Course ID</label></div>
+                                   <div><input type="number" id="cor_id" name="cor_id" placeholder="course Id" required><br></div>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                    <div><label for="cor_cred">*Course Credits</label></div>
+                                    <div><input type="number" id="cor_cred" name="cor_cred" placeholder="credits" required></div>
+                                   </td>
+
+                                  <td>
+                                      <div><label for="cor_sched">*Course Schedule</label></div>
+                                      <div><input type="text" id="cor_sched" name="cor_sched"  placeholder="Day" required></div>
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td>
+                                       <div><label for="cor_In">Course Instructor</label></div>
+                                        <div><input type="text" id="cor_In" placeholder="Instructor" name="cor_In"></div>
+                                  </td>
+
+                                   <td>
+                                      <div><label for="cor_TA">Course TA</label></div>
+                                      <div><input type="text" id="cor_TA" placeholder="TA" name="cor_TA"></div>
+                                  </td>
+                              </tr>
+
+                    </table>
+                      <div align="center"><button class="button" type="submit" form="form1" value="Submit">Add Course</button></div>
+                     {% if message is not None %}
+                      <div class="alert alert-danger">
+                         {% if message is not None %}
+                             <strong>{{ message }}</strong>
+                         {% endif %}
+                      {% endif %}
+                </div>
+                 </form></div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

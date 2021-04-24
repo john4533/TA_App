@@ -21,7 +21,6 @@
             <li><a href="/Account/">Account</a></li>
             <li><a href="/SupAccounts/">Accounts</a></li>
             <li><a href="/SupCourses/">Courses </a></li>
-            <li><a href="/SupCourseView/">View Courses</a></li>
 {#            <li><a href="/SupEmail/">Email </a></li>#}
         </ul>
     </div>
@@ -32,56 +31,41 @@
     <div class="container-fluid">
         <div class="row">
             <div lcass="col-lg-12">
-                  <div align="center"><button class="open_b">Register Courses</button></div>
-                  <div class="form-pop" id="c_form" align="center"><form  class="course" action="/SupCourses/" method="post" id="form1">
-                    {% csrf_token %}
-                     <table class="table1" cellspacing="50">
-                          <div class="img1"><img width="75" align="center"  src="/static/images/courses_image.svg"></div>
-                          <div  class="legend" align="center"><legend>Register Courses</legend></div>
-                         <tr>
-                                  <td>
-                                    <div><label for="cor_name">*Course Name</label></div>
-                                    <div><input type="text" id="cor_name" name="cor_name" placeholder="course name" required></div>
-                                  </td>
-                                 <td>
-                                   <div> <label for="cor_id">*Course ID</label></div>
-                                   <div><input type="number" id="cor_id" name="cor_id" placeholder="course Id" required><br></div>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                    <div><label for="cor_cred">*Course Credits</label></div>
-                                    <div><input type="number" id="cor_cred" name="cor_cred" placeholder="credits" required></div>
-                                   </td>
+                <nav class="navbar navbar-light bg-light">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </nav>
+                <div class="form" method="get">
+                        <table class="table">
+                            <thead class="table table-striped table-dark">
+                            <tr>
+                                <th scope="col">Course ID</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Course Schedule</th>
+                                <th scope="col">Course Credits</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for course in courses %}
+                                <tr>
+                                    <th scope="row">{{ course.courseid }}</th>
+                                    <td>{{ course.coursename }}</td>
+                                    <td>{{ course.courseschedule }}</td>
+                                    <td>{{ course.coursecredits }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                 <a href="/RegisterCourses/"><button class="btn btn-primary" type="submit">Add Courses</button></a>
 
-                                  <td>
-                                      <div><label for="cor_sched">*Course Schedule</label></div>
-                                      <div><input type="text" id="cor_sched" name="cor_sched"  placeholder="Day" required></div>
-                                  </td>
-                              </tr>
+                    </div>
 
-                              <tr>
-                                  <td>
-                                       <div><label for="cor_In">Course Instructor</label></div>
-                                        <div><input type="text" id="cor_In" placeholder="Instructor" name="cor_In"></div>
-                                  </td>
-
-                                   <td>
-                                      <div><label for="cor_TA">Course TA</label></div>
-                                      <div><input type="text" id="cor_TA" placeholder="TA" name="cor_TA"></div>
-                                  </td>
-                              </tr>
-
-                    </table>
-                      <div align="center"><button class="button" type="submit" form="form1" value="Submit">Add Course</button></div>
-                 </form></div>
-
+                </div>
             </div>
         </div>
     </div>
-
-</div>
-
 </body>
 </html>
 
