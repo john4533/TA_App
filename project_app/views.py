@@ -24,22 +24,23 @@ class SupHome(View):
 
 class SupAccounts(View):
     def get(self, request):
-        return render(request, "sup_accounts.html", {"roles": Roles.choices})
+        accounts = list(User.objects.all())
+        return render(request, "sup_accounts.html", {"roles": Roles.choices, "accounts": accounts})
 
     def post(self, request):
         message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'], request.POST['role'])
-        accounts = User.objects.all
+        accounts = list(User.objects.all())
         return render(request, "sup_accounts.html", {"roles": Roles.choices, "accounts": accounts, "message": message})
 
 
 class SupCourses(View):
     def get(self, request):
-        courses = Course.objects.all
+        courses = list(Course.objects.all())
         return render(request, "sup_courses.html", {"courses": courses})
 
     def post(self, request):
         message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'], request.POST['cor_cred'])
-        courses = Course.objects.all
+        courses = list(Course.objects.all())
         return render(request, "sup_courses.html", {"courses": courses, "message": message})
 
 class SupEmail(View):
