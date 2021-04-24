@@ -35,13 +35,11 @@ class SupAccounts(View):
 
 class RegisterCourses(View):
     def get(self, request):
-        courses = list(Course.objects.all())
-        return render(request, "register_courses.html", {"courses": courses})
+        return render(request, "register_courses.html")
 
     def post(self, request):
         message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'], request.POST['cor_cred'])
-        courses = list(Course.objects.all())
-        return render(request, "register_courses.html", {"courses": courses, "message": message})
+        return render(request, "register_courses.html", {"message": message})
 
 class SupEmail(View):
     def get(self, request):
@@ -56,6 +54,10 @@ class SupCourses(View):
     def get(self,request):
         courses = list(Course.objects.all())
         return render(request, "sup_courses.html", {"courses":courses})
+
+class CreateLab(View):
+    def get(self,request):
+        return render(request, "sup_create_lab.html")
 
 
 
