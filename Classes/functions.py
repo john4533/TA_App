@@ -35,6 +35,19 @@ def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""
     else:
         return "Please fill out all required entries"
 
+
+def deleteAccount(email=""):
+    pass
+
+def deleteCourse(courseid=""):
+    if courseid == "":
+        return "Please enter a course ID"
+    elif courseid not in list(i["courseid"] for i in Course.objects.all().values("courseid")):
+        return "Course with that ID does not exist"
+    else:
+        Course.objects.get(courseid=courseid).delete()
+        return "Course with ID " + courseid + " has been deleted"
+
 def setCourseId(courseId, courseIdOriginal):
     #precondition: course with the old ID exists, new ID does not exist
     #postcondition: course ID is updated
@@ -97,16 +110,6 @@ def setLabTA(ta, labId):
     # Postcondition: ta is assigned to the lab
     pass
 
-def deleteaccount(username):
-    pass
 
-def deleteCourse(courseid=""):
-    if courseid == "":
-        return "Please enter a course ID"
-    elif courseid not in list(i["courseid"] for i in Course.objects.all().values("courseid")):
-        return "Course with that ID does not exist"
-    else:
-        Course.objects.get(courseid=courseid).delete()
-        return "Course with ID " + courseid + " has been deleted"
 
 

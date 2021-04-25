@@ -9,42 +9,51 @@ from Classes.functions import *
 
 class UserTestCase(TestCase):
 
+    def setUp(self):
+        self.account1 = createAccount("xyz", "password1", "xyz@uwm.edu", "Instructor")
+
 #   CREATE ACCOUNT TESTS
     def test_useralreadyexists(self):
-        createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
-        self.assertEqual(createAccount("abc", "password2", "xyz@uwm.edu", "supervisor"), "User with that email already exists")
+        self.assertEqual(createAccount("abc", "password2", "xyz@uwm.edu", "Supervisor"), "User with that email already exists")
 
     def test_usercreated(self):
-        createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         b = User.objects.get(email="xyz@uwm.edu")
         self.assertEqual("xyz", b.username)
         self.assertEqual("password1", b.password)
-        self.assertEqual("instructor", b.role)
+        self.assertEqual("Instructor", b.role)
 
     def test_nousername(self):
-        self.assertEqual(createAccount("", "password1", "xyz@uwm.edu", "instructor"), "Please fill out all required entries")
+        self.assertEqual(createAccount("", "password1", "xyz@uwm.edu", "Instructor"), "Please fill out all required entries")
 
     def test_nopassword(self):
-        self.assertEqual(createAccount("xyz", "", "xyz@uwm.edu", "instructor"), "Please fill out all required entries")
+        self.assertEqual(createAccount("xyz", "", "xyz@uwm.edu", "Instructor"), "Please fill out all required entries")
 
     def test_noemail(self):
-        self.assertEqual(createAccount("xyz", "password1", "", "instructor"), "Please fill out all required entries")
+        self.assertEqual(createAccount("xyz", "password1", "", "Instructor"), "Please fill out all required entries")
 
     def test_norole(self):
         self.assertEqual(createAccount("xyz", "password1", "xyz@uwm.edu", ""), "Please fill out all required entries")
 
 
+#   DELETE ACCOUNT TESTS
+    def test_deletenoemailentered(self):
+        self.assertEqual(deleteAccount(""), "Please enter an email")
+
+    def test_deletenocourseexists(self):
+        self.assertEqual(deleteAccount("user2@uwm.edu"), "User with that email does not exist")
+
+    def test_deletecourse(self):
+        self.assertEqual(self.account1.email, "xyz@uwm.edu")
+        self.assertEqual(deleteCourse("xyz@uwm.edu"), "User with email xyz@uwm.edu has been deleted")
+
 # LOGIN TESTS
     def test_invalidusername(self):
-        createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         self.assertFalse(login("abc", "password1"))
 
     def test_invalidpassword(self):
-        createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         self.assertFalse(login("xyz", "password2"))
 
     def test_validlogin(self):
-        createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         self.assertTrue(login("xyz", "password1"))
 
 
