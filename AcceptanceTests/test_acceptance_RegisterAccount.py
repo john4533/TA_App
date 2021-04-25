@@ -15,11 +15,7 @@ class SupAccountsTest(TestCase):
     def test_createAccount(self):
         response = self.client.post("/RegisterAccount/", {"username": "user1", "password": "password1",
                                     "email": "user1@uwm.edu", "role": "instructor"})
-        last_index = len(response.context["accounts"]) - 1
-        self.assertEqual(response.context["accounts"][last_index].username, "user1")
-        self.assertEqual(response.context["accounts"][last_index].password, "password1")
-        self.assertEqual(response.context["accounts"][last_index].email, "user1@uwm.edu")
-        self.assertEqual(response.context["accounts"][last_index].role, "instructor")
+        self.assertEqual(response.url, '/AccountDisplay/')
 
     def test_emptyUsername(self):
         response = self.client.post("/RegisterAccount/", {"username": "", "password": "password1",
@@ -41,3 +37,9 @@ class SupAccountsTest(TestCase):
                                     "email": "user1@uwm.edu", "role": ""})
         self.assertEqual(response.context["message"], "Please fill out all required entries", msg="Empty role, user created without role")
 
+
+        # last_index = len(response.context["accounts"]) - 1
+        # self.assertEqual(response.context["accounts"][last_index].username, "user1")
+        # self.assertEqual(response.context["accounts"][last_index].password, "password1")
+        # self.assertEqual(response.context["accounts"][last_index].email, "user1@uwm.edu")
+        # self.assertEqual(response.context["accounts"][last_index].role, "instructor")
