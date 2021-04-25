@@ -18,10 +18,10 @@ class MyTestCase(TestCase):
         self.assertEqual(createCourse("337", "Software Engineering", "TR @ 10:00 - 10:50", "3"), "Course with that ID already exists")
 
     def test_courseCreated(self):
-        createCourse("361", "Software Engineering", "TR - 10:00", "3")
+        createCourse("361", "Software Engineering", "TR @ 10:00 - 10:50", "3")
         b = Course.objects.get(courseid="361")
         self.assertEqual("Software Engineering", b.coursename)
-        self.assertEqual("TR - 10:00", b.courseschedule)
+        self.assertEqual("TR @ 10:00 - 10:50", b.courseschedule)
         self.assertEqual("3", b.coursecredits)
 
     def test_nocourseid(self):

@@ -69,7 +69,7 @@
                             {% csrf_token %}
                             <input class="col-xs-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-warning  my-sm-0" type="submit">Search</button>
-                            <button class="btn btn-warning" type="submit">Add Course</button>
+                            <button class="btn btn-warning" type="submit" name="add_course" value="add_course">Add Course</button>
                         </form>
                         <hr style="width:100%;text-align:left;margin-left:0; margin-top:0px">
                     </nav>
@@ -97,6 +97,7 @@
                                         <button type="submit" class="btn btn-danger" name="delete_course"
                                                 value={{ course.courseid }}>Delete
                                         </button>
+                                        <button type="submit" class="btn btn-warning" name="add_lab" value="add_lab">Add Lab</button>
                                     </td>
 
                                 </tr>

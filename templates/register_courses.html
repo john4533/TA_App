@@ -67,7 +67,7 @@
                     <hr style="width:100%;text-align:left;margin-left:0">
                 </div>
                 <div class="form-pop" id="c_form" align="center">
-                    <form class="course" method="post" id="form1">
+                    <form class="course" method="post">
                         {% csrf_token %}
                         <table class="table1" cellspacing="50">
                             <div class="img1"><img width="200" align="center" src="/static/images/book.png">
@@ -102,22 +102,22 @@
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td>
-                                    <div><label for="cor_In">Course Instructor</label></div>
-                                    <div><input type="text" id="cor_In" placeholder="Instructor" name="cor_In">
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div><label for="cor_TA">Course TA</label></div>
-                                    <div><input type="text" id="cor_TA" placeholder="TA" name="cor_TA"></div>
-                                </td>
-                            </tr>
+{#                            <tr>#}
+{#                                <td>#}
+{#                                    <div><label for="cor_In">Course Instructor</label></div>#}
+{#                                    <div><input type="text" id="cor_In" placeholder="Instructor" name="cor_In">#}
+{#                                    </div>#}
+{#                                </td>#}
+{##}
+{#                                <td>#}
+{#                                    <div><label for="cor_TA">Course TA</label></div>#}
+{#                                    <div><input type="text" id="cor_TA" placeholder="TA" name="cor_TA"></div>#}
+{#                                </td>#}
+{#                            </tr>#}
 
                         </table>
                         <div align="center">
-                            <button class="btn btn-warning" type="submit" form="form1" value="Submit">Add Course
+                            <button class="btn btn-warning" type="submit" value="Submit">Add Course
                             </button>
                         </div>
                         {% if message is not None %}

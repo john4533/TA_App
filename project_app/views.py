@@ -71,12 +71,21 @@ class SupCourses(View):
             message = deleteCourse(request.POST['delete_course'])
             courses = list(Course.objects.all())
             return render(request, "sup_courses.html", {"courses": courses, "delete_message": message})
-        else:
+        elif request.POST.get('add_course'):
             return redirect('/RegisterCourses/')
+        elif request.POST.get('add_lab'):
+            return redirect('/RegisterLab/')
 
-class CreateLab(View):
+class RegisterLab(View):
     def get(self, request):
-        return render(request, "sup_create_lab.html")
+        return render(request, "register_lab.html")
+
+    def post(self, request):
+        message = createLab(request.POST['lab_id'], request.POST['lab_name'], request.POST['lab_sched'])
+        if message is None:
+            return redirect('/SupCourses/')
+        else:
+            return render(request, "register_courses.html", {"message": message})
 
 class Account(View):
     def get(self,request):

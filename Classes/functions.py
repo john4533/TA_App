@@ -35,6 +35,10 @@ def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""
     else:
         return "Please fill out all required entries"
 
+def createLab(labId="", labName="", labSchedule=""):
+    # Precondition: correct two inputs, and labId does not already belong to a lab
+    # Postcondition: lab is created with the given labId and labName
+    pass
 
 def deleteAccount(email=""):
     if email == "":
@@ -53,6 +57,9 @@ def deleteCourse(courseid=""):
     else:
         Course.objects.get(courseid=courseid).delete()
         return "Course with ID " + courseid + " has been deleted"
+
+def deleteLab(labid=""):
+    pass
 
 def setCourseId(courseId, courseIdOriginal):
     #precondition: course with the old ID exists, new ID does not exist
@@ -87,10 +94,7 @@ def setCourseCredits(courseCredits, courseId):
 #     pass
 
 
-def createLab(labId, labName):
-    # Precondition: correct two inputs, and labId does not already belong to a lab
-    # Postcondition: lab is created with the given labId and labName
-    pass
+
 
 
 def setLabId(labIdNew, labIdOriginal):
