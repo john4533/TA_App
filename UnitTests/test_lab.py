@@ -20,29 +20,29 @@ class MyTestCase(TestCase):
         createLab("901", "Software Engineering Lab 1", "T @ 11:00 - 12:50")
         b = Lab.objects.get(labid="901")
         self.assertEqual("Software Engineering Lab 1", b.labname)
-        self.assertEqual("R @ 11:00 - 12:50", b.labschedule)
+        self.assertEqual("T @ 11:00 - 12:50", b.labschedule)
 
     def test_nolabid(self):
         self.assertEqual(createLab("", "Software Engineering Lab 1", "R @ 11:00 - 12:50"),
                          "Please fill out all required entries")
 
     def test_nolabename(self):
-        self.assertEqual(createCourse("901", "", "R @ 11:00 - 12:50"), "Please fill out all required entries")
+        self.assertEqual(createLab("901", "", "R @ 11:00 - 12:50"), "Please fill out all required entries")
 
     def test_nolabschedule(self):
-        self.assertEqual(createCourse("901", "Software Engineering Lab 1", ""), "Please fill out all required entries")
+        self.assertEqual(createLab("901", "Software Engineering Lab 1", ""), "Please fill out all required entries")
 
 
 #   DELETE LAB TESTS
     def test_deletenolabidentered(self):
-        self.assertEqual(deleteLab(""), "Please enter a course ID")
+        self.assertEqual(deleteLab(""), "Please enter a lab ID")
 
     def test_deletenolabexists(self):
-        self.assertEqual(deleteLab("901"), "Course with that ID does not exist")
+        self.assertEqual(deleteLab("901"), "Lab with that ID does not exist")
 
     def test_deletelab(self):
         self.assertEqual(self.lab1.labid, "902")
-        self.assertEqual(deleteLab("902"), "Course with ID 902 has been deleted")
+        self.assertEqual(deleteLab("902"), "Lab with ID 902 has been deleted")
 
 
 
