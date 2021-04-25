@@ -100,5 +100,13 @@ def setLabTA(ta, labId):
 def deleteaccount(username):
     pass
 
-def deleteCourse(courseid):
-    pass
+def deleteCourse(courseid=""):
+    if courseid == "":
+        return "Please enter a course ID"
+    elif courseid not in list(i["courseid"] for i in Course.objects.all().values("courseid")):
+        return "Course with that ID does not exist"
+    else:
+        Course.objects.get(courseid=courseid).delete()
+        return "Course with ID " + courseid + " has been deleted"
+
+

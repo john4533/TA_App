@@ -40,9 +40,11 @@ class RegisterCourses(View):
         return render(request, "register_courses.html")
 
     def post(self, request):
-        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'],
-                               request.POST['cor_cred'])
-        return render(request, "register_courses.html", {"message": message})
+        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'], request.POST['cor_cred'])
+        if message is None:
+            return redirect('/SupCourses/')
+        else:
+            return render(request, "register_courses.html", {"message": message})
 
 
 class SupEmail(View):
@@ -66,9 +68,9 @@ class SupCourses(View):
 
     def post(self, request):
         if request.POST.get('delete_course'):
-            Course.objects.get(courseid=request.POST['delete_course']).delete()
+            message = deleteCourse(request.POST['delete_course'])
             courses = list(Course.objects.all())
-            return render(request, "sup_courses.html", {"courses": courses})
+            return render(request, "sup_courses.html", {"courses": courses, "delete_message": message})
         else:
             return redirect('/RegisterCourses/')
 
