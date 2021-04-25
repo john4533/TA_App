@@ -13,12 +13,12 @@ def login(name, password):
     else:
         return True
 
-def createAccount(username="", password="", email="", role=""):
+def createAccount(username="", password="", email="", role="", phone="", address="", officehours=""):
     # precondition: user with provided email does not currently exist
     # postcondition: user account is created with a unique email and role
     if username != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(email=email))) == 0:
-            User.objects.create(username=username, password=password, email=email, role=role)
+            User.objects.create(username=username, password=password, email=email, role=role, phone=phone, address=address, officehours=officehours)
         else:
             return "User with that email already exists"
     else:
@@ -37,7 +37,13 @@ def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""
 
 
 def deleteAccount(email=""):
-    pass
+    if email == "":
+        return "Please enter an email"
+    elif email not in list(i["email"] for i in User.objects.all().values("email")):
+        return "User with that email does not exist"
+    else:
+        User.objects.get(email=email).delete()
+        return "User with email " + email + " has been deleted"
 
 def deleteCourse(courseid=""):
     if courseid == "":

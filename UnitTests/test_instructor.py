@@ -7,6 +7,7 @@ django.setup()
 from project_app.models import User
 
 class MyTestCase(TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)
+    pass
+    # def test_something(self):
+    #     self.assertEqual(True, False)
 
