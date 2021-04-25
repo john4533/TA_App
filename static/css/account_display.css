@@ -1,0 +1,82 @@
+/*main content*/
+#wrapper{
+    position: relative;
+}
+#page-content-wrapper {
+    width: 100%;
+    postion: relative;
+    padding-top: 10px;
+    padding-left: 100px;
+}
+
+.sticky {
+	background-color: white;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+}
+h1 {
+    display: inline-block;
+    color: dimgrey;
+    font-family: Calibri;
+    font-size: 45px;
+}
+
+.form-group-row {
+    float: right;
+    padding-top: 10px;
+}
+
+.col-xs-2 {
+    vertical-align: bottom;
+}
+
+.table {
+    text-align: center;
+}
+th{
+    position: sticky;
+    top:55px;
+
+}
+
+/*side bar*/
+#sidebar-wrapper {
+    position: fixed;
+    width: 95px;
+    height: 100%;
+    background: #000;
+
+}
+
+.sidebar-nav {
+    padding: 0px;
+    list-style: none
+}
+
+.sidebar-nav li {
+    text-indents: 60px;
+    line-height: 80px;
+    text-decoration: none;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #ddd;
+}
+
+p {
+    line-height: 2px;
+}
+
+.sidebar-nav logOut a {
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    bottom: 17px;
+    color: #ddd;
+    padding-left: 7px;
+}
+
