@@ -1,7 +1,8 @@
 /*main content*/
-#wrapper{
+#wrapper {
     position: relative;
 }
+
 #page-content-wrapper {
     width: 100%;
     postion: relative;
@@ -10,11 +11,12 @@
 }
 
 .sticky {
-	background-color: white;
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0;
+    background-color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 }
+
 h1 {
     display: inline-block;
     color: dimgrey;
@@ -34,10 +36,10 @@ h1 {
 .table {
     text-align: center;
 }
-th{
-    position: sticky;
-    top:55px;
 
+th {
+    position: sticky;
+    top: 55px;
 }
 
 /*side bar*/
@@ -46,7 +48,6 @@ th{
     width: 95px;
     height: 100%;
     background: #000;
-
 }
 
 .sidebar-nav {

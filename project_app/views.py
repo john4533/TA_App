@@ -29,7 +29,7 @@ class RegisterAccount(View):
 
     def post(self, request):
         message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'],
-                                request.POST['role'])
+                                request.POST['role'], request.POST['phone'], request.POST['address'], request.POST['officehours'])
         if message is None:
             return redirect('/AccountDisplay/')
         else:
@@ -47,19 +47,18 @@ class RegisterCourses(View):
         else:
             return render(request, "register_courses.html", {"message": message})
 
-
-class SupEmail(View):
-    def get(self, request):
-        return render(request, "sup_email.html", {})
-
-
 class AccountDisplay(View):
     def get(self, request):
-        accounts=list(User.objects.all())
+        accounts = list(User.objects.all())
         return render(request, "account_display.html", {"accounts":accounts})
 
     def post(self, request):
-        return redirect('/RegisterAccount/')
+        if request.POST.get('delete_account'):
+            message = deleteAccount(request.POST['delete_account'])
+            accounts = list(User.objects.all())
+            return render(request, "account_display.html", {"accounts": accounts, "delete_message": message})
+        else:
+            return redirect('/RegisterAccount/')
 
 
 class SupCourses(View):
@@ -72,13 +71,26 @@ class SupCourses(View):
             message = deleteCourse(request.POST['delete_course'])
             courses = list(Course.objects.all())
             return render(request, "sup_courses.html", {"courses": courses, "delete_message": message})
-        else:
+        elif request.POST.get('add_course'):
             return redirect('/RegisterCourses/')
+        elif request.POST.get('add_lab'):
+            return redirect('/RegisterLab/')
 
-class CreateLab(View):
+class RegisterLab(View):
     def get(self, request):
-        return render(request, "sup_create_lab.html")
+        return render(request, "register_lab.html")
+
+    def post(self, request):
+        message = createLab(request.POST['lab_id'], request.POST['lab_name'], request.POST['lab_sched'])
+        if message is None:
+            return redirect('/SupCourses/')
+        else:
+            return render(request, "register_courses.html", {"message": message})
 
 class Account(View):
     def get(self,request):
         return render(request,"account.html")
+
+class SupEmail(View):
+    def get(self, request):
+        return render(request, "sup_email.html", {})

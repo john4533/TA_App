@@ -66,68 +66,73 @@
                     <h1>Register Course</h1>
                     <hr style="width:100%;text-align:left;margin-left:0">
                 </div>
-                    <div class="form-pop" id="c_form" align="center">
-                        <form class="course" method="post" id="form1">
-                            {% csrf_token %}
-                            <table class="table1" cellspacing="50">
-                                <div class="img1"><img width="200" align="center" src="/static/images/book.png">
-                                </div>
-                                <tr>
-                                    <td>
-                                        <div><label for="cor_name">*Course Name</label></div>
-                                        <div><input type="text" id="cor_name" name="cor_name" placeholder="course name"
-                                                    required></div>
-                                    </td>
-                                    <td>
-                                        <div><label for="cor_id">*Course ID</label></div>
-                                        <div><input type="number" id="cor_id" name="cor_id" placeholder="course Id"
-                                                    required><br></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div><label for="cor_cred">*Course Credits</label></div>
-                                        <div><input type="number" id="cor_cred" name="cor_cred" placeholder="credits"
-                                                    required></div>
-                                    </td>
-
-                                    <td>
-                                        <div><label for="cor_sched">*Course Schedule</label></div>
-                                        <div><input type="text" id="cor_sched" name="cor_sched" placeholder="Day"
-                                                    required></div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div><label for="cor_In">Course Instructor</label></div>
-                                        <div><input type="text" id="cor_In" placeholder="Instructor" name="cor_In">
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <div><label for="cor_TA">Course TA</label></div>
-                                        <div><input type="text" id="cor_TA" placeholder="TA" name="cor_TA"></div>
-                                    </td>
-                                </tr>
-
-                            </table>
-                            <div align="center">
-                                <button class="btn btn-warning" type="submit" form="form1" value="Submit">Add Course</button>
+                <div class="form-pop" id="c_form" align="center">
+                    <form class="course" method="post">
+                        {% csrf_token %}
+                        <table class="table1" cellspacing="50">
+                            <div class="img1"><img width="200" align="center" src="/static/images/book.png">
                             </div>
+
+                            <div class="legend" align="center">
+                                <legend>Register Course</legend>
+                            </div>
+                            <tr>
+                                <td>
+                                    <div><label for="cor_name">*Course Name</label></div>
+                                    <div><input type="text" id="cor_name" name="cor_name" placeholder="course name"
+                                                required></div>
+                                </td>
+                                <td>
+                                    <div><label for="cor_id">*Course ID</label></div>
+                                    <div><input type="number" id="cor_id" name="cor_id" placeholder="course Id"
+                                                required><br></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div><label for="cor_cred">*Course Credits</label></div>
+                                    <div><input type="number" id="cor_cred" name="cor_cred" placeholder="credits"
+                                                required></div>
+                                </td>
+
+                                <td>
+                                    <div><label for="cor_sched">*Course Schedule</label></div>
+                                    <div><input type="text" id="cor_sched" name="cor_sched" placeholder="Day"
+                                                required></div>
+                                </td>
+                            </tr>
+
+{#                            <tr>#}
+{#                                <td>#}
+{#                                    <div><label for="cor_In">Course Instructor</label></div>#}
+{#                                    <div><input type="text" id="cor_In" placeholder="Instructor" name="cor_In">#}
+{#                                    </div>#}
+{#                                </td>#}
+{##}
+{#                                <td>#}
+{#                                    <div><label for="cor_TA">Course TA</label></div>#}
+{#                                    <div><input type="text" id="cor_TA" placeholder="TA" name="cor_TA"></div>#}
+{#                                </td>#}
+{#                            </tr>#}
+
+                        </table>
+                        <div align="center">
+                            <button class="btn btn-warning" type="submit" value="Submit">Add Course
+                            </button>
+                        </div>
+                        {% if message is not None %}
+                            <div class="error">
                             {% if message is not None %}
-                                <div class="error">
-                                {% if message is not None %}
-                                    <strong>{{ message }}</strong>
-                                {% endif %}
+                                <strong>{{ message }}</strong>
                             {% endif %}
-                            </div>
-                        </form>
-                    </div>
+                        {% endif %}
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

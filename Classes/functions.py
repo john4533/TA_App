@@ -13,12 +13,12 @@ def login(name, password):
     else:
         return True
 
-def createAccount(username="", password="", email="", role=""):
+def createAccount(username="", password="", email="", role="", phone="", address="", officehours=""):
     # precondition: user with provided email does not currently exist
     # postcondition: user account is created with a unique email and role
     if username != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(email=email))) == 0:
-            User.objects.create(username=username, password=password, email=email, role=role)
+            User.objects.create(username=username, password=password, email=email, role=role, phone=phone, address=address, officehours=officehours)
         else:
             return "User with that email already exists"
     else:
@@ -34,6 +34,44 @@ def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""
             return "Course with that ID already exists"
     else:
         return "Please fill out all required entries"
+
+def createLab(labId="", labName="", labSchedule=""):
+    # Precondition: correct two inputs, and labId does not already belong to a lab
+    # Postcondition: lab is created with the given labId and labName
+    if labId != '' and labName != '' and labSchedule != '':
+        if len(list(Lab.objects.filter(labid=labId))) == 0:
+            Lab.objects.create(labid=labId, labname=labName, labschedule=labSchedule)
+        else:
+            return "Lab with that ID already exists"
+    else:
+        return "Please fill out all required entries"
+
+def deleteAccount(email=""):
+    if email == "":
+        return "Please enter an email"
+    elif email not in list(i["email"] for i in User.objects.all().values("email")):
+        return "User with that email does not exist"
+    else:
+        User.objects.get(email=email).delete()
+        return "User with email " + email + " has been deleted"
+
+def deleteCourse(courseid=""):
+    if courseid == "":
+        return "Please enter a course ID"
+    elif courseid not in list(i["courseid"] for i in Course.objects.all().values("courseid")):
+        return "Course with that ID does not exist"
+    else:
+        Course.objects.get(courseid=courseid).delete()
+        return "Course with ID " + courseid + " has been deleted"
+
+def deleteLab(labid=""):
+    if labid == "":
+        return "Please enter a lab ID"
+    elif labid not in list(i["labid"] for i in Lab.objects.all().values("labid")):
+        return "Lab with that ID does not exist"
+    else:
+        Lab.objects.get(labid=labid).delete()
+        return "Lab with ID " + labid + " has been deleted"
 
 def setCourseId(courseId, courseIdOriginal):
     #precondition: course with the old ID exists, new ID does not exist
@@ -68,10 +106,7 @@ def setCourseCredits(courseCredits, courseId):
 #     pass
 
 
-def createLab(labId, labName):
-    # Precondition: correct two inputs, and labId does not already belong to a lab
-    # Postcondition: lab is created with the given labId and labName
-    pass
+
 
 
 def setLabId(labIdNew, labIdOriginal):
@@ -97,16 +132,6 @@ def setLabTA(ta, labId):
     # Postcondition: ta is assigned to the lab
     pass
 
-def deleteaccount(username):
-    pass
 
-def deleteCourse(courseid=""):
-    if courseid == "":
-        return "Please enter a course ID"
-    elif courseid not in list(i["courseid"] for i in Course.objects.all().values("courseid")):
-        return "Course with that ID does not exist"
-    else:
-        Course.objects.get(courseid=courseid).delete()
-        return "Course with ID " + courseid + " has been deleted"
 
 

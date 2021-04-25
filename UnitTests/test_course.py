@@ -10,16 +10,18 @@ from project_app.models import Course
 
 class MyTestCase(TestCase):
 
+    def setUp(self):
+        self.course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
+
 #   CREATE COURSE TESTS
     def test_courseIdexists(self):
-        createCourse("361", "Software Engineering", "TR - 10:00", "3")
-        self.assertEqual(createCourse("361", "Not Software Engineering", "MW - 12:00", "4"), "Course with that ID already exists")
+        self.assertEqual(createCourse("337", "Software Engineering", "TR @ 10:00 - 10:50", "3"), "Course with that ID already exists")
 
     def test_courseCreated(self):
-        createCourse("361", "Software Engineering", "TR - 10:00", "3")
+        createCourse("361", "Software Engineering", "TR @ 10:00 - 10:50", "3")
         b = Course.objects.get(courseid="361")
         self.assertEqual("Software Engineering", b.coursename)
-        self.assertEqual("TR - 10:00", b.courseschedule)
+        self.assertEqual("TR @ 10:00 - 10:50", b.courseschedule)
         self.assertEqual("3", b.coursecredits)
 
     def test_nocourseid(self):
@@ -38,15 +40,14 @@ class MyTestCase(TestCase):
 
 #   DELETE COURSE TESTS
     def test_deletenocourseidentered(self):
-        createCourse("361", "Software Engineering", "TR - 10:00", "3")
         self.assertEqual(deleteCourse(""), "Please enter a course ID")
 
     def test_deletenocourseexists(self):
         self.assertEqual(deleteCourse("361"), "Course with that ID does not exist")
 
     def test_deletecourse(self):
-        createCourse("361", "Software Engineering", "TR - 10:00", "3")
-        self.assertEqual(deleteCourse("361"), "Course with ID 361 has been deleted")
+        self.assertEqual(self.course1.courseid, "337")
+        self.assertEqual(deleteCourse("337"), "Course with ID 337 has been deleted")
 
     # def test_courseIdupdated(self):
     #     createCourse("361", "Software Engineering", "TR - 10:00", "3")
