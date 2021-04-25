@@ -76,6 +76,7 @@
                                 <th scope="col">Course Name</th>
                                 <th scope="col">Course Schedule</th>
                                 <th scope="col">Course Credits</th>
+                                <th scope="col"> </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -85,6 +86,7 @@
                                     <td>{{ course.coursename }}</td>
                                     <td>{{ course.courseschedule }}</td>
                                     <td>{{ course.coursecredits }}</td>
+                                    <td><button type="button" class="btn btn-danger">Delete</button></td>
                                 </tr>
                                 
                             {% endfor %}
