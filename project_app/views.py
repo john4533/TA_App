@@ -29,7 +29,7 @@ class RegisterAccount(View):
 
     def post(self, request):
         message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'],
-                                request.POST['role'])
+                                request.POST['role'], request.POST['phone'], request.POST['address'], request.POST['officehours'])
         if message is None:
             return redirect('/AccountDisplay/')
         else:
