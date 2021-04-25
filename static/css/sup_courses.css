@@ -1,11 +1,29 @@
 
-
+/*main content*/
 #page-content-wrapper {
-  width: 100%;
-  postion: absolute;
-  padding: 150px;
-
+    width: 100%;
+    postion: absolute;
+    padding-top: 10px;
+    padding-left: 100px;
 }
+
+h1 {
+    display: inline-block;
+    color: dimgrey;
+    font-family: Calibri;
+    font-size: 45px;
+}
+
+.form-group-row {
+    float: right;
+    padding-top: 10px;
+}
+
+.col-xs-2 {
+    vertical-align: bottom;
+}
+
+
 /*side bar*/
 #sidebar-wrapper {
     position: absolute;
@@ -45,3 +63,4 @@ p {
     color: #ddd;
     padding-left: 7px;
 }
+
