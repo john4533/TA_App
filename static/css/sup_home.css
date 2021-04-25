@@ -2,10 +2,15 @@
 #page-content-wrapper {
     width: 100%;
     postion: absolute;
-    padding-top: 40px;
+    padding-top: 10px;
     padding-left: 100px;
+    padding-right: 0px;
 
-
+}
+h1{
+    color: dimgrey;
+    font-family: Calibri;
+    font-size: 45px;
 }
 
 /*side bar*/
