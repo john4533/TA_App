@@ -49,14 +49,14 @@ class RegisterCourses(View):
 
 class AccountDisplay(View):
     def get(self, request):
-        accounts=list(User.objects.all())
+        accounts = list(User.objects.all())
         return render(request, "account_display.html", {"accounts":accounts})
 
     def post(self, request):
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
-            accounts = list(Course.objects.all())
-            return render(request, "account_displau.html", {"accounts": accounts, "delete_message": message})
+            accounts = list(User.objects.all())
+            return render(request, "account_display.html", {"accounts": accounts, "delete_message": message})
         else:
             return redirect('/RegisterAccount/')
 

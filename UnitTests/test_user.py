@@ -10,16 +10,17 @@ from Classes.functions import *
 class UserTestCase(TestCase):
 
     def setUp(self):
-        self.account1 = createAccount("xyz", "password1", "xyz@uwm.edu", "Instructor")
+        self.account1 = User.objects.create(username="xyz", password="password1", email="xyz@uwm.edu", role="Instructor")
 
 #   CREATE ACCOUNT TESTS
     def test_useralreadyexists(self):
         self.assertEqual(createAccount("abc", "password2", "xyz@uwm.edu", "Supervisor"), "User with that email already exists")
 
     def test_usercreated(self):
-        b = User.objects.get(email="xyz@uwm.edu")
-        self.assertEqual("xyz", b.username)
-        self.assertEqual("password1", b.password)
+        createAccount("user", "password2", "user@uwm.edu", "Instructor")
+        b = User.objects.get(email="user@uwm.edu")
+        self.assertEqual("user", b.username)
+        self.assertEqual("password2", b.password)
         self.assertEqual("Instructor", b.role)
 
     def test_nousername(self):
@@ -44,7 +45,7 @@ class UserTestCase(TestCase):
 
     def test_deletecourse(self):
         self.assertEqual(self.account1.email, "xyz@uwm.edu")
-        self.assertEqual(deleteCourse("xyz@uwm.edu"), "User with email xyz@uwm.edu has been deleted")
+        self.assertEqual(deleteAccount("xyz@uwm.edu"), "User with email xyz@uwm.edu has been deleted")
 
 # LOGIN TESTS
     def test_invalidusername(self):
