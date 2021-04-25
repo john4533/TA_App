@@ -99,3 +99,6 @@ def setLabTA(ta, labId):
 
 def deleteaccount(username):
     pass
+
+def deleteCourse(courseid):
+    pass

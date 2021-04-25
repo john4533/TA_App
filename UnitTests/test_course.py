@@ -1,6 +1,6 @@
 from django.test import TestCase
 import os
-from Classes.functions import createCourse, setCourseId, setCourseName, setCourseSchedule, setCourseCredits
+from Classes.functions import *
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
@@ -10,6 +10,7 @@ from project_app.models import Course
 
 class MyTestCase(TestCase):
 
+#   CREATE COURSE TESTS
     def test_courseIdexists(self):
         createCourse("361", "Software Engineering", "TR - 10:00", "3")
         self.assertEqual(createCourse("361", "Not Software Engineering", "MW - 12:00", "4"), "Course with that ID already exists")
@@ -34,6 +35,18 @@ class MyTestCase(TestCase):
         self.assertEqual(createCourse("361", "Software Engineering", "TR @ 10:00 - 10:50", ""), "Please fill out all required entries")
 
 
+
+#   DELETE COURSE TESTS
+    def test_deletenocourseidentered(self):
+        createCourse("361", "Software Engineering", "TR - 10:00", "3")
+        self.assertEqual(deleteCourse(""), "Please enter a course ID")
+
+    def test_deletenocourseexists(self):
+        self.assertEqual(deleteCourse("361"), "Course with that ID does not exist")
+
+    def test_deletecourse(self):
+        createCourse("361", "Software Engineering", "TR - 10:00", "3")
+        self.assertEqual(deleteCourse("361"), "Course with ID 361 has been deleted")
 
     # def test_courseIdupdated(self):
     #     createCourse("361", "Software Engineering", "TR - 10:00", "3")

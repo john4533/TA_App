@@ -9,6 +9,7 @@ from Classes.functions import *
 
 class UserTestCase(TestCase):
 
+#   CREATE ACCOUNT TESTS
     def test_useralreadyexists(self):
         createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         self.assertEqual(createAccount("abc", "password2", "xyz@uwm.edu", "supervisor"), "User with that email already exists")
@@ -29,9 +30,11 @@ class UserTestCase(TestCase):
     def test_noemail(self):
         self.assertEqual(createAccount("xyz", "password1", "", "instructor"), "Please fill out all required entries")
 
-    def test_role(self):
+    def test_norole(self):
         self.assertEqual(createAccount("xyz", "password1", "xyz@uwm.edu", ""), "Please fill out all required entries")
 
+
+# LOGIN TESTS
     def test_invalidusername(self):
         createAccount("xyz", "password1", "xyz@uwm.edu", "instructor")
         self.assertFalse(login("abc", "password1"))
