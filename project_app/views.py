@@ -55,6 +55,9 @@ class Accountdisplay(View):
         accounts=list(User.objects.all())
         return render(request, "account_display.html", {"accounts":accounts})
 
+    def post(self, request):
+        return redirect('/RegisterAccount/')
+
 
 class SupCourses(View):
     def get(self, request):
