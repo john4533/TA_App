@@ -1,12 +1,20 @@
 /*main content*/
-
+#wrapper{
+    position: relative;
+}
 #page-content-wrapper {
     width: 100%;
-    postion: absolute;
+    postion: relative;
     padding-top: 10px;
     padding-left: 100px;
 }
 
+.sticky {
+	background-color: white;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+}
 h1 {
     display: inline-block;
     color: dimgrey;
@@ -22,12 +30,19 @@ h1 {
 .col-xs-2 {
     vertical-align: bottom;
 }
+
 .table {
     text-align: center;
 }
+th{
+    position: sticky;
+    top:55px;
+
+}
+
 /*side bar*/
 #sidebar-wrapper {
-    position: absolute;
+    position: fixed;
     width: 95px;
     height: 100%;
     background: #000;
