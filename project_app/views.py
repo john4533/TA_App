@@ -23,16 +23,16 @@ class SupHome(View):
         return render(request, "sup_home.html", {})
 
 
-class SupAccounts(View):
+class RegisterAccount(View):
     def get(self, request):
         accounts = list(User.objects.all())
-        return render(request, "sup_accounts.html", {"roles": Roles.choices, "accounts": accounts})
+        return render(request, "register_account.html", {"roles": Roles.choices, "accounts": accounts})
 
     def post(self, request):
         message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'],
                                 request.POST['role'])
         accounts = list(User.objects.all())
-        return render(request, "sup_accounts.html", {"roles": Roles.choices, "accounts": accounts, "message": message})
+        return render(request, "register_account.html", {"roles": Roles.choices, "accounts": accounts, "message": message})
 
 
 class RegisterCourses(View):
@@ -50,9 +50,10 @@ class SupEmail(View):
         return render(request, "sup_email.html", {})
 
 
-class Account(View):
+class Accountdisplay(View):
     def get(self, request):
-        return render(request, "account.html", {})
+        accounts=list(User.objects.all())
+        return render(request, "account_display.html", {"accounts":accounts})
 
 
 class SupCourses(View):
@@ -71,3 +72,7 @@ class SupCourses(View):
 class CreateLab(View):
     def get(self, request):
         return render(request, "sup_create_lab.html")
+
+class Account(View):
+    def get(self,request):
+        return render(request,"account.html")

@@ -20,12 +20,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('CreateCourse/', CreateCourse.as_view()),
     path('SupHome/', SupHome.as_view()),
-    path('SupAccounts/', SupAccounts.as_view()),
+   # path('SupAccounts/', SupAccounts.as_view()),
     path('SupCourses/', SupCourses.as_view()),
     path('SupEmail/', SupEmail.as_view()),
     path('Account/', Account.as_view()),
     path('RegisterCourses/', RegisterCourses.as_view()),
     path('CreateLab/', CreateLab.as_view()),
+    path('RegisterAccount/',RegisterAccount.as_view()),
+    path('Accountdisplay/',Accountdisplay.as_view()),
     path('', Login.as_view())
 ]
 
