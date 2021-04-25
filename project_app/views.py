@@ -51,9 +51,14 @@ class Account(View):
         return render(request, "account.html", {})
 
 class SupCourses(View):
-    def get(self,request):
+    def get(self, request):
         courses = list(Course.objects.all())
         return render(request, "sup_courses.html", {"courses":courses})
+
+    def post(self, request):
+        Course.objects.get(courseid=request.POST["delete_course"]).delete()
+        courses = list(Course.objects.all())
+        return render(request, "sup_courses.html", {"courses": courses})
 
 class CreateLab(View):
     def get(self,request):
