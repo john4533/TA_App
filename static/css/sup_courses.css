@@ -22,7 +22,9 @@ h1 {
 .col-xs-2 {
     vertical-align: bottom;
 }
-
+.table {
+    text-align: center;
+}
 /*side bar*/
 #sidebar-wrapper {
     position: absolute;
