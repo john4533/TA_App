@@ -47,19 +47,18 @@ class RegisterCourses(View):
         else:
             return render(request, "register_courses.html", {"message": message})
 
-
-class SupEmail(View):
-    def get(self, request):
-        return render(request, "sup_email.html", {})
-
-
 class AccountDisplay(View):
     def get(self, request):
         accounts=list(User.objects.all())
         return render(request, "account_display.html", {"accounts":accounts})
 
     def post(self, request):
-        return redirect('/RegisterAccount/')
+        if request.POST.get('delete_account'):
+            message = deleteAccount(request.POST['delete_account'])
+            accounts = list(Course.objects.all())
+            return render(request, "account_displau.html", {"accounts": accounts, "delete_message": message})
+        else:
+            return redirect('/RegisterAccount/')
 
 
 class SupCourses(View):
@@ -82,3 +81,7 @@ class CreateLab(View):
 class Account(View):
     def get(self,request):
         return render(request,"account.html")
+
+class SupEmail(View):
+    def get(self, request):
+        return render(request, "sup_email.html", {})
