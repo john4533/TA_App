@@ -25,14 +25,15 @@ class SupHome(View):
 
 class RegisterAccount(View):
     def get(self, request):
-        accounts = list(User.objects.all())
-        return render(request, "register_account.html", {"roles": Roles.choices, "accounts": accounts})
+        return render(request, "register_account.html", {"roles": Roles.choices})
 
     def post(self, request):
         message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'],
                                 request.POST['role'])
-        accounts = list(User.objects.all())
-        return render(request, "register_account.html", {"roles": Roles.choices, "accounts": accounts, "message": message})
+        if message is None:
+            return redirect('/AccountDisplay/')
+        else:
+            return render(request, "register_account.html", {"roles": Roles.choices, "message": message})
 
 
 class RegisterCourses(View):
@@ -52,7 +53,7 @@ class SupEmail(View):
         return render(request, "sup_email.html", {})
 
 
-class Accountdisplay(View):
+class AccountDisplay(View):
     def get(self, request):
         accounts=list(User.objects.all())
         return render(request, "account_display.html", {"accounts":accounts})
