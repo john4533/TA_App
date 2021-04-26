@@ -73,6 +73,9 @@ def deleteLab(labid=""):
         Lab.objects.get(labid=labid).delete()
         return "Lab with ID " + labid + " has been deleted"
 
+def getCourses():
+    pass
+
 # def setCourseId(courseId, courseIdOriginal):
 #     #precondition: course with the old ID exists, new ID does not exist
 #     #postcondition: course ID is updated
