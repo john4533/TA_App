@@ -103,7 +103,8 @@ class RegisterLab(View):
 
 class Account(View):
     def get(self,request):
-        return render(request,"account.html")
+        user=list(User.objects.filter(role="Supervisor"))
+        return render(request,"account.html",{"user":user})
 
 class SupEmail(View):
     def get(self, request):
