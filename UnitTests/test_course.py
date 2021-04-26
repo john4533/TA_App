@@ -5,10 +5,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
 
-from project_app.models import Course, Lab
 
-
-class MyTestCase(TestCase):
+class CourseTestCase(TestCase):
 
 #   CREATE COURSE TESTS
     def test_courseIdexists(self):

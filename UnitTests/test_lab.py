@@ -3,10 +3,9 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
-from project_app.models import User, Lab, Course
 from Classes.functions import *
 
-class MyTestCase(TestCase):
+class LabTestCase(TestCase):
 
     def setUp(self):
         self.course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")

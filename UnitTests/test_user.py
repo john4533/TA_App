@@ -1,10 +1,8 @@
 from django.test import TestCase
 import os
-from Classes.user import User
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
-from project_app.models import User, Course
 from Classes.functions import *
 
 class UserTestCase(TestCase):
@@ -58,7 +56,7 @@ class UserTestCase(TestCase):
         self.assertEqual(self.account1.username, "xyz")
         self.assertEqual(deleteAccount("xyz"), "User with username xyz has been deleted")
 
-# LOGIN TESTS
+#   LOGIN TESTS
     def test_invalidusername(self):
         self.assertFalse(login("abc", "password1"))
 
