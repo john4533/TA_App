@@ -13,11 +13,12 @@ h1 {
     font-family: Calibri;
     font-size: 45px;
 }
-.img1 {
+.row img {
     margin-top: 100px;
     margin-bottom: -30px;
 }
-.legend{
+.row h3{
+    align-content: center;
     font-family: Calibri;
 }
 label {

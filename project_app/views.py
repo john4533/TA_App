@@ -95,8 +95,8 @@ class RegisterLab(View):
 
     def post(self, request):
         message = createLab(Course.objects.get(courseid=request.session["course"]), request.POST['lab_id'], request.POST['lab_name'], request.POST['lab_sched'])
-        request.session["course"] = ""
         if message is None:
+            request.session["course"] = ""
             return redirect('/SupCourses/')
         else:
             return render(request, "register_lab.html", {"message": message})

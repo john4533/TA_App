@@ -1,11 +1,48 @@
-
 /*main content*/
 #page-content-wrapper {
-  width: 100%;
-  postion: absolute;
-  padding: 150px;
+    width: 100%;
+    postion: absolute;
+    padding-top: 10px;
+    padding-left: 100px;
+    padding-right: 0px;
 
 }
+
+h1 {
+    color: dimgrey;
+    font-family: Calibri, serif;
+    font-size: 45px;
+}
+.row img{
+    padding-top: 35px;
+    margin-bottom: -30px;
+}
+.row h3{
+    align-content: center;
+    font-family: Calibri, serif;
+    : 120px;
+}
+label {
+    margin-top: 12px;
+    font-family: Calibri;
+}
+
+input{
+    margin-left: 8px;
+    background: transparent;
+    border: 3px none;
+    border-bottom: 1px solid #000000;
+}
+.btn{
+    margin-top: 15px;
+
+}
+.row strong{
+    padding-top: 10px;
+    color: darkred;
+}
+
+
 /*side bar*/
 #sidebar-wrapper {
     position: absolute;
@@ -44,57 +81,5 @@ p {
     bottom: 17px;
     color: #ddd;
     padding-left: 7px;
-}
-
-.button {
-
-    margin-top: 25px;
-    position: relative;
-	display: inline-block;
-	background-color: green;
-	background-image: linear-gradient(green,lightgreen);
-    border-radius: 12px;
-
-	/* text styles */
-	text-decoration: none;
-	color: #fff;
-	font-size: 15px;
-	font-family: sans-serif;
-	font-weight: 100;
-
-}
-.button1{
-      margin-top: 25px;
-      background-color: red;
-      width: 7%;
-      border-radius: 12px;
-}
-
-label {
-    margin-top: 21px;
-}
-
-input{
-    margin-left: 8px;
-    border-width: 3px ;
-    background: transparent;
-    border: none;
-    border-bottom: 0.5px solid #000000;
-}
-
-.img1{
-  margin-top: 10px;
-  text-align: center;
-}
-
-.form-pop{
-  display: none;
-}
-
-.open_b{
-  border-radius: 12px;
-  width: 20%;
-  font-size: 25px;
-  background-color: gold;
 }
 
