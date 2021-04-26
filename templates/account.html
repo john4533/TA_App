@@ -29,14 +29,39 @@
 <div id="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
+            <h1>Personal Info</h1>
+            <hr class="new1">
+            <div><img src="/static/images/logo1.svg"></div>
+            <br>
             <div>
-                <b>account .................................................................
-                    .........................................
-                    ......................................
-                    ................................................</b>
+                <br>
+                <form method="get">
+                    <p style="font-size: 20px">Username:
+                        {{ user.0.username }}
+                    </p>
+                    <br>
+                    <p style="font-size: 20px">Email:
+                        {{ user.0.email }}
+                    </p>
+                    <br>
+                    <p style="font-size: 20px">Address:
+                    {{ user.0.address }}
+                    </p>
+                    <br>
+                    <p style="font-size: 20px">Phone No:
+                        {{ user.0.phone }}
+                    </p>
+                    <br>
+                    <p style="font-size: 20px">Role:
+                        {{ user.0.role }}
+                    </p>
+                   <br>
+                  <div><button>Edit</button></div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+</div>
 </body>
-</html>ml>
+</html>

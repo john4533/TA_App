@@ -80,4 +80,19 @@ p {
     padding-left: 7px;
 }
 
+.header{
+    writing-mode: horizontal-tb;
+    background-color: powderblue;
+    padding-right: 85%;
+    padding-left: 10%;
+    padding-bottom: 1%;
+}
 
+.p{
+    font-size: 20px;
+    color: gold;
+}
+
+hr.new1{
+     border: 5px solid blue;
+}
