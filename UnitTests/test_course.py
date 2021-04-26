@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
 django.setup()
 
-from project_app.models import Course
+from project_app.models import Course, Lab
 
 
 class MyTestCase(TestCase):
@@ -54,12 +54,12 @@ class MyTestCase(TestCase):
 
     def test_getCourses_noLabs(self):
         course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
-        self.assertEqual(getCourses(), {{course1: []}})
+        self.assertEqual(getCourses(), {course1: []})
 
     def test_getCourses_success(self):
         course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
-        lab1 = Lab.objects.create(labid="901", labname="Lab 1", labschedule="T @ 11:00 - 12:50")
-        self.assertEqual(getCourses(), {{course1: [lab1]}})
+        lab1 = Lab.objects.create(course=course1, labid="901", labname="Lab 1", labschedule="T @ 11:00 - 12:50")
+        self.assertEqual(getCourses(), {course1: [lab1]})
 
 
     # def test_courseIdupdated(self):

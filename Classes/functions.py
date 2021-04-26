@@ -48,12 +48,12 @@ def createLab(course="", labId="", labName="", labSchedule=""):
 
 def deleteAccount(username=""):
     if username == "":
-        return "Please enter an email"
+        return "Please enter a username"
     elif username not in list(i["username"] for i in User.objects.all().values("username")):
         return "User with that username does not exist"
     else:
         User.objects.get(username=username).delete()
-        return "User with email " + username + " has been deleted"
+        return "User with username " + username + " has been deleted"
 
 def deleteCourse(courseid=""):
     if courseid == "":
