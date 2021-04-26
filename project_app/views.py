@@ -6,6 +6,7 @@ from Classes.functions import *
 # Create your views here.
 class Login(View):
     def get(self, request):
+        request.session["name"]
         return render(request, "login.html", {})
 
     def post(self, request):

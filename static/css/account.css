@@ -1,48 +1,24 @@
 /*main content*/
-#wrapper{
-    position: relative;
-}
 #page-content-wrapper {
     width: 100%;
-    postion: relative;
+    postion: absolute;
     padding-top: 10px;
     padding-left: 100px;
-}
+    padding-right: 0px;
 
-.sticky {
-	background-color: white;
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0;
 }
-h1 {
-    display: inline-block;
+h1{
     color: dimgrey;
     font-family: Calibri;
     font-size: 45px;
 }
-
-.form-group-row {
-    float: right;
-    padding-top: 10px;
+.main{
+    align-content: center;
+    padding-left: 150px;
 }
-
-.col-xs-2 {
-    vertical-align: bottom;
-}
-
-.table {
-    text-align: center;
-}
-th{
-    position: sticky;
-    top:55px;
-
-}
-
 /*side bar*/
 #sidebar-wrapper {
-    position: fixed;
+    position: absolute;
     width: 95px;
     height: 100%;
     background: #000;
@@ -79,17 +55,3 @@ p {
     color: #ddd;
     padding-left: 7px;
 }
-
-.header{
-    writing-mode: horizontal-tb;
-    background-color: powderblue;
-    padding-right: 85%;
-    padding-left: 10%;
-    padding-bottom: 1%;
-}
-
-.p{
-    font-size: 20px;
-    color: gold;
-}
-
