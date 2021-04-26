@@ -21,7 +21,7 @@ urlpatterns = [
     path('SupHome/', SupHome.as_view()),
    # path('SupAccounts/', SupAccounts.as_view()),
     path('SupCourses/', SupCourses.as_view()),
-    path('SupEmail/', SupEmail.as_view()),
+    # path('SupEmail/', SupEmail.as_view()),
     path('Account/', Account.as_view()),
     path('RegisterCourses/', RegisterCourses.as_view()),
     path('RegisterLab/', RegisterLab.as_view()),
