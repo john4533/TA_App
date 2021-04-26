@@ -18,14 +18,6 @@ class User(models.Model):
     # officehours may need to be a sort of datetime object
     officehours = models.CharField(max_length=20, blank=True)
 
-class Lab(models.Model):
-    labid = models.CharField(max_length=20)
-    labname = models.CharField(max_length=50)
-
-    # labschedule may need to be a sort of datetime object
-    labschedule = models.CharField(max_length=20, blank=True)
-    # labTA = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-
 class Course(models.Model):
     courseid = models.CharField(max_length=20)
     coursename = models.CharField(max_length=50)
@@ -39,4 +31,13 @@ class Course(models.Model):
     # courseTA may be a list including foreign key to the TA user, a graderstatus boolean, and # number of labs they are in
     # courseTA = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     # graderstatus = models.BooleanField(default=False)
-    # labs = models.ForeignKey(Lab, on_delete=models.CASCADE, null=True)
+
+class Lab(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    labid = models.CharField(max_length=20)
+    labname = models.CharField(max_length=50)
+
+    # labschedule may need to be a sort of datetime object
+    labschedule = models.CharField(max_length=20, blank=True)
+    # labTA = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+

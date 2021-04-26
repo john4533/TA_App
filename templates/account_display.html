@@ -88,6 +88,7 @@
                             </thead>
                             <tbody>
                             {% for account in accounts %}
+
                                 <tr>
                                     <th scope="row">{{ account.username }}</th>
                                     <td>
@@ -98,15 +99,15 @@
                                     <td>{{ account.role }}</td>
                                     <td>{{ account.officehours }}</td>
                                     <td>
+
                                         <div>
                                             <button type="submit" class="btn btn-danger" name="delete_account"
                                                     value={{ account.email }}>Delete
                                             </button>
                                         </div>
-                                        <br>
-                                        <div>
-                                            <button type="button" class="btn btn-secondary btn-sm">Edit</button>
-                                        </div>
+{#                                        <div>#}
+{#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_account" value={{ account.email }}>Edit</button>#}
+{#                                        </div>#}
                                     </td>
 
                                 </tr>

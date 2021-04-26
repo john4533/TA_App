@@ -35,12 +35,12 @@ def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""
     else:
         return "Please fill out all required entries"
 
-def createLab(labId="", labName="", labSchedule=""):
+def createLab(course="", labId="", labName="", labSchedule=""):
     # Precondition: correct two inputs, and labId does not already belong to a lab
     # Postcondition: lab is created with the given labId and labName
-    if labId != '' and labName != '' and labSchedule != '':
+    if course != '' and labId != '' and labName != '' and labSchedule != '':
         if len(list(Lab.objects.filter(labid=labId))) == 0:
-            Lab.objects.create(labid=labId, labname=labName, labschedule=labSchedule)
+            Lab.objects.create(course=course, labid=labId, labname=labName, labschedule=labSchedule)
         else:
             return "Lab with that ID already exists"
     else:

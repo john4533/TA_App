@@ -66,7 +66,7 @@
                     <h1>Register Account</h1>
                     <hr style="width:100%;text-align:left;margin-left:0">
                     <div align="center">
-                        <form method="post" id="form1">
+                        <form method="post">
                             {% csrf_token %}
                             <table class="table1" cellspacing="50">
                                 <div class="img1"><img height="75" width="75" align="center"
@@ -94,7 +94,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div><label for="cor_sched">Role</label></div>
+                                        <div><label>Role</label></div>
                                         <div><select name="role" required>
                                             {% for i in roles %}
                                                 <option value={{ i.0 }}>{{ i.0 }}</option>
@@ -105,7 +105,7 @@
                                 <tr>
                                     <td>
                                         <div><label>Phone Number</label></div>
-                                        <div><input name="phone" type="tel" placeholder="1-(234)-567-8910"/>
+                                        <div><input name="phone" type="tel" placeholder="234-567-8910" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
                                         </div>
                                     </td>
                                     <td>
@@ -123,7 +123,7 @@
                                 </tr>
                             </table>
                             <div align="center">
-                                <button class="btn btn-warning" type="submit" form="form1" value="Submit">Add Account
+                                <button class="btn btn-warning" type="submit" value="Submit">Add Account
                                 </button>
                             </div>
                             <div class="message">

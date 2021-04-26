@@ -16,6 +16,10 @@ class SupCourseTest(TestCase):
         response = self.client.post("/RegisterCourses/", {"cor_id": "337", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50", "cor_cred": "3"})
         self.assertEqual(response.url, '/SupCourses/')
 
+    def test_createCourse(self):
+        response = self.client.post("/RegisterCourses/", {"cor_id": "337", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50", "cor_cred": "3"})
+        self.assertEqual(response.url, '/SupCourses/')
+
     def test_emptyCourseid(self):
         response = self.client.post("/RegisterCourses/", {"cor_id": "", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50", "cor_cred": "3"})
         self.assertEqual(response.context["message"], "Please fill out all required entries", msg="Empty id, course created without id")

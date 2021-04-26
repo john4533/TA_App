@@ -23,6 +23,17 @@ class UserTestCase(TestCase):
         self.assertEqual("password2", b.password)
         self.assertEqual("Instructor", b.role)
 
+    def test_usercreatedwithextrainfo(self):
+        createAccount("user", "password2", "user@uwm.edu", "Instructor", "1-(123)-456-7890",
+                      "20 Main Street", "T @ 3:00 - 3:50")
+        b = User.objects.get(email="user@uwm.edu")
+        self.assertEqual("user", b.username)
+        self.assertEqual("password2", b.password)
+        self.assertEqual("Instructor", b.role)
+        self.assertEqual("1-(123)-456-7890", b.phone)
+        self.assertEqual("20 Main Street", b.address)
+        self.assertEqual("T @ 3:00 - 3:50", b.officehours)
+
     def test_nousername(self):
         self.assertEqual(createAccount("", "password1", "xyz@uwm.edu", "Instructor"), "Please fill out all required entries")
 
