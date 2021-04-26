@@ -10,7 +10,7 @@ class SupAccountsTest(TestCase):
     def test_accountExists(self):
         response = self.client.post("/RegisterAccount/", {"username": self.user.username, "password": self.user.password,
                                     "email": self.user.email, "role": self.user.role})
-        self.assertEqual(response.context["message"], "User with that email already exists", msg="User created twice")
+        self.assertEqual(response.context["message"], "User with that username already exists", msg="User created twice")
 
     def test_createAccount(self):
         response = self.client.post("/RegisterAccount/", {"username": "user1", "password": "password1",

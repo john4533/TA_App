@@ -23,8 +23,8 @@ class LoginTest(TestCase):
 
     def test_invalidPassword(self):
         response = self.client.post("/", {"name": "Charlie", "password": "Password124"})
-        self.assertEqual(response.context["message"], "information is incorrect", msg="Invalid login, incorrect password passes")
+        self.assertEqual(response.context["message"], "Information is incorrect", msg="Invalid login, incorrect password passes")
 
     def test_usernameDNE(self):
         response = self.client.post("/", {"name": "Bryce", "password": "Password123"})
-        self.assertEqual(response.context["message"], "information is incorrect", msg="Invalid login, incorrect username passes")
+        self.assertEqual(response.context["message"], "Information is incorrect", msg="Invalid login, incorrect username passes")

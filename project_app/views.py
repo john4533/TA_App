@@ -60,8 +60,7 @@ class AccountDisplay(View):
 
 class SupCourses(View):
     def get(self, request):
-        dictionary = getCourses()
-        return render(request, "sup_courses.html", {"dictionary": dictionary})
+        return render(request, "sup_courses.html", {"dictionary": getCourses()})
 
     def post(self, request):
         if request.POST.get('add_course'):
@@ -69,11 +68,12 @@ class SupCourses(View):
         elif request.POST.get('add_lab'):
             request.session["course"] = request.POST["add_lab"]
             return redirect('/RegisterLab/')
-        if request.POST.get('delete_course'):
-            message = deleteCourse(request.POST['delete_course'])
-        elif request.POST.get('delete_lab'):
-            message = deleteLab(request.POST['delete_lab'])
-        return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
+        else:
+            if request.POST.get('delete_course'):
+                message = deleteCourse(request.POST['delete_course'])
+            elif request.POST.get('delete_lab'):
+                message = deleteLab(request.POST['delete_lab'])
+            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
 
 
 class RegisterLab(View):

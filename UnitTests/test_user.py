@@ -14,20 +14,20 @@ class UserTestCase(TestCase):
 
 #   CREATE ACCOUNT TESTS
     def test_useralreadyexists(self):
-        self.assertEqual(createAccount("abc", "password2", "xyz@uwm.edu", "Supervisor"), "User with that email already exists")
+        self.assertEqual(createAccount("xyz", "password2", "abc@uwm.edu", "Supervisor"), "User with that username already exists")
 
     def test_usercreated(self):
         createAccount("user", "password2", "user@uwm.edu", "Instructor")
-        b = User.objects.get(email="user@uwm.edu")
-        self.assertEqual("user", b.username)
+        b = User.objects.get(username="user")
+        self.assertEqual("user@uwm.edu", b.email)
         self.assertEqual("password2", b.password)
         self.assertEqual("Instructor", b.role)
 
     def test_usercreatedwithextrainfo(self):
         createAccount("user", "password2", "user@uwm.edu", "Instructor", "1-(123)-456-7890",
                       "20 Main Street", "T @ 3:00 - 3:50")
-        b = User.objects.get(email="user@uwm.edu")
-        self.assertEqual("user", b.username)
+        b = User.objects.get(username="user")
+        self.assertEqual("user@uwm.edu", b.email)
         self.assertEqual("password2", b.password)
         self.assertEqual("Instructor", b.role)
         self.assertEqual("1-(123)-456-7890", b.phone)
@@ -48,15 +48,15 @@ class UserTestCase(TestCase):
 
 
 #   DELETE ACCOUNT TESTS
-    def test_deletenoemailentered(self):
-        self.assertEqual(deleteAccount(""), "Please enter an email")
+    def test_deletenoeusernameentered(self):
+        self.assertEqual(deleteAccount(""), "Please enter a username")
 
-    def test_deletenocourseexists(self):
-        self.assertEqual(deleteAccount("user2@uwm.edu"), "User with that email does not exist")
+    def test_deletenouserexists(self):
+        self.assertEqual(deleteAccount("user2"), "User with that username does not exist")
 
-    def test_deletecourse(self):
-        self.assertEqual(self.account1.email, "xyz@uwm.edu")
-        self.assertEqual(deleteAccount("xyz@uwm.edu"), "User with email xyz@uwm.edu has been deleted")
+    def test_deleteuser(self):
+        self.assertEqual(self.account1.username, "xyz")
+        self.assertEqual(deleteAccount("xyz"), "User with username xyz has been deleted")
 
 # LOGIN TESTS
     def test_invalidusername(self):
@@ -67,22 +67,3 @@ class UserTestCase(TestCase):
 
     def test_validlogin(self):
         self.assertTrue(login("xyz", "password1"))
-
-
-    # def test_init(self):
-    #     a = User("xyz@uwm.edu", "password1")
-    #     self.assertEqual(a.name, "xyz@uwm.edu")
-    #     self.assertEqual(a.password, "password1")
-    #
-    # def test_noname(self):
-    #     with self.assertRaises(TypeError, msg="Empty Username") as context:
-    #         b = User("", "password1")
-    #
-    # def test_nopassword(self):
-    #     with self.assertRaises(TypeError, msg="Empty Password") as context:
-    #         b = User("xyz@uwm.edu", "")
-
-
-    # def test_nouwm(self):
-    #     with self.assertRaises(TypeError, msg="No @uwm.edu") as context:
-    #         a = User.create_user("xyz@gmail.com", "password1")
