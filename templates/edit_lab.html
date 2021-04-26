@@ -64,13 +64,13 @@
                 <div class="col-lg-12">
 
                     <div align="center">
-                        <form method="post" id="form1">
+                        <form method="post">
                             {% csrf_token %}
                             <table class="table1" cellspacing="50">
                                 <div class="img1"><img height="75" width="75" align="center"
                                                        src="/static/images/create_lab.png"></div>
                                 <div class="legend" align="center">
-                                    <legend>Register Lab</legend>
+                                    <legend>Edit Lab</legend>
                                 </div>
 
                                 <tr>
@@ -92,7 +92,7 @@
                                 </tr>
                             </table>
                             <div align="center">
-                                <button class="button" type="submit" form="form1" value="Submit">Add Lab</button>
+                                <button class="button" type="submit" value="Submit">Add Lab</button>
                             </div>
                             <div class="message">
                                 {% if message is not None %}

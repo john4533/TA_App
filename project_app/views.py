@@ -103,7 +103,7 @@ class RegisterLab(View):
 
 class Account(View):
     def get(self,request):
-        user=list(User.objects.filter(role="Supervisor"))
+        user=User.objects.get(username=request.session["name"])
         return render(request,"account.html",{"user":user})
 
 class SupEmail(View):

@@ -73,25 +73,25 @@ def deleteLab(labid=""):
         Lab.objects.get(labid=labid).delete()
         return "Lab with ID " + labid + " has been deleted"
 
-def setCourseId(courseId, courseIdOriginal):
-    #precondition: course with the old ID exists, new ID does not exist
-    #postcondition: course ID is updated
-    pass
-
-def setCourseName(courseName, courseId):
-    #precondition: course with the ID exists
-    #postcondition: course name is updated
-    pass
-
-def setCourseSchedule(courseSchedule, courseId):
-    # precondition: course with the ID exists
-    # postcondition: course schedule is updated
-    pass
-
-def setCourseCredits(courseCredits, courseId):
-    #precondition: course with the ID exists
-    #postcondition: course credits are updated
-    pass
+# def setCourseId(courseId, courseIdOriginal):
+#     #precondition: course with the old ID exists, new ID does not exist
+#     #postcondition: course ID is updated
+#     pass
+#
+# def setCourseName(courseName, courseId):
+#     #precondition: course with the ID exists
+#     #postcondition: course name is updated
+#     pass
+#
+# def setCourseSchedule(courseSchedule, courseId):
+#     # precondition: course with the ID exists
+#     # postcondition: course schedule is updated
+#     pass
+#
+# def setCourseCredits(courseCredits, courseId):
+#     #precondition: course with the ID exists
+#     #postcondition: course credits are updated
+#     pass
 
 
 # MAYBE IMPLEMENT THESE LATER
@@ -109,28 +109,28 @@ def setCourseCredits(courseCredits, courseId):
 
 
 
-def setLabId(labIdNew, labIdOriginal):
-    # Precondition: correct two inputs, labIdOriginal needs to exist already, and labIdNew needs to not exist already
-    # Postcondition: new labId is assigned to the lab
-    pass
-
-
-def setLabName(labName, labId):
-    # Precondition: correct two inputs, and labId needs to exist already
-    # Postcondition: labName is assigned to the lab
-    pass
-
-
-def setLabSchedule(schedule, labId):
-    # Precondition: correct two inputs,
-    # Postcondition: labSchedule is assigned to the lab
-    pass
-
-
-def setLabTA(ta, labId):
-    # Precondition: correct two inputs, and labId needs to exist already
-    # Postcondition: ta is assigned to the lab
-    pass
+# def setLabId(labIdNew, labIdOriginal):
+#     # Precondition: correct two inputs, labIdOriginal needs to exist already, and labIdNew needs to not exist already
+#     # Postcondition: new labId is assigned to the lab
+#     pass
+#
+#
+# def setLabName(labName, labId):
+#     # Precondition: correct two inputs, and labId needs to exist already
+#     # Postcondition: labName is assigned to the lab
+#     pass
+#
+#
+# def setLabSchedule(schedule, labId):
+#     # Precondition: correct two inputs,
+#     # Postcondition: labSchedule is assigned to the lab
+#     pass
+#
+#
+# def setLabTA(ta, labId):
+#     # Precondition: correct two inputs, and labId needs to exist already
+#     # Postcondition: ta is assigned to the lab
+#     pass
 
 
 
