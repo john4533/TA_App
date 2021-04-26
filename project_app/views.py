@@ -11,7 +11,7 @@ class Login(View):
     def post(self, request):
         result = login(request.POST['name'], request.POST['password'])
         if not result:
-            return render(request, "login.html", {"message": "information is incorrect"})
+            return render(request, "login.html", {"message": "Information is incorrect"})
         else:
             request.session["name"] = request.POST['name']
             return redirect('/SupHome/')
@@ -48,46 +48,33 @@ class RegisterCourses(View):
 
 class AccountDisplay(View):
     def get(self, request):
-        accounts = list(User.objects.exclude(role="Supervisor"))
-        return render(request, "account_display.html", {"accounts":accounts})
+        return render(request, "account_display.html", {"accounts":list(User.objects.exclude(role="Supervisor"))})
 
     def post(self, request):
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
-            accounts = list(User.objects.exclude(role="Supervisor"))
-            return render(request, "account_display.html", {"accounts": accounts, "delete_message": message})
+            return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message})
         else:
             return redirect('/RegisterAccount/')
 
 
 class SupCourses(View):
     def get(self, request):
-        courses = list(Course.objects.all())
-        dictionary= {}
-        for c in courses:
-            dictionary[c] = list(Lab.objects.filter(course__courseid=c.courseid))
+        dictionary = getCourses()
         return render(request, "sup_courses.html", {"dictionary": dictionary})
 
     def post(self, request):
-        if request.POST.get('delete_course'):
-            message = deleteCourse(request.POST['delete_course'])
-            courses = list(Course.objects.all())
-            dictionary = {}
-            for c in courses:
-                dictionary[c] = list(Lab.objects.filter(course__courseid=c.courseid))
-            return render(request, "sup_courses.html", {"dictionary": dictionary, "delete_message": message})
-        elif request.POST.get('delete_lab'):
-            message = deleteLab(request.POST['delete_lab'])
-            courses = list(Course.objects.all())
-            dictionary = {}
-            for c in courses:
-                dictionary[c] = list(Lab.objects.filter(course__courseid=c.courseid))
-            return render(request, "sup_courses.html", {"dictionary": dictionary, "delete_message": message})
-        elif request.POST.get('add_course'):
+        if request.POST.get('add_course'):
             return redirect('/RegisterCourses/')
         elif request.POST.get('add_lab'):
             request.session["course"] = request.POST["add_lab"]
             return redirect('/RegisterLab/')
+        if request.POST.get('delete_course'):
+            message = deleteCourse(request.POST['delete_course'])
+        elif request.POST.get('delete_lab'):
+            message = deleteLab(request.POST['delete_lab'])
+        return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
+
 
 class RegisterLab(View):
     def get(self, request):
@@ -103,9 +90,9 @@ class RegisterLab(View):
 
 class Account(View):
     def get(self,request):
-        user=list(User.objects.filter(role="Supervisor"))
+        user = User.objects.get(username=request.session["name"])
         return render(request,"account.html",{"user":user})
 
-class SupEmail(View):
-    def get(self, request):
-        return render(request, "sup_email.html", {})
+# class SupEmail(View):
+#     def get(self, request):
+#         return render(request, "sup_email.html", {})

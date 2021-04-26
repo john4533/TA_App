@@ -10,11 +10,9 @@ from project_app.models import Course
 
 class MyTestCase(TestCase):
 
-    def setUp(self):
-        self.course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
-
 #   CREATE COURSE TESTS
     def test_courseIdexists(self):
+        Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
         self.assertEqual(createCourse("337", "Software Engineering", "TR @ 10:00 - 10:50", "3"), "Course with that ID already exists")
 
     def test_courseCreated(self):
@@ -46,8 +44,23 @@ class MyTestCase(TestCase):
         self.assertEqual(deleteCourse("361"), "Course with that ID does not exist")
 
     def test_deletecourse(self):
-        self.assertEqual(self.course1.courseid, "337")
+        course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
+        self.assertEqual(course1.courseid, "337")
         self.assertEqual(deleteCourse("337"), "Course with ID 337 has been deleted")
+
+#   GET COURSES TESTS
+    def test_getCourses_noCourses(self):
+        self.assertEqual(getCourses(), {})
+
+    def test_getCourses_noLabs(self):
+        course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
+        self.assertEqual(getCourses(), {{course1: []}})
+
+    def test_getCourses_success(self):
+        course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
+        lab1 = Lab.objects.create(labid="901", labname="Lab 1", labschedule="T @ 11:00 - 12:50")
+        self.assertEqual(getCourses(), {{course1: [lab1]}})
+
 
     # def test_courseIdupdated(self):
     #     createCourse("361", "Software Engineering", "TR - 10:00", "3")
