@@ -16,9 +16,10 @@ class SupCourseTest(TestCase):
         response = self.client.post("/RegisterCourses/", {"cor_id": "337", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50", "cor_cred": "3"})
         self.assertEqual(response.url, '/SupCourses/')
 
-    def test_createCourse(self):
-        response = self.client.post("/RegisterCourses/", {"cor_id": "337", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50", "cor_cred": "3"})
-        self.assertEqual(response.url, '/SupCourses/')
+        response = self.client.post("/RegisterCourses/",
+                                    {"cor_id": "338", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50",
+                                     "cor_cred": "3"}, follow=True)
+        self.assertEqual(len(response.context["dictionary"]), 3)
 
     def test_emptyCourseid(self):
         response = self.client.post("/RegisterCourses/", {"cor_id": "", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50", "cor_cred": "3"})
@@ -32,14 +33,6 @@ class SupCourseTest(TestCase):
         response = self.client.post("/RegisterCourses/", {"cor_id": "337", "cor_name": "System Programming", "cor_sched": "", "cor_cred": "3"})
         self.assertEqual(response.context["message"], "Please fill out all required entries", msg="Empty schedule, course created without schedule")
 
-    def test_emptyCourseid(self):
+    def test_emptyCoursecredits(self):
         response = self.client.post("/RegisterCourses/", {"cor_id": "337", "cor_name": "System Programming", "cor_sched": "TR @ 1:00 - 1:50", "cor_cred": ""})
         self.assertEqual(response.context["message"], "Please fill out all required entries", msg="Empty credits, course created without credits")
-
-
-
-        # last_index = len(response.context["courses"]) - 1
-        # self.assertEqual(response.context["courses"][last_index].courseid, "337")
-        # self.assertEqual(response.context["courses"][last_index].coursename, "System Programming")
-        # self.assertEqual(response.context["courses"][last_index].courseschedule, "TR @ 1:00 - 1:50")
-        # self.assertEqual(response.context["courses"][last_index].coursecredits, "3")

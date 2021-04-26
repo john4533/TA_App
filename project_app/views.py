@@ -48,7 +48,7 @@ class RegisterCourses(View):
 
 class AccountDisplay(View):
     def get(self, request):
-        return render(request, "account_display.html", {"accounts":list(User.objects.exclude(role="Supervisor"))})
+        return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor"))})
 
     def post(self, request):
         if request.POST.get('delete_account'):
@@ -92,7 +92,3 @@ class Account(View):
     def get(self,request):
         user = User.objects.get(username=request.session["name"])
         return render(request,"account.html",{"user":user})
-
-# class SupEmail(View):
-#     def get(self, request):
-#         return render(request, "sup_email.html", {})

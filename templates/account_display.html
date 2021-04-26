@@ -67,9 +67,9 @@
                         <h1> All Accounts</h1>
                         <form class="form-group-row" method="post">
                             {% csrf_token %}
-                            <input class="col-xs-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-warning  my-sm-0" type="submit">Search</button>
-                            <button class="btn btn-warning" type="submit">Add Account</button>
+{#                            <input class="col-xs-2" type="search" placeholder="Search" aria-label="Search">#}
+{#                            <button class="btn btn-warning  my-sm-0" type="submit">Search</button>#}
+                            <button class="btn btn-warning" type="submit" name="register_account" value="register_account">Add Account</button>
                         </form>
                         <hr style="width:100%;text-align:left;margin-left:0; margin-top:0px">
                     </nav>
