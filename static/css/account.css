@@ -12,10 +12,21 @@ h1{
     font-family: Calibri;
     font-size: 45px;
 }
-.main{
-    align-content: center;
-    padding-left: 150px;
+.center{
+    margin-top: 150px;
+    text-align: center;
 }
+h3{
+    color: #043b5d;
+    display: inline;
+}
+.content ul{
+    display: inline-block;
+    text-align: left;
+    list-style: none;
+    font-size: 30px;
+}
+
 /*side bar*/
 #sidebar-wrapper {
     position: absolute;
