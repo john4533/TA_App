@@ -29,13 +29,26 @@ h3 {
 
 h4 {
     color: #861616;
+    font-size: 20px;
 }
 
 h5 {
     font-family: Calibri;
     font-size: 26px;
 }
+.print{
+    display: inline;
+    padding-right: 40px;
+    color: #861616;
+    font-family: Calibri, serif;
+    font-size: 30px;
+    padding-top: 60px;
+    vertical-align: -18px;
 
+}
+.form-group-row .btn-warning{
+    margin-top: 17px;
+}
 .form-group-row {
     float: right;
     padding-top: 10px;
@@ -51,16 +64,17 @@ h5 {
 
 th {
     position: sticky;
-    top: 55px;
+    top: 75px;
 }
 
 .lines {
     border: 30px;
 }
 
+
 /*side bar*/
 #sidebar-wrapper {
-    position: absolute;
+    position: fixed;
     width: 110px;
     height: 100%;
     background: #000;
@@ -95,8 +109,9 @@ p {
     position: absolute;
     text-align: center;
     text-decoration: none;
-    bottom: 17px;
+    bottom: 25px;
     color: #ddd;
-    padding-left: 7px;
+    font-size: 20px;
+    padding-left: 4px;
 }
 
