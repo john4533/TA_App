@@ -5,9 +5,9 @@
 body{
     background: #ffbd00;
 }
-.row img {
-    width: 10vh;
-}
+/*.row img {*/
+/*    width: 10vh;*/
+/*}*/
 
 .row li{
     list-style: none;
