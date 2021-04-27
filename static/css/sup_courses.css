@@ -5,6 +5,7 @@
     padding-top: 10px;
     padding-left: 100px;
 }
+
 .sticky {
     background-color: white;
     position: -webkit-sticky;
@@ -36,20 +37,26 @@ th {
     position: sticky;
     top: 55px;
 }
-.lines{
+
+.lines {
     border: 30px;
 }
-h3{
+
+h3 {
     color: #010416;
+    font-size: 20px;
 }
+
 h4 {
     color: #861616;
 }
 
-h5{
+h5 {
     font-family: Calibri;
     font-size: 26px;
 }
+
+
 
 
 /*side bar*/

@@ -79,24 +79,24 @@
                         <table class="table">
                             <thead class="table table-striped table-dark">
                             <tr class="table-info">
-                                <th scope="col">Username</th>
-                                <th scope="col">Contact Information</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Office Hours</th>
-                                <th scope="col"></th>
+                                <th><h5>Username</h5></th>
+                                <th><h5>Contact Information</h5></th>
+                                <th><h5>Role</h5></th>
+                                <th><h5>Office Hours</h5></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for account in accounts %}
                                 <tr>
-                                    <th scope="row">{{ account.username }}</th>
+                                    <th><h5>{{ account.username }}</h5></th>
                                     <td>
-                                        <div>{{ account.email }}</div>
-                                        <div>{{ account.phone }}</div>
-                                        <div>{{ account.address }}</div>
+                                        <div><h5>{{ account.email }}</h5></div>
+                                        <div><h5>{{ account.phone }}</h5></div>
+                                        <div><h5>{{ account.address }}</h5></div>
                                     </td>
-                                    <td>{{ account.role }}</td>
-                                    <td>{{ account.officehours }}</td>
+                                    <td><h5>{{ account.role }}</h5></td>
+                                    <td><h5>{{ account.officehours }}</h5></td>
                                     <td>
 
                                         <div>
