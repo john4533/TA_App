@@ -76,25 +76,25 @@
 
                                 <tr>
                                     <td>
-                                        <label>Username</label>
+                                        <label>*Username</label>
                                         <div><input name="username" type="text" placeholder="username"
                                                     required/>
                                         </div>
                                     </td>
                                     <td>
-                                        <div><label>Password</label></div>
+                                        <div><label>*Password</label></div>
                                         <div><input name="password" type="password" placeholder="password"
                                                     required/><br></div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div><label>Email</label></div>
+                                        <div><label>*Email</label></div>
                                         <div><input name="email" type="email" placeholder="email" required/>
                                         </div>
                                     </td>
                                     <td>
-                                        <div><label>Role</label></div>
+                                        <div><label>*Role</label></div>
                                         <div><select name="role" required>
                                             {% for i in roles %}
                                                 <option value={{ i.0 }}>{{ i.0 }}</option>
