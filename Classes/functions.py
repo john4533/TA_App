@@ -1,6 +1,8 @@
 from project_app.models import *
 
 def login(name, password):
+    # precondition: user with provided username and password exists
+    # postcondition: returns True if username and password match those in database, False if either entry is incorrect
     noSuchUser = False
     badPassword = False
     try:
@@ -14,66 +16,87 @@ def login(name, password):
         return True
 
 def createAccount(username="", password="", email="", role="", phone="", address="", officehours=""):
-    # precondition: user with provided email does not currently exist
-    # postcondition: user account is created with a unique email and role
+    # precondition: user with provided username does not currently exist with username, password, email, and role entered
+    # postcondition: user account is created with a unique username, a password, an email, a role,
+    # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
     if username != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, password=password, email=email, role=role, phone=phone, address=address, officehours=officehours)
+            string = ""
         else:
-            return "User with that username already exists"
+            string = "User with that username already exists"
     else:
-        return "Please fill out all required entries"
+        string = "Please fill out all required entries"
+    return string
 
 def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""):
-    # precondition: courseid does not currently exist
-    # postcondition: course is created with unique ID and name, message is returned if course with the id exists
+    # precondition: course with provided courseid does not currently exist with courseid, coursename, courseschedule, and coursecredits entered
+    # postcondition: course is created with unique ID and name, message is returned if course with the id exists or required entries are blank
     if courseId != '' and courseName != '' and courseSchedule != '' and courseCredits != '':
         if len(list(Course.objects.filter(courseid=courseId))) == 0:
             Course.objects.create(courseid=courseId, coursename=courseName, courseschedule=courseSchedule, coursecredits=courseCredits)
+            string = ""
         else:
-            return "Course with that ID already exists"
+            string = "Course with that ID already exists"
     else:
-        return "Please fill out all required entries"
+        string ="Please fill out all required entries"
+    return string
 
 def createLab(course="", labId="", labName="", labSchedule=""):
-    # precondition: correct two inputs, and labId does not already belong to a lab
-    # postcondition: lab is created with the given labId and labName
+    # precondition: course is given and exists, lab with provided labid does not currently exist with labid, labname, and labschedule entered
+    # postcondition: lab is created with unique labId and course, labName, labschedule, message is returned if lab with the id exists or required entries are blank
     if course != '' and labId != '' and labName != '' and labSchedule != '':
         if len(list(Lab.objects.filter(labid=labId))) == 0:
             Lab.objects.create(course=course, labid=labId, labname=labName, labschedule=labSchedule)
+            string = ""
         else:
-            return "Lab with that ID already exists"
+            string = "Lab with that ID already exists"
     else:
-        return "Please fill out all required entries"
+        string = "Please fill out all required entries"
+    return string
 
 def deleteAccount(username=""):
+    # precondition: account with unique username exists
+    # postcondition: account with unique username is removed from database and a message is returned if username is not entered,
+    # if user with that username does not exist or if the user was successfully deleted
     if username == "":
-        return "Please enter a username"
+        string = "Please enter a username"
     elif username not in list(i["username"] for i in User.objects.all().values("username")):
-        return "User with that username does not exist"
+        string = "User with that username does not exist"
     else:
         User.objects.get(username=username).delete()
-        return "User with username " + username + " has been deleted"
+        string = "User with username " + username + " has been deleted"
+    return string
 
 def deleteCourse(courseid=""):
+    # precondition: course with unique courseid exists
+    # postcondition: course with unique courseid is removed from database and a message is returned if courseid is not entered,
+    # if course with that courseid does not exist or if the course was successfully deleted
     if courseid == "":
-        return "Please enter a course ID"
+        string = "Please enter a course ID"
     elif courseid not in list(i["courseid"] for i in Course.objects.all().values("courseid")):
-        return "Course with that ID does not exist"
+        string = "Course with that ID does not exist"
     else:
         Course.objects.get(courseid=courseid).delete()
-        return "Course with ID " + courseid + " has been deleted"
+        string = "Course with ID " + courseid + " has been deleted"
+    return string
 
 def deleteLab(labid=""):
+    # precondition: lab with unique labid exists
+    # postcondition: lab with unique labid is removed from database and a message is returned if labid is not entered,
+    # if lab with that labid does not exist or if the lab was successfully deleted
     if labid == "":
-        return "Please enter a lab ID"
+        string = "Please enter a lab ID"
     elif labid not in list(i["labid"] for i in Lab.objects.all().values("labid")):
-        return "Lab with that ID does not exist"
+        string = "Lab with that ID does not exist"
     else:
         Lab.objects.get(labid=labid).delete()
-        return "Lab with ID " + labid + " has been deleted"
+        string = "Lab with ID " + labid + " has been deleted"
+    return string
 
 def getCourses():
+    # precondition: None
+    # postcondition: returns a dictionary with course keys and values are lists of labs
     courses = list(Course.objects.all())
     dictionary = {}
     for c in courses:

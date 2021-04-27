@@ -30,7 +30,7 @@ class RegisterAccount(View):
     def post(self, request):
         message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'), request.POST.get('officehours'))
-        if message is None:
+        if message is "":
             return redirect('/AccountDisplay/')
         else:
             return render(request, "register_account.html", {"roles": Roles.choices, "message": message})
@@ -42,7 +42,7 @@ class RegisterCourses(View):
 
     def post(self, request):
         message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'], request.POST['cor_cred'])
-        if message is None:
+        if message is "":
             return redirect('/SupCourses/')
         else:
             return render(request, "register_courses.html", {"message": message})
@@ -83,7 +83,7 @@ class RegisterLab(View):
 
     def post(self, request):
         message = createLab(Course.objects.get(courseid=request.session["course"]), request.POST['lab_id'], request.POST['lab_name'], request.POST['lab_sched'])
-        if message is None:
+        if message is "":
             request.session["course"] = ""
             return redirect('/SupCourses/')
         else:
