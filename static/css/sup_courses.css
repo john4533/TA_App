@@ -1,9 +1,11 @@
 /*main content*/
 #page-content-wrapper {
     width: 100%;
-    postion: relative;
+    postion: absolute;
     padding-top: 10px;
-    padding-left: 100px;
+    padding-left: 110px;
+    padding-right: 0px;
+
 }
 
 .sticky {
@@ -17,7 +19,21 @@ h1 {
     display: inline-block;
     color: dimgrey;
     font-family: Calibri;
-    font-size: 45px;
+    font-size: 60px;
+}
+
+h3 {
+    color: #010416;
+    font-size: 20px;
+}
+
+h4 {
+    color: #861616;
+}
+
+h5 {
+    font-family: Calibri;
+    font-size: 26px;
 }
 
 .form-group-row {
@@ -42,29 +58,15 @@ th {
     border: 30px;
 }
 
-h3 {
-    color: #010416;
-    font-size: 20px;
-}
-
-h4 {
-    color: #861616;
-}
-
-h5 {
-    font-family: Calibri;
-    font-size: 26px;
-}
-
-
 
 
 /*side bar*/
 #sidebar-wrapper {
-    position: fixed;
-    width: 95px;
+    position: absolute;
+    width: 110px;
     height: 100%;
     background: #000;
+
 }
 
 .sidebar-nav {
@@ -76,6 +78,8 @@ h5 {
     text-indents: 60px;
     line-height: 80px;
     text-decoration: none;
+    font-size: 22px;
+    font-family: Calibri;
 }
 
 .sidebar-nav li a {

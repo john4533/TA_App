@@ -3,7 +3,7 @@
     width: 100%;
     postion: absolute;
     padding-top: 10px;
-    padding-left: 100px;
+    padding-left: 110px;
     padding-right: 0px;
 
 }
@@ -11,7 +11,7 @@
 h1 {
     color: dimgrey;
     font-family: Calibri;
-    font-size: 45px;
+    font-size: 60px;
 }
 .row img {
     margin-top: 100px;
@@ -44,7 +44,7 @@ input {
 /*side bar*/
 #sidebar-wrapper {
     position: absolute;
-    width: 95px;
+    width: 110px;
     height: 100%;
     background: #000;
 
@@ -59,6 +59,8 @@ input {
     text-indents: 60px;
     line-height: 80px;
     text-decoration: none;
+    font-size: 22px;
+    font-family: Calibri;
 }
 
 .sidebar-nav li a {
