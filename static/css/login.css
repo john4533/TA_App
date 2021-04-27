@@ -1,34 +1,70 @@
-.row{
-    background-color: #ffbd00;
+
+#page-content-wrapper {
+    postion: absolute;
+    padding-right: 0px;
+    width: 100%;
 
 }
-body{
+.row {
+    background-color: #ffbd00;
+}
+
+body {
     background: #ffbd00;
 }
-/*.row img {*/
-/*    width: 10vh;*/
-/*}*/
 
-.row li{
+img {
+    width: 150px;
+    border: black;
+}
+
+.print {
+    color: #ba0a0a;
+    display: inline;
+    font-family: Calibri, serif;
+    font-size: 30px;
+    padding-right: 18px;
+    vertical-align: -5px;
+}
+
+.row li {
     list-style: none;
 }
-.navbar{
-    background-color: black;
-    /*padding-top: 2vh;*/
-}
-.row2{
 
-}
-.row3{
-    /*padding-top: 100px;*/
-    /*padding-bottom: 10px;*/
-}
-.row4{
+.navbar {
     background-color: black;
-    height: 3px;
-    margin-top: -80px;
+    padding-top: 20px;
 }
-footer{
+
+footer {
     background-color: #ffbd00;
     height: 100px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 2px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+
+}
+input[type=password] {
+    width: 100%;
+    padding: 2px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+.btn{
+    margin-right: 30px;
+    width: 130px;
+    margin-bottom: 9px;
+    padding-top: -10px;
 }
