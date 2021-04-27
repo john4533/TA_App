@@ -69,8 +69,7 @@
                         <form method="post">
                             {% csrf_token %}
                             <table class="table1" cellspacing="50">
-                                <div class="img1"><img height="75" width="75" align="center"
-                                                       src="/static/images/create_account.png"></div>
+                                <img height="75" width="75" align="center" src="/static/images/create_account.png">
                                 <div class="legend" align="center">
                                     <legend>Register Account</legend>
                                 </div>
@@ -84,7 +83,8 @@
                                     </td>
                                     <td>
                                         <div><label>Password</label></div>
-                                        <div><input name="password" type="password" placeholder="password" required/><br></div>
+                                        <div><input name="password" type="password" placeholder="password"
+                                                    required/><br></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -105,7 +105,8 @@
                                 <tr>
                                     <td>
                                         <div><label>Phone Number</label></div>
-                                        <div><input name="phone" type="tel" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+                                        <div><input name="phone" type="tel" placeholder="123-456-7890"
+                                                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
                                         </div>
                                     </td>
                                     <td>

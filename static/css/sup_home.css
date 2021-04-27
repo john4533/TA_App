@@ -12,6 +12,11 @@ h1{
     font-family: Calibri;
     font-size: 60px;
 }
+.center{
+    align: center;
+    margin-top: 200px;
+
+}
 
 /*side bar*/
 #sidebar-wrapper {
