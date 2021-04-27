@@ -34,15 +34,10 @@ if you adopt such a policy during the initial meeting, put it here
 If someone does not attend the meeting, then they should get in touch with someone who did attend. (provided that they have informed everyone beforehand)
 
 Procedure for handling a member who is not meeting expectations
-Two meetings in one week missed is three points (without excuse).
-One meeting missed is one point.
-Missing meetings should be communicated to other group members the day before.
-
-
-6 points before involving the instructor
-Actions: total of six points per sprint.
-Confront: after 3 points.
-
+Missed meeting will require a message to be sent to the person who did not participate.
+Repeated meetings missed will require an email to be sent to the person who did not participate to schedule a meeting to discuss the issue.
+If no response to any of the above in one day, start by contacting TA about the issue.
+If no response to any of the above in two days, start by contacting instructor about the issue.
 
 Signatures: 
 Mohammed Yousuf Khan: yk3245385@gmail.com,(414) -243-9503
