@@ -42,15 +42,13 @@ th {
 h3{
     color: #010416;
 }
-h4{
+h4 {
     color: #861616;
 }
-h5{
-    display: inline;
-    padding-right: 30px;
-    font-family: Calibri;
-    font-size: 28px;
 
+h5{
+    font-family: Calibri;
+    font-size: 26px;
 }
 
 
