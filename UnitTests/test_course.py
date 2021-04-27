@@ -58,30 +58,3 @@ class CourseTestCase(TestCase):
         course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
         lab1 = Lab.objects.create(course=course1, labid="901", labname="Lab 1", labschedule="T @ 11:00 - 12:50")
         self.assertEqual(getCourses(), {course1: [lab1]})
-
-
-    # def test_courseIdupdated(self):
-    #     createCourse("361", "Software Engineering", "TR - 10:00", "3")
-    #     setCourseId("362", "361")
-    #     b = Course.objects.get(courseid="362")
-    #     self.assertEqual("Software Engineering", b.coursename)
-    #     self.assertEqual("TR - 10:00", b.courseschedule)
-    #     self.assertEqual("3", b.coursecredits)
-    #
-    # def test_courseNameupdated(self):
-    #     createCourse("361", "Software Engineering", "TR - 10:00", "3")
-    #     setCourseName("Not Software Engineering", "361")
-    #     b = Course.objects.get(courseid="361")
-    #     self.assertEqual("Not Software Engineering", b.coursename)
-    #
-    # def test_courseScheduleupdated(self):
-    #     createCourse("361", "Software Engineering", "TR - 10:00", "3")
-    #     setCourseSchedule("MW - 12:00", "361")
-    #     b = Course.objects.get(courseid="361")
-    #     self.assertEqual("MW - 12:00", b.courseschedule)
-    #
-    # def test_courseCreditsupdated(self):
-    #     createCourse("361", "Software Engineering", "TR - 10:00", "3")
-    #     setCourseCredits("4", "361")
-    #     b = Course.objects.get(courseid="361")
-    #     self.assertEqual("4", b.coursecredits)

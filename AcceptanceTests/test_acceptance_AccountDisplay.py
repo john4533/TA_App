@@ -16,12 +16,3 @@ class AccountDisplayTests(TestCase):
     def test_adduser(self):
         response = self.client.post("/AccountDisplay/", {"register_account": "register_account"})
         self.assertEqual(response.url, "/RegisterAccount/")
-
-
-
- # def post(self, request):
- #        if request.POST.get('delete_account'):
- #            message = deleteAccount(request.POST['delete_account'])
- #            return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message})
- #        else:
- #            return redirect('/RegisterAccount/')
