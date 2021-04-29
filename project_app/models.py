@@ -28,14 +28,15 @@ class Course(models.Model):
     courseid = models.CharField(max_length=20)
     coursename = models.CharField(max_length=50)
     coursecredits = models.CharField(max_length=2)
-    user_assigned= models.ForeignKey(User,on_delete=models.CASCADE)
+    user_assigned = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
 
 class Section(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     sectionid = models.CharField(max_length=20)
     type = models.CharField(max_length=20, choices=Types.choices)
     schedule = models.CharField(max_length=20, blank=True)
-    #TA = models.ForeignKey(TA, on_delete=models.CASCADE)
+    # TA = models.ForeignKey(TA, on_delete=models.CASCADE)
 
 # class TA(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)

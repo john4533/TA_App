@@ -102,24 +102,20 @@ def deleteSection(sectionid=""):
         string = "Section with ID " + sectionid + " has been deleted"
     return string
 
+
 def getCourses():
     # precondition: None
     # postcondition: returns a dictionary with course keys and values are lists of section
     courses = list(Course.objects.all())
-    print(courses)
     dictionary = {}
     for c in courses:
-        print(c)
         dictionary[c] = list(Section.objects.filter(course__courseid=c.courseid))
-        print(dictionary[c])
-    print("word")
     return dictionary
 
-def assignUser(user,course):
-    if user=="" or course=="" or user==None:
+
+def assignUser(user, course):
+    if user == "" or course == "" or user == None:
         raise ValueError
-
-
 
 # def setCourseId(courseId, courseIdOriginal):
 #     #precondition: course with the old ID exists, new ID does not exist

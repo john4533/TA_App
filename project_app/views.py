@@ -29,7 +29,8 @@ class RegisterAccount(View):
 
     def post(self, request):
         message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'],
-                                request.POST['role'], request.POST.get('phone'), request.POST.get('address'), request.POST.get('officehours'))
+                                request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
+                                request.POST.get('officehours'))
         if message is "":
             return redirect('/AccountDisplay/')
         else:
@@ -47,6 +48,7 @@ class RegisterCourses(View):
         else:
             return render(request, "register_courses.html", {"message": message})
 
+
 class AccountDisplay(View):
     def get(self, request):
         return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor"))})
@@ -54,7 +56,8 @@ class AccountDisplay(View):
     def post(self, request):
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
-            return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message})
+            return render(request, "account_display.html",
+                          {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message})
         else:
             return redirect('/RegisterAccount/')
 
@@ -68,7 +71,7 @@ class SupCourses(View):
             return redirect('/RegisterCourses/')
         elif request.POST.get('add_section'):
             request.session["course"] = request.POST["add_section"]
-            return redirect('/RegisterLab/')
+            return redirect('/RegisterSection/')
         else:
             if request.POST.get('delete_course'):
                 message = deleteCourse(request.POST['delete_course'])
@@ -76,20 +79,23 @@ class SupCourses(View):
                 message = deleteSection(request.POST['delete_section'])
             return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
 
-#
-# class RegisterLab(View):
-#     def get(self, request):
-#         return render(request, "register_lab.html")
-#
-#     def post(self, request):
-#         message = createLab(Course.objects.get(courseid=request.session["course"]), request.POST['lab_id'], request.POST['lab_name'], request.POST['lab_sched'])
-#         if message is "":
-#             request.session["course"] = ""
-#             return redirect('/SupCourses/')
-#         else:
-#             return render(request, "register_lab.html", {"message": message})
+
+class RegisterSection(View):
+    def get(self, request):
+        return render(request, "register_section.html", {"types": Types.choices})
+
+    def post(self, request):
+        message = createSection(Course.objects.get(courseid=request.session["course"]),
+                                request.POST['section_sectionid'], request.POST['type'],
+                                request.POST['section_schedule'])
+        if message is "":
+            request.session["course"] = ""
+            return redirect('/SupCourses/')
+        else:
+            return render(request, "register_section.html", {"types": Types.choices, "message": message})
+
 
 class Account(View):
-    def get(self,request):
+    def get(self, request):
         user = User.objects.get(username=request.session["name"])
-        return render(request,"account.html",{"user":user})
+        return render(request, "account.html", {"user": user})
