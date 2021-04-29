@@ -1,5 +1,6 @@
 from project_app.models import *
 
+
 def login(name, password):
     # precondition: user with provided username and password exists
     # postcondition: returns True if username and password match those in database, False if either entry is incorrect
@@ -15,13 +16,15 @@ def login(name, password):
     else:
         return True
 
+
 def createAccount(username="", password="", email="", role="", phone="", address="", officehours=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
     # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
     if username != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(username=username))) == 0:
-            User.objects.create(username=username, password=password, email=email, role=role, phone=phone, address=address, officehours=officehours)
+            User.objects.create(username=username, password=password, email=email, role=role, phone=phone,
+                                address=address, officehours=officehours)
             string = ""
         else:
             string = "User with that username already exists"
@@ -29,31 +32,34 @@ def createAccount(username="", password="", email="", role="", phone="", address
         string = "Please fill out all required entries"
     return string
 
-def createCourse(courseId="", courseName="", courseSchedule="", courseCredits=""):
+
+def createCourse(courseId="", courseName="", courseCredits=""):
     # precondition: course with provided courseid does not currently exist with courseid, coursename, courseschedule, and coursecredits entered
     # postcondition: course is created with unique ID and name, message is returned if course with the id exists or required entries are blank
-    if courseId != '' and courseName != '' and courseSchedule != '' and courseCredits != '':
+    if courseId != '' and courseName != '' and courseCredits != '':
         if len(list(Course.objects.filter(courseid=courseId))) == 0:
-            Course.objects.create(courseid=courseId, coursename=courseName, courseschedule=courseSchedule, coursecredits=courseCredits)
+            Course.objects.create(courseid=courseId, coursename=courseName, coursecredits=courseCredits)
             string = ""
         else:
             string = "Course with that ID already exists"
     else:
-        string ="Please fill out all required entries"
+        string = "Please fill out all required entries"
     return string
 
-def createLab(course="", labId="", labName="", labSchedule=""):
-    # precondition: course is given and exists, lab with provided labid does not currently exist with labid, labname, and labschedule entered
-    # postcondition: lab is created with unique labId and course, labName, labschedule, message is returned if lab with the id exists or required entries are blank
-    if course != '' and labId != '' and labName != '' and labSchedule != '':
-        if len(list(Lab.objects.filter(labid=labId))) == 0:
-            Lab.objects.create(course=course, labid=labId, labname=labName, labschedule=labSchedule)
+
+def createSection(course="", sectionid="", type="", schedule=""):
+    # precondition: course is given and exists, section with provided sectionid does not currently exist with sectionid, type, and sectionschedule entered
+    # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
+    if course != '' and sectionid != '' and type != '' and schedule != '':
+        if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
+            Section.objects.create(course=course, sectionid=sectionid, type=type, schedule=schedule)
             string = ""
         else:
-            string = "Lab with that ID already exists"
+            string = "Section with that ID already exists"
     else:
         string = "Please fill out all required entries"
     return string
+
 
 def deleteAccount(username=""):
     # precondition: account with unique username exists
@@ -68,6 +74,7 @@ def deleteAccount(username=""):
         string = "User with username " + username + " has been deleted"
     return string
 
+
 def deleteCourse(courseid=""):
     # precondition: course with unique courseid exists
     # postcondition: course with unique courseid is removed from database and a message is returned if courseid is not entered,
@@ -81,27 +88,33 @@ def deleteCourse(courseid=""):
         string = "Course with ID " + courseid + " has been deleted"
     return string
 
-def deleteLab(labid=""):
-    # precondition: lab with unique labid exists
-    # postcondition: lab with unique labid is removed from database and a message is returned if labid is not entered,
-    # if lab with that labid does not exist or if the lab was successfully deleted
-    if labid == "":
-        string = "Please enter a lab ID"
-    elif labid not in list(i["labid"] for i in Lab.objects.all().values("labid")):
-        string = "Lab with that ID does not exist"
+
+def deleteSection(sectionid=""):
+    # precondition: section with unique sectionid exists
+    # postcondition: section with unique sectionid is removed from database and a message is returned if sectionid is not entered,
+    # if section with that sectionid does not exist or if the section was successfully deleted
+    if sectionid == "":
+        string = "Please enter a section ID"
+    elif sectionid not in list(i["sectionid"] for i in Section.objects.all().values("sectionid")):
+        string = "Section with that ID does not exist"
     else:
-        Lab.objects.get(labid=labid).delete()
-        string = "Lab with ID " + labid + " has been deleted"
+        Section.objects.get(sectionid=sectionid).delete()
+        string = "Section with ID " + sectionid + " has been deleted"
     return string
 
 def getCourses():
     # precondition: None
-    # postcondition: returns a dictionary with course keys and values are lists of labs
+    # postcondition: returns a dictionary with course keys and values are lists of section
     courses = list(Course.objects.all())
+    print(courses)
     dictionary = {}
     for c in courses:
-        dictionary[c] = list(Lab.objects.filter(course__courseid=c.courseid))
+        print(c)
+        dictionary[c] = list(Section.objects.filter(course__courseid=c.courseid))
+        print(dictionary[c])
+    print("word")
     return dictionary
+
 
 # def setCourseId(courseId, courseIdOriginal):
 #     #precondition: course with the old ID exists, new ID does not exist
@@ -136,8 +149,6 @@ def getCourses():
 #     pass
 
 
-
-
 #
 # def setLabId(labIdNew, labIdOriginal):
 #     # Precondition: correct two inputs, labIdOriginal needs to exist already, and labIdNew needs to not exist already
@@ -162,6 +173,3 @@ def getCourses():
 #     # Postcondition: ta is assigned to the lab
 #     pass
 #
-
-
-

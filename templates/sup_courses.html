@@ -85,17 +85,15 @@
                             <tr>
                                 <th scope="col"><h5>Course ID</h5></th>
                                 <th scope="col"><h5>Course Name</h5></th>
-                                <th scope="col"><h5>Course Schedule</h5></th>
                                 <th scope="col"><h5>Course Credits</h5></th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            {% for course, labs in dictionary.items %}
+                            {% for course, sections in dictionary.items %}
                                 <tr>
                                     <td><h3>{{ course.courseid }}</h3></td>
                                     <td><h3>{{ course.coursename }}</h3></td>
-                                    <td><h3>{{ course.courseschedule }}</h3></td>
                                     <td><h3>{{ course.coursecredits }}</h3></td>
                                     <td>
                                         <button type="submit" class="btn btn-danger" name="delete_course"
@@ -107,26 +105,26 @@
                                         {#                                            </button>#}
                                         {#                                        </div>#}
 
-                                        <button type="submit" class="btn btn-warning" name="add_lab"
+                                        <button type="submit" class="btn btn-warning" name="add_section"
                                                 value={{ course.courseid }}>Add Lab
                                         </button>
                                     </td>
-                                    {% for lab in labs %}
+                                    {% for section in sections %}
                                         <tr>
                                             <td><h4>
-                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ lab.labid }}</h4>
+                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.sectionid }}</h4>
                                             </td>
                                             <td><h4>
-                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ lab.labname }}</h4>
+                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.type }}</h4>
                                             </td>
                                             <td><h4>
-                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ lab.labschedule }}</h4>
+                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.schedule }}</h4>
                                             </td>
                                             <td></td>
 
                                             <td>
-                                                <button type="submit2" class="btn btn-danger" name="delete_lab"
-                                                        value={{ lab.labid }}>Delete
+                                                <button type="submit2" class="btn btn-danger" name="delete_section"
+                                                        value={{ sections.sectionid }}>Delete
                                                 </button>
                                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                             </td>

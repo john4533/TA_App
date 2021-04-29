@@ -7,10 +7,12 @@ class Roles(models.TextChoices):
     ta = "TA"
     ins = "Instructor"
 
+
 class Types(models.TextChoices):
     lec = "Lecture"
     lab = "Lab"
     disc = "Discussion"
+
 
 class User(models.Model):
     username = models.CharField(max_length=20)
@@ -21,14 +23,15 @@ class User(models.Model):
     address = models.CharField(max_length=50, blank=True)
     officehours = models.CharField(max_length=20, blank=True)
 
+
 class Course(models.Model):
     courseid = models.CharField(max_length=20)
     coursename = models.CharField(max_length=50)
     coursecredits = models.CharField(max_length=2)
+
 
 class Section(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     sectionid = models.CharField(max_length=20)
     type = models.CharField(max_length=20, choices=Types.choices)
     schedule = models.CharField(max_length=20, blank=True)
-

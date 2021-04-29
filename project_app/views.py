@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import User, Course
 from Classes.functions import *
+
 
 # Create your views here.
 class Login(View):
@@ -41,7 +41,7 @@ class RegisterCourses(View):
         return render(request, "register_courses.html")
 
     def post(self, request):
-        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_sched'], request.POST['cor_cred'])
+        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_cred'])
         if message is "":
             return redirect('/SupCourses/')
         else:
@@ -66,28 +66,28 @@ class SupCourses(View):
     def post(self, request):
         if request.POST.get('add_course'):
             return redirect('/RegisterCourses/')
-        elif request.POST.get('add_lab'):
-            request.session["course"] = request.POST["add_lab"]
+        elif request.POST.get('add_section'):
+            request.session["course"] = request.POST["add_section"]
             return redirect('/RegisterLab/')
         else:
             if request.POST.get('delete_course'):
                 message = deleteCourse(request.POST['delete_course'])
-            elif request.POST.get('delete_lab'):
-                message = deleteLab(request.POST['delete_lab'])
+            elif request.POST.get('delete_section'):
+                message = deleteSection(request.POST['delete_section'])
             return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
 
-
-class RegisterLab(View):
-    def get(self, request):
-        return render(request, "register_lab.html")
-
-    def post(self, request):
-        message = createLab(Course.objects.get(courseid=request.session["course"]), request.POST['lab_id'], request.POST['lab_name'], request.POST['lab_sched'])
-        if message is "":
-            request.session["course"] = ""
-            return redirect('/SupCourses/')
-        else:
-            return render(request, "register_lab.html", {"message": message})
+#
+# class RegisterLab(View):
+#     def get(self, request):
+#         return render(request, "register_lab.html")
+#
+#     def post(self, request):
+#         message = createLab(Course.objects.get(courseid=request.session["course"]), request.POST['lab_id'], request.POST['lab_name'], request.POST['lab_sched'])
+#         if message is "":
+#             request.session["course"] = ""
+#             return redirect('/SupCourses/')
+#         else:
+#             return render(request, "register_lab.html", {"message": message})
 
 class Account(View):
     def get(self,request):
