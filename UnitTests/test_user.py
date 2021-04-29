@@ -65,3 +65,4 @@ class UserTestCase(TestCase):
 
     def test_validlogin(self):
         self.assertTrue(login("xyz", "password1"))
+

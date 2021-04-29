@@ -115,6 +115,11 @@ def getCourses():
     print("word")
     return dictionary
 
+def assignUser(user,course):
+    if user=="" or course=="" or user==None:
+        raise ValueError
+
+
 
 # def setCourseId(courseId, courseIdOriginal):
 #     #precondition: course with the old ID exists, new ID does not exist
