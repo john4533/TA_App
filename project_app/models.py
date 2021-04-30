@@ -31,8 +31,8 @@ class Course(models.Model):
 
 class TA(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    graderstatus = models.BooleanField(False)
-    numlabs = models.IntegerField(default=1)
+    graderstatus = models.BooleanField(default=False)
+    numlabs = models.IntegerField(default=0)
     course=models.ForeignKey(Course,on_delete=models.CASCADE, null=True, blank=True)
 
 
