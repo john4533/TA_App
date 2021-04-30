@@ -8,6 +8,7 @@ class Roles(models.TextChoices):
     ins = "Instructor"
 
 
+
 class Types(models.TextChoices):
     lec = "Lecture"
     lab = "Lab"

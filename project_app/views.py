@@ -37,6 +37,7 @@ class RegisterAccount(View):
             return render(request, "register_account.html", {"roles": Roles.choices, "message": message})
 
 
+
 class RegisterCourses(View):
     def get(self, request):
         return render(request, "register_courses.html")
