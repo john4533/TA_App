@@ -15,39 +15,39 @@
 <section>
     <div class="row">
         <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <img src="static/images/uwm.svg" alt="static/images/uwm.svg">
-
-        </div>
-        <div class="row2 justify-content-center align-items-center">
-            <div class="navbar">
-                <h1></h1>
-                <form action="/" method="post">
-                    {% csrf_token %}
-                       <div class="print">
-                {{ message }}
-            </div>
-                    <td>
-                        <label>
-                            <input type="text" name="name" placeholder="Username" required>
-                        </label>
-                    </td>
-                    <tr>
-                        <td><label>
-                            <input type="password" name="password" placeholder="Password" required>
-                        </label></td>
-                    </tr>
-                    <input class="btn btn-secondary" type="submit">
-                    <td> .</td>
-                </form>
-            </div>
-
-            <div class="row3 justify-content-center align-items-center" style="height: 80vh">
-
-                <img class="img-fluid w-100" src="static/images/uwm_campus.jpg" alt="static/images/uwm_camp.jpg">
+            <div class="container-fluid">
+                <img src="static/images/uwm.svg" alt="static/images/uwm.svg">
 
             </div>
-        </div>
+            <div class="row2 justify-content-center align-items-center">
+                <div class="navbar">
+                    <h1></h1>
+                    <form action="/" method="post">
+                        {% csrf_token %}
+                        <div class="invalid">
+                                {{ message }}
+                        </div>
+                        <td>
+                            <label>
+                                <input type="text" name="name" placeholder="Username" required>
+                            </label>
+                        </td>
+                        <tr>
+                            <td><label>
+                                <input type="password" name="password" placeholder="Password" required>
+                            </label></td>
+                        </tr>
+                        <input class="btn btn-secondary" type="submit">
+                        <td> .</td>
+                    </form>
+                </div>
+
+                <div class="row3 justify-content-center align-items-center" style="height: 80vh">
+
+                    <img class="img-fluid w-100" src="static/images/uwm_campus.jpg" alt="static/images/uwm_camp.jpg">
+
+                </div>
+            </div>
         </div>
 </section>
 </body>
