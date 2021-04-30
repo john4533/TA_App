@@ -10,27 +10,24 @@ class CourseTestCase(TestCase):
 
 #   CREATE COURSE TESTS
     def test_courseIdexists(self):
-        Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
-        self.assertEqual(createCourse("337", "Software Engineering", "TR @ 10:00 - 10:50", "3"), "Course with that ID already exists")
+        Course.objects.create(courseid="337",name="Systems Programming",credits="3")
+        self.assertEqual(createCourse("337", "Software Engineering", "3"), "Course with that ID already exists")
 
     def test_courseCreated(self):
-        createCourse("361", "Software Engineering", "TR @ 10:00 - 10:50", "3")
+        createCourse("361", "Software Engineering", "3")
         b = Course.objects.get(courseid="361")
-        self.assertEqual("Software Engineering", b.coursename)
-        self.assertEqual("TR @ 10:00 - 10:50", b.courseschedule)
-        self.assertEqual("3", b.coursecredits)
+        self.assertEqual("Software Engineering", b.name)
+        self.assertEqual("3", b.credits)
 
     def test_nocourseid(self):
-        self.assertEqual(createCourse("", "Software Engineering", "TR @ 10:00 - 10:50", "3"), "Please fill out all required entries")
+        self.assertEqual(createCourse("", "Software Engineering", "3"), "Please fill out all required entries")
 
     def test_nocoursename(self):
-        self.assertEqual(createCourse("361", "", "TR @ 10:00 - 10:50", "3"), "Please fill out all required entries")
+        self.assertEqual(createCourse("361", "", "3"), "Please fill out all required entries")
 
-    def test_nocourseschedule(self):
-        self.assertEqual(createCourse("361", "Software Engineering", "", "3"), "Please fill out all required entries")
 
     def test_nocoursecredits(self):
-        self.assertEqual(createCourse("361", "Software Engineering", "TR @ 10:00 - 10:50", ""), "Please fill out all required entries")
+        self.assertEqual(createCourse("361", "Software Engineering", ""), "Please fill out all required entries")
 
 
 
@@ -42,7 +39,7 @@ class CourseTestCase(TestCase):
         self.assertEqual(deleteCourse("361"), "Course with that ID does not exist")
 
     def test_deletecourse(self):
-        course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
+        course1 = Course.objects.create(courseid="337",name="Systems Programming",credits="3")
         self.assertEqual(course1.courseid, "337")
         self.assertEqual(deleteCourse("337"), "Course with ID 337 has been deleted")
 
@@ -51,13 +48,13 @@ class CourseTestCase(TestCase):
         self.assertEqual(getCourses(), {})
 
     def test_getCourses_noLabs(self):
-        course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
+        course1 = Course.objects.create(courseid="337",name="Systems Programming",credits="3")
         self.assertEqual(getCourses(), {course1: []})
 
     def test_getCourses_success(self):
-        course1 = Course.objects.create(courseid="337", coursename="Systems Programming", courseschedule="TR @ 1:00 - 1:50", coursecredits="3")
-        lab1 = Lab.objects.create(course=course1, labid="901", labname="Lab 1", labschedule="T @ 11:00 - 12:50")
-        self.assertEqual(getCourses(), {course1: [lab1]})
+        course1 = Course.objects.create(courseid="337",name="Systems Programming",credits="3")
+        section= Section.objects.create(course=course1, sectionid="901", type="Lab 1",schedule="T @ 11:00 - 12:50")
+        self.assertEqual(getCourses(), {course1: [section]})
 
     # ASSIGN COURSES
 
