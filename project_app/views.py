@@ -42,7 +42,7 @@ class RegisterCourses(View):
         return render(request, "register_courses.html")
 
     def post(self, request):
-        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_cred'])
+        message = createCourse(request.POST['course_id'], request.POST['course_name'], request.POST['cor_credits'])
         if message is "":
             return redirect('/SupCourses/')
         else:
@@ -77,7 +77,7 @@ class SupCourses(View):
                 message = deleteCourse(request.POST['delete_course'])
             elif request.POST.get('delete_section'):
                 message = deleteSection(request.POST['delete_section'])
-            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
+            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message}, {})
 
 
 class RegisterSection(View):
