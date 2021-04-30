@@ -1,6 +1,11 @@
 from django.contrib import admin
-from project_app.models import User, Course, Section
+from project_app.models import User, Course, Section, Assigned,TA
+
 # Register your models here.
 admin.site.register(User)
+admin.site.register(TA)
 admin.site.register(Course)
 admin.site.register(Section)
+admin.site.register(Assigned)
+
+
