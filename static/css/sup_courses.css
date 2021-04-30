@@ -115,3 +115,12 @@ p {
     padding-left: 4px;
 }
 
+/*Bootstrap Addition*/
+
+.container{
+    margin:10px;
+    /*background-color: #F0F0F0*/
+}
+.btn{
+    margin:5px;
+}

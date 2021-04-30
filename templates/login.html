@@ -24,9 +24,11 @@
                     <h1></h1>
                     <form action="/" method="post">
                         {% csrf_token %}
-                        <div class="invalid">
+                        {% if message is not None %}
+                            <div class="invalid">
                                 {{ message }}
-                        </div>
+                            </div>
+                        {% endif %}
                         <td>
                             <label>
                                 <input type="text" name="name" placeholder="Username" required>
