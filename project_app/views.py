@@ -42,7 +42,7 @@ class RegisterCourses(View):
         return render(request, "register_courses.html")
 
     def post(self, request):
-        message = createCourse(request.POST['course_id'], request.POST['course_name'], request.POST['cor_credits'])
+        message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_cred'])
         if message is "":
             return redirect('/SupCourses/')
         else:
