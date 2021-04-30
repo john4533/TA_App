@@ -94,3 +94,4 @@ class CourseTestCase(TestCase):
          except ValueError:
              print("Invalid arguments")
 
+
