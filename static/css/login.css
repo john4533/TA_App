@@ -18,9 +18,24 @@ img {
     border: black;
 }
 
+.invalid {
+  display: inline;
+  color: #d6000b;
+  background-color: #ff9393;
+  margin: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  text-shadow: 1px 1px rgba(250,250,250,.3);
+  border-radius: 4px;
+  padding: 5px;
+  vertical-align: -1px;
+}
+
 .print {
     color: #ba0a0a;
-    display: inline;
+    display: inline-block;
+    margin: 8px 0;
     font-family: Calibri, serif;
     font-size: 30px;
     padding-right: 18px;
