@@ -43,3 +43,4 @@ class Section(models.Model):
     schedule = models.CharField(max_length=20, blank=True)
     TA_assigned = models.ForeignKey(TA, on_delete=models.CASCADE, blank=True, null=True)
 
+
