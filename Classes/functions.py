@@ -33,12 +33,12 @@ def createAccount(username="", password="", email="", role="", phone="", address
     return string
 
 
-def createCourse(courseId="", courseName="", courseCredits=""):
+def createCourse(courseId="", name="", credits=""):
     # precondition: course with provided courseid does not currently exist with courseid, coursename, courseschedule, and coursecredits entered
     # postcondition: course is created with unique ID and name, message is returned if course with the id exists or required entries are blank
-    if courseId != '' and courseName != '' and courseCredits != '':
+    if courseId != '' and name != '' and credits != '':
         if len(list(Course.objects.filter(courseid=courseId))) == 0:
-            Course.objects.create(courseid=courseId, coursename=courseName, coursecredits=courseCredits)
+            Course.objects.create(courseid=courseId, name=name, credits=credits)
             string = ""
         else:
             string = "Course with that ID already exists"
