@@ -77,7 +77,7 @@ class SupCourses(View):
                 message = deleteCourse(request.POST['delete_course'])
             elif request.POST.get('delete_section'):
                 message = deleteSection(request.POST['delete_section'])
-            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message}, {})
+            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
 
 
 class RegisterSection(View):
