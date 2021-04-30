@@ -49,6 +49,7 @@ class RegisterCourses(View):
             return render(request, "register_courses.html", {"message": message})
 
 
+
 class AccountDisplay(View):
     def get(self, request):
         return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor"))})

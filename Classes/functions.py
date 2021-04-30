@@ -33,6 +33,7 @@ def createAccount(username="", password="", email="", role="", phone="", address
     return string
 
 
+
 def createCourse(courseId="", name="", credits=""):
     # precondition: course with provided courseid does not currently exist with courseid, coursename, courseschedule, and coursecredits entered
     # postcondition: course is created with unique ID and name, message is returned if course with the id exists or required entries are blank
