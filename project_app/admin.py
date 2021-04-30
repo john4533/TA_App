@@ -9,3 +9,4 @@ admin.site.register(Section)
 admin.site.register(Assigned)
 
 
+
