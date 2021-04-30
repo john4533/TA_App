@@ -44,3 +44,4 @@ class Section(models.Model):
     TA_assigned = models.ForeignKey(TA, on_delete=models.CASCADE, blank=True, null=True)
 
 
+
