@@ -16,18 +16,17 @@ from django.contrib import admin
 from django.urls import path
 from project_app.views import *
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('SupHome/', SupHome.as_view()),
-    path('SupCourses/', SupCourses.as_view()),
+    path('Home/', Home.as_view()),
+    path('Courses/', Courses.as_view()),
     path('Account/', Account.as_view()),
     path('RegisterCourses/', RegisterCourses.as_view()),
     path('RegisterSection/', RegisterSection.as_view()),
-    path('RegisterAccount/',RegisterAccount.as_view()),
-    path('AccountDisplay/',AccountDisplay.as_view()),
+    path('RegisterAccount/', RegisterAccount.as_view()),
+    path('AccountDisplay/', AccountDisplay.as_view()),
+    path('AssignInstructor/', AssignInstructor.as_view()),
+    path('AssignTAToCourse/', AssignTAToCourse.as_view()),
+    path('AssignTAToSection/', AssignTAToSection.as_view()),
     path('', Login.as_view())
 ]
-
-
-

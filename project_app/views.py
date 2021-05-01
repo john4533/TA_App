@@ -15,12 +15,35 @@ class Login(View):
             return render(request, "login.html", {"message": "Information is incorrect"})
         else:
             request.session["name"] = request.POST['name']
-            return redirect('/SupHome/')
+            return redirect('/Home/')
 
 
-class SupHome(View):
+class Home(View):
     def get(self, request):
         return render(request, "home.html", {})
+
+
+class Account(View):
+    def get(self, request):
+        user = User.objects.get(username=request.session["name"])
+        return render(request, "account.html", {"user": user})
+
+
+class AccountDisplay(View):
+    def get(self, request):
+        user = User.objects.get(username=request.session["name"])
+        return render(request, "all_accounts.html",
+                      {"accounts": list(User.objects.exclude(role="Supervisor")), "user": user})
+
+    def post(self, request):
+        user = User.objects.get(username=request.session["name"])
+        if request.POST.get('delete_account'):
+            message = deleteAccount(request.POST['delete_account'])
+            return render(request, "all_accounts.html",
+                          {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message,
+                           "user": user})
+        else:
+            return redirect('/RegisterAccount/')
 
 
 class RegisterAccount(View):
@@ -28,7 +51,7 @@ class RegisterAccount(View):
         return render(request, "register_account.html", {"roles": Roles.choices})
 
     def post(self, request):
-        message = createAccount(request.POST['username'], request.POST['password'], request.POST['email'],
+        message = createAccount(request.POST['username'],request.POST['name'], request.POST['password'], request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
                                 request.POST.get('officehours'))
         if message is "":
@@ -36,6 +59,28 @@ class RegisterAccount(View):
         else:
             return render(request, "register_account.html", {"roles": Roles.choices, "message": message})
 
+
+class Courses(View):
+    def get(self, request):
+        return render(request, "all_courses.html", {"dictionary": getCourses()})
+
+    def post(self, request):
+        if request.POST.get('add_course'):
+            return redirect('/RegisterCourses/')
+        elif request.POST.get('assign_instructor'):
+            return redirect('/AssignInstructor/')
+        elif request.POST.get('register_section'):
+            return redirect('/RegisterSection/')
+        elif request.POST.get('Assign_TA_to_Course'):
+            return redirect('/AssignTAToCourse/')
+        elif request.POST.get('Assign_TA_to_Section'):
+            return redirect('/AssignTAToSection/')
+        else:
+            if request.POST.get('delete_course'):
+                message = deleteCourse(request.POST['delete_course'])
+            elif request.POST.get('delete_section'):
+                message = deleteSection(request.POST['delete_section'])
+            return render(request, "all_courses.html", {"dictionary": getCourses(), "delete_message": message}, )
 
 
 class RegisterCourses(View):
@@ -45,43 +90,9 @@ class RegisterCourses(View):
     def post(self, request):
         message = createCourse(request.POST['cor_id'], request.POST['cor_name'], request.POST['cor_cred'])
         if message is "":
-            return redirect('/SupCourses/')
+            return redirect('/Courses/')
         else:
             return render(request, "register_courses.html", {"message": message})
-
-
-
-class AccountDisplay(View):
-    def get(self, request):
-        user = User.objects.get(username=request.session["name"])
-        return render(request, "all_accounts.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "user":user})
-
-    def post(self, request):
-        user = User.objects.get(username=request.session["name"])
-        if request.POST.get('delete_account'):
-            message = deleteAccount(request.POST['delete_account'])
-            return render(request, "all_accounts.html",
-                          {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message,"user":user})
-        else:
-            return redirect('/RegisterAccount/')
-
-
-class SupCourses(View):
-    def get(self, request):
-        return render(request, "sup_courses.html", {"dictionary": getCourses()})
-
-    def post(self, request):
-        if request.POST.get('add_course'):
-            return redirect('/RegisterCourses/')
-        elif request.POST.get('add_section'):
-            request.session["course"] = request.POST["add_section"]
-            return redirect('/RegisterSection/')
-        else:
-            if request.POST.get('delete_course'):
-                message = deleteCourse(request.POST['delete_course'])
-            elif request.POST.get('delete_section'):
-                message = deleteSection(request.POST['delete_section'])
-            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message},)
 
 
 class RegisterSection(View):
@@ -94,12 +105,23 @@ class RegisterSection(View):
                                 request.POST['section_schedule'])
         if message is "":
             request.session["course"] = ""
-            return redirect('/SupCourses/')
+            return redirect('/Courses/')
         else:
             return render(request, "register_section.html", {"types": Types.choices, "message": message})
 
 
-class Account(View):
+class AssignInstructor(View):
     def get(self, request):
-        user = User.objects.get(username=request.session["name"])
-        return render(request, "account.html", {"user": user})
+        return render(request, "assign_instructor.html")
+
+    # {"dictionary": getUsers()}
+
+
+class AssignTAToCourse(View):
+    def get(self, request):
+        return render(request, "assign_TA_to_course.html")
+
+
+class AssignTAToSection(View):
+    def get(self, request):
+        return render(request, "assign_TA_to_section.html")

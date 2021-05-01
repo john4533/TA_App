@@ -29,6 +29,7 @@
             <thead class="table table-striped table-info">
             <tr>
                 <th><h5>Username</h5></th>
+                <th><h5>name</h5></th>
                 <th><h5>Contact Information</h5></th>
                 <th><h5>Role</h5></th>
                 <th><h5>Office Hours</h5></th>
@@ -39,6 +40,8 @@
             {% for account in accounts %}
                 <tr>
                     <td><h5>{{ account.username }}</h5></td>
+                    <td><h5>{{ account.name }}</h5></td>
+
                     <td>
                         <div><h5>{{ account.email }}</h5></div>
                         <div><h5>{{ account.phone }}</h5></div>

@@ -17,13 +17,13 @@ def login(name, password):
         return True
 
 
-def createAccount(username="", password="", email="", role="", phone="", address="", officehours=""):
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officehours=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
     # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
-    if username != '' and password != '' and email != '' and role != '':
+    if username != '' and name != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(username=username))) == 0:
-            User.objects.create(username=username, password=password, email=email, role=role, phone=phone,
+            User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
                                 address=address, officehours=officehours)
             string = ""
         else:
@@ -31,7 +31,6 @@ def createAccount(username="", password="", email="", role="", phone="", address
     else:
         string = "Please fill out all required entries"
     return string
-
 
 
 def createCourse(courseId="", name="", credits=""):
@@ -48,12 +47,12 @@ def createCourse(courseId="", name="", credits=""):
     return string
 
 
-def createSection(course="", sectionid="", type="", schedule=""):
+def createSection(course="", sectionid="", types="", schedule=""):
     # precondition: course is given and exists, section with provided sectionid does not currently exist with sectionid, type, and sectionschedule entered
     # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
-    if course != '' and sectionid != '' and type != '' and schedule != '':
+    if course != '' and sectionid != '' and types != '' and schedule != '':
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
-            Section.objects.create(course=course, sectionid=sectionid, type=type, schedule=schedule)
+            Section.objects.create(course=course, sectionid=sectionid, type=types, schedule=schedule)
             string = ""
         else:
             string = "Section with that ID already exists"
@@ -117,6 +116,16 @@ def getCourses():
 def assignUser(user, course):
     if user == "" or course == "" or user == None:
         raise ValueError
+
+
+def getUsers():
+    # precondition: None
+    # postcondition: returns a dictionary with course keys and values are lists of section
+    users = list(User.objects.all())
+    dictionary = {}
+    for c in users:
+        dictionary[c] = list(Section.objects.filter(user__username=c.username))
+    return dictionary
 
 # def setCourseId(courseId, courseIdOriginal):
 #     #precondition: course with the old ID exists, new ID does not exist
