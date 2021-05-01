@@ -57,10 +57,11 @@ class AccountDisplay(View):
         return render(request, "all_accounts.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "user":user})
 
     def post(self, request):
+        user = User.objects.get(username=request.session["name"])
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",
-                          {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message})
+                          {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message,"user":user})
         else:
             return redirect('/RegisterAccount/')
 
