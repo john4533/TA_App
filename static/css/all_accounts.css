@@ -1,0 +1,41 @@
+h5{
+    font-family: Calibri;
+    font-size: 26px;
+}
+.print{
+    display: inline;
+    padding-right: 40px;
+    color: #861616;
+    font-family: Calibri, serif;
+    font-size: 30px;
+    padding-top: 60px;
+    vertical-align: -18px;
+
+}
+.form-group-row .btn-warning{
+    margin-top: 17px;
+}
+
+.form-group-row {
+    float: right;
+    padding-top: 10px;
+}
+
+.col-xs-2 {
+    vertical-align: bottom;
+}
+
+.table {
+    /*text-align: center;*/
+}
+
+th{
+    position: sticky;
+    top:75px;
+
+}
+
+
+
+
+

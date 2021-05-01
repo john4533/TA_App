@@ -1,0 +1,20 @@
+#page-content-wrapper {
+    width: 100%;
+    postion: absolute;
+    padding-top: 10px;
+    padding-left: 110px;
+    padding-right: 0px;
+
+}
+.sticky {
+    background-color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+h1{
+    display: inline-block;
+    color: dimgrey;
+    font-family: Calibri;
+    font-size: 60px;
+}

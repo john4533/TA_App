@@ -20,7 +20,7 @@ class Login(View):
 
 class SupHome(View):
     def get(self, request):
-        return render(request, "sup_home.html", {})
+        return render(request, "home.html", {})
 
 
 class RegisterAccount(View):
@@ -54,12 +54,12 @@ class RegisterCourses(View):
 class AccountDisplay(View):
     def get(self, request):
         user = User.objects.get(username=request.session["name"])
-        return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "user":user})
+        return render(request, "all_accounts.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "user":user})
 
     def post(self, request):
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
-            return render(request, "account_display.html",
+            return render(request, "all_accounts.html",
                           {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message})
         else:
             return redirect('/RegisterAccount/')
