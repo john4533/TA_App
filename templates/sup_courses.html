@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+    {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/sup_courses.css' %}" type="text/css"/>
 </head>
@@ -86,7 +87,14 @@
                         <div class="container border border-secondary course-container">
                             <div class="row course-row">
                                 <div class="col" style="text-align:center">
-                                    <h2>Software Engineering</h2>
+                                    <div style="float:left; width:80%">
+                                        <h2>Software Engineering</h2>
+                                    </div>
+                                    <div style="float:right">
+                                        <button type="button" class="btn btn-danger delete-course-btn" style="font-size:17px; margin-top:12px">
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -100,9 +108,16 @@
                             </div>
 
                             <div class="container border border-secondary rounded">
-                                <div class="row header-row" >
-                                    <div class="col">
-                                        <h5>Staff</h5>
+                                <div class="row header-row">
+                                    <div class="col" style="text-align:center">
+                                        <div style="float:left; width:80%">
+                                            <h5>Staff</h5>
+                                        </div>
+                                        <div style="float:right">
+                                            <button type="button" class="btn btn-warning assign-btn">
+                                                Assign Staff
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row header-row">
@@ -128,19 +143,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col btn-assign-section">
-                                    <button type="button" class="btn btn-warning assign-btn">
-                                        Assign Staff
-                                    </button>
-                                </div>
-                            </div>
 
                             <div class="container border border-secondary rounded">
 
                                 <div class="row header-row">
-                                    <div class="col">
-                                        <h5>Sections</h5>
+                                    <div class="col" style="text-align:center">
+                                        <div style="float:left; width:80%">
+                                            <h5>Sections</h5>
+                                        </div>
+                                        <div style="float:right">
+                                            <button type="button" class="btn btn-warning assign-btn">
+                                                Add Section
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row header-row">
@@ -171,7 +186,7 @@
                                     <div class="col border border-secondary">
                                         <h6>Jayson</h6>
                                     </div>
-                                    <div class="col border border-secondary text-center">
+                                    <div class="col1 border border-secondary text-center">
                                         <button type="button" class="btn btn-danger">
                                             Delete
                                         </button>
@@ -181,82 +196,67 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                    <div class="col btn-assign-section">
-                                        <button type="button" class="btn btn-warning assign-btn">
-                                            Add Section
-                                        </button>
-                                    </div>
-                            </div>
-
-                            <div class="row">
-                                    <div class="col">
-                                        <button type="button" class="btn btn-danger delete-course-btn">
-                                            Delete Course
-                                        </button>
-                                    </div>
-                            </div>
                         </div> <!-- container end -->
 
-{#                        <table class="table">#}
-{#                            <thead class="table table-dark ">#}
-{#                            <tr>#}
-{#                                <th scope="col"><h5>Course ID</h5></th>#}
-{#                                <th scope="col"><h5>Course Name</h5></th>#}
-{#                                <th scope="col"><h5>Course Credits</h5></th>#}
-{#                                <th scope="col"></th>#}
-{#                            </tr>#}
-{#                            </thead>#}
-{#                            <tbody>#}
-{#                            {% for course, sections in dictionary.items %}#}
-{#                                <tr>#}
-{#                                    <td><h3>{{ course.courseid }}</h3></td>#}
-{#                                    <td><h3>{{ course.coursename }}</h3></td>#}
-{#                                    <td><h3>{{ course.coursecredits }}</h3></td>#}
-{#                                    <td>#}
-{#                                        <button type="submit" class="btn btn-danger" name="delete_course"#}
-{#                                                value={{ course.courseid }}>Delete#}
-{#                                        </button>#}
-                                        {#                                        <div>#}
-                                        {#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_course"#}
-                                        {#                                                    value={{ course.courseid }}>Edit#}
-                                        {#                                            </button>#}
-                                        {#                                        </div>#}
-{##}
-{#                                        <button type="submit" class="btn btn-warning" name="add_section"#}
-{#                                                value={{ course.courseid }}>Add Section#}
-{#                                        </button>#}
-{#                                    </td>#}
-{#                                    {% for section in sections %}#}
-{#                                        <tr>#}
-{#                                            <td><h4>#}
-{#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.sectionid }}</h4>#}
-{#                                            </td>#}
-{#                                            <td><h4>#}
-{#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.type }}</h4>#}
-{#                                            </td>#}
-{#                                            <td><h4>#}
-{#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.schedule }}</h4>#}
-{#                                            </td>#}
-{#                                            <td></td>#}
-{##}
-{#                                            <td>#}
-{#                                                <button type="submit2" class="btn btn-danger" name="delete_section"#}
-{#                                                        value={{ sections.sectionid }}>Delete#}
-{#                                                </button>#}
-{#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
-{#                                            </td>#}
-                                            {#                                            <div>#}
-                                            {#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_lab"#}
-                                            {#                                                    value={{ lab.labid }}>Edit#}
-                                            {#                                            </button>#}
-                                            {#                                            </div>#}
-{#                                        </tr>#}
-{#                                    {% endfor %}#}
-{#                                </tr>#}
-{#                            {% endfor %}#}
-{#                            </tbody>#}
-{#                        </table>#}
+                        {#                        <table class="table">#}
+                        {#                            <thead class="table table-dark ">#}
+                        {#                            <tr>#}
+                        {#                                <th scope="col"><h5>Course ID</h5></th>#}
+                        {#                                <th scope="col"><h5>Course Name</h5></th>#}
+                        {#                                <th scope="col"><h5>Course Credits</h5></th>#}
+                        {#                                <th scope="col"></th>#}
+                        {#                            </tr>#}
+                        {#                            </thead>#}
+                        {#                            <tbody>#}
+                        {#                            {% for course, sections in dictionary.items %}#}
+                        {#                                <tr>#}
+                        {#                                    <td><h3>{{ course.courseid }}</h3></td>#}
+                        {#                                    <td><h3>{{ course.coursename }}</h3></td>#}
+                        {#                                    <td><h3>{{ course.coursecredits }}</h3></td>#}
+                        {#                                    <td>#}
+                        {#                                        <button type="submit" class="btn btn-danger" name="delete_course"#}
+                        {#                                                value={{ course.courseid }}>Delete#}
+                        {#                                        </button>#}
+                        {#                                        <div>#}
+                        {#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_course"#}
+                        {#                                                    value={{ course.courseid }}>Edit#}
+                        {#                                            </button>#}
+                        {#                                        </div>#}
+                        {##}
+                        {#                                        <button type="submit" class="btn btn-warning" name="add_section"#}
+                        {#                                                value={{ course.courseid }}>Add Section#}
+                        {#                                        </button>#}
+                        {#                                    </td>#}
+                        {#                                    {% for section in sections %}#}
+                        {#                                        <tr>#}
+                        {#                                            <td><h4>#}
+                        {#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.sectionid }}</h4>#}
+                        {#                                            </td>#}
+                        {#                                            <td><h4>#}
+                        {#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.type }}</h4>#}
+                        {#                                            </td>#}
+                        {#                                            <td><h4>#}
+                        {#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ section.schedule }}</h4>#}
+                        {#                                            </td>#}
+                        {#                                            <td></td>#}
+                        {##}
+                        {#                                            <td>#}
+                        {#                                                <button type="submit2" class="btn btn-danger" name="delete_section"#}
+                        {#                                                        value={{ sections.sectionid }}>Delete#}
+                        {#                                                </button>#}
+                        {#                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
+                        {#                                            </td>#}
+                        {#                                            <div>#}
+                        {#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_lab"#}
+                        {#                                                    value={{ lab.labid }}>Edit#}
+                        {#                                            </button>#}
+                        {#                                            </div>#}
+                        {#                                        </tr>#}
+                        {#                                    {% endfor %}#}
+                        {#                                </tr>#}
+                        {#                            {% endfor %}#}
+                        {#                            </tbody>#}
+                        {#                        </table>#}
 
                     </form>
                 </div>
