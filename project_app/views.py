@@ -53,7 +53,8 @@ class RegisterCourses(View):
 
 class AccountDisplay(View):
     def get(self, request):
-        return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor"))})
+        user = User.objects.get(username=request.session["name"])
+        return render(request, "account_display.html", {"accounts": list(User.objects.exclude(role="Supervisor")), "user":user})
 
     def post(self, request):
         if request.POST.get('delete_account'):
@@ -79,7 +80,7 @@ class SupCourses(View):
                 message = deleteCourse(request.POST['delete_course'])
             elif request.POST.get('delete_section'):
                 message = deleteSection(request.POST['delete_section'])
-            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message})
+            return render(request, "sup_courses.html", {"dictionary": getCourses(), "delete_message": message},)
 
 
 class RegisterSection(View):
