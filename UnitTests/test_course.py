@@ -56,9 +56,7 @@ class CourseTestCase(TestCase):
         section= Section.objects.create(course=course1, sectionid="901", type="Lab 1",schedule="T @ 11:00 - 12:50")
         self.assertEqual(getCourses(), {course1: [section]})
 
-    # ASSIGN COURSES
-
-
+    # ASSIGN COURSES (ASSUMPTION: USERS AND COURSES ARE VALID)
     def test_Invalid_user_assigned_course(self):
           user1 = createAccount("zyx", "123", "zyx@uwm.edu", "Supervisor", "414-243-9503", "address", "officehours")
           user2 = createAccount("z", "123", "abc@uwm.edu", "TA", "414-243-9503", "address", "officehours")
@@ -83,15 +81,45 @@ class CourseTestCase(TestCase):
          self.assertEqual("Course has been assigned", assignUser(user4, course5))
          self.assertEqual("Course has been assigned", assignUser(user4, course6))
 
-    def test_invalid_arguments_assigned(self):
-         try:
-             assignUser("", "")
-         except ValueError:
-             print("Invalid arguments")
+    def test_instructor_already_assigned(self):
+        user5 = createAccount("d", "123", "c@uwm.edu", "Instructor", "414-243-9503", "address", "officehours")
+        user6 = createAccount("e", "123", "c@uwm.edu", "Instructor", "414-243-9503", "address", "officehours")
+        course7 = createCourse("1", "a", "2")
+        assignUser(user5, course7)
+        self.assertEquals(assignUser(user6, course7), "Course already has an instructor assigned to it")
 
-         try:
-             assignUser(None, None)
-         except ValueError:
-             print("Invalid arguments")
+    def test_invalid_arguments_assigned(self):
+        testuser = createAccount("testuser", "test123", "test@uwm.edu", "Instructor", "123-456-7890", "testaddress", "testhours")
+        testcourse = createCourse("123", "test", "1 to 3")
+
+        try:
+            assignUser("", "")
+        except ValueError:
+            print("Invalid arguments")
+
+        try:
+            assignUser(None, None)
+        except ValueError:
+            print("Invalid arguments")
+
+        try:
+            assignUser(testuser, None)
+        except ValueError:
+            print("Invalid course argument")
+
+        try:
+            assignUser(testuser, "")
+        except ValueError:
+            print("Invalid course argument")
+
+        try:
+            assignUser(None, testcourse)
+        except ValueError:
+            print("Invalid user argument")
+
+        try:
+            assignUser("", testcourse)
+        except ValueError:
+            print("Invalid user argument")
 
 
