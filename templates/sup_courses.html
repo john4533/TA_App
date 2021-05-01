@@ -83,118 +83,115 @@
                         {% csrf_token %}
 
                         <!-- container start -->
-                        <div class="container border border-primary rounded">
+                        <div class="container border border-secondary course-container">
                             <div class="row course-row">
                                 <div class="col" style="text-align:center">
-                                    <h1>Software Engineering</h1>
+                                    <h2>Software Engineering</h2>
                                 </div>
                             </div>
 
                             <div class="row course-info">
-                                <div class="col justify-content-start">
+                                <div class="col">
                                     <h3>Course ID: 361</h3>
                                 </div>
-                                <div class="col justify-content-end">
+                                <div class="col" style="text-align:right">
                                     <h3>Credits: 3</h3>
                                 </div>
                             </div>
 
-                            <div class="container border border-primary rounded">
-
-                                <div class="row">
+                            <div class="container border border-secondary rounded">
+                                <div class="row header-row" >
                                     <div class="col">
-                                        <h4>Staff</h4>
+                                        <h5>Staff</h5>
                                     </div>
                                 </div>
-                                <div class="row course-table-header">
-                                    <div class="col col-sm">
-                                        <h6>Name</h6>
+                                <div class="row header-row">
+                                    <div class="col">
+                                        <h4>Name</h4>
                                     </div>
-                                    <div class="col col-sm">
-                                        <h6>Role</h6>
+                                    <div class="col">
+                                        <h4>Role</h4>
                                     </div>
-                                    <div class="col col-sm">
-                                        <h6>Grader</h6>
+                                    <div class="col">
+                                        <h4>Grader</h4>
                                     </div>
                                 </div>
                                 <div class="row course-table-data">
-                                    <div class="col col-sm">
-                                        Jayson
+                                    <div class="col border border-secondary">
+                                        <h6>Jayson</h6>
                                     </div>
-                                    <div class="col col-sm">
-                                        Instructor
+                                    <div class="col border border-secondary">
+                                        <h6>Instructor</h6>
                                     </div>
-                                    <div class="col col-sm">
-                                        True
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col btn-assign-section">
-                                        <button type="button" class="btn btn-warning btn-sm">
-                                            Assign Staff
-                                        </button>
+                                    <div class="col border border-secondary">
+                                        <h6>True</h6>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col btn-assign-section">
+                                    <button type="button" class="btn btn-warning assign-btn">
+                                        Assign Staff
+                                    </button>
+                                </div>
+                            </div>
 
+                            <div class="container border border-secondary rounded">
 
-
-                            <div class="container border border-primary rounded">
-
-                                <div class="row">
+                                <div class="row header-row">
                                     <div class="col">
-                                        <h4>Sections</h4>
+                                        <h5>Sections</h5>
                                     </div>
                                 </div>
-                                <div class="row course-table-header">
-                                    <div class="col col-sm">
-                                        <h6>ID</h6>
+                                <div class="row header-row">
+                                    <div class="col">
+                                        <h4>ID</h4>
                                     </div>
-                                    <div class="col col-sm">
-                                        <h6>Type</h6>
+                                    <div class="col">
+                                        <h4>Type</h4>
                                     </div>
-                                    <div class="col col-sm">
-                                        <h6>Schedule</h6>
+                                    <div class="col">
+                                        <h4>Schedule</h4>
                                     </div>
-                                    <div class="col col-sm">
-                                        <h6>Staff</h6>
+                                    <div class="col">
+                                        <h4>Staff</h4>
                                     </div>
-                                    <div class="col col-sm"></div>
+                                    <div class="col"></div>
                                 </div>
                                 <div class="row course-table-data">
-                                    <div class="col col-sm">
-                                        201
+                                    <div class="col border border-secondary">
+                                        <h6>201</h6>
                                     </div>
-                                    <div class="col col-sm">
-                                        Lecture
+                                    <div class="col border border-secondary">
+                                        <h6>Lecture</h6>
                                     </div>
-                                    <div class="col col-sm">
-                                        TR @ 11:00-12:50
+                                    <div class="col border border-secondary">
+                                        <h6>TR @ 11:00-12:50</h6>
                                     </div>
-                                    <div class="col col-sm">
-                                        Jayson
+                                    <div class="col border border-secondary">
+                                        <h6>Jayson</h6>
                                     </div>
-                                    <div class="col col-sm btn-delete-section">
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                    <div class="col border border-secondary text-center">
+                                        <button type="button" class="btn btn-danger">
                                             Delete
                                         </button>
-                                        <button type="button" class="btn btn-warning btn-sm">
+                                        <button type="button" class="btn btn-warning">
                                             Assign
                                         </button>
                                     </div>
                                 </div>
-                                <div class="row">
+                            </div>
+                            <div class="row">
                                     <div class="col btn-assign-section">
-                                        <button type="button" class="btn btn-warning btn-sm">
+                                        <button type="button" class="btn btn-warning assign-btn">
                                             Add Section
                                         </button>
                                     </div>
-                                </div>
                             </div>
 
                             <div class="row">
-                                    <div class="col btn-assign-section">
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                    <div class="col">
+                                        <button type="button" class="btn btn-danger delete-course-btn">
                                             Delete Course
                                         </button>
                                     </div>
@@ -269,7 +266,3 @@
 </div>
 </body>
 </html>
-
-
-
-

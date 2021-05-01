@@ -49,8 +49,9 @@ h5{
 }
 
 .table {
-    text-align: center;
+    /*text-align: center;*/
 }
+
 th{
     position: sticky;
     top:75px;

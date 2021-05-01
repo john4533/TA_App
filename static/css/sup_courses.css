@@ -19,22 +19,36 @@ h1 {
     display: inline-block;
     color: dimgrey;
     font-family: Calibri;
-    font-size: 60px;
+    font-size: 80px;
+}
+
+h2{
+    color: black;
+    font-family: "Copperplate Gothic Light";
+    font-size: 80px;
 }
 
 h3 {
+    font-family: "Copperplate Gothic Bold";
     color: #010416;
-    font-size: 20px;
+    font-size: 40px;
 }
 
 h4 {
-    color: #861616;
-    font-size: 20px;
+    color: white;
+    font-size: 30px;
+    /*text-align: center;*/
 }
 
 h5 {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+}
+
+h6{
     font-family: Calibri;
-    font-size: 26px;
+    font-size: 30px;
 }
 .print{
     display: inline;
@@ -118,9 +132,38 @@ p {
 /*Bootstrap Addition*/
 
 .container{
-    margin:10px;
-    /*background-color: #F0F0F0*/
+    background-color: white;
+    max-width: 2000px;
+    margin: 10px;
+    /*border-color: black;*/
 }
+
+.course-container{
+    border-radius: 50px;
+    background-color: lightblue;
+    max-width: 2000px;
+    padding-right: 35px;
+    padding-bottom: 25px;
+    margin: auto;
+}
+
 .btn{
+    min-height:40px;
+    min-width:120px;
     margin:5px;
+    font-size: 20px;
+}
+
+.assign-btn{
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+
+.delete-course-btn{
+    margin-left: 10px;
+}
+
+.header-row{
+    background-color: black;
 }
