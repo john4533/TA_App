@@ -25,6 +25,9 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
                                 address=address, officehours=officehours)
+            if role=="TA":
+                user1=User.objects.get(username=username)
+                TA.objects.create(user=user1)
             string = ""
         else:
             string = "User with that username already exists"
