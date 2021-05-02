@@ -16,35 +16,29 @@
             <table class="table1" cellspacing="50">
                 <img height="auto" width="300" height="300" align="center"
                      src="/static/images/create_lab.jpg">
-                <h3>Register Lab</h3>
+                <h3>Register Section</h3>
                 <tr>
                     <td>
-                        <label>*Section Id</label>
-                        <div><input name="section_sectionid" type="text" placeholder="Section 1" required/>
-                        </div>
+                        <label>*Section ID</label>
+                        <div><input name="section_sectionid"  type="text" placeholder="Section ID" required/></div>
                     </td>
-                    <td>
-                        <div><label>*Type</label></div>
-                        <div><select name="type" required>
-                            {% for i in types %}
-                                <option value={{ i.0 }}>{{ i.0 }}</option>
-                            {% endfor %}
-                        </select><br></div>
-                    </td>
+                    <td><select name="type" required>
+                        {% for i in types %}
+                            <option value={{ i.0 }}>{{ i.0 }}</option>
+                        {% endfor %}
+                    </select><br></td>
                 </tr>
                 <tr>
                     <td>
-                        {#This will be changed to some sort of a date time object for the days of the week that the lab meets, the start time, and the end time#}
-                        <div><label>Section Schedule</label></div>
+                        {#                                      This will be changed to some sort of a date time object for the days of the week that the lab meets, the start time, and the end time#}
+                        <div><label>Schedule</label></div>
                         <div><input name="section_schedule" type="text" placeholder="TR @ 10:00am-11:00am"
                                     required/></div>
                     </td>
-
                 </tr>
             </table>
             <div align="center">
-                <button class="btn btn-warning" type="submit" form="form1" value="Submit">Add Section
-                </button>
+                <button class="btn btn-warning" type="submit" value="Submit">Add Section</button>
             </div>
             {% if message is not None %}
                 <strong>{{ message }}</strong>

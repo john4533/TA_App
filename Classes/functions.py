@@ -51,6 +51,7 @@ def createSection(course="", sectionid="", types="", schedule=""):
     # precondition: course is given and exists, section with provided sectionid does not currently exist with sectionid, type, and sectionschedule entered
     # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
     if course != '' and sectionid != '' and types != '' and schedule != '':
+
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
             Section.objects.create(course=course, sectionid=sectionid, type=types, schedule=schedule)
             string = ""
@@ -113,19 +114,7 @@ def getCourses():
     return dictionary
 
 
-def assignUser(user, course):
-    if user == "" or course == "" or user == None:
-        raise ValueError
-
-
-def getUsers():
-    # precondition: None
-    # postcondition: returns a dictionary with course keys and values are lists of section
-    users = list(User.objects.all())
-    dictionary = {}
-    for c in users:
-        dictionary[c] = list(Section.objects.filter(user__username=c.username))
-    return dictionary
+7
 
 # def setCourseId(courseId, courseIdOriginal):
 #     #precondition: course with the old ID exists, new ID does not exist

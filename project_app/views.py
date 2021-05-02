@@ -70,6 +70,7 @@ class Courses(View):
         elif request.POST.get('assign_instructor'):
             return redirect('/AssignInstructor/')
         elif request.POST.get('register_section'):
+            request.session["course"] = request.POST["register_section"]
             return redirect('/RegisterSection/')
         elif request.POST.get('Assign_TA_to_Course'):
             return redirect('/AssignTAToCourse/')
@@ -98,10 +99,10 @@ class RegisterCourses(View):
 class RegisterSection(View):
     def get(self, request):
         return render(request, "register_section.html", {"types": Types.choices})
-
     def post(self, request):
         message = createSection(Course.objects.get(courseid=request.session["course"]),
-                                request.POST['section_sectionid'], request.POST['type'],
+                                request.POST['section_sectionid'],
+                                request.POST['type'],
                                 request.POST['section_schedule'])
         if message is "":
             request.session["course"] = ""
