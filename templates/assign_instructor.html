@@ -17,13 +17,14 @@
             </div>
             <button class="btn btn-warning" type="submit" value="Submit">Assign Instructors</button>
             </button>
-
     </nav>
+
+
 {% endblock %}
 
 
 {% block middle_section %}
-    {% csrf_token %}
+
     <div class="container" style="z-index: 1">
         <div class="row">
             <div class="col-lg-7 mx-auto">
@@ -31,22 +32,26 @@
                     <div class="card-body p-5">
                         <h3 align="center">Please select an instructor</h3>
                         <ul class="list-group">
-                            <li class="list-group-item rounded-0" style="border: none">
-                                <div>
-                                    <div><select class="form-select" name="instructor" required size="40">
-                                        {% for account in accounts %}
-                                            <option value={{ account.name }}>{{ account.name }}</option>
-                                        {% endfor %}
-                                    </select></div>
-                                </div>
+                            {% for account in accounts %}
+                                <li class="list-group-item rounded-0">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="form-check-input" type="radio" name="instructor" id="select"
+                                               value={{ account.name }} checked>
+                                        <label class="cursor-pointer  custom-control-label" value={{ account.name }}
+                                                for="select">{{ account.name }}</label>
+                                    </div>
+                                </li>
+                            {% endfor %}
+
                             </li>
                         </ul>
                     </div>
                 </div>
-             </form>
             </div>
         </div>
     </div>
+    </form>
+
 
 
 {% endblock %}

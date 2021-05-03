@@ -13,8 +13,10 @@ h5{
     vertical-align: -18px;
 
 }
-.form-group-row .btn-warning{
+.btn-warning{
     margin-top: 17px;
+    align-items: flex-end;
+
 }
 
 .form-group-row {

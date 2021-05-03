@@ -49,10 +49,18 @@
                         <h3>Course ID: {{ course.courseid }}</h3>
                     </div>
                     <div style="float:right">
-                        <button class="btn btn-warning assign-btn" type="submit" name="assign_instructor"
-                                value={{ course.courseid }}>
-                            Assign Instructor
-                        </button>
+                        <h3 style="display: inline">Course Instructor: {{ course.Instructor.name }}</h3>
+                        {% if course.Instructor == null %}
+                            <button class="btn btn-warning assign-btn" type="submit" name="assign_instructor"
+                                    value={{ course.courseid }}>
+                                Assign Instructor
+                            </button>
+                        {% else %}
+                            <button type="submit" class="btn btn-danger delete-course-btn"
+                                    style="font-size:17px; margin-top:12px">
+                                Delete
+                            </button>
+                        {% endif %}
                     </div>
                     <div class="col" style="text-align:right">
                         <h3>Credits: {{ course.credits }}</h3>
@@ -106,8 +114,8 @@
                             </div>
                             <div style="float:right">
                                 <button type="submit" class="btn btn-warning" name="register_section"
-                                                value={{ course.courseid }} style="font-size=16px" >Add Section
-                                        </button>
+                                        value={{ course.courseid }} style="font-size=16px">Add Section
+                                </button>
                             </div>
                         </div>
                     </div>
