@@ -117,9 +117,33 @@ def getCourses():
     return dictionary
 
 
-def assignInstructor(instructor):
-    return True
+def assignInstructor(courseid="", instructor=""):
+    # precondition: coursid of a current course and a unique instructor
+    # postcondition: instuctor is assigned to the passed in course
+    # m = request.POST['instructor']
+    # id = request.session["course"]
+    # m = request.POST['instructor']
+    if instructor != '' and courseid != '':
+        string = ""
+        courseid.Instructor = User.objects.get(username=instructor)
+        courseid.save()
+    else:
+        string = "Please fill out all required fields"
 
+    return string
+
+
+def assignTAtoCourse(courseid="", Username="", numLabs=""):
+    if courseid != '' and TA != '' and numLabs != '':
+        string = ""
+        ta = TA.objects.get(user__username=(User.objects.get(username=Username)).username)
+        ta.course = courseid
+        ta.numlabs = numLabs
+        ta.save()
+
+    else:
+        string = "Please enter all fields"
+    return string
 # def setCourseId(courseId, courseIdOriginal):
 #     #precondition: course with the old ID exists, new ID does not exist
 #     #postcondition: course ID is updated

@@ -41,7 +41,7 @@ class AccountDisplay(View):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",
                           {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message,
-                           "role":"Supervisor"})
+                           "role": "Supervisor"})
         else:
             return redirect('/RegisterAccount/')
 
@@ -121,26 +121,37 @@ class AssignInstructor(View):
                       {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA"))})
 
     def post(self, request):
-        # CODE FOR ASSIGN METHOD
-        m = request.POST['instructor']
-        id = request.session["course"]
-        course = Course.objects.get(courseid=id)
-        m = request.POST['instructor']
-        course.Instructor = User.objects.get(name=m)
-        course.save()
-        #TILL course.save
-        message = assignInstructor(request.POST['instructor'])
+        try:
+            message = assignInstructor(Course.objects.get(courseid=request.session["course"]),
+                                       request.POST['instructor'])
+        except:
+            message = "Please make a selection"
         if message is "":
+            request.session["course"] = ""
+            return redirect('/Courses/')
+
+        else:
             return render(request, "assign_instructor.html",
                           {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA")),
                            "message": message})
-        else:
-            return redirect('/Courses/')
 
 
 class AssignTAToCourse(View):
     def get(self, request):
         return render(request, "assign_TA_to_course.html", dict(TAs=list(TA.objects.filter(course__isnull=True))))
+
+    def post(self, request):
+        try:
+            message = assignTAtoCourse(Course.objects.get(courseid=request.session["course"]), request.POST['TA'],
+                                       request.POST['numLabs'])
+        except:
+            message = "Please make a selection"
+        if message is "":
+            request.session["course"] = ""
+            return redirect('/Courses/')
+        else:
+            return render(request, "assign_TA_to_course.html", {"TAs": list(TA.objects.filter(course__isnull=True)),
+                                                                "message": message})
 
 
 class AssignTAToSection(View):
