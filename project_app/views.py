@@ -120,6 +120,14 @@ class AssignInstructor(View):
                       {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA"))})
 
     def post(self, request):
+        # CODE FOR ASSIGN METHOD
+        m = request.POST['instructor']
+        id = request.session["course"]
+        course = Course.objects.get(courseid=id)
+        m = request.POST['instructor']
+        course.Instructor = User.objects.get(name=m)
+        course.save()
+        #TILL course.save
         message = assignInstructor(request.POST['instructor'])
         if message is "":
             return render(request, "assign_instructor.html",
