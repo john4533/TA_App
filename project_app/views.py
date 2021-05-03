@@ -32,16 +32,16 @@ class Account(View):
 class AccountDisplay(View):
     def get(self, request):
         user = User.objects.get(username=request.session["name"])
+        print(user)
         return render(request, "all_accounts.html",
                       {"accounts": list(User.objects.exclude(role="Supervisor")), "user": user})
 
     def post(self, request):
-        user = User.objects.get(username=request.session["name"])
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",
                           {"accounts": list(User.objects.exclude(role="Supervisor")), "delete_message": message,
-                           "user": user})
+                           "role":"Supervisor"})
         else:
             return redirect('/RegisterAccount/')
 

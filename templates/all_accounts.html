@@ -13,7 +13,7 @@
         <div class="print">
             {{ delete_message }}
         </div>
-        {% if user.role == "Supervisor" %}
+        {% if user.role == "Supervisor" or role == "Supervisor" %}
             <button class="btn btn-warning" type="submit" name="register_account"
                     value="register_account">Add Account
             </button>
@@ -52,7 +52,7 @@
                     <td>
 
                         <div>
-                            {% if user.role == "Supervisor" %}
+                            {% if user.role == "Supervisor" or role == "Supervisor" %}
                                 <button type="submit" class="btn btn-danger" name="delete_account"
                                         value={{ account.username }}>Delete
                                 </button>

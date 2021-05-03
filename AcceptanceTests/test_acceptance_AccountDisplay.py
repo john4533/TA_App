@@ -5,7 +5,7 @@ from project_app.models import User, Course
 class AccountDisplayTests(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create(username="instructor1", password="password", email="instructor@uwm.edu", role="Instructor",
+        self.user = User.objects.create(username="instructor1", name="kum", password="password", email="instructor@uwm.edu", role="Instructor",
                                         phone="123-456-7890", address="12 Main Street")
     def test_deleteuser(self):
         self.assertEqual(len(list(User.objects.all())), 1)
