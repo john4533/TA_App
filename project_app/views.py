@@ -74,7 +74,8 @@ class Courses(View):
         elif request.POST.get('register_section'):
             request.session["course"] = request.POST["register_section"]
             return redirect('/RegisterSection/')
-        elif request.POST.get('Assign_TA_to_Course'):
+        elif request.POST.get('assign_TA_to_course'):
+            request.session["course"] = request.POST["assign_TA_to_course"]
             return redirect('/AssignTAToCourse/')
         elif request.POST.get('Assign_TA_to_Section'):
             return redirect('/AssignTAToSection/')

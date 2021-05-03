@@ -1,14 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/assign_TA_to_section.css' %}">
+    <link rel="stylesheet" href="{% static 'css/assign_TA_to_Course.css' %}">
 {% endblock %}
 
 {% block header %}
-    <h1>Assign TA to Course</h1>
+
+    <nav class="sticky">
+        <h1> Assign Instructor to Course</h1>
+        <form class="form-group-row" method="post">
+            {% csrf_token %}
+            {#                            <input class="col-xs-2" type="search" placeholder="Search" aria-label="Search">#}
+            {#                            <button class="btn btn-warning  my-sm-0" type="submit">Search</button>#}
+            <div class="print">
+                {{ message }}
+            </div>
+            <button class="btn btn-warning" type="submit" value="Submit">Assign TA to Course</button>
+    </nav>
+
+
 {% endblock %}
 
 
 {% block middle_section %}
+
+    <div class="container" style="z-index: 1">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="card shadow border-0 mb-5">
+                    <div class="card-body p-5">
+                        <h3 align="center">Please select a TA</h3>
+                        <ul class="list-group">
+                            {% for account in accounts %}
+                                <li class="list-group-item rounded-0">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="form-check-input" type="radio" name="instructor" id="select"
+                                               value={{ account.name }} checked>
+                                        <label class="cursor-pointer  custom-control-label"
+                                                for="select"> &nbsp&nbsp{{ account.name }}</label>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
 
 {% endblock %}
