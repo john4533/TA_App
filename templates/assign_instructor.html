@@ -5,10 +5,47 @@
 {% endblock %}
 
 {% block header %}
-    <h1> Assign Instructor to Class</h1>
+
+    <nav class="sticky">
+        <h1> Assign Instructor to Course</h1>
+        <form class="form-group-row" method="post">
+            {% csrf_token %}
+            {#                            <input class="col-xs-2" type="search" placeholder="Search" aria-label="Search">#}
+            {#                            <button class="btn btn-warning  my-sm-0" type="submit">Search</button>#}
+            <div class="print">
+                {{ message }}
+            </div>
+            <button class="btn btn-warning" type="submit" value="Submit">Assign Instructors</button>
+            </button>
+        </form>
+    </nav>
 {% endblock %}
 
 
 {% block middle_section %}
+    {% csrf_token %}
+    <div class="container" style="z-index: 1">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="card shadow border-0 mb-5">
+                    <div class="card-body p-5">
+                        <h3 align="center">Please select an instructor</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item rounded-0" style="border: none">
+                                <div>
+                                    <div><select class="form-select" name="instructor" required size="40">
+                                        {% for account in accounts %}
+                                            <option value={{ account.name }}>{{ account.name }}</option>
+                                        {% endfor %}
+                                    </select></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}

@@ -51,7 +51,8 @@ class RegisterAccount(View):
         return render(request, "register_account.html", {"roles": Roles.choices})
 
     def post(self, request):
-        message = createAccount(request.POST['username'],request.POST['name'], request.POST['password'], request.POST['email'],
+        message = createAccount(request.POST['username'], request.POST['name'], request.POST['password'],
+                                request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
                                 request.POST.get('officehours'))
         if message is "":
@@ -68,6 +69,7 @@ class Courses(View):
         if request.POST.get('add_course'):
             return redirect('/RegisterCourses/')
         elif request.POST.get('assign_instructor'):
+            request.session["course"] = request.POST["assign_instructor"]
             return redirect('/AssignInstructor/')
         elif request.POST.get('register_section'):
             request.session["course"] = request.POST["register_section"]
@@ -99,6 +101,7 @@ class RegisterCourses(View):
 class RegisterSection(View):
     def get(self, request):
         return render(request, "register_section.html", {"types": Types.choices})
+
     def post(self, request):
         message = createSection(Course.objects.get(courseid=request.session["course"]),
                                 request.POST['section_sectionid'],
@@ -113,9 +116,17 @@ class RegisterSection(View):
 
 class AssignInstructor(View):
     def get(self, request):
-        return render(request, "assign_instructor.html")
+        return render(request, "assign_instructor.html",
+                      {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA"))})
 
-    # {"dictionary": getUsers()}
+    def post(self, request):
+        message = assignInstructor(request.POST['instructor'])
+        if message is "":
+            return render(request, "assign_instructor.html",
+                          {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA")),
+                           "message": message})
+        else:
+            return redirect('/Courses/')
 
 
 class AssignTAToCourse(View):

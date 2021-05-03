@@ -50,7 +50,7 @@
                     </div>
                     <div style="float:right">
                         <button class="btn btn-warning assign-btn" type="submit" name="assign_instructor"
-                                value="assign_instructor">
+                                value={{ course.Instructor }}>
                             Assign Instructor
                         </button>
                     </div>
@@ -67,7 +67,7 @@
                             </div>
                             <div style="float:right">
                                 <button class="btn btn-warning assign-btn" type="submit" name="Assign_TA_to_Course"
-                                        value="Assign_TA_to_Course">
+                                        value={{ course.courseid }}>
                                     Assign TA
                                 </button>
                             </div>
@@ -106,7 +106,7 @@
                             </div>
                             <div style="float:right">
                                 <button type="submit" class="btn btn-warning" name="register_section"
-                                                value={{ course.courseid }} style="font-size: 16px">Add Section
+                                                value={{ course.courseid }} style="font-size=16px" >Add Section
                                         </button>
                             </div>
                         </div>
