@@ -7,7 +7,7 @@
 {% block header %}
 
     <nav class="sticky">
-        <h1> Assign Instructor to Course</h1>
+        <h1> Assign TA to Course</h1>
         <form class="form-group-row" method="post">
             {% csrf_token %}
             {#                            <input class="col-xs-2" type="search" placeholder="Search" aria-label="Search">#}
@@ -31,13 +31,13 @@
                     <div class="card-body p-5">
                         <h3 align="center">Please select a TA</h3>
                         <ul class="list-group">
-                            {% for account in accounts %}
+                            {% for TA in TAs %}
                                 <li class="list-group-item rounded-0">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="form-check-input" type="radio" name="instructor" id="select"
-                                               value={{ account.name }} checked>
+                                        <input class="form-check-input" type="radio" name="TA" id="select"
+                                               value={{ TA.user.name }} checked>
                                         <label class="cursor-pointer  custom-control-label"
-                                                for="select"> &nbsp&nbsp{{ account.name }}</label>
+                                                for="select"> &nbsp&nbsp{{ TA.user.name }}</label>
                                     </div>
                                 </li>
                             {% endfor %}

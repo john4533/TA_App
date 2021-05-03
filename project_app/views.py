@@ -140,7 +140,7 @@ class AssignInstructor(View):
 
 class AssignTAToCourse(View):
     def get(self, request):
-        return render(request, "assign_TA_to_course.html")
+        return render(request, "assign_TA_to_course.html", dict(TAs=list(TA.objects.filter(course__isnull=True))))
 
 
 class AssignTAToSection(View):
