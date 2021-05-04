@@ -123,7 +123,7 @@ def assignInstructor(courseid="", instructor=""):
 def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
     if not Username:
         message = "please select a user"
-    elif not numLabs:
+    elif not numLabs or int(numLabs) < 0:
         message = "please enter number of labs"
     else:
         message = ""
