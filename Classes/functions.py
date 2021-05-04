@@ -169,6 +169,9 @@ def getTAsInCourse(sectionid):
 def unAssignTA(name):
     user1=User.objects.get(username=name)
     ta=TA.objects.get(user=user1)
+    section = Section.objects.get(TA_assigned=ta)
+    section.TA_assigned=None
+    section.save()
     ta.course=None
     ta.save()
     return "TA is Unassigned from this course"
