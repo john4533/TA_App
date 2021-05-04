@@ -20,16 +20,20 @@ h4 {
 }
 
 h5 {
-    color: white;
-    text-align: center;
-    font-size: 30px;
-    margin-left: 20%;
-    display: inline;
+    font-family: Calibri;
+    font-size: 40px;
+    /*color: white;*/
+
+    /*color: white;*/
+    /*text-align: center;*/
+    /*font-size: 30px;*/
+    /*margin-left: 20%;*/
+    /*display: inline;*/
 }
 
 h6{
     font-family: Calibri;
-    font-size: 20px;
+    font-size: 30px;
 }
 .print{
     display: inline;
@@ -76,7 +80,7 @@ th {
 
 .course-container{
     border-radius: 50px;
-    background-color: #b3b3b3;
+    background-color: floralwhite;
     max-width: 90%;
     padding-right: 35px;
     padding-bottom: 25px;
@@ -91,9 +95,9 @@ th {
 }
 
 .assign-btn{
-    min-width:20px;
-    font-size: 16px;
-    margin-bottom: 30px;
+    /*min-width:20px;*/
+    /*font-size: 16px;*/
+    margin-bottom: 1px;
 
 }
 
