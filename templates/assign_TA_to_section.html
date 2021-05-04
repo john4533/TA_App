@@ -32,6 +32,7 @@
                         <h3 align="center">Please select a TA</h3>
                         <ul class="list-group">
                             {% for TA in TAs %}
+                                {% if TA.assignedlabs < TA.numlabs %}
                                 <li class="list-group-item rounded-0">
                                     <div class="custom-control custom-checkbox">
                                         <input class="form-check-input" type="radio" name="username" id="select"
@@ -40,6 +41,7 @@
                                                 for="select"> &nbsp&nbsp{{ TA.user.name }}</label>
                                     </div>
                                 </li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     </div>

@@ -130,6 +130,7 @@ def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
         ta = TA.objects.get(user__username=(User.objects.get(username=Username)).username)
         ta.course = courseid
         ta.numlabs = numLabs
+        ta.assignedlabs = 0
         ta.save()
         if graderstatus:
             ta.graderstatus = graderstatus
@@ -144,8 +145,11 @@ def assignTAtoSection(sectionid="", username=""):
     else:
         message = ""
         s = Section.objects.get(sectionid=sectionid)
-        s.TA_assigned = TA.objects.get(user__username=username)
+        ta = TA.objects.get(user__username=username)
+        ta.assignedlabs += 1
+        s.TA_assigned = ta
         s.save()
+        ta.save()
     return message
 
 
@@ -165,27 +169,33 @@ def getTAsInCourse(sectionid):
     s = Section.objects.get(sectionid=sectionid)
     return list(TA.objects.filter(course__courseid=s.course.courseid))
 
+
 def unAssignTA(name):
-    user1=User.objects.get(username=name)
-    ta=TA.objects.get(user=user1)
+    user1 = User.objects.get(username=name)
+    ta = TA.objects.get(user=user1)
     try:
-        section=list(Section.objects.filter(TA_assigned=ta))
+        section = list(Section.objects.filter(TA_assigned=ta))
         for sect in section:
-            unAssignTASection(sect.sectionid)
+            unAssignTASection(sect.sectionid, name)
     except:
         pass
-    ta.course=None
+    ta.course = None
     ta.save()
     return "TA is Unassigned from this course"
 
+
 def unAssignTASection(sectionid):
-    section=Section.objects.get(sectionid=sectionid)
-    section.TA_assigned=None
+    section = Section.objects.get(sectionid=sectionid)
+    ta = TA.objects.get(course = section.course)
+    ta.assignedlabs -=  1
+    ta.save()
+    section.TA_assigned = None
     section.save()
     return "TA has been unassigned from this section"
 
+
 def unAssignInstructor(courseid):
-    course=Course.objects.get(courseid=courseid)
-    course.Instructor=None
+    course = Course.objects.get(courseid=courseid)
+    course.Instructor = None
     course.save()
     return "Instructor has been unassigned from this course"
