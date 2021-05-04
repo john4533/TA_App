@@ -120,32 +120,33 @@ def getCourses():
 def assignInstructor(courseid="", instructor=""):
     # precondition: coursid of a current course and a unique instructor
     # postcondition: instuctor is assigned to the passed in course
-    if instructor != '' and courseid != '':
+    if instructor == None:
+        string = "Please select an Instructor"
+    else:
         string = ""
         courseid.Instructor = User.objects.get(username=instructor)
         courseid.save()
-    else:
-        string = "Please fill out all required fields"
 
     return string
 
 
 def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
-    if courseid != '' and TA != '' and numLabs != '':
-        string = ""
+    if Username == '':
+        message = "please select a user"
+    elif numLabs == '':
+        message = "please enter number of labs"
+    else:
+        message = ""
         ta = TA.objects.get(user__username=(User.objects.get(username=Username)).username)
         ta.course = courseid
         ta.numlabs = numLabs
         ta.save()
-    if graderstatus != '':
-        ta.graderstatus = graderstatus
-        ta.save()
 
-    else:
-        string = "Please enter all fields"
-    return string
+        if graderstatus:
+            ta.graderstatus = graderstatus
+            ta.save()
+    return message
+
 
 def assignTAtoSection():
     pass
-
-

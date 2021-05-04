@@ -122,13 +122,9 @@ class AssignInstructor(View):
                       {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA"))})
 
     def post(self, request):
-        try:
-            message = assignInstructor(Course.objects.get(courseid=request.session["course"]),
-                                       request.POST['instructor'])
-        except:
-            message = "Please select an Instructor"
+        message = assignInstructor(Course.objects.get(courseid=request.session["course"]),
+                                   request.POST.get('instructor'))
         if message is "":
-            request.session["course"] = ""
             return redirect('/Courses/')
 
         else:
@@ -142,14 +138,9 @@ class AssignTAToCourse(View):
         return render(request, "assign_TA_to_course.html", dict(TAs=list(TA.objects.filter(course__isnull=True))))
 
     def post(self, request):
-        checked = request.POST.get('graderStatus')
-        if not checked:
-            checked = 'False'
-        try:
-            message = assignTAtoCourse(Course.objects.get(courseid=request.session["course"]), request.POST['TA'],
-                                       request.POST['numLabs'], checked)
-        except:
-            message = "Please select a TA"
+        message = assignTAtoCourse(Course.objects.get(courseid=request.session["course"]), request.POST.get('UserName'),
+                                   request.POST.get('numLabs'), request.POST.get('graderStatus'))
+
         if message is "":
             request.session["course"] = ""
             return redirect('/Courses/')
