@@ -56,70 +56,31 @@ class CourseTestCase(TestCase):
         section= Section.objects.create(course=course1, sectionid="901", type="Lab 1",schedule="T @ 11:00 - 12:50")
         self.assertEqual(getCourses(), {course1: [section]})
 
-    # ASSIGN COURSES (ASSUMPTION: USERS AND COURSES ARE VALID)
-    def test_Invalid_user_assigned_course(self):
-          user1 = createAccount("zyx", "123", "zyx@uwm.edu", "Supervisor", "414-243-9503", "address", "officehours")
-          user2 = createAccount("z", "123", "abc@uwm.edu", "TA", "414-243-9503", "address", "officehours")
-          course1 = createCourse("1", "y", "3")
-          self.assertEqual("Course cannot be assigned to Supervisor", assignUser(user1, course1))
-          self.assertEqual("Course cannot be assigned to TA", assignUser(user2, course1))
+    # ASSIGN
+    def test_setup(self):
+        test_Sup = createAccount("testSup", "123", "email", "Supervisor", "123", "addr", "hours")
+        test_Ins = createAccount("testIns", "123", "email", "Instructor", "123", "addr", "hours")
+        test_TA = createAccount("testTA", "123", "email", "TA", "123", "addr", "hours")
+        test_course1 = createCourse("1", "course1", "1")
+        test_course2 = createCourse("2", "course2", "2")
 
-    def test_valid_user_assigned_course(self):
-         user2 = createAccount("a", "123", "a@uwm.edu", "Instructor", "414-243-9503", "address", "officehours")
-         user3 = createAccount("b", "123", "b@uwm.edu", "Instructor", "414-243-9503", "address", "officehours")
-         course2 = createCourse("2", "b", "3")
-         course3 = createCourse("3", "c", "3")
-         self.assertEqual("Course has been assigned", assignUser(user2, course2))
-         self.assertEqual("Course has been assigned", assignUser(user3, course3))
+    # ASSIGN INSTRUCTOR
+    def test_assignInstructor_badParam(self):
+        self.assertEqual(assignInstructor("", ""), "Please fill out all required fields")
+        self.assertEqual(assignInstructor("", "testIns"), "Please fill out all required fields")
+        self.assertEqual(assignInstructor("course1", ""), "Please fill out all required fields")
 
-    def test_multiple_courses_assigned(self):
-         user4 = createAccount("c", "123", "c@uwm.edu", "Instructor", "414-243-9503", "address", "officehours")
-         course4 = createCourse("4", "c", "3")
-         course5 = createCourse("5", "d", "3")
-         course6 = createCourse("6", "f", "3")
-         self.assertEqual("Course has been assigned", assignUser(user4, course4))
-         self.assertEqual("Course has been assigned", assignUser(user4, course5))
-         self.assertEqual("Course has been assigned", assignUser(user4, course6))
+    def test_assignInstructor_goodParam(self):
+        self.assertEqual(assignInstructor("course1", "testIns"), "")
 
-    def test_instructor_already_assigned(self):
-        user5 = createAccount("d", "123", "c@uwm.edu", "Instructor", "414-243-9503", "address", "officehours")
-        user6 = createAccount("e", "123", "c@uwm.edu", "Instructor", "414-243-9503", "address", "officehours")
-        course7 = createCourse("1", "a", "2")
-        assignUser(user5, course7)
-        self.assertEquals(assignUser(user6, course7), "Course already has an instructor assigned to it")
+    # ASSIGN TA
+    def test_assignTAtoCourse_badParam(self):
+        self.assertEqual(assignTAtoCourse("", "", "", ""), "Please fill out all required fields")
+        self.assertEqual(assignTAtoCourse("1", "", "", ""), "Please fill out all required fields")
+        self.assertEqual(assignTAtoCourse("", "testTA", "", ""), "Please fill out all required fields")
+        self.assertEqual(assignTAtoCourse("", "", "1", ""), "Please fill out all required fields")
+        self.assertEqual(assignTAtoCourse("", "", "", "True"), "Please fill out all required fields")
 
-    def test_invalid_arguments_assigned(self):
-        testuser = createAccount("testuser", "test123", "test@uwm.edu", "Instructor", "123-456-7890", "testaddress", "testhours")
-        testcourse = createCourse("123", "test", "1 to 3")
-
-        try:
-            assignUser("", "")
-        except ValueError:
-            print("Invalid arguments")
-
-        try:
-            assignUser(None, None)
-        except ValueError:
-            print("Invalid arguments")
-
-        try:
-            assignUser(testuser, None)
-        except ValueError:
-            print("Invalid course argument")
-
-        try:
-            assignUser(testuser, "")
-        except ValueError:
-            print("Invalid course argument")
-
-        try:
-            assignUser(None, testcourse)
-        except ValueError:
-            print("Invalid user argument")
-
-        try:
-            assignUser("", testcourse)
-        except ValueError:
-            print("Invalid user argument")
-
+    def test_assignTAtoCourse_goodParam(self):
+        self.assertEqual(assignTAtoCourse("1", "testTA", "1", "True"), "")
 
