@@ -83,7 +83,7 @@
                         <th><h5>Name</h5></th>
                         <th><h5>Skills</h5></th>
                         <th><h5>Grader</h5></th>
-
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -94,6 +94,12 @@
                                 <td><h6>{{ TA.user.name }}</h6></td>
                                 <td><h6>CSS</h6></td>
                                 <td><h6>{{ TA.graderstatus }}</h6></td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger delete-course-btn"
+                                            style="font-size:17px; margin-top:12px">
+                                        Remove
+                                    </button>
+                                </td>
                             </tr>
                         {% endif %}
                     {% endfor %}
