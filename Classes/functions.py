@@ -176,7 +176,7 @@ def unAssignTA(name):
     try:
         section = list(Section.objects.filter(TA_assigned=ta))
         for sect in section:
-            unAssignTASection(sect.sectionid, name)
+            unAssignTASection(sect.sectionid)
     except:
         pass
     ta.course = None
@@ -186,8 +186,8 @@ def unAssignTA(name):
 
 def unAssignTASection(sectionid):
     section = Section.objects.get(sectionid=sectionid)
-    ta = TA.objects.get(course = section.course)
-    ta.assignedlabs -=  1
+    ta = TA.objects.get(course=section.course)
+    ta.assignedlabs -= 1
     ta.save()
     section.TA_assigned = None
     section.save()
