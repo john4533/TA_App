@@ -36,7 +36,7 @@
                             <h2> {{ course.name }}</h2>
                         </div>
                         <div style="float:right">
-                            <button type="submit" class="btn btn-danger delete-course-btn"
+                            <button type="submit" class="btn btn-danger delete-course-btn" name="delete_course" value="{{ course.courseid }}"
                                     style="font-size:17px; margin-top:12px">
                                 Delete
                             </button>
@@ -95,7 +95,7 @@
                                 <td><h6>CSS</h6></td>
                                 <td><h6>{{ TA.graderstatus }}</h6></td>
                                 <td>
-                                    <button type="submit" class="btn btn-danger delete-course-btn"
+                                    <button type="submit" class="btn btn-danger delete-course-btn" name="" value="{{ course.courseid }}"
                                             style="font-size:17px; margin-top:12px">
                                         Remove
                                     </button>
