@@ -125,7 +125,7 @@ class AssignInstructor(View):
             message = assignInstructor(Course.objects.get(courseid=request.session["course"]),
                                        request.POST['instructor'])
         except:
-            message = "Please make a selection"
+            message = "Please selct an Instructor"
         if message is "":
             request.session["course"] = ""
             return redirect('/Courses/')
@@ -141,11 +141,14 @@ class AssignTAToCourse(View):
         return render(request, "assign_TA_to_course.html", dict(TAs=list(TA.objects.filter(course__isnull=True))))
 
     def post(self, request):
+        checked = request.POST.get('graderStatus')
+        if not checked:
+            checked = 'False'
         try:
             message = assignTAtoCourse(Course.objects.get(courseid=request.session["course"]), request.POST['TA'],
-                                       request.POST['numLabs'])
+                                       request.POST['numLabs'],checked)
         except:
-            message = "Please make a selection"
+            message = "Please select a TA"
         if message is "":
             request.session["course"] = ""
             return redirect('/Courses/')
