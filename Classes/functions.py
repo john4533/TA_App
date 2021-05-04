@@ -173,3 +173,8 @@ def unAssignTA(name):
     ta.save()
     return "TA is Unassigned from this course"
 
+def unAssignTASection(sectionid):
+    section=Section.objects.get(sectionid=sectionid)
+    section.TA_assigned=None
+    section.save()
+    return "TA has been unassigned from this section"
