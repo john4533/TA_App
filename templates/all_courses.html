@@ -36,44 +36,50 @@
                             <h2> {{ course.name }}</h2>
                         </div>
                         <div style="float:right">
-                            <button type="submit" class="btn btn-danger delete-course-btn" name="delete_course" value="{{ course.courseid }}"
+                            <button type="submit" class="btn btn-danger" name="delete_course"
+                                    value="{{ course.courseid }}"
                                     style="font-size:17px; margin-top:12px">
-                                Delete
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                     class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd"
+                                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
-
+                <br>
+                <br>
                 <div class="row course-info">
-                    <div style="float:right">
-                        <h3 style="display: inline">Course Instructor: {{ course.Instructor.name }}</h3>
-                        {% if course.Instructor == null %}
-                            <button class="btn btn-warning assign-btn" type="submit" name="assign_instructor"
-                                    value={{ course.courseid }}>
-                                Assign Instructor
-                            </button>
-                        {% else %}
-                            <button type="submit" class="btn btn-danger delete-course-btn"
-                                    style="font-size:17px; margin-top:12px">
-                                Remove
-                            </button>
-                        {% endif %}
+                    <div class="col">
+                        <h3>ID: {{ course.courseid }}</h3>
                     </div>
                     <div class="col">
-                        <h3>Course ID: {{ course.courseid }}</h3>
+                        <div style="text-align: center">
+                            {% if course.Instructor == null %}
+                                <button class="btn btn-warning assign-btn" type="submit" name="assign_instructor"
+                                        value={{ course.courseid }}>
+                                    Assign Instructor
+                                </button>
+                            {% else %}
+                                <h3>Instructor: {{ course.Instructor.name }}
+                                    <button type="submit" class="btn btn-danger"
+                                            style="font-size:17px; margin-top:12px">
+                                        Remove
+                                    </button>
+                                </h3>
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="col" style="text-align:right">
                         <h3>Credits: {{ course.credits }}</h3>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col">
                         <h5><strong>TAs</strong></h5>
-                    </div>
-                    <div class="col" style="text-align:right">
-                        <button class="btn btn-warning assign-btn" type="submit" name="assign_TA_to_course"
-                                value={{ course.courseid }}>Assign TA
-                        </button>
                     </div>
                 </div>
 
@@ -83,19 +89,25 @@
                         <th><h5>Name</h5></th>
                         <th><h5>Skills</h5></th>
                         <th><h5>Grader</h5></th>
-                        <th></th>
+                        <th>
+                            <div class="col">
+                                <button class="btn btn-warning assign-btn" type="submit" name="assign_TA_to_course"
+                                        value={{ course.courseid }}>Assign TA
+                                </button>
+                            </div>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for TA in TAs %}
                         {% if TA.course.courseid == course.courseid %}
-
                             <tr>
                                 <td><h6>{{ TA.user.name }}</h6></td>
-                                <td><h6>CSS</h6></td>
+                                <td><h6>{{ TA.user.skills }}</h6></td>
                                 <td><h6>{{ TA.graderstatus }}</h6></td>
                                 <td>
-                                    <button type="submit" class="btn btn-danger delete-course-btn" name="" value="{{ course.courseid }}"
+                                    <button type="submit" class="btn btn-danger delete-course-btn" name=""
+                                            value="{{ course.courseid }}"
                                             style="font-size:17px; margin-top:12px">
                                         Remove
                                     </button>
@@ -110,11 +122,6 @@
                     <div class="col">
                         <h5><strong>Sections</strong></h5>
                     </div>
-                    <div class="col" style="text-align:right">
-                        <button type="submit" class="btn btn-warning" name="register_section"
-                                value={{ course.courseid }} style="font-size=16px">Add Section
-                        </button>
-                    </div>
                 </div>
 
                 <table class="table">
@@ -124,7 +131,13 @@
                         <th><h5>Type</h5></th>
                         <th><h5>Schedule</h5></th>
                         <th><h5>Staff</h5></th>
-                        <th></th>
+                        <th>
+                            <div class="col">
+                                <button type="submit" class="btn btn-warning" name="register_section"
+                                        value={{ course.courseid }} style="font-size=16px">Add Section
+                                </button>
+                            </div>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -137,18 +150,31 @@
 
                             <td><h6>{{ section.schedule }}</h6></td>
 
-                            <td><h6>{{ section.TA_assigned }}</h6></td>
+                            <td>
+                                {% if section.TA_assigned == null %}
+                                    <button class="btn btn-warning" type="submit" name="Assign_TA_to_Section"
+                                            value="Assign_TA_to_Section" style="font-size: 16px">
+                                        Assign
+                                    </button>
+                                {% else %}
+                                    <h6>{{ section.TA_assigned.user.name }}
+                                        <button type="button" class="btn btn-danger" style="font-size: 16px">
+                                            Remove
+                                        </button>
+                                    </h6>
+                                {% endif %}
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-danger" style="font-size: 16px">
-                                    Delete
-                                </button>
-                                <button class="btn btn-warning" type="submit" name="Assign_TA_to_Section"
-                                        value="Assign_TA_to_Section" style="font-size: 16px">
-                                    Assign
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                         class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
                                 </button>
                             </td>
                         {% endfor %}
-
                     </tr>
                     </tbody>
                 </table>

@@ -81,7 +81,7 @@ th {
 .course-container{
     border-radius: 50px;
     background-color: floralwhite;
-    max-width: 60%;
+    max-width: 80%;
     padding-right: 35px;
     padding-bottom: 25px;
     margin: auto;
@@ -95,8 +95,6 @@ th {
 }
 
 .assign-btn{
-    /*min-width:20px;*/
-    /*font-size: 16px;*/
     margin-bottom: 1px;
 
 }
