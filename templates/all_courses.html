@@ -65,7 +65,8 @@
                             {% else %}
                                 <h3>Instructor: {{ course.Instructor.name }}
                                     <button type="submit" class="btn btn-danger"
-                                            style="font-size:17px; margin-top:12px" name="rem_Ins" value={{ course.courseid }}>
+                                            style="font-size:17px; margin-top:12px" name="rem_Ins"
+                                            value={{ course.courseid }}>
                                         Remove
                                     </button>
                                 </h3>
@@ -141,9 +142,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        {% for section in sections %}
-
+                    {% for section in sections %}
+                        <tr>
                             <td><h6>{{ section.sectionid }}</h6></td>
 
                             <td><h6>{{ section.type }}</h6></td>
@@ -158,14 +158,16 @@
                                     </button>
                                 {% else %}
                                     <h6>{{ section.TA_assigned.user.name }}
-                                        <button type="submit" class="btn btn-danger" style="font-size:16px" name="rem_TA_sec" value={{ section.sectionid }}>
+                                        <button type="submit" class="btn btn-danger" style="font-size:16px"
+                                                name="rem_TA_sec" value={{ section.sectionid }}>
                                             Remove
                                         </button>
                                     </h6>
                                 {% endif %}
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-danger" style="font-size: 16px" name="del_section" value={{ section.sectionid }}>
+                                <button type="submit" class="btn btn-danger" style="font-size: 16px" name="del_section"
+                                        value={{ section.sectionid }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                          class="bi bi-trash" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -174,8 +176,9 @@
                                     </svg>
                                 </button>
                             </td>
-                        {% endfor %}
-                    </tr>
+                        </tr>
+                    {% endfor %}
+
                     </tbody>
                 </table>
 
