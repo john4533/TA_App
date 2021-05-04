@@ -165,3 +165,11 @@ def getTAsInCourse(sectionid):
     # postcondition: returns a dictionary of TAs in a particular course
     s = Section.objects.get(sectionid=sectionid)
     return list(TA.objects.filter(course__courseid=s.course.courseid))
+
+def unAssignTA(name):
+    user1=User.objects.get(username=name)
+    ta=TA.objects.get(user=user1)
+    ta.course=None
+    ta.save()
+    return "TA is Unassigned from this course"
+
