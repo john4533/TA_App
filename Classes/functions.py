@@ -141,7 +141,6 @@ def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
         ta.course = courseid
         ta.numlabs = numLabs
         ta.save()
-
         if graderstatus:
             ta.graderstatus = graderstatus
             ta.save()
