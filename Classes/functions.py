@@ -133,12 +133,15 @@ def assignInstructor(courseid="", instructor=""):
     return string
 
 
-def assignTAtoCourse(courseid="", Username="", numLabs=""):
+def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
     if courseid != '' and TA != '' and numLabs != '':
         string = ""
         ta = TA.objects.get(user__username=(User.objects.get(username=Username)).username)
         ta.course = courseid
         ta.numlabs = numLabs
+        ta.save()
+    if graderstatus != '':
+        ta.graderstatus = graderstatus
         ta.save()
 
     else:
