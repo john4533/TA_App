@@ -169,16 +169,17 @@ def unAssignTA(name):
     user1=User.objects.get(username=name)
     ta=TA.objects.get(user=user1)
     try:
-        section=list(Section.objects.get(TA_assigned=ta).sectionid)
+        section=list(Section.objects.filter(TA_assigned=ta))
         for sect in section:
             unAssignTASection(sect.sectionid)
     except:
-        ta.course=None
-        ta.save()
+        pass
+    ta.course=None
+    ta.save()
     return "TA is Unassigned from this course"
 
 def unAssignTASection(sectionid):
-    section=list(Section.objects.filter(sectionid=sectionid))
+    section=Section.objects.get(sectionid=sectionid)
     section.TA_assigned=None
     section.save()
     return "TA has been unassigned from this section"
