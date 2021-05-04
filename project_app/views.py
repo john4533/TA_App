@@ -32,7 +32,6 @@ class Account(View):
 class AccountDisplay(View):
     def get(self, request):
         user = User.objects.get(username=request.session["name"])
-        print(user)
         return render(request, "all_accounts.html",
                       {"accounts": list(User.objects.exclude(role="Supervisor")), "user": user})
 
@@ -63,7 +62,8 @@ class RegisterAccount(View):
 
 class Courses(View):
     def get(self, request):
-        return render(request, "all_courses.html", {"dictionary": getCourses()})
+        return render(request, "all_courses.html", {"dictionary": getCourses(),
+                                                    "TAs": list(TA.objects.all())})
 
     def post(self, request):
         if request.POST.get('add_course'):
@@ -84,7 +84,8 @@ class Courses(View):
                 message = deleteCourse(request.POST['delete_course'])
             elif request.POST.get('delete_section'):
                 message = deleteSection(request.POST['delete_section'])
-            return render(request, "all_courses.html", {"dictionary": getCourses(), "delete_message": message}, )
+            return render(request, "all_courses.html", {"dictionary": getCourses(), "delete_message": message,
+                                                        "TAs": list(TA.objects.all())})
 
 
 class RegisterCourses(View):
@@ -125,7 +126,7 @@ class AssignInstructor(View):
             message = assignInstructor(Course.objects.get(courseid=request.session["course"]),
                                        request.POST['instructor'])
         except:
-            message = "Please selct an Instructor"
+            message = "Please select an Instructor"
         if message is "":
             request.session["course"] = ""
             return redirect('/Courses/')
@@ -146,7 +147,7 @@ class AssignTAToCourse(View):
             checked = 'False'
         try:
             message = assignTAtoCourse(Course.objects.get(courseid=request.session["course"]), request.POST['TA'],
-                                       request.POST['numLabs'],checked)
+                                       request.POST['numLabs'], checked)
         except:
             message = "Please select a TA"
         if message is "":

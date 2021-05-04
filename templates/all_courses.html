@@ -68,11 +68,11 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h5><strong>Staff</strong></h5>
+                        <h5><strong>TAs</strong></h5>
                     </div>
                     <div class="col" style="text-align:right">
                         <button class="btn btn-warning assign-btn" type="submit" name="assign_TA_to_course"
-                            value={{ course.courseid }}>Assign TA
+                                value={{ course.courseid }}>Assign TA
                         </button>
                     </div>
                 </div>
@@ -81,17 +81,22 @@
                     <thead class="table table-dark table-info">
                     <tr>
                         <th><h5>Name</h5></th>
-                        <th><h5>Role</h5></th>
+                        <th><h5>Skills</h5></th>
                         <th><h5>Grader</h5></th>
 
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><h6>Jayson</h6></td>
-                            <td><h6>Instructor</h6></td>
-                            <td><h6>True</h6></td>
-                        </tr>
+                    {% for TA in TAs %}
+                        {% if TA.course.courseid == course.courseid %}
+
+                            <tr>
+                                <td><h6>{{ TA.user.name }}</h6></td>
+                                <td><h6>CSS</h6></td>
+                                <td><h6>{{ TA.graderstatus }}</h6></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
                     </tbody>
                 </table>
 
@@ -101,7 +106,7 @@
                     </div>
                     <div class="col" style="text-align:right">
                         <button type="submit" class="btn btn-warning" name="register_section"
-                                        value={{ course.courseid }} style="font-size=16px">Add Section
+                                value={{ course.courseid }} style="font-size=16px">Add Section
                         </button>
                     </div>
                 </div>
@@ -117,124 +122,124 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {% for section in sections %}
+                    <tr>
+                        {% for section in sections %}
 
-                                <td><h6>{{ section.sectionid }}</h6></td>
+                            <td><h6>{{ section.sectionid }}</h6></td>
 
-                                <td><h6>{{ section.type }}</h6></td>
+                            <td><h6>{{ section.type }}</h6></td>
 
-                                <td><h6>{{ section.schedule }}</h6></td>
+                            <td><h6>{{ section.schedule }}</h6></td>
 
-                                <td><h6>{{ section.TA_assigned }}</h6></td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" style="font-size: 16px">
-                                        Delete
-                                    </button>
-                                    <button class="btn btn-warning" type="submit" name="Assign_TA_to_Section"
-                                            value="Assign_TA_to_Section" style="font-size: 16px">
-                                        Assign
-                                    </button>
-                                </td>
-                            {% endfor %}
+                            <td><h6>{{ section.TA_assigned }}</h6></td>
+                            <td>
+                                <button type="button" class="btn btn-danger" style="font-size: 16px">
+                                    Delete
+                                </button>
+                                <button class="btn btn-warning" type="submit" name="Assign_TA_to_Section"
+                                        value="Assign_TA_to_Section" style="font-size: 16px">
+                                    Assign
+                                </button>
+                            </td>
+                        {% endfor %}
 
-                        </tr>
+                    </tr>
                     </tbody>
                 </table>
 
-{#                <div class="container border border-secondary rounded">#}
-{#                    <div class="row header-row">#}
-{#                        <div class="col" style="text-align:center">#}
-{#                            <div style="float:left; width:80%">#}
-{#                                <h5>Staff</h5>#}
-{#                            </div>#}
-{#                            <div style="float:right">#}
-{#                                <button class="btn btn-warning assign-btn" type="submit" name="assign_TA_to_course"#}
-{#                                        value={{ course.courseid }}>#}
-{#                                    Assign TA#}
-{#                                </button>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="row header-row">#}
-{#                        <div class="col">#}
-{#                            <h4>Name</h4>#}
-{#                        </div>#}
-{#                        <div class="col">#}
-{#                            <h4>Role</h4>#}
-{#                        </div>#}
-{#                        <div class="col">#}
-{#                            <h4>Grader</h4>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="row course-table-data">#}
-{#                        <div class="col border border-secondary">#}
-{#                            <h6>Jayson</h6>#}
-{#                        </div>#}
-{#                        <div class="col border border-secondary">#}
-{#                            <h6>Instructor</h6>#}
-{#                        </div>#}
-{#                        <div class="col border border-secondary">#}
-{#                            <h6>True</h6>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
+                {#                <div class="container border border-secondary rounded">#}
+                {#                    <div class="row header-row">#}
+                {#                        <div class="col" style="text-align:center">#}
+                {#                            <div style="float:left; width:80%">#}
+                {#                                <h5>Staff</h5>#}
+                {#                            </div>#}
+                {#                            <div style="float:right">#}
+                {#                                <button class="btn btn-warning assign-btn" type="submit" name="assign_TA_to_course"#}
+                {#                                        value={{ course.courseid }}>#}
+                {#                                    Assign TA#}
+                {#                                </button>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                    <div class="row header-row">#}
+                {#                        <div class="col">#}
+                {#                            <h4>Name</h4>#}
+                {#                        </div>#}
+                {#                        <div class="col">#}
+                {#                            <h4>Role</h4>#}
+                {#                        </div>#}
+                {#                        <div class="col">#}
+                {#                            <h4>Grader</h4>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                    <div class="row course-table-data">#}
+                {#                        <div class="col border border-secondary">#}
+                {#                            <h6>Jayson</h6>#}
+                {#                        </div>#}
+                {#                        <div class="col border border-secondary">#}
+                {#                            <h6>Instructor</h6>#}
+                {#                        </div>#}
+                {#                        <div class="col border border-secondary">#}
+                {#                            <h6>True</h6>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
 
-{#                <div class="container border border-secondary rounded">#}
-{##}
-{#                    <div class="row header-row">#}
-{#                        <div class="col" style="text-align:center">#}
-{#                            <div style="float:left; width:80%">#}
-{#                                <h5>Sections</h5>#}
-{#                            </div>#}
-{#                            <div style="float:right">#}
-{#                                <button type="submit" class="btn btn-warning" name="register_section"#}
-{#                                        value={{ course.courseid }} style="font-size=16px">Add Section#}
-{#                                </button>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="row header-row">#}
-{#                        <div class="col">#}
-{#                            <h4>ID</h4>#}
-{#                        </div>#}
-{#                        <div class="col">#}
-{#                            <h4>Type</h4>#}
-{#                        </div>#}
-{#                        <div class="col">#}
-{#                            <h4>Schedule</h4>#}
-{#                        </div>#}
-{#                        <div class="col">#}
-{#                            <h4>Staff</h4>#}
-{#                        </div>#}
-{#                        <div class="col"></div>#}
-{#                    </div>#}
-{#                    {% for section in sections %}#}
-{#                        <div class="row course-table-data">#}
-{#                            <div class="col border border-secondary">#}
-{#                                <h6>{{ section.sectionid }}</h6>#}
-{#                            </div>#}
-{#                            <div class="col border border-secondary">#}
-{#                                <h6>{{ section.type }}</h6>#}
-{#                            </div>#}
-{#                            <div class="col border border-secondary">#}
-{#                                <h6>{{ section.schedule }}</h6>#}
-{#                            </div>#}
-{#                            <div class="col border border-secondary">#}
-{#                                <h6>{{ section.TA_assigned }}</h6>#}
-{#                            </div>#}
-{#                            <div class="col border border-secondary text-center">#}
-{#                                <button type="button" class="btn btn-danger" style="font-size: 16px">#}
-{#                                    Delete#}
-{#                                </button>#}
-{#                                <button class="btn btn-warning" type="submit" name="Assign_TA_to_Section"#}
-{#                                        value="Assign_TA_to_Section" style="font-size: 16px">#}
-{#                                    Assign#}
-{#                                </button>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    {% endfor %}#}
-{#                </div>#}
+                {#                <div class="container border border-secondary rounded">#}
+                {##}
+                {#                    <div class="row header-row">#}
+                {#                        <div class="col" style="text-align:center">#}
+                {#                            <div style="float:left; width:80%">#}
+                {#                                <h5>Sections</h5>#}
+                {#                            </div>#}
+                {#                            <div style="float:right">#}
+                {#                                <button type="submit" class="btn btn-warning" name="register_section"#}
+                {#                                        value={{ course.courseid }} style="font-size=16px">Add Section#}
+                {#                                </button>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                    <div class="row header-row">#}
+                {#                        <div class="col">#}
+                {#                            <h4>ID</h4>#}
+                {#                        </div>#}
+                {#                        <div class="col">#}
+                {#                            <h4>Type</h4>#}
+                {#                        </div>#}
+                {#                        <div class="col">#}
+                {#                            <h4>Schedule</h4>#}
+                {#                        </div>#}
+                {#                        <div class="col">#}
+                {#                            <h4>Staff</h4>#}
+                {#                        </div>#}
+                {#                        <div class="col"></div>#}
+                {#                    </div>#}
+                {#                    {% for section in sections %}#}
+                {#                        <div class="row course-table-data">#}
+                {#                            <div class="col border border-secondary">#}
+                {#                                <h6>{{ section.sectionid }}</h6>#}
+                {#                            </div>#}
+                {#                            <div class="col border border-secondary">#}
+                {#                                <h6>{{ section.type }}</h6>#}
+                {#                            </div>#}
+                {#                            <div class="col border border-secondary">#}
+                {#                                <h6>{{ section.schedule }}</h6>#}
+                {#                            </div>#}
+                {#                            <div class="col border border-secondary">#}
+                {#                                <h6>{{ section.TA_assigned }}</h6>#}
+                {#                            </div>#}
+                {#                            <div class="col border border-secondary text-center">#}
+                {#                                <button type="button" class="btn btn-danger" style="font-size: 16px">#}
+                {#                                    Delete#}
+                {#                                </button>#}
+                {#                                <button class="btn btn-warning" type="submit" name="Assign_TA_to_Section"#}
+                {#                                        value="Assign_TA_to_Section" style="font-size: 16px">#}
+                {#                                    Assign#}
+                {#                                </button>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    {% endfor %}#}
+                {#                </div>#}
 
 
             </div>
