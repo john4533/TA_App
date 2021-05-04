@@ -140,7 +140,7 @@ def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
 def assignTAtoSection(sectionid="", username=""):
     if username is None:
         message = "please select a user"
-        print(username)
+
     else:
         message = ""
         s = Section.objects.get(sectionid=sectionid)

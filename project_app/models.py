@@ -8,11 +8,11 @@ class Roles(models.TextChoices):
     ins = "Instructor"
 
 
-
 class Types(models.TextChoices):
     lec = "Lecture"
     lab = "Lab"
     disc = "Discussion"
+
 
 class User(models.Model):
     username = models.CharField(max_length=20)
@@ -23,7 +23,8 @@ class User(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=50, blank=True)
     officehours = models.CharField(max_length=20, blank=True)
-    skills=models.CharField(max_length=200,blank=True)
+    skills = models.CharField(max_length=200, blank=True)
+
 
 class Course(models.Model):
     courseid = models.CharField(max_length=20)
@@ -37,6 +38,7 @@ class TA(models.Model):
     graderstatus = models.BooleanField(default=False)
     numlabs = models.IntegerField(default=0)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
+    assignedlabs = models.IntegerField(default=0)
 
 
 class Section(models.Model):
@@ -45,4 +47,3 @@ class Section(models.Model):
     type = models.CharField(max_length=20, choices=Types.choices)
     schedule = models.CharField(max_length=20, blank=True)
     TA_assigned = models.ForeignKey(TA, on_delete=models.SET_NULL, blank=True, null=True)
-
