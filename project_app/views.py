@@ -85,8 +85,8 @@ class Courses(View):
                 message = deleteCourse(request.POST['delete_course'])
             if request.POST.get('rem_TA'):
                 message = unAssignTA(request.POST['rem_TA'])
-            elif request.POST.get('delete_section'):
-                message = deleteSection(request.POST['delete_section'])
+            elif request.POST.get('del_section'):
+                message = deleteSection(request.POST['del_section'])
             return render(request, "all_courses.html", {"dictionary": getCourses(),
                                                         "TAs": list(TA.objects.all())})
 
