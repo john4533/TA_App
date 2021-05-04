@@ -168,17 +168,18 @@ def getTAsInCourse(sectionid):
 def unAssignTA(name):
     user1=User.objects.get(username=name)
     ta=TA.objects.get(user=user1)
-    section = Section.objects.get(TA_assigned=ta)
-    section.TA_assigned=None
-    section.save()
-    ta.course=None
-    ta.save()
+    try:
+        unAssignTASection(Section.objects.get(TA_assigned=ta).sectionid)
+    except:
+        ta.course=None
+        ta.save()
     return "TA is Unassigned from this course"
 
 def unAssignTASection(sectionid):
-    section=Section.objects.get(sectionid=sectionid)
-    section.TA_assigned=None
-    section.save()
+    section=list(Section.objects.filter(sectionid=sectionid))
+    for sect in section:
+        sect.TA_assigned=None
+        sect.save()
     return "TA has been unassigned from this section"
 
 def unAssignInstructor(courseid):
