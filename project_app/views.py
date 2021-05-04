@@ -92,7 +92,7 @@ class Courses(View):
             elif request.POST.get('rem_Ins'):
                 message=unAssignInstructor(request.POST['rem_Ins'])
             return render(request, "all_courses.html", {"dictionary": getCourses(),
-                                                        "TAs": list(TA.objects.all())})
+                                                        "TAs": list(TA.objects.all()), "message":message})
 
 
 class RegisterCourses(View):

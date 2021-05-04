@@ -144,8 +144,7 @@ def assignTAtoSection(sectionid="", username=""):
     else:
         message = ""
         s = Section.objects.get(sectionid=sectionid)
-        t = TA.objects.get(user__username=username)
-        s.TA_assigned = t
+        s.TA_assigned = TA.objects.get(user__username=username)
         s.save()
     return message
 
