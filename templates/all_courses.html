@@ -152,8 +152,8 @@
 
                             <td>
                                 {% if section.TA_assigned == null %}
-                                    <button class="btn btn-warning" type="submit" name="Assign_TA_to_Section"
-                                            value="Assign_TA_to_Section" style="font-size: 16px">
+                                    <button class="btn btn-warning" type="submit" name="assign_TA_to_Section"
+                                            value={{ section.sectionid }} style="font-size=16px">
                                         Assign
                                     </button>
                                 {% else %}

@@ -107,20 +107,10 @@ def deleteSection(sectionid=""):
     return string
 
 
-def getCourses():
-    # precondition: None
-    # postcondition: returns a dictionary with course keys and values are lists of section
-    courses = list(Course.objects.all())
-    dictionary = {}
-    for c in courses:
-        dictionary[c] = list(Section.objects.filter(course__courseid=c.courseid))
-    return dictionary
-
-
 def assignInstructor(courseid="", instructor=""):
     # precondition: coursid of a current course and a unique instructor
     # postcondition: instuctor is assigned to the passed in course
-    if instructor == None:
+    if instructor is None:
         string = "Please select an Instructor"
     else:
         string = ""
@@ -131,9 +121,9 @@ def assignInstructor(courseid="", instructor=""):
 
 
 def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
-    if Username == '':
+    if not Username:
         message = "please select a user"
-    elif numLabs == '':
+    elif not numLabs:
         message = "please enter number of labs"
     else:
         message = ""
@@ -147,5 +137,31 @@ def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
     return message
 
 
-def assignTAtoSection():
-    pass
+def assignTAtoSection(sectionid="", username=""):
+    if username is None:
+        message = "please select a user"
+        print(username)
+    else:
+        message = ""
+        s = Section.objects.get(sectionid=sectionid)
+        t = TA.objects.get(user__username=username)
+        s.TA_assigned = t
+        s.save()
+    return message
+
+
+def getCourses():
+    # precondition: None
+    # postcondition: returns a dictionary with course keys and values are lists of section
+    courses = list(Course.objects.all())
+    dictionary = {}
+    for c in courses:
+        dictionary[c] = list(Section.objects.filter(course__courseid=c.courseid))
+    return dictionary
+
+
+def getTAsInCourse(sectionid):
+    # precndition: courseid
+    # postcondition: returns a dictionary of TAs in a particular course
+    s = Section.objects.get(sectionid=sectionid)
+    return list(TA.objects.filter(course__courseid=s.course.courseid))

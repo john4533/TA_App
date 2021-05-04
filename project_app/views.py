@@ -77,7 +77,8 @@ class Courses(View):
         elif request.POST.get('assign_TA_to_course'):
             request.session["course"] = request.POST["assign_TA_to_course"]
             return redirect('/AssignTAToCourse/')
-        elif request.POST.get('Assign_TA_to_Section'):
+        elif request.POST.get('assign_TA_to_Section'):
+            request.session["sectionid"] = request.POST["assign_TA_to_Section"]
             return redirect('/AssignTAToSection/')
         else:
             if request.POST.get('delete_course'):
@@ -151,4 +152,14 @@ class AssignTAToCourse(View):
 
 class AssignTAToSection(View):
     def get(self, request):
-        return render(request, "assign_TA_to_section.html")
+        return render(request, "assign_TA_to_section.html", {"TAs": getTAsInCourse(request.session["sectionid"])})
+
+    def post(self, request):
+        message = assignTAtoSection(request.session["sectionid"], request.POST.get('username'))
+
+        if message is "":
+            request.session["course"] = ""
+            return redirect('/Courses/')
+
+        else:
+            return render(request, "assign_TA_to_section.html", {"TAs": getTAsInCourse(request.session["sectionid"]),"message":message})
