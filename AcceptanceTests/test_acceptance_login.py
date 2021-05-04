@@ -11,7 +11,7 @@ class LoginTest(TestCase):
 
     def test_existingUser_ValidLoginSupervisor(self):
         response = self.client.post("/", {"name": "Bob", "password": "Password123"})
-        self.assertEqual(response.url, "/SupHome/", msg="Valid Login redirects the user to the incorrect url")
+        self.assertEqual(response.url, "/Home/", msg="Valid Login redirects the user to the incorrect url")
 
     def test_invalidPassword(self):
         response = self.client.post("/", {"name": "Charlie", "password": "Password124"})

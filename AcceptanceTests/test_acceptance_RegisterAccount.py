@@ -5,20 +5,19 @@ from project_app.models import User
 class SupAccountsTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create(username="user", password="password", email="user@uwm.edu", role="supervisor")
-
+        self.user = User.objects.create(username="user",name="user1", password="password", email="user@uwm.edu", role="supervisor")
+        self.loginuser= User.objects.create(username="user23", name="user23", password="123",email="nub@uwm.edu",role="supervisor")
     def test_accountExists(self):
-        response = self.client.post("/RegisterAccount/", {"username": self.user.username, "password": self.user.password,
+        response = self.client.post("/RegisterAccount/", {"username": self.user.username, "name":"user1", "password": self.user.password,
                                     "email": self.user.email, "role": self.user.role})
         self.assertEqual(response.context["message"], "User with that username already exists", msg="User created twice")
 
     def test_createAccount(self):
-        response = self.client.post("/RegisterAccount/", {"username": "user1", "password": "password1",
+        response = self.client.post("/RegisterAccount/", {"username": "user1","name":"kad", "password": "password1",
                                                           "email": "user1@uwm.edu", "role": "instructor", "phone": "",
                                                           "address": "", "officehours": ""})
-        self.assertEqual(response.url, '/AccountDisplay/')
-
-        response = self.client.post("/RegisterAccount/", {"username": "user2", "password": "password1",
+        self.assertEqual(response.url, "/AccountDisplay/")
+        response = self.client.post("/RegisterAccount/", {"username": "user2", "name":"mo","password": "password1",
                                     "email": "user1@uwm.edu", "role": "instructor", "phone": "", "address": "", "officehours": ""}, follow=True)
         self.assertEqual(len(response.context["accounts"]), 3)
 

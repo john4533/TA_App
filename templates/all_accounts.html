@@ -15,7 +15,7 @@
         </div>
         {% if user.role == "Supervisor" or role == "Supervisor" %}
             <button class="btn btn-warning" type="submit" name="register_account"
-                    value="register_account">Add Account
+                    value={{ user.username }}>Add Account
             </button>
         {% endif %}
     </form>
