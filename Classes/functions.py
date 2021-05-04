@@ -178,3 +178,9 @@ def unAssignTASection(sectionid):
     section.TA_assigned=None
     section.save()
     return "TA has been unassigned from this section"
+
+def unAssignInstructor(courseid):
+    course=Course.objects.get(courseid=courseid)
+    course.Instructor=None
+    course.save()
+    return "Instructor has been unassigned from this course"
