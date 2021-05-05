@@ -14,9 +14,11 @@
             <div class="print">
                 {{ message }}
             </div>
-            <button class="btn btn-warning" type="submit" name="add_course" value="add_course">Add
-                Course
-            </button>
+            {% if user.role == "Supervisor" or role == "Supervisor" %}
+                <button class="btn btn-warning" type="submit" name="add_course" value="add_course">Add
+                    Course
+                </button>
+            {% endif %}
         </form>
     </nav>
 {% endblock %}
@@ -36,16 +38,18 @@
                             <h2> {{ course.name }}</h2>
                         </div>
                         <div style="float:right">
-                            <button type="submit" class="btn btn-danger" name="delete_course"
-                                    value="{{ course.courseid }}"
-                                    style="font-size:17px; margin-top:12px">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                     class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                    <path fill-rule="evenodd"
-                                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                </svg>
-                            </button>
+                            {% if user.role == "Supervisor" or role == "Supervisor" %}
+                                <button type="submit" class="btn btn-danger" name="delete_course"
+                                        value="{{ course.courseid }}"
+                                        style="font-size:17px; margin-top:12px">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                         class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -57,18 +61,22 @@
                     </div>
                     <div class="col">
                         <div style="text-align: center">
-                            {% if course.Instructor == null %}
+                            {% if course.Instructor == null and user.role == "Supervisor" or role == "Supervisor" %}
                                 <button class="btn btn-warning assign-btn" type="submit" name="assign_instructor"
                                         value={{ course.courseid }}>
                                     Assign Instructor
                                 </button>
+
                             {% else %}
                                 <h3>Instructor: {{ course.Instructor.name }}
-                                    <button type="submit" class="btn btn-danger"
-                                            style="font-size:17px; margin-top:12px" name="rem_Ins"
-                                            value={{ course.courseid }}>
-                                        Remove
-                                    </button>
+                                    {% if user.role == "Supervisor" or role == "Supervisor" %}
+
+                                        <button type="submit" class="btn btn-danger"
+                                                style="font-size:17px; margin-top:12px" name="rem_Ins"
+                                                value={{ course.courseid }}>
+                                            Remove
+                                        </button>
+                                    {% endif %}
                                 </h3>
                             {% endif %}
                         </div>
@@ -92,9 +100,11 @@
                         <th><h5>Grader</h5></th>
                         <th>
                             <div class="col">
-                                <button class="btn btn-warning assign-btn" type="submit" name="assign_TA_to_course"
-                                        value={{ course.courseid }}>Assign TA
-                                </button>
+                                {% if user.role == "Supervisor" or role == "Supervisor" %}
+                                    <button class="btn btn-warning assign-btn" type="submit" name="assign_TA_to_course"
+                                            value={{ course.courseid }}>Assign TA
+                                    </button>
+                                {% endif %}
                             </div>
                         </th>
                     </tr>
@@ -107,11 +117,13 @@
                                 <td><h6>{{ TA.user.skills }}</h6></td>
                                 <td><h6>{{ TA.graderstatus }}</h6></td>
                                 <td>
-                                    <button type="submit" class="btn btn-danger delete-course-btn" name="rem_TA"
-                                            value="{{ TA.user.username }}"
-                                            style="font-size:17px; margin-top:12px">
-                                        Remove
-                                    </button>
+                                    {% if user.role == "Supervisor" or role == "Supervisor" %}
+                                        <button type="submit" class="btn btn-danger delete-course-btn" name="rem_TA"
+                                                value="{{ TA.user.username }}"
+                                                style="font-size:17px; margin-top:12px">
+                                            Remove
+                                        </button>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endif %}
@@ -134,9 +146,11 @@
                         <th><h5>Staff</h5></th>
                         <th>
                             <div class="col">
-                                <button type="submit" class="btn btn-warning" name="register_section"
-                                        value={{ course.courseid }} style="font-size=16px">Add Section
-                                </button>
+                                {% if user.role == "Supervisor" or role == "Supervisor" %}
+                                    <button type="submit" class="btn btn-warning" name="register_section"
+                                            value={{ course.courseid }} style="font-size=16px">Add Section
+                                    </button>
+                                {% endif %}
                             </div>
                         </th>
                     </tr>
@@ -151,30 +165,36 @@
                             <td><h6>{{ section.schedule }}</h6></td>
 
                             <td>
-                                {% if section.TA_assigned == null %}
+                                {% if section.TA_assigned == null and  user.role == "Supervisor" or role == "Supervisor" %}
                                     <button class="btn btn-warning" type="submit" name="assign_TA_to_Section"
                                             value={{ section.sectionid }} style="font-size=16px">
                                         Assign
                                     </button>
                                 {% else %}
                                     <h6>{{ section.TA_assigned.user.name }}
-                                        <button type="submit" class="btn btn-danger" style="font-size:16px"
-                                                name="rem_TA_sec" value={{ section.sectionid }}>
-                                            Remove
-                                        </button>
+                                        {% if TA.course.courseid == course.courseid %}
+                                            <button type="submit" class="btn btn-danger" style="font-size:16px"
+                                                    name="rem_TA_sec" value={{ section.sectionid }}>
+                                                Remove
+                                            </button>
+                                        {% endif %}
                                     </h6>
                                 {% endif %}
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-danger" style="font-size: 16px" name="del_section"
-                                        value={{ section.sectionid }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                         class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                    </svg>
-                                </button>
+                                {% if TA.course.courseid == course.courseid %}
+                                    <button type="submit" class="btn btn-danger" style="font-size: 16px"
+                                            name="del_section"
+                                            value={{ section.sectionid }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                             fill="currentColor"
+                                             class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd"
+                                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
+                                    </button>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

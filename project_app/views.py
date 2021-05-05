@@ -62,8 +62,9 @@ class RegisterAccount(View):
 
 class Courses(View):
     def get(self, request):
+        user = User.objects.get(username=request.session["name"])
         return render(request, "all_courses.html", {"dictionary": getCourses(),
-                                                    "TAs": list(TA.objects.all())})
+                                                    "TAs": list(TA.objects.all()), "user": user})
 
     def post(self, request):
         if request.POST.get('add_course'):
@@ -90,9 +91,12 @@ class Courses(View):
             elif request.POST.get('rem_TA_sec'):
                 message = unAssignTASection(request.POST['rem_TA_sec'])
             elif request.POST.get('rem_Ins'):
-                message=unAssignInstructor(request.POST['rem_Ins'])
+                message = unAssignInstructor(request.POST['rem_Ins'])
+
+            user = User.objects.get(username=request.session["name"])
             return render(request, "all_courses.html", {"dictionary": getCourses(),
-                                                        "TAs": list(TA.objects.all()), "message":message})
+                                                        "TAs": list(TA.objects.all()), "message": message,
+                                                        "user": user})
 
 
 class RegisterCourses(View):
@@ -168,4 +172,5 @@ class AssignTAToSection(View):
             return redirect('/Courses/')
 
         else:
-            return render(request, "assign_TA_to_section.html", {"TAs": getTAsInCourse(request.session["sectionid"]),"message":message})
+            return render(request, "assign_TA_to_section.html",
+                          {"TAs": getTAsInCourse(request.session["sectionid"]), "message": message})
