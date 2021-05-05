@@ -29,8 +29,6 @@ class CourseTestCase(TestCase):
     def test_nocoursecredits(self):
         self.assertEqual(createCourse("361", "Software Engineering", ""), "Please fill out all required entries")
 
-
-
 #   DELETE COURSE TESTS
     def test_deletenocourseidentered(self):
         self.assertEqual(deleteCourse(""), "Please enter a course ID")
@@ -58,29 +56,43 @@ class CourseTestCase(TestCase):
 
     # ASSIGN
     def test_setup(self):
-        test_Sup = createAccount("testSup","xde","123", "email", "Supervisor", "123", "addr", "hours")
-        test_Ins = createAccount("testIns","zz", "123", "email", "Instructor", "123", "addr", "hours")
-        test_TA = createAccount("testTA","dd", "123", "email", "TA", "123", "addr", "hours")
-        test_course1 = createCourse("1", "course1", "1")
-        test_course2 = createCourse("2", "course2", "2")
+        test_Sup = createAccount("testSup","xde","123", "email", "Supervisor", "123", "addr", "Sup hours")
+        test_Ins = createAccount("testIns","zz", "123", "email", "Instructor", "123", "addr", "Ins hours")
+        test_TA = createAccount("testTA","dd", "123", "email", "TA", "123", "addr", "TA hours")
+        test_course1 = createCourse("361", "Test Course 1", "1")
+        test_section1 = createSection(test_course1, "901", "Lab", "section hours")
 
     # ASSIGN INSTRUCTOR
     def test_assignInstructor_badParam(self):
-        self.assertEqual(assignInstructor("", ""), "Please select an Instructor")
-        self.assertEqual(assignInstructor("", "testIns"), "Please select an Instructor")
-        self.assertEqual(assignInstructor("course1", ""), "Please select an Instructor")
+        test_Ins = createAccount("testIns", "zz", "123", "email", "Instructor", "123", "addr", "Ins hours")
+        test_course1 = createCourse("361", "Test Course 1", "1")
+
+        self.assertEqual(assignInstructor("", ""), "Please fill out all required fields")
+        self.assertEqual(assignInstructor("", test_Ins), "Please fill out all required fields")
+        self.assertEqual(assignInstructor("361", ""), "Please fill out all required fields")
 
     def test_assignInstructor_goodParam(self):
+        test_Ins = createAccount("testIns", "zz", "123", "email", "Instructor", "123", "addr", "Ins hours")
+        test_course1 = createCourse("361", "Test Course 1", "1")
+
         self.assertEqual(assignInstructor("course1", "testIns"), "")
 
     # ASSIGN TA
     def test_assignTAtoCourse_badParam(self):
+        test_TA = createAccount("testTA","dd", "123", "email", "TA", "123", "addr", "TA hours")
+        test_course1 = createCourse("361", "Test Course 1", "1")
+
         self.assertEqual(assignTAtoCourse("", "", "", ""), "Please fill out all required fields")
-        self.assertEqual(assignTAtoCourse("1", "", "", ""), "Please fill out all required fields")
+        self.assertEqual(assignTAtoCourse("361", "", "", ""), "Please fill out all required fields")
         self.assertEqual(assignTAtoCourse("", "testTA", "", ""), "Please fill out all required fields")
         self.assertEqual(assignTAtoCourse("", "", "1", ""), "Please fill out all required fields")
-        self.assertEqual(assignTAtoCourse("", "", "", "True"), "Please fill out all required fields")
+        self.assertEqual(assignTAtoCourse("", "", "", False), "Please fill out all required fields")
 
     def test_assignTAtoCourse_goodParam(self):
-        self.assertEqual(assignTAtoCourse("1", "testTA", "1", "True"), "")
+        self.assertEqual(assignTAtoCourse("1", "testTA", "1", True), "")
+
+    def test_assignTAtoSection_badParam(self):
+        #not made yet, params are TA username and section ID
+        self.assertEqual(assignTAtoSection("", ""), "please select a user")
+        self.assertEqual(assignTAtoSection("", ))
 
