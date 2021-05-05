@@ -1,44 +1,48 @@
 from django.test import TestCase, Client
-from project_app.models import Course, Lab
+from project_app.models import Course,Section,User
 
 
 class SupCourseTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.course = Course.objects.create(courseid="361", coursename="Software Engineering", courseschedule="TR @ 10:00 - 10:50", coursecredits=3)
-        self.lab = Lab.objects.create(course= self.course, labid="901", labname="Lab 1",
-                                            labschedule="T @ 11:00 - 12:50")
+        self.course = Course.objects.create(courseid="361", name="Software Engineering",credits=3)
+        self.lab = Section.objects.create(course= self.course, sectionid="901", type="Lab",
+                                            schedule="T @ 11:00 - 12:50")
+        self.loginuser = User.objects.create(username="user23", name="user23", password="123", email="nub@uwm.edu",
+                                             role="supervisor")
 
-    def test_labExists(self):
-        self.client.post("/SupCourses/", {"add_lab": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterLab/", {"lab_id": self.lab.labid, "lab_name": self.lab.labname,
-                                                      "lab_sched": self.lab.labschedule})
-        self.assertEqual(response.context["message"], "Lab with that ID already exists", msg="Lab created twice")
+    def test_SectionExists(self):
+        self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
+        response = self.client.post("/RegisterSection/", {"section_sectionid": self.lab.sectionid, "type": self.lab.type,
+                                                      "section_schedule": self.lab.schedule})
+        self.assertEqual(response.context["message"], "Section with that ID already exists", msg="Section created twice")
 
-    def test_createLab(self):
-        self.client.post("/SupCourses/", {"add_lab": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterLab/", {"lab_id": "902", "lab_name": "Lab 2", "lab_sched": "R @ 11:00 - 12:50"})
-        self.assertEqual(response.url, '/SupCourses/')
+    def test_createsection(self):
+        response = self.client.post("/", {"name": "user23", "password": "123"})
+        self.assertEqual(response.url, '/Home/')
+        self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
+        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"})
+        self.assertEqual(response.url, '/Courses/')
 
-        self.client.post("/SupCourses/", {"add_lab": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterLab/",
-                                    {"lab_id": "903", "lab_name": "Lab 2", "lab_sched": "R @ 11:00 - 12:50"}, follow=True)
+        self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
+        response = self.client.post("/RegisterSection/",
+                                    {"section_sectionid": "903", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"}, follow=True)
         self.assertEqual(len(response.context["dictionary"][self.course]), 3)
 
-    def test_emptyLabid(self):
-        self.client.post("/SupCourses/", {"add_lab": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterLab/", {"lab_id": "", "lab_name": "Lab 2", "lab_sched": "R @ 11:00 - 12:50"})
+    def test_emptySectionid(self):
+        self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
+        response = self.client.post("/RegisterSection/", {"section_sectionid": "", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"})
         self.assertEqual(response.context["message"], "Please fill out all required entries",
-                         msg="Empty id, lab created without id")
+                         msg="Empty id, section created without id")
 
-    def test_emptyLabname(self):
-        self.client.post("/SupCourses/", {"add_lab": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterLab/", {"lab_id": "902", "lab_name": "", "lab_sched": "R @ 11:00 - 12:50"})
+    def test_emptySectionname(self):
+        self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
+        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "", "section_schedule": "R @ 11:00 - 12:50"})
         self.assertEqual(response.context["message"], "Please fill out all required entries",
                          msg="Empty name, lab created without name")
 
-    def test_emptyLabschedule(self):
-        self.client.post("/SupCourses/", {"add_lab": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterLab/", {"lab_id": "902", "lab_name": "Lab 2", "lab_sched": ""})
+    def test_emptySectionschedule(self):
+        self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
+        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "lab", "section_schedule": ""})
         self.assertEqual(response.context["message"], "Please fill out all required entries",
                          msg="Empty schedule, lab created without schedule")

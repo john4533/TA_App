@@ -58,17 +58,17 @@ class CourseTestCase(TestCase):
 
     # ASSIGN
     def test_setup(self):
-        test_Sup = createAccount("testSup", "123", "email", "Supervisor", "123", "addr", "hours")
-        test_Ins = createAccount("testIns", "123", "email", "Instructor", "123", "addr", "hours")
-        test_TA = createAccount("testTA", "123", "email", "TA", "123", "addr", "hours")
+        test_Sup = createAccount("testSup","xde","123", "email", "Supervisor", "123", "addr", "hours")
+        test_Ins = createAccount("testIns","zz", "123", "email", "Instructor", "123", "addr", "hours")
+        test_TA = createAccount("testTA","dd", "123", "email", "TA", "123", "addr", "hours")
         test_course1 = createCourse("1", "course1", "1")
         test_course2 = createCourse("2", "course2", "2")
 
     # ASSIGN INSTRUCTOR
     def test_assignInstructor_badParam(self):
-        self.assertEqual(assignInstructor("", ""), "Please fill out all required fields")
-        self.assertEqual(assignInstructor("", "testIns"), "Please fill out all required fields")
-        self.assertEqual(assignInstructor("course1", ""), "Please fill out all required fields")
+        self.assertEqual(assignInstructor("", ""), "Please select an Instructor")
+        self.assertEqual(assignInstructor("", "testIns"), "Please select an Instructor")
+        self.assertEqual(assignInstructor("course1", ""), "Please select an Instructor")
 
     def test_assignInstructor_goodParam(self):
         self.assertEqual(assignInstructor("course1", "testIns"), "")

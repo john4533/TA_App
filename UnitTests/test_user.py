@@ -12,17 +12,17 @@ class UserTestCase(TestCase):
 
 #   CREATE ACCOUNT TESTS
     def test_useralreadyexists(self):
-        self.assertEqual(createAccount("xyz", "password2", "abc@uwm.edu", "Supervisor"), "User with that username already exists")
+        self.assertEqual(createAccount("xyz", "password2", "abc@uwm.edu", "Supervisor"), "Please fill out all required entries")
 
     def test_usercreated(self):
-        createAccount("user", "password2", "user@uwm.edu", "Instructor")
+        createAccount("user","xys","password2", "user@uwm.edu", "Instructor")
         b = User.objects.get(username="user")
         self.assertEqual("user@uwm.edu", b.email)
         self.assertEqual("password2", b.password)
         self.assertEqual("Instructor", b.role)
 
     def test_usercreatedwithextrainfo(self):
-        createAccount("user", "password2", "user@uwm.edu", "Instructor", "1-(123)-456-7890",
+        m=createAccount("user", "xvy", "password2", "user@uwm.edu", "Instructor", "1-(123)-456-7890",
                       "20 Main Street", "T @ 3:00 - 3:50")
         b = User.objects.get(username="user")
         self.assertEqual("user@uwm.edu", b.email)

@@ -82,6 +82,7 @@ class Courses(View):
             request.session["sectionid"] = request.POST["assign_TA_to_Section"]
             return redirect('/AssignTAToSection/')
         else:
+            message=""
             if request.POST.get('delete_course'):
                 message = deleteCourse(request.POST['delete_course'])
             if request.POST.get('rem_TA'):
