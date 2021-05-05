@@ -17,11 +17,11 @@ class SupAccountsTest(TestCase):
         self.assertEqual(response.url,'/Home/')
         response = self.client.post("/RegisterAccount/", {"username": "user1","name":"kad", "password": "password1",
                                                           "email": "user1@uwm.edu", "role": "instructor", "phone": "",
-                                                          "address": "", "officehours": ""})
+                                                          "address": "", "officehours": "","skills":""})
         self.assertEqual(response.url, "/AccountDisplay/")
 
         response = self.client.post("/RegisterAccount/", {"username": "user2", "name":"mo","password": "password1",
-                                    "email": "user1@uwm.edu", "role": "instructor", "phone": "", "address": "", "officehours": ""}, follow=True)
+                                    "email": "user1@uwm.edu", "role": "instructor", "phone": "", "address": "", "officehours": "","skills":""}, follow=True)
         self.assertEqual(len(response.context["accounts"]), 4)
 
     def test_createAccountwithfullinfo(self):
@@ -30,14 +30,14 @@ class SupAccountsTest(TestCase):
 
         response = self.client.post("/RegisterAccount/", {"username": "user1","name": "4er","password": "password1",
                                     "email": "user1@uwm.edu", "role": "instructor", "phone": "1-(123)-456-7890",
-                                    "address": "20 Main Street", "officehours": "T @ 3:00 - 3:50"})
+                                    "address": "20 Main Street", "officehours": "T @ 3:00 - 3:50","skills":""})
         self.assertEqual(response.url, '/AccountDisplay/')
 
         response = self.client.post("/RegisterAccount/", {"username": "user2", "name": "4wer","password": "password1",
                                                           "email": "user1@uwm.edu", "role": "instructor",
                                                           "phone": "1-(123)-456-7890",
                                                           "address": "20 Main Street",
-                                                          "officehours": "T @ 3:00 - 3:50"}, follow=True)
+                                                          "officehours": "T @ 3:00 - 3:50","skills":""}, follow=True)
         self.assertEqual(len(response.context["accounts"]), 4)
 
     def test_emptyUsername(self):
