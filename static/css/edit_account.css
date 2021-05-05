@@ -1,23 +1,31 @@
-.center{
+.center {
     margin-top: 150px;
     text-align: center;
 }
-h3{
+
+h3 {
     color: #043b5d;
     display: inline;
 }
-.content ul{
+
+.content ul {
     display: inline-block;
     text-align: left;
     list-style: none;
     font-size: 30px;
 }
 
-.form-group-row .btn-secondary{
-    margin-top: 17px;
+.form-group-row .btn-warning {
+    margin-top: 10px;
 }
 
 .form-group-row {
     float: right;
     padding-top: 10px;
+    display: inline;
+}
+.left {
+    align-items: self-end ;
+
+    padding-left: 100px;
 }

@@ -17,14 +17,15 @@ def login(name, password):
         return True
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="", officehours=""):
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officehours="",
+                  skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
     # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
     if username != '' and name != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
-                                address=address, officehours=officehours)
+                                address=address, officehours=officehours, skills=skills)
             if role == "TA":
                 user1 = User.objects.get(username=username)
                 TA.objects.create(user=user1)
@@ -34,6 +35,32 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
     else:
         string = "Please fill out all required entries"
     return string
+
+
+def editAccount(username="", name="", password="", email="", role="", phone="", address="", officehours="", skills=""):
+    #precodition user must exist
+    #post condition the users account information as been updated
+    user = User.objects.get(username=username)
+    user.name = name
+    user.save()
+    user.password = password
+    user.save()
+    user.email = email
+    user.save()
+    if role:
+        user.role = role
+        user.save()
+    user.phone = phone
+    user.save()
+    user.address = address
+    user.save()
+    user.officehours = officehours
+    user.save()
+    if skills:
+        user.skills = skills
+        user.save()
+
+    return ""
 
 
 def createCourse(courseId="", name="", credits=""):

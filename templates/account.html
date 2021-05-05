@@ -6,6 +6,12 @@
 
 {% block header %}
     <h1>Account</h1>
+    <form class="form-group-row" method="post">
+        {% csrf_token %}
+        <button class="btn btn-secondary" type="submit" name="edit_account"
+                value={{ user.username }}>Edit Info
+        </button>
+    </form>
 {% endblock %}
 
 
@@ -20,6 +26,9 @@
                 <li><h3>Address:</h3> {{ user.address }}</li>
                 <li><h3>Phone Number:</h3> {{ user.phone }}</li>
                 <li><h3>Role:</h3> {{ user.role }}</li>
+                {% if user.role == "TA" %}
+                <li><h3>Skills:</h3> {{ use.skills }}</li>
+                {% endif %}
             </ul>
         </div>
     </div>

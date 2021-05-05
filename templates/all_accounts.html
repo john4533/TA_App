@@ -8,8 +8,6 @@
     <h1> All Accounts</h1>
     <form class="form-group-row" method="post">
         {% csrf_token %}
-        {#                            <input class="col-xs-2" type="search" placeholder="Search" aria-label="Search">#}
-        {#                            <button class="btn btn-warning  my-sm-0" type="submit">Search</button>#}
         <div class="print">
             {{ delete_message }}
         </div>
@@ -33,6 +31,9 @@
                 <th><h5>Contact Information</h5></th>
                 <th><h5>Role</h5></th>
                 <th><h5>Office Hours</h5></th>
+                <th><h5>Skills</h5></th>
+                <th></th>
+                <th></th>
                 <th></th>
             </tr>
             </thead>
@@ -49,18 +50,27 @@
                     </td>
                     <td><h5>{{ account.role }}</h5></td>
                     <td><h5>{{ account.officehours }}</h5></td>
-                    <td>
+                    <td><h5>{{ account.skills }}</h5></td>
+                    <td></td>
+
 
                         <div>
                             {% if user.role == "Supervisor" or role == "Supervisor" %}
-                                <button type="submit" class="btn btn-danger" name="delete_account"
-                                        value={{ account.username }}>Delete
-                                </button>
+                                <td>
+                                    <button class="btn btn-secondary" type="submit" name="edit_account"
+                                            value={{ user.username }}>Edit
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger" name="delete_account"
+                                            value={{ account.username }}>Delete
+                                    </button>
+                                </td>
                             {% endif %}
-                        </div>
-                        {#                                        <div>#}
-                        {#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_account" value={{ account.email }}>Edit</button>#}
-                        {#                                        </div>#}
+                    </div>
+                    {#                                        <div>#}
+                    {#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_account" value={{ account.email }}>Edit</button>#}
+                    {#                                        </div>#}
                     </td>
                 </tr>
             {% endfor %}

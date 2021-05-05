@@ -28,6 +28,28 @@ class Account(View):
         user = User.objects.get(username=request.session["name"])
         return render(request, "account.html", {"user": user})
 
+    def post(self, request):
+        request.session["name"] = request.POST["edit_account"]
+        return redirect('/editAccount/')
+
+
+class EditAccount(View):
+    def get(self, request):
+        user = User.objects.get(username=request.session["name"])
+        return render(request, "edit_account.html", {"user": user})
+
+    def post(self, request):
+
+        message = editAccount(request.session["name"],
+                                request.POST.get('name'), request.POST.get('password'),
+                                request.POST.get('email'),request.POST.get('role'),
+                                request.POST.get('phone'), request.POST.get('address'),
+                                request.POST.get('officehours'), request.POST.get('skills'))
+        if message is "":
+            return redirect('/Account/')
+        else:
+            return render(request, "redit_account.html", {"roles": Roles.choices, "message": message})
+
 
 class AccountDisplay(View):
     def get(self, request):
@@ -53,7 +75,7 @@ class RegisterAccount(View):
         message = createAccount(request.POST['username'], request.POST['name'], request.POST['password'],
                                 request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
-                                request.POST.get('officehours'))
+                                request.POST.get('officehours'), request.POST.get('skills'))
         if message is "":
             return redirect('/AccountDisplay/')
         else:
