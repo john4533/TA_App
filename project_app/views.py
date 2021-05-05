@@ -58,6 +58,8 @@ class AccountDisplay(View):
                       {"accounts": list(User.objects.exclude(role="Supervisor")), "user": user})
 
     def post(self, request):
+        if request.POST.get('edit_account'):
+            return redirect('/editAccount/')
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",

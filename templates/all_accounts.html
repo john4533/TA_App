@@ -56,11 +56,11 @@
 
                         <div>
                             {% if user.role == "Supervisor" or role == "Supervisor" %}
-                                <td>
-                                    <button class="btn btn-secondary" type="submit" name="edit_account"
-                                            value={{ user.username }}>Edit
-                                    </button>
-                                </td>
+                                    <td>
+                                       <button class="btn btn-secondary" type="submit" name="edit_account"
+                                                value={{ user.username }}>Edit
+                                        </button>
+                                    </td>
                                 <td>
                                     <button type="submit" class="btn btn-danger" name="delete_account"
                                             value={{ account.username }}>Delete
