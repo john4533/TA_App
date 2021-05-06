@@ -39,7 +39,6 @@ class EditAccount(View):
         return render(request, "edit_account.html", {"user": user})
 
     def post(self, request):
-
         message = editAccount(request.session["name"],
                                 request.POST.get('name'), request.POST.get('password'),
                                 request.POST.get('phone'), request.POST.get('address'),
@@ -47,7 +46,7 @@ class EditAccount(View):
         if message is "":
             return redirect('/Account/')
         else:
-            return render(request, "redit_account.html", {"roles": Roles.choices, "message": message})
+            return render(request, "edit_account.html", {"roles": Roles.choices, "message": message})
 
 
 class AccountDisplay(View):
@@ -58,7 +57,7 @@ class AccountDisplay(View):
 
     def post(self, request):
         if request.POST.get('edit_account'):
-            return redirect('/editAccount/')
+            redirect('/editAccount/')
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",
