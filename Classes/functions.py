@@ -17,7 +17,7 @@ def login(name, password):
         return True
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="", officehours="",
+def createAccount(username="", name="", password="", email="", role="", phone="", address="",officenumber="", officehours="",
                   skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
@@ -25,7 +25,7 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
     if username != '' and name != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
-                                address=address, officehours=officehours, skills=skills)
+                                address=address,officenumber=officenumber, officehours=officehours, skills=skills)
             if role == "TA":
                 user1 = User.objects.get(username=username)
                 TA.objects.create(user=user1)
@@ -37,9 +37,9 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
     return string
 
 
-def editAccount(username="", name="", password="", phone="", address="", officehours="", skills=""):
-    #precodition user must exist
-    #post condition the users account information as been updated
+def editAccount(username="", name="", password="", address="", phone="", officenumber="", officehours="", skills=""):
+    # precodition user must exist
+    # post condition the users account information as been updated
     user = User.objects.get(username=username)
     if name:
         user.name = name
@@ -47,11 +47,14 @@ def editAccount(username="", name="", password="", phone="", address="", officeh
     if password:
         user.password = password
         user.save()
+    if address:
+        user.address = address
+        user.save()
     if phone:
         user.phone = phone
         user.save()
-    if address:
-        user.address = address
+    if officenumber:
+        user.officenumber = officenumber
         user.save()
     if officehours:
         user.officehours = officehours
@@ -137,7 +140,7 @@ def deleteSection(sectionid=""):
 def assignInstructor(courseid="", instructor=""):
     # precondition: coursid of a current course and a unique instructor
     # postcondition: instructor is assigned to the passed in course
-    if instructor=="" or courseid=="":
+    if instructor == "" or courseid == "":
         string = "Please select an Instructor"
     else:
         string = ""

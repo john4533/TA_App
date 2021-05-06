@@ -25,10 +25,10 @@
                 <li><h3>Email:</h3> {{ user.email }}</li>
                 <li><h3>Address:</h3> {{ user.address }}</li>
                 <li><h3>Phone Number:</h3> {{ user.phone }}</li>
+                <li><h3>Office Number:</h3>{{ user.officenumber }}</li>
+                <li><h3>Office Hours:</h3>{{ user.officehours }}</li>
                 <li><h3>Role:</h3> {{ user.role }}</li>
-                {% if user.role == "TA" %}
                 <li><h3>Skills:</h3> {{ user.skills }}</li>
-                {% endif %}
             </ul>
         </div>
     </div>

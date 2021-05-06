@@ -22,6 +22,7 @@ class User(models.Model):
     role = models.CharField(max_length=10, choices=Roles.choices)
     phone = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=50, blank=True)
+    officenumber = models.CharField(max_length=10, blank=True)
     officehours = models.CharField(max_length=20, blank=True)
     skills = models.CharField(max_length=200, blank=True)
 

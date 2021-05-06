@@ -31,6 +31,7 @@
                 <th><h5>Contact Information</h5></th>
                 <th><h5>Role</h5></th>
                 <th><h5>Office Hours</h5></th>
+                <th><h5>Office Number</h5></th>
                 <th><h5>Skills</h5></th>
                 <th></th>
                 <th></th>
@@ -50,23 +51,24 @@
                     </td>
                     <td><h5>{{ account.role }}</h5></td>
                     <td><h5>{{ account.officehours }}</h5></td>
+                    <td><h5>{{ account.officenumber }}</h5></td>
                     <td><h5>{{ account.skills }}</h5></td>
                     <td></td>
 
 
-                        <div>
-                            {% if user.role == "Supervisor" or role == "Supervisor" %}
-                                    <td>
-                                       <button class="btn btn-secondary" type="submit" name="edit_account"
-                                                value={{ account.username }}>Edit
-                                        </button>
-                                    </td>
-                                <td>
-                                    <button type="submit" class="btn btn-danger" name="delete_account"
-                                            value={{ account.username }}>Delete
-                                    </button>
-                                </td>
-                            {% endif %}
+                    <div>
+                        {% if user.role == "Supervisor" or role == "Supervisor" %}
+                            <td>
+                                <button class="btn btn-secondary" type="submit" name="edit_account"
+                                        value={{ account.username }}>Edit
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-danger" name="delete_account"
+                                        value={{ account.username }}>Delete
+                                </button>
+                            </td>
+                        {% endif %}
                     </div>
                     {#                                        <div>#}
                     {#                                            <button type="button" class="btn btn-secondary btn-sm" name="edit_account" value={{ account.email }}>Edit</button>#}

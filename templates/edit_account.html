@@ -21,39 +21,43 @@
 
 
 {% block middle_section %}
-<form method="post">
-    {% csrf_token %}
-    <div class="center">
-        <img src="/static/images/logo1.svg">
-        <div class="content">
-            <ul>
-                <type name="usernmae" value{{ user.username }}>
-                <li><h3>Name:</h3>
-                    <input name="name" class="form-control"
-                           value={{ user.name }}>
-                </li>
-                <li><h3>Password:</h3>
-                    <input name="password" class="form-control"
-                           value={{ user.password }}>
-                </li>
-                <li><h3>Address:</h3>
-                    <input name="address" class="form-control"
-                           value={{ user.address }}>
-                </li>
-                <li><h3>Phone Number:</h3>
-                    <input name="phone" class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                           value={{ user.phone }}>
-                </li>
-                <li><h3>Office hours:</h3>
-                    <input name="officehours" class="form-control"
-                           value={{ user.officehours }}>
-                </li>
-                <li><h3>Skills:</h3>
-                    <input name="skills" class="form-control"
-                           value={{ user.skills }}>
-                </li>
-            </ul>
+    <form method="post">
+        {% csrf_token %}
+        <div class="center">
+            <img src="/static/images/logo1.svg">
+            <div class="content">
+                <ul>
+                    <type name="usernmae" value{{ user.username }}>
+                        <li><h3>Name:</h3>
+                            <input name="name" class="form-control"
+                                   value={{ user.name }}>
+                        </li>
+                        <li><h3>Password:</h3>
+                            <input name="password" class="form-control"
+                                   value={{ user.password }}>
+                        </li>
+                        <li><h3>Address:</h3>
+                            <input name="address" class="form-control"
+                                   value={{ user.address }}>
+                        </li>
+                        <li><h3>Phone Number:</h3>
+                            <input name="phone" class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                   value={{ user.phone }}>
+                        </li>
+                        <li><h3>Office Number:</h3>
+                            <input name="officenumber" class="form-control"
+                                   value={{ user.officenumber }}>
+                        </li>
+                        <li><h3>Office hours:</h3>
+                            <input name="officehours" class="form-control"
+                                   value={{ user.officehours }}>
+                        </li>
+                        <li><h3>Skills:</h3>
+                            <input name="skills" class="form-control"
+                                   value={{ user.skills }}>
+                        </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 {% endblock %}

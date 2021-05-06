@@ -98,6 +98,7 @@
                         <th><h5>Name</h5></th>
                         <th><h5>Skills</h5></th>
                         <th><h5>Grader</h5></th>
+                        <th><h5>Sections</h5></th>
                         <th>
                             <div class="col">
                                 {% if user.role == "Supervisor" or role == "Supervisor" %}
@@ -116,6 +117,7 @@
                                 <td><h6>{{ TA.user.name }}</h6></td>
                                 <td><h6>{{ TA.user.skills }}</h6></td>
                                 <td><h6>{{ TA.graderstatus }}</h6></td>
+                                <td><h6>{{ TA.numlabs }}</h6></td>
                                 <td>
                                     {% if user.role == "Supervisor" or role == "Supervisor" %}
                                         <button type="submit" class="btn btn-danger delete-course-btn" name="rem_TA"
@@ -143,7 +145,7 @@
                         <th><h5>ID</h5></th>
                         <th><h5>Type</h5></th>
                         <th><h5>Schedule</h5></th>
-                        <th><h5>Staff</h5></th>
+                        <th><h5>TAs</h5></th>
                         <th>
                             <div class="col">
                                 {% if user.role == "Supervisor" or role == "Supervisor" %}
@@ -162,17 +164,19 @@
 
                             <td><h6>{{ section.type }}</h6></td>
 
-                            <td><h6>{{ section.schedule }}</h6></td>
+                            <td><h6>{{ section.schedule }} </h6></td>
 
                             <td>
-                                {% if section.TA_assigned == null and  user.role == "Supervisor" or role == "Supervisor" %}
-                                    <button class="btn btn-warning" type="submit" name="assign_TA_to_Section"
-                                            value={{ section.sectionid }} style="font-size=16px">
-                                        Assign
-                                    </button>
+                                {% if section.TA_assigned == null %}
+                                    {% if user.role == "Supervisor"  or course.Instructor.username == user.username %}
+                                        <button class="btn btn-warning" type="submit" name="assign_TA_to_Section"
+                                                value={{ section.sectionid }} style="font-size=16px">
+                                            Assign
+                                        </button>
+                                    {% endif %}
                                 {% else %}
                                     <h6>{{ section.TA_assigned.user.name }}
-                                        {% if user.role == "Supervisor" or role == "Supervisor" %}
+                                        {% if user.role == "Supervisor" or role == "Supervisor" or course.Instructor.username == user.username %}
                                             <button type="submit" class="btn btn-danger" style="font-size:16px"
                                                     name="rem_TA_sec" value={{ section.sectionid }}>
                                                 Remove
@@ -180,6 +184,7 @@
                                         {% endif %}
                                     </h6>
                                 {% endif %}
+
                             </td>
                             <td>
                                 {% if user.role == "Supervisor" or role == "Supervisor" %}

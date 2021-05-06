@@ -40,9 +40,10 @@ class EditAccount(View):
 
     def post(self, request):
         message = editAccount(request.session["name"],
-                                request.POST.get('name'), request.POST.get('password'),
-                                request.POST.get('phone'), request.POST.get('address'),
-                                request.POST.get('officehours'), request.POST.get('skills'))
+                              request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
+                              request.POST.get('phone'), request.POST.get('officenumber'),
+                              request.POST.get('officenumber'), request.POST.get('officehours'),
+                              request.POST.get('skills'))
         if message is "":
             return redirect('/Account/')
         else:
@@ -104,7 +105,7 @@ class Courses(View):
             request.session["sectionid"] = request.POST["assign_TA_to_Section"]
             return redirect('/AssignTAToSection/')
         else:
-            message=""
+            message = ""
             if request.POST.get('delete_course'):
                 message = deleteCourse(request.POST['delete_course'])
             if request.POST.get('rem_TA'):
