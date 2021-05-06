@@ -21,20 +21,17 @@
                     <td>
                         <label>*Section ID</label>
                         <div><input name="section_sectionid"  type="text" placeholder="Section ID" required/></div>
-                    </td>
-                    <td><select name="type" required>
-                        {% for i in types %}
-                            <option value={{ i.0 }}>{{ i.0 }}</option>
-                        {% endfor %}
-                    </select><br></td>
+
+                        <div><label>Schedule</label></div>
+                        <div><input name="section_schedule" type="text" placeholder="TR @ 10:00am-11:00am" {# This will be changed to some sort of a date time object #}
+                                                                                                           {#  for the days of the week that the lab meets, the start time, and the end time#}
+                                    required/></div><br></td>
                 </tr>
                 <tr>
-                    <td>
-                        {#                                      This will be changed to some sort of a date time object for the days of the week that the lab meets, the start time, and the end time#}
-                        <div><label>Schedule</label></div>
-                        <div><input name="section_schedule" type="text" placeholder="TR @ 10:00am-11:00am"
-                                    required/></div>
-                    </td>
+                        <select name="type" required>
+                        {% for i in types %}
+                            <option value={{ i.0 }}>{{ i.0 }}</option>
+                        {% endfor %}</select>
                 </tr>
             </table>
             <div align="center">
