@@ -42,7 +42,6 @@ class EditAccount(View):
 
         message = editAccount(request.session["name"],
                                 request.POST.get('name'), request.POST.get('password'),
-                                request.POST.get('email'),request.POST.get('role'),
                                 request.POST.get('phone'), request.POST.get('address'),
                                 request.POST.get('officehours'), request.POST.get('skills'))
         if message is "":

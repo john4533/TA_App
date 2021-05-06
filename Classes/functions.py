@@ -37,25 +37,25 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
     return string
 
 
-def editAccount(username="", name="", password="", email="", role="", phone="", address="", officehours="", skills=""):
+def editAccount(username="", name="", password="", phone="", address="", officehours="", skills=""):
     #precodition user must exist
     #post condition the users account information as been updated
     user = User.objects.get(username=username)
-    user.name = name
-    user.save()
-    user.password = password
-    user.save()
-    user.email = email
-    user.save()
-    if role:
-        user.role = role
+    if name:
+        user.name = name
         user.save()
-    user.phone = phone
-    user.save()
-    user.address = address
-    user.save()
-    user.officehours = officehours
-    user.save()
+    if password:
+        user.password = password
+        user.save()
+    if phone:
+        user.phone = phone
+        user.save()
+    if address:
+        user.address = address
+        user.save()
+    if officehours:
+        user.officehours = officehours
+        user.save()
     if skills:
         user.skills = skills
         user.save()
