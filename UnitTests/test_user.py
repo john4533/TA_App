@@ -23,7 +23,7 @@ class UserTestCase(TestCase):
 
     def test_usercreatedwithextrainfo(self):
         m=createAccount("user", "xvy", "password2", "user@uwm.edu", "Instructor", "1-(123)-456-7890",
-                      "20 Main Street", "T @ 3:00 - 3:50")
+                      "20 Main Street", "123","T @ 3:00 - 3:50")
         b = User.objects.get(username="user")
         self.assertEqual("user@uwm.edu", b.email)
         self.assertEqual("password2", b.password)
