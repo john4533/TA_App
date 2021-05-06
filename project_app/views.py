@@ -76,7 +76,7 @@ class RegisterAccount(View):
         message = createAccount(request.POST['username'], request.POST['name'], request.POST['password'],
                                 request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
-                                request.POST.get('officehours'), request.POST.get('skills'))
+                                request.POST.get('officenumber'), request.POST.get('officehours'), request.POST.get('skills'))
         if message is "":
             return redirect('/AccountDisplay/')
         else:
