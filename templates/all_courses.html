@@ -172,12 +172,10 @@
                                     </button>
                                 {% else %}
                                     <h6>{{ section.TA_assigned.user.name }}
-                                        {% if TA.course.courseid == course.courseid %}
                                             <button type="submit" class="btn btn-danger" style="font-size:16px"
                                                     name="rem_TA_sec" value={{ section.sectionid }}>
                                                 Remove
                                             </button>
-                                        {% endif %}
                                     </h6>
                                 {% endif %}
                             </td>
