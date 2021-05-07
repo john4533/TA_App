@@ -60,17 +60,18 @@
                                        value={{ user.officehours }}>
                             </td>
                         </tr>
-                                                <tr>
-                                                    <td><h3>Skills:</h3>
-                                                        <input name="skills" class="form-control"
-                                                               value={{ user.skills }}>
-                                                    </td>
-                                                </tr>
+                        <tr>
+                            <td><h3>Skills:</h3>
+                                <input name="skills" class="form-control"
+                                       value={{ user.skills }}>
+                            </td>
+                        </tr>
                     </table>
                 </div>
-{#                <div><h3>Skills</h3></div>#}
-{#                <textarea name="skills" rows="5" cols="50" placeholder="Please enter a list of skills"#}
-{#                          value={{ user.skills }}></textarea>#}
+                {#                <div><h3>Skills</h3></div>#}
+                {#                <textarea name="skills" rows="5" cols="50" placeholder="Please enter a list of skills"#}
+                {#                          value={{ user.skills }}></textarea>#}
+                <br>
                 <div style="align-content: flex-end">
                     <button class="btn btn-warning" type="submit" name="update_account"
                             value={{ user.username }}>Update
