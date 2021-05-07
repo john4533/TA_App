@@ -17,39 +17,39 @@
                 <div class="legend" align="center">
                     <legend>Register Account</legend>
                 </div>
-
+                <tr>
+                    <div><select name="role" style="text-align:center" required>
+                        {% for i in roles %}
+                            <option value={{ i.0 }}>{{ i.0 }}</option>
+                        {% endfor %}
+                    </select><br></div>
+                </tr>
                 <tr>
                     <td>
                         <label>*Username</label>
-                        <div><input name="username" type="text" placeholder="username"
+                        <div><input name="username" type="text" placeholder="johndoe36"
                                     required/>
                         </div>
+                        <br>
                     </td>
+
                     <td>
-                        <label>*Name</label>
-                        <div><input name="name" type="text" placeholder="name"
-                                    required/>
-                        </div>
-                    </td>
-                    <td>
-                        <div><label>Skills</label></div>
-                        <div><input name="skills" type="skills" placeholder="Skills"
-                        /><br></div>
+                        <div><label>*Password</label></div>
+                        <div><input name="password" type="password" placeholder="password123"
+                                    required/><br></div>
+                        <br>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div><label>*Email</label></div>
-                        <div><input name="email" type="email" placeholder="email" required/>
-                        </div>
+                        <label>*Name</label>
+                        <div><input name="name" type="text" placeholder="John Doe" required/></div>
+                        <br>
                     </td>
                     <td>
-                        <div><label>*Role</label></div>
-                        <div><select name="role" required>
-                            {% for i in roles %}
-                                <option value={{ i.0 }}>{{ i.0 }}</option>
-                            {% endfor %}
-                        </select><br></div>
+                        <div><label>*Email</label></div>
+                        <div><input name="email" type="email" placeholder="doej@uwm.edu" required/></div>
+                        <br>
                     </td>
                 </tr>
                 <tr>
@@ -58,17 +58,19 @@
                         <div><input name="phone" type="tel" placeholder="123-456-7890"
                                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
                         </div>
+                        <br>
                     </td>
                     <td>
                         <div><label>Address</label></div>
                         <div><input name="address" type="text" placeholder="123 Main St Milwaukee"/><br>
                         </div>
+                        <br>
                     </td>
                 </tr>
                 <tr>
-                     <td>
+                    <td>
                         <div><label>Office Number</label></div>
-                        <div><input name="officenumber" type="text" placeholder="902"/>
+                        <div><input name="officenumber" type="text" placeholder="S217"/>
                         </div>
                     </td>
                     <td>
@@ -76,13 +78,10 @@
                         <div><input name="officehours" type="text" placeholder="TR @ 10:00am-11:00am"/>
                         </div>
                     </td>
-                    <td>
-                        <div><label>*Password</label></div>
-                        <div><input name="password" type="password" placeholder="password"
-                                    required/><br></div>
-                    </td>
                 </tr>
             </table>
+            <div><label>Skills</label></div>
+            <textarea name="skills" rows="5" cols="50" placeholder="Please enter a list of skills"></textarea>
             <div align="center">
                 <button class="btn btn-warning" type="submit" value="Submit">Add Account
                 </button>
