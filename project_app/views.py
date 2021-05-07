@@ -39,15 +39,18 @@ class EditAccount(View):
         return render(request, "edit_account.html", {"user": user})
 
     def post(self, request):
-        message = editAccount(request.session["name"],
+        message = editAccount(request.POST['update_account'],
                               request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
                               request.POST.get('phone'), request.POST.get('officenumber'),
                                request.POST.get('officehours'),
                               request.POST.get('skills'))
-        if message is "":
+        if message!="":
+            return render(request, "edit_account.html", {"roles": Roles.choices, "message": message})
+        elif request.session["name"]==request.POST['update_account']:
             return redirect('/Account/')
         else:
-            return render(request, "edit_account.html", {"roles": Roles.choices, "message": message})
+            return redirect('/AccountDisplay/')
+
 
 
 class AccountDisplay(View):
@@ -57,6 +60,10 @@ class AccountDisplay(View):
                       {"accounts": list(User.objects.exclude(role="Supervisor")), "user": user})
 
     def post(self, request):
+        if request.POST.get('edit_account'):
+            user=User.objects.get(username=request.POST['edit_account'])
+            return render(request, "edit_account.html", {"user":user})
+
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",

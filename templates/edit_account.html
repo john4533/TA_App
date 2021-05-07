@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block header %}
-    <form method="post">
+    <form action="/editAccount/" method="post">
     {% csrf_token %}
     <div class="group-row">
         <div class="form" style="display: inline">
             <h1>Edit Account</h1>
         </div>
         <div class="left" style="display: inline" style="align-content: flex-end">
-            <button class="btn btn-warning" value="Submit" type="submit" name="edit_account"
+            <button class="btn btn-warning" type="submit" name="update_account"
                     value={{ user.username }}>Update
             </button>
         </div>
@@ -21,7 +21,7 @@
 
 
 {% block middle_section %}
-    <form method="post">
+    <form  method="post">
         {% csrf_token %}
         <div class="center">
             <img src="/static/images/logo1.svg">
