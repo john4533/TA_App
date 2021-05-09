@@ -8,6 +8,16 @@ class Roles(models.TextChoices):
     ins = "Instructor"
 
 
+class Days(models.TextChoices):
+    mon = "Monday"
+    tue = "Tuesday"
+    wed = "Wednesday"
+    thu = "Thursday"
+    fri = "Friday"
+    sat = "Saturday"
+    sun = "Sunday"
+
+
 class Types(models.TextChoices):
     lec = "Lecture"
     lab = "Lab"
@@ -23,7 +33,9 @@ class User(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=50, blank=True)
     officenumber = models.CharField(max_length=10, blank=True)
-    officehours = models.CharField(max_length=20, blank=True)
+    officehoursStart = models.CharField(max_length=10, blank=True)
+    officehoursEnd = models.CharField(max_length=10, blank=True)
+    officehoursDays = models.CharField(max_length=50, blank=True)
     skills = models.CharField(max_length=200, blank=True)
 
 
@@ -46,5 +58,7 @@ class Section(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     sectionid = models.CharField(max_length=20)
     type = models.CharField(max_length=20, choices=Types.choices)
-    schedule = models.CharField(max_length=20, blank=True)
+    scheduleStart = models.CharField(max_length=10, blank=True)
+    scheduleEnd = models.CharField(max_length=10, blank=True)
+    scheduleDays = models.CharField(max_length=50, blank=True)
     TA_assigned = models.ForeignKey(TA, on_delete=models.SET_NULL, blank=True, null=True)

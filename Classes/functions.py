@@ -17,15 +17,40 @@ def login(name, password):
         return True
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="",officenumber="", officehours="",
-                  skills=""):
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart="",
+                  officehoursEnd="", officehoursDays=None, skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
     # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
+
+    formattedDays = ''
+    if officehoursDays is not None:
+        print("Office Hours Days is not None: In functions.py")
+        for day in officehoursDays:
+            if day.__eq__("Monday"):
+                formattedDays += "M"
+            elif day.__eq__("Tuesday"):
+                formattedDays += "T"
+            elif day.__eq__("Wednesday"):
+                formattedDays += "W"
+            elif day.__eq__("Thursday"):
+                formattedDays += "TR"
+            elif day.__eq__("Friday"):
+                formattedDays += "F"
+            elif day.__eq__("Saturday"):
+                formattedDays += "S"
+            elif day.__eq__("Sunday"):
+                formattedDays += "SU"
+
+        print("Formatted Days: " + formattedDays)
+    else:
+        print("No days")
+
     if username != '' and name != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
-                                address=address,officenumber=officenumber, officehours=officehours, skills=skills)
+                                address=address, officenumber=officenumber, officehoursStart=officehoursStart,
+                                officehoursEnd=officehoursEnd, officehoursDays=formattedDays, skills=skills)
             if role == "TA":
                 user1 = User.objects.get(username=username)
                 TA.objects.create(user=user1)

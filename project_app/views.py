@@ -75,17 +75,23 @@ class AccountDisplay(View):
 
 class RegisterAccount(View):
     def get(self, request):
-        return render(request, "register_account.html", {"roles": Roles.choices})
+        return render(request, "register_account.html", {"roles": Roles.choices, "days": Days.choices})
 
     def post(self, request):
-        message = createAccount(request.POST['username'], request.POST['name'], request.POST['password'],
-                                request.POST['email'],
+
+        print(len(request.POST['selectedDays'])) # I amonly getting the last selected day of the week from the form
+
+        for day in request.POST['selectedDays']:
+            print(day)
+
+        message = createAccount(request.POST['username'], request.POST['name'], request.POST['password'], request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
-                                request.POST.get('officenumber'), request.POST.get('officehours'), request.POST.get('skills'))
+                                request.POST.get('officenumber'), request.POST['selectedDays'], request.POST.get('officehoursEnd'),
+                                request.POST.get('selectedDays'), request.POST.get('skills'))
         if message is "":
             return redirect('/AccountDisplay/')
         else:
-            return render(request, "register_account.html", {"roles": Roles.choices, "message": message})
+            return render(request, "register_account.html", {"roles": Roles.choices, "days": Days.choices, "message": message})
 
 
 class Courses(View):
