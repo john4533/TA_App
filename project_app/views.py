@@ -162,7 +162,7 @@ class RegisterSection(View):
 class AssignInstructor(View):
     def get(self, request):
         return render(request, "assign_instructor.html",
-                      {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA"))})
+                      {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA")), "totalacc": len(list(User.objects.exclude(role="Supervisor").exclude(role="TA")))})
 
     def post(self, request):
         message = assignInstructor(Course.objects.get(courseid=request.session["course"]),
@@ -173,7 +173,7 @@ class AssignInstructor(View):
         else:
             return render(request, "assign_instructor.html",
                           {"accounts": list(User.objects.exclude(role="Supervisor").exclude(role="TA")),
-                           "message": message})
+                            "totalacc": len(list(User.objects.exclude(role="Supervisor").exclude(role="TA"))), "message": message})
 
 
 class AssignTAToCourse(View):

@@ -15,9 +15,7 @@
             <div class="print">
                 {{ message }}
             </div>
-            <button class="btn btn-warning" type="submit" value="Submit">Assign Instructors</button>
-            </button>
-
+        </form>
     </nav>
 
 
@@ -25,34 +23,43 @@
 
 
 {% block middle_section %}
+    <form class="form" method="post">
+        {% csrf_token %}
+        <div class="container" style="z-index: 1">
+            <div class="row">
+                <div class="col-lg-7 mx-auto">
+                    <div class="card shadow border-0 mb-5" style="background-color: floralwhite">
+                        {% if totalacc != 0 %}
+                            <div align="center">
+                                <button class="btn btn-warning" type="submit" value="Submit">Assign Instructors
+                                </button>
+                            </div>
+                        {% endif %}
+                        <div class="card-body p-5">
 
-    <div class="container" style="z-index: 1">
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <div class="card shadow border-0 mb-5">
-                    <div class="card-body p-5">
-                        <h3 align="center">Please select an instructor</h3>
-                        <ul class="list-group">
-                            {% for account in accounts %}
-                                <li class="list-group-item rounded-0">
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="form-check-input" type="radio" name="instructor" id="select"
-                                               value={{ account.username }} >
-                                        <label class="cursor-pointer  custom-control-label" value={{ account.username }}
-                                                for="select"> &nbsp&nbsp{{ account.name }}</label>
-                                    </div>
-                                </li>
-                            {% endfor %}
+                            {% if totalacc == 0 %}
+                                <h3 align="center">No instructors are available</h3>
+                            {% else %}
+                                <h3 align="center">Please select an instructor</h3>
+                            {% endif %}
 
-                            </li>
-                        </ul>
+                            <ul class="list-group">
+                                {% for account in accounts %}
+                                    <li class="list-group-item rounded-0">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="form-check-input" type="radio" name="instructor" id="select"
+                                                   value={{ account.username }}>
+                                            <label class="cursor-pointer  custom-control-label"
+                                                   value={{ account.username }}
+                                                           for="select"> &nbsp&nbsp{{ account.name }}</label>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
-
-
-
 {% endblock %}

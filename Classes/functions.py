@@ -184,7 +184,7 @@ def deleteSection(sectionid=""):
 def assignInstructor(courseid="", instructor=""):
     # precondition: coursid of a current course and a unique instructor
     # postcondition: instructor is assigned to the passed in course
-    if instructor == "" or courseid == "":
+    if instructor is None:
         string = "Please select an Instructor"
     else:
         string = ""
