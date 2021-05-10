@@ -196,9 +196,9 @@ def assignInstructor(courseid="", instructor=""):
 
 def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
     if not Username:
-        message = "please select a user"
+        message = "Please select a TA"
     elif not numLabs or int(numLabs) < 0:
-        message = "please enter number of labs"
+        message = "Please enter number of labs"
     else:
         message = ""
         ta = TA.objects.get(user__username=(User.objects.get(username=Username)).username)
@@ -214,7 +214,7 @@ def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
 
 def assignTAtoSection(sectionid="", username=""):
     if username is None:
-        message = "please select a user"
+        message = "Please select a TA"
 
     else:
         message = ""
@@ -247,6 +247,7 @@ def getTAsInCourse(sectionid):
 def unAssignTA(name):
     user1 = User.objects.get(username=name)
     ta = TA.objects.get(user=user1)
+    courseid = ta.course.courseid
     try:
         section = list(Section.objects.filter(TA_assigned=ta))
         for sect in section:
@@ -255,21 +256,24 @@ def unAssignTA(name):
         pass
     ta.course = None
     ta.save()
-    return "TA is Unassigned from this course"
+    return ta.user.name + " has been unassigned from course with ID " + courseid
 
 
 def unAssignTASection(sectionid):
     section = Section.objects.get(sectionid=sectionid)
     ta = TA.objects.get(course=section.course)
+    courseid = ta.course.courseid
+    taname = ta.user.name
     ta.assignedlabs -= 1
     ta.save()
     section.TA_assigned = None
     section.save()
-    return "TA has been unassigned from this section"
+    return taname +" has been unassigned from section with ID " + courseid + "-" + sectionid
 
 
 def unAssignInstructor(courseid):
     course = Course.objects.get(courseid=courseid)
+    instructor = course.Instructor.name
     course.Instructor = None
     course.save()
-    return "Instructor has been unassigned from this course"
+    return instructor + " has been unassigned from course with ID " + courseid

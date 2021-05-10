@@ -53,7 +53,6 @@ class EditAccount(View):
             return redirect('/AccountDisplay/')
 
 
-
 class AccountDisplay(View):
     def get(self, request):
         user = User.objects.get(username=request.session["name"])
@@ -178,7 +177,7 @@ class AssignInstructor(View):
 
 class AssignTAToCourse(View):
     def get(self, request):
-        return render(request, "assign_TA_to_course.html", dict(TAs=list(TA.objects.filter(course__isnull=True))))
+        return render(request, "assign_TA_to_course.html", {"TAs": list(TA.objects.filter(course__isnull=True)), "totalTAs": len(list(TA.objects.filter(course__isnull=True)))})
 
     def post(self, request):
         message = assignTAtoCourse(Course.objects.get(courseid=request.session["course"]), request.POST.get('UserName'),
@@ -188,13 +187,13 @@ class AssignTAToCourse(View):
             request.session["course"] = ""
             return redirect('/Courses/')
         else:
-            return render(request, "assign_TA_to_course.html", {"TAs": list(TA.objects.filter(course__isnull=True)),
+            return render(request, "assign_TA_to_course.html", {"TAs": list(TA.objects.filter(course__isnull=True)), "totalTAs": len(list(TA.objects.filter(course__isnull=True))),
                                                                 "message": message})
 
 
 class AssignTAToSection(View):
     def get(self, request):
-        return render(request, "assign_TA_to_section.html", {"TAs": getTAsInCourse(request.session["sectionid"])})
+        return render(request, "assign_TA_to_section.html", {"TAs": getTAsInCourse(request.session["sectionid"]), "totalTAs": len(getTAsInCourse(request.session["sectionid"]))})
 
     def post(self, request):
         message = assignTAtoSection(request.session["sectionid"], request.POST.get('username'))
@@ -205,4 +204,4 @@ class AssignTAToSection(View):
 
         else:
             return render(request, "assign_TA_to_section.html",
-                          {"TAs": getTAsInCourse(request.session["sectionid"]), "message": message})
+                          {"TAs": getTAsInCourse(request.session["sectionid"]),  "totalTAs": len(getTAsInCourse(request.session["sectionid"])), "message": message})

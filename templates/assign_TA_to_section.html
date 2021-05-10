@@ -15,7 +15,7 @@
             <div class="print">
                 {{ message }}
             </div>
-            <button class="btn btn-warning" type="submit" value="Submit">Assign TA to Section</button>
+        </form>
     </nav>
 
 
@@ -23,32 +23,46 @@
 
 
 {% block middle_section %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="container" style="z-index: 1">
+            <div class="row">
+                <div class="col-lg-7 mx-auto">
+                    <div class="card shadow border-0 mb-5" style="background-color: floralwhite">
+                        {% if totalTAs != 0 %}
+                            <div align="center">
+                                <button class="btn btn-warning" type="submit" value="Submit">Assign TA to Section
+                                </button>
+                            </div>
+                        {% endif %}
+                        <div class="card-body p-5">
 
-    <div class="container" style="z-index: 1">
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <div class="card shadow border-0 mb-5">
-                    <div class="card-body p-5">
-                        <h3 align="center">Please select a TA</h3>
-                        <ul class="list-group">
-                            {% for TA in TAs %}
-                                {% if TA.assignedlabs < TA.numlabs %}
-                                <li class="list-group-item rounded-0">
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="form-check-input" type="radio" name="username" id="select"
-                                               value={{ TA.user.username }}>
-                                        <label class="cursor-pointer  custom-control-label" value={{ TA.user.username }}
-                                                for="select"> &nbsp&nbsp{{ TA.user.name }}</label>
-                                    </div>
-                                </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
+                            {% if totalTAs == 0 %}
+                                <h3 align="center">No TAs are available</h3>
+                            {% else %}
+                                <h3 align="center">Please select a TA</h3>
+                            {% endif %}
+
+                            <ul class="list-group">
+                                {% for TA in TAs %}
+                                    {% if TA.assignedlabs < TA.numlabs %}
+                                        <li class="list-group-item rounded-0">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="radio" name="username" id="select"
+                                                       value={{ TA.user.username }}>
+                                                <label class="cursor-pointer  custom-control-label"
+                                                       value={{ TA.user.username }}
+                                                               for="select"> &nbsp&nbsp{{ TA.user.name }}</label>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
 
 {% endblock %}
