@@ -54,10 +54,28 @@
                                 <input name="officenumber" class="form-control"
                                        value={{ user.officenumber }}>
                             </td>
+                        </tr>
+                        <tr>
                             <td>
-                                <h3>Office hours:</h3>
-                                <input name="officehours" class="form-control"
-                                       value={{ user.officehours }}>
+                                <h3>Office Hours Start Time:</h3>
+                                <input name="officehoursStart" type="time" class="form-control"
+                                        value={{ user.officehoursStart }}>
+                                        <!-- Placeholder values not working -->
+                            </td>
+                            <td>
+                                <h3>Office Hours End Time:</h3>
+                                <input name="officehoursEnd" type="time" class="form-control"
+                                        value={{ user.officehoursEnd }}>
+                                        <!-- Placeholder values not working -->s
+                            </td>
+                            <td>
+                                <h3>Office Hours Days:</h3>
+                                <select name="selectedDays" multiple class="form-control" style="text-align:center">
+                                    <!-- The days is not containing the values for the Days.choices-->
+                                    {% for i in days %}
+                                        <option value={{ i.0 }}>{{ i.0 }}</option>
+                                    {% endfor %}
+                                </select>
                             </td>
                         </tr>
                         <tr>

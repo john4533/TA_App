@@ -33,9 +33,9 @@ class User(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=50, blank=True)
     officenumber = models.CharField(max_length=10, blank=True)
-    officehoursStart = models.CharField(max_length=10, blank=True)
-    officehoursEnd = models.CharField(max_length=10, blank=True)
-    officehoursDays = models.CharField(max_length=50, blank=True)
+    officehoursStart = models.TimeField(blank=True, null=True)
+    officehoursEnd = models.TimeField(blank=True, null=True)
+    officehoursDays = models.CharField(max_length=10, blank=True)
     skills = models.CharField(max_length=200, blank=True)
 
 
@@ -58,7 +58,7 @@ class Section(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     sectionid = models.CharField(max_length=20)
     type = models.CharField(max_length=20, choices=Types.choices)
-    scheduleStart = models.CharField(max_length=10, blank=True)
-    scheduleEnd = models.CharField(max_length=10, blank=True)
-    scheduleDays = models.CharField(max_length=50, blank=True)
+    scheduleStart = models.TimeField(blank=True, null=True)
+    scheduleEnd = models.TimeField(blank=True, null=True)
+    scheduleDays = models.CharField(max_length=10, blank=True)
     TA_assigned = models.ForeignKey(TA, on_delete=models.SET_NULL, blank=True, null=True)

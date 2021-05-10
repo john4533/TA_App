@@ -21,13 +21,24 @@
                     <td>
                         <label>*Section ID</label>
                         <div><input name="section_sectionid" type="text" placeholder="201" required/></div>
-
-                        <div><label>Schedule</label></div>
-                        <div><input name="section_schedule" type="text" placeholder="TR @ 10:00am-11:00am"
-                                {# This will be changed to some sort of a date time object #}
-                                {#  for the days of the week that the lab meets, the start time, and the end time#}
-                                    required/></div>
-                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div><label>Schedule Start Time</label></div>
+                        <div><input name="scheduleStart" type="time"/></div>
+                    </td>
+                    <td>
+                        <div><label>Schedule End Time</label></div>
+                        <div><input name="scheduleEnd" type="time"/></div>
+                    </td>
+                    <td>
+                        <div><label>Schedule Days</label></div>
+                        <div><select name="selectedDays" multiple style="text-align:center">
+                            {% for i in days %}
+                                <option value={{ i.0 }}>{{ i.0 }}</option>
+                            {% endfor %}
+                        </select><br></div>
                     </td>
                 </tr>
             </table>

@@ -17,16 +17,12 @@ def login(name, password):
         return True
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart="",
-                  officehoursEnd="", officehoursDays=None, skills=""):
-    # precondition: user with provided username does not currently exist with username, password, email, and role entered
-    # postcondition: user account is created with a unique username, a password, an email, a role,
-    # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
-
+def formatDays(daysList):
+    # precondition: a list is provided containing strings for the days of the week, or an empty list
+    # postcondition: a string for the formatted days is returned, or an empty string if an empty list was provided
     formattedDays = ''
-    if officehoursDays is not None:
-        print("Office Hours Days is not None: In functions.py")
-        for day in officehoursDays:
+    if daysList is not []:
+        for day in daysList:
             if day.__eq__("Monday"):
                 formattedDays += "M"
             elif day.__eq__("Tuesday"):
@@ -41,10 +37,18 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
                 formattedDays += "S"
             elif day.__eq__("Sunday"):
                 formattedDays += "SU"
+    return formattedDays
 
-        print("Formatted Days: " + formattedDays)
-    else:
-        print("No days")
+
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart="",
+                  officehoursEnd="", officehoursDays=[], skills=""):
+    # precondition: user with provided username does not currently exist with username, password, email, and role entered
+    # postcondition: user account is created with a unique username, a password, an email, a role,
+    # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
+
+    # Need to handle the edge cases for the office hours...
+
+    formattedDays = formatDays(officehoursDays)
 
     if username != '' and name != '' and password != '' and email != '' and role != '':
         if len(list(User.objects.filter(username=username))) == 0:
@@ -62,9 +66,13 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
     return string
 
 
-def editAccount(username="", name="", password="", address="", phone="", officenumber="", officehours="", skills=""):
+def editAccount(username="", name="", password="", address="", phone="", officenumber="",
+                officehoursStart="", officehoursEnd="", officehoursDays=[], skills=""):
     # precodition user must exist
     # post condition the users account information as been updated
+
+    formattedDays = formatDays(officehoursDays)
+
     user = User.objects.get(username=username)
     if name:
         user.name = name
@@ -81,8 +89,14 @@ def editAccount(username="", name="", password="", address="", phone="", officen
     if officenumber:
         user.officenumber = officenumber
         user.save()
-    if officehours:
-        user.officehours = officehours
+    if officehoursStart:
+        user.officehoursStart = officehoursStart
+        user.save()
+    if officehoursEnd:
+        user.officehoursEnd = officehoursEnd
+        user.save()
+    if officehoursDays:
+        user.officehoursDays = formattedDays
         user.save()
     if skills:
         user.skills = skills
@@ -105,13 +119,18 @@ def createCourse(courseId="", name="", credits=""):
     return string
 
 
-def createSection(course="", sectionid="", types="", schedule=""):
+def createSection(course="", sectionid="", types="", scheduleStart="", scheduleEnd="", scheduleDays=[]):
     # precondition: course is given and exists, section with provided sectionid does not currently exist with sectionid, type, and sectionschedule entered
     # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
-    if course != '' and sectionid != '' and types != '' and schedule != '':
 
+    # Handle the edge cases for the schedule...
+
+    formattedDays = formatDays(scheduleDays)
+
+    if course != '' and sectionid != '' and types != '' and scheduleStart != '' and scheduleEnd != '' and formattedDays != '':
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
-            Section.objects.create(course=course, sectionid=sectionid, type=types, schedule=schedule)
+            Section.objects.create(course=course, sectionid=sectionid, type=types, scheduleStart=scheduleStart,
+                                   scheduleEnd=scheduleEnd, scheduleDays=formattedDays)
             string = ""
         else:
             string = "Section with that ID already exists"

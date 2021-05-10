@@ -70,15 +70,15 @@
                 <tr>
                     <td>
                         <div><label>Office Hours Start Time</label></div>
-                        <div><input name="officehoursStart" type="time" placeholder="10:00am"/></div>
+                        <div><input name="officehoursStart" type="time"/></div>
                     </td>
                     <td>
                         <div><label>Office Hours End Time</label></div>
-                        <div><input name="officehoursEnd" type="time" placeholder="11:50pm"/></div>
+                        <div><input name="officehoursEnd" type="time"/></div>
                     </td>
                     <td>
                         <div><label>Office Hours Days</label></div>
-                        <div><select multiple name="selectedDays" style="text-align:center"> <!-- name="selectedDays[]" ...? Doesn't seem to work either-->
+                        <div><select name="selectedDays" multiple style="text-align:center">
                             {% for i in days %}
                                 <option value={{ i.0 }}>{{ i.0 }}</option>
                             {% endfor %}

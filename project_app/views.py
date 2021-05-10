@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from Classes.functions import *
+from datetime import datetime
 
 
 # Create your views here.
@@ -36,14 +37,14 @@ class Account(View):
 class EditAccount(View):
     def get(self, request):
         user = User.objects.get(username=request.session["name"])
-        return render(request, "edit_account.html", {"user": user})
+        return render(request, "edit_account.html", {"user": user, "days": Days.choices})
 
     def post(self, request):
         message = editAccount(request.POST['update_account'],
-                              request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
-                              request.POST.get('phone'), request.POST.get('officenumber'),
-                               request.POST.get('officehours'),
-                              request.POST.get('skills'))
+                            request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
+                            request.POST.get('phone'), request.POST.get('officenumber'),
+                            request.POST.get('officehoursStart'), request.POST.get('officehoursEnd'),
+                            request.POST.getlist('selectedDays'), request.POST.get('skills'))
         if message!="":
             return render(request, "edit_account.html", {"roles": Roles.choices, "message": message})
         elif request.session["name"]==request.POST['update_account']:
@@ -79,16 +80,12 @@ class RegisterAccount(View):
 
     def post(self, request):
 
-        print(len(request.POST['selectedDays'])) # I amonly getting the last selected day of the week from the form
-
-        for day in request.POST['selectedDays']:
-            print(day)
-
         message = createAccount(request.POST['username'], request.POST['name'], request.POST['password'], request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
-                                request.POST.get('officenumber'), request.POST['selectedDays'], request.POST.get('officehoursEnd'),
-                                request.POST.get('selectedDays'), request.POST.get('skills'))
-        if message is "":
+                                request.POST.get('officenumber'), request.POST.get('officehoursStart'), request.POST.get('officehoursEnd'),
+                                request.POST.getlist('selectedDays'), request.POST.get('skills'))
+
+        if message.__eq__(""):
             return redirect('/AccountDisplay/')
         else:
             return render(request, "register_account.html", {"roles": Roles.choices, "days": Days.choices, "message": message})
@@ -148,13 +145,13 @@ class RegisterCourses(View):
 
 class RegisterSection(View):
     def get(self, request):
-        return render(request, "register_section.html", {"types": Types.choices})
+        return render(request, "register_section.html", {"types": Types.choices, "days": Days.choices})
 
     def post(self, request):
         message = createSection(Course.objects.get(courseid=request.session["course"]),
-                                request.POST['section_sectionid'],
-                                request.POST['type'],
-                                request.POST['section_schedule'])
+                                request.POST['section_sectionid'], request.POST['type'],
+                                request.POST['scheduleStart'], request.POST['scheduleEnd'],
+                                request.POST.getlist('selectedDays'))
         if message is "":
             request.session["course"] = ""
             return redirect('/Courses/')
