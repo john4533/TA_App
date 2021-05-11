@@ -40,8 +40,8 @@ def formatDays(daysList):
     return formattedDays
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart="",
-                  officehoursEnd="", officehoursDays=[], skills=""):
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart=None,
+                  officehoursEnd=None, officehoursDays=[], skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
     # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
@@ -50,7 +50,7 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
 
     formattedDays = formatDays(officehoursDays)
 
-    if username != '' and name != '' and password != '' and email != '' and role != '':
+    if username != '' and name != '' and password != '' and email != '' and role != '' and officehoursStart is not None and officehoursEnd is not None and formattedDays != '':
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
                                 address=address, officenumber=officenumber, officehoursStart=officehoursStart,
@@ -67,7 +67,7 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
 
 
 def editAccount(username="", name="", password="", address="", phone="", officenumber="",
-                officehoursStart="", officehoursEnd="", officehoursDays=[], skills=""):
+                officehoursStart=None, officehoursEnd=None, officehoursDays=[], skills=""):
     # precodition user must exist
     # post condition the users account information as been updated
 
@@ -119,7 +119,7 @@ def createCourse(courseId="", name="", credits=""):
     return string
 
 
-def createSection(course="", sectionid="", types="", scheduleStart="", scheduleEnd="", scheduleDays=[]):
+def createSection(course="", sectionid="", types="", scheduleStart=None, scheduleEnd=None, scheduleDays=[]):
     # precondition: course is given and exists, section with provided sectionid does not currently exist with sectionid, type, and sectionschedule entered
     # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
 
@@ -127,7 +127,7 @@ def createSection(course="", sectionid="", types="", scheduleStart="", scheduleE
 
     formattedDays = formatDays(scheduleDays)
 
-    if course != '' and sectionid != '' and types != '' and scheduleStart != '' and scheduleEnd != '' and formattedDays != '':
+    if course != '' and sectionid != '' and types != '' and scheduleStart is not None and scheduleEnd is not None and formattedDays != '':
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
             Section.objects.create(course=course, sectionid=sectionid, type=types, scheduleStart=scheduleStart,
                                    scheduleEnd=scheduleEnd, scheduleDays=formattedDays)

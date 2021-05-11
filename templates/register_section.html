@@ -26,19 +26,19 @@
                 <tr>
                     <td>
                         <div><label>Schedule Start Time</label></div>
-                        <div><input name="scheduleStart" type="time"/></div>
+                        <div><input name="scheduleStart" type="time" required/></div>
                     </td>
                     <td>
                         <div><label>Schedule End Time</label></div>
-                        <div><input name="scheduleEnd" type="time"/></div>
+                        <div><input name="scheduleEnd" type="time" required/></div>
                     </td>
                     <td>
                         <div><label>Schedule Days</label></div>
-                        <div><select name="selectedDays" multiple style="text-align:center">
+                        <div>
                             {% for i in days %}
-                                <option value={{ i.0 }}>{{ i.0 }}</option>
+                                <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
                             {% endfor %}
-                        </select><br></div>
+                        </div>
                     </td>
                 </tr>
             </table>

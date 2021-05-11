@@ -40,6 +40,9 @@ class EditAccount(View):
         return render(request, "edit_account.html", {"user": user, "days": Days.choices})
 
     def post(self, request):
+
+        print
+
         message = editAccount(request.POST['update_account'],
                             request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
                             request.POST.get('phone'), request.POST.get('officenumber'),
@@ -78,7 +81,6 @@ class RegisterAccount(View):
         return render(request, "register_account.html", {"roles": Roles.choices, "days": Days.choices})
 
     def post(self, request):
-
         message = createAccount(request.POST['username'], request.POST['name'], request.POST['password'], request.POST['email'],
                                 request.POST['role'], request.POST.get('phone'), request.POST.get('address'),
                                 request.POST.get('officenumber'), request.POST.get('officehoursStart'), request.POST.get('officehoursEnd'),
@@ -155,7 +157,7 @@ class RegisterSection(View):
             request.session["course"] = ""
             return redirect('/Courses/')
         else:
-            return render(request, "register_section.html", {"types": Types.choices, "message": message})
+            return render(request, "register_section.html", {"types": Types.choices, "days": Days.choices, "message": message})
 
 
 class AssignInstructor(View):

@@ -70,19 +70,19 @@
                 <tr>
                     <td>
                         <div><label>Office Hours Start Time</label></div>
-                        <div><input name="officehoursStart" type="time"/></div>
+                        <div><input name="officehoursStart" type="time" required/></div>
                     </td>
                     <td>
                         <div><label>Office Hours End Time</label></div>
-                        <div><input name="officehoursEnd" type="time"/></div>
+                        <div><input name="officehoursEnd" type="time" required/></div>
                     </td>
                     <td>
                         <div><label>Office Hours Days</label></div>
-                        <div><select name="selectedDays" multiple style="text-align:center">
+                        <div>
                             {% for i in days %}
-                                <option value={{ i.0 }}>{{ i.0 }}</option>
+                                <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
                             {% endfor %}
-                        </select><br></div>
+                        </div>
                     </td>
                 </tr>
             </table>
