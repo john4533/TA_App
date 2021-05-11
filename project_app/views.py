@@ -27,21 +27,43 @@ class Home(View):
 class Account(View):
     def get(self, request):
         user = User.objects.get(username=request.session["name"])
+        # print(use)
         return render(request, "account.html", {"user": user})
 
     def post(self, request):
-        request.session["name"] = request.POST["edit_account"]
+        request.session["account"] = request.POST["edit_account"]
         return redirect('/editAccount/')
 
 
 class EditAccount(View):
     def get(self, request):
-        user = User.objects.get(username=request.session["name"])
-        return render(request, "edit_account.html", {"user": user, "days": Days.choices})
+        user = User.objects.get(username=request.session["account"])
+        request.session["account"] = ""
+
+        # move into functions.py...
+
+        all_days = {"Monday": False, "Tuesday": False, "Wednesday": False, "Thursday": False, "Friday": False, "Saturday": False, "Sunday": False}
+        for c in user.officehoursDays:
+            if c.__eq__("M"):
+                all_days["Monday"] = True
+            elif c.__eq__("T"):
+                all_days["Tuesday"] = True
+            elif c.__eq__("W"):
+                all_days["Wednesday"] = True
+            elif c.__eq__("R"):
+                all_days["Thursday"] = True
+            elif c.__eq__("F"):
+                all_days["Friday"] = True
+            elif c.__eq__("S"):
+                all_days["Saturday"] = True
+            elif c.__eq__("U"):
+                all_days["Sunday"] = True
+
+        return render(request, "edit_account.html", {"user": user, "days": all_days.items()})
+        # return render(request, "edit_account.html", {"user": user, "days": Days.choices})
+
 
     def post(self, request):
-
-        print
 
         message = editAccount(request.POST['update_account'],
                             request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
@@ -51,9 +73,10 @@ class EditAccount(View):
         if message!="":
             return render(request, "edit_account.html", {"roles": Roles.choices, "message": message})
 
-        elif request.session["name"]==request.POST['update_account']:
+        elif request.session["name"] == request.POST['update_account']:
             return redirect('/Account/')
         else:
+
             return redirect('/AccountDisplay/')
 
 
@@ -65,8 +88,10 @@ class AccountDisplay(View):
 
     def post(self, request):
         if request.POST.get('edit_account'):
-            user=User.objects.get(username=request.POST['edit_account'])
-            return render(request, "edit_account.html", {"user": user, "days": Days.choices})
+            # user=User.objects.get(username=request.POST['edit_account'])
+            # user = User.objects.get(username=request.session["name"])
+            request.session["account"] = request.POST['edit_account']
+            return redirect('/editAccount/')
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",

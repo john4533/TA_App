@@ -9,13 +9,13 @@ class Roles(models.TextChoices):
 
 
 class Days(models.TextChoices):
-    mon = "Monday"
-    tue = "Tuesday"
-    wed = "Wednesday"
-    thu = "Thursday"
-    fri = "Friday"
-    sat = "Saturday"
-    sun = "Sunday"
+    M = "Monday"
+    T = "Tuesday"
+    W = "Wednesday"
+    R = "Thursday"
+    F = "Friday"
+    S = "Saturday"
+    U = "Sunday"
 
 
 class Types(models.TextChoices):

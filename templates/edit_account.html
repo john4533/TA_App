@@ -28,12 +28,12 @@
                             <td>
                                 <h3>Name:</h3>
                                 <input name="name" class="form-control"
-                                       value={{ user.name }}>
+                                       required value={{ user.name }}>
                             </td>
                             <td>
                                 <h3>Password:</h3>
                                 <input name="password" class="form-control"
-                                       value={{ user.password }}>
+                                       required value={{ user.password }}>
                             </td>
                         </tr>
                         <tr>
@@ -59,20 +59,24 @@
                             <td>
                                 <h3>Office Hours Start Time:</h3>
                                 <input name="officehoursStart" type="time" class="form-control"
-                                       value={{ user.officehoursStart }}>
+                                       required value={{ user.officehoursStart }}>
                                 <!-- Placeholder values not working -->
                             </td>
                             <td>
                                 <h3>Office Hours End Time:</h3>
                                 <input name="officehoursEnd" type="time" class="form-control"
-                                       value={{ user.officehoursEnd }}>
+                                       required value={{ user.officehoursEnd }}>
                                 <!-- Placeholder values not working -->
                             </td>
                             <td>
                                 <h3>Office Hours Days:</h3>
                                 <div class="form-control">
                                     {% for i in days %}
-                                    <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
+                                        {% if i.1 == True %}
+                                            <input type="checkbox" multiple name="selectedDays" checked value={{ i.0 }}>{{ i.0 }}<br>
+                                        {% else %}
+                                            <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </td>
@@ -97,5 +101,5 @@
 
             </div>
         </div>
-    </form >
+    </form>
 {% endblock %}

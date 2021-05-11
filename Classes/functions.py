@@ -40,7 +40,8 @@ def formatDays(daysList):
     return formattedDays
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart=None,
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="",
+                  officehoursStart=None,
                   officehoursEnd=None, officehoursDays=[], skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
@@ -74,34 +75,33 @@ def editAccount(username="", name="", password="", address="", phone="", officen
     formattedDays = formatDays(officehoursDays)
 
     user = User.objects.get(username=username)
-    if name:
-        user.name = name
-        user.save()
-    if password:
-        user.password = password
-        user.save()
-    if address:
-        user.address = address
-        user.save()
-    if phone:
-        user.phone = phone
-        user.save()
-    if officenumber:
-        user.officenumber = officenumber
-        user.save()
-    if officehoursStart:
-        user.officehoursStart = officehoursStart
-        user.save()
-    if officehoursEnd:
-        user.officehoursEnd = officehoursEnd
-        user.save()
-    if officehoursDays:
-        user.officehoursDays = formattedDays
-        user.save()
-    if skills:
-        user.skills = skills
-        user.save()
-
+    # if name:
+    user.name = name
+    user.save()
+    # if password:
+    user.password = password
+    user.save()
+    # if address:
+    user.address = address
+    user.save()
+    # if phone:
+    user.phone = phone
+    user.save()
+    # if officenumber:
+    user.officenumber = officenumber
+    user.save()
+    # if officehoursStart:
+    user.officehoursStart = officehoursStart
+    user.save()
+    # if officehoursEnd:
+    user.officehoursEnd = officehoursEnd
+    user.save()
+    # if officehoursDays:
+    user.officehoursDays = formattedDays
+    user.save()
+    # if skills:
+    user.skills = skills
+    user.save()
     return ""
 
 
@@ -268,7 +268,7 @@ def unAssignTASection(sectionid):
     ta.save()
     section.TA_assigned = None
     section.save()
-    return taname +" has been unassigned from section with ID " + courseid + "-" + sectionid
+    return taname + " has been unassigned from section with ID " + courseid + "-" + sectionid
 
 
 def unAssignInstructor(courseid):
