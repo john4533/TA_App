@@ -17,13 +17,7 @@
                 <div class="legend" align="center">
                     <legend>Register Account</legend>
                 </div>
-                <tr>
-                    <div><select name="role" style="text-align:center" required>
-                        {% for i in roles %}
-                            <option value={{ i.0 }}>{{ i.0 }}</option>
-                        {% endfor %}
-                    </select><br></div>
-                </tr>
+
                 <tr>
                     <td>
                         <label>*Username</label>
@@ -69,30 +63,42 @@
                 </tr>
                 <tr>
                     <td>
-                        <div><label>Office Hours Start Time</label></div>
+                        <div><label>*Office Hours Start Time</label></div>
                         <div><input name="officehoursStart" type="time" required/></div>
                     </td>
                     <td>
-                        <div><label>Office Hours End Time</label></div>
+                        <div><label>*Office Hours End Time</label></div>
                         <div><input name="officehoursEnd" type="time" required/></div>
                     </td>
-                    <td>
-                        <div><label>Office Hours Days</label></div>
-                        <div>
-                            {% for i in days %}
-                                <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
-                            {% endfor %}
-                        </div>
-                    </td>
                 </tr>
+
             </table>
             <br>
+            <div><label>*Office Hours Days</label></div>
+            <div>
+                {% for i in days %}
+
+                    <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>  {{ i.0 }}
+
+                {% endfor %}
+            </div>
+
+
+            <div><label>*Role</label></div>
+            <div><select name="role" style="text-align:center" required>
+                {% for i in roles %}
+                    <option value={{ i.0 }}>{{ i.0 }}</option>
+                {% endfor %}
+            </select><br></div>
+
 
             <div><label>Address</label></div>
             <textarea name="address" rows="1" cols="50" placeholder="123 Main St Milwaukee, Wisconsin"/></textarea><br>
 
             <div><label>Skills</label></div>
             <textarea name="skills" rows="5" cols="50" placeholder="Please enter a list of skills"></textarea>
+
+
             <div align="center">
                 <button class="btn btn-warning" type="submit" value="Submit">Add Account
                 </button>
