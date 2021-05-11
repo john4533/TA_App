@@ -10,7 +10,7 @@ class TestAssign(TestCase):
                                              role="supervisor")
         self.course1 = Course.objects.create(courseid="122", name="System Design", credits=3)
         self.lab = Section.objects.create(course=self.course, sectionid="901", type="Lab",
-                                          schedule="T @ 11:00 - 12:50")
+                                          )
         self.lec = Section.objects.create(course=self.course, sectionid="902", type="Lecture",
                                           schedule="T @ 11:00 - 12:50")
         self.Ins1 = User.objects.create(username="user2", name="user2", password="123", email="nub@uwm.edu",

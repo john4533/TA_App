@@ -12,6 +12,7 @@
             <h1>Edit Account</h1>
         </div>
     </div>
+    </form>
 {% endblock %}
 
 
@@ -72,7 +73,7 @@
                                 <h3>Office Hours Days:</h3>
                                 <div class="form-control">
                                     {% for i in days %}
-                                        <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}><br>
+                                    <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
                                     {% endfor %}
                                 </div>
                             </td>
@@ -97,5 +98,5 @@
 
             </div>
         </div>
-    </form>
+    </form >
 {% endblock %}

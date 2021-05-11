@@ -50,6 +50,7 @@ class EditAccount(View):
                             request.POST.getlist('selectedDays'), request.POST.get('skills'))
         if message!="":
             return render(request, "edit_account.html", {"roles": Roles.choices, "message": message})
+
         elif request.session["name"]==request.POST['update_account']:
             return redirect('/Account/')
         else:
@@ -65,8 +66,7 @@ class AccountDisplay(View):
     def post(self, request):
         if request.POST.get('edit_account'):
             user=User.objects.get(username=request.POST['edit_account'])
-            return render(request, "edit_account.html", {"user":user})
-
+            return render(request, "edit_account.html", {"user": user, "days": Days.choices})
         if request.POST.get('delete_account'):
             message = deleteAccount(request.POST['delete_account'])
             return render(request, "all_accounts.html",
