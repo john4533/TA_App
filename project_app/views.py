@@ -41,7 +41,6 @@ class EditAccount(View):
         request.session["account"] = ""
 
         # move into functions.py...
-
         all_days = {"Monday": False, "Tuesday": False, "Wednesday": False, "Thursday": False, "Friday": False, "Saturday": False, "Sunday": False}
         for c in user.officehoursDays:
             if c.__eq__("M"):
