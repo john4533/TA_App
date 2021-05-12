@@ -54,45 +54,93 @@ class CourseTestCase(TestCase):
         section= Section.objects.create(course=course1, sectionid="901", type="Lab 1",schedule="T @ 11:00 - 12:50")
         self.assertEqual(getCourses(), {course1: [section]})
 
-    # ASSIGN
-    def test_setup(self):
-        test_Sup = createAccount("testSup","xde","123", "email", "Supervisor", "123", "addr", "Sup hours")
-        test_Ins = createAccount("testIns","zz", "123", "email", "Instructor", "123", "addr", "Ins hours")
-        test_TA = createAccount("testTA","dd", "123", "email", "TA", "123", "addr", "TA hours")
-        test_course1 = createCourse("361", "Test Course 1", "1")
-        test_section1 = createSection(test_course1, "901", "Lab", "section hours")
-
     # ASSIGN INSTRUCTOR
     def test_assignInstructor_badParam(self):
-        test_Ins = createAccount("testIns", "zz", "123", "email", "Instructor", "123", "addr", "Ins hours")
-        test_course1 = createCourse("361", "Test Course 1", "1")
+        test_Ins = User.objects.create(username="testInsUser", name="testInsName", password="123",
+                                       email="testIns@uwm.edu", role="Instructor", phone="123-456-7890",
+                                       address="testInsAddress", officenumber="E252", officehoursStart="10:00",
+                                       officehoursEnd="10:50", officehoursDays=[], skills="")
+        test_course1 = Course.objects.create(courseid="361", name="Test Course 1", credits="3")
 
-        self.assertEqual(assignInstructor("", ""), "Please fill out all required fields")
-        self.assertEqual(assignInstructor("", test_Ins), "Please fill out all required fields")
-        self.assertEqual(assignInstructor("361", ""), "Please fill out all required fields")
+        self.assertEqual(assignInstructor(None, None), "Please select a course")
+        self.assertEqual(assignInstructor("", ""), "Please select a course")
+        self.assertEqual(assignInstructor(None, "testInsUser"), "Please select a course")
+        self.assertEqual(assignInstructor("", "testInsUser"), "Please select a course")
+        self.assertEqual(assignInstructor(test_course1, None), "Please select an instructor")
+        self.assertEqual(assignInstructor(test_course1, ""), "Please select an instructor")
 
     def test_assignInstructor_goodParam(self):
-        test_Ins = createAccount("testIns", "zz", "123", "email", "Instructor", "123", "addr", "Ins hours")
-        test_course1 = createCourse("361", "Test Course 1", "1")
+        test_Ins = User.objects.create(username="testInsUser", name="testInsName", password="123",
+                                       email="testIns@uwm.edu", role="Instructor", phone="123-456-7890",
+                                       address="testInsAddress", officenumber="E252", officehoursStart="10:00",
+                                       officehoursEnd="10:50", officehoursDays=[], skills="")
+        test_course1 = Course.objects.create(courseid="361", name="Test Course 1", credits="3")
 
-        self.assertEqual(assignInstructor("course1", "testIns"), "")
+        self.assertEqual(assignInstructor(test_course1, "testInsUser"), "")
 
-    # ASSIGN TA
+    # ASSIGN TA COURSE
     def test_assignTAtoCourse_badParam(self):
-        test_TA = createAccount("testTA","dd", "123", "email", "TA", "123", "addr", "TA hours")
-        test_course1 = createCourse("361", "Test Course 1", "1")
+        test_TA_User = User.objects.create(username="testTAUser", name="testTAName", password="123",
+                                           email="testTA@uwm.edu", role="TA", phone="123-456-7890",
+                                           address="testTAAddress", officenumber="E253", officehoursStart="1:00",
+                                           officehoursEnd="2:00", officehoursDays=[], skills="")
+        test_course1 = Course.objects.create(courseid="361", name="Test Course 1", credits="3")
+        test_TA_TA = TA.objects.create(user=test_TA_User, graderstatus=False, numlabs=0, course=test_course1,
+                                       assignedlabs=0)
+        self.assertEqual(assignTAtoCourse("", "", "", ""), "Please select a course")
+        self.assertEqual(assignTAtoCourse(None, None, None, None), "Please select a course")
 
-        self.assertEqual(assignTAtoCourse("", "", "", ""), "Please fill out all required fields")
-        self.assertEqual(assignTAtoCourse("361", "", "", ""), "Please fill out all required fields")
-        self.assertEqual(assignTAtoCourse("", "testTA", "", ""), "Please fill out all required fields")
-        self.assertEqual(assignTAtoCourse("", "", "1", ""), "Please fill out all required fields")
-        self.assertEqual(assignTAtoCourse("", "", "", False), "Please fill out all required fields")
+        self.assertEqual(assignTAtoCourse("", "testTAUser", 1, True), "Please select a course")
+        self.assertEqual(assignTAtoCourse(None, "testTAUser", 1, True), "Please select a course")
+
+        self.assertEqual(assignTAtoCourse(test_course1, "", 1, True), "Please select a TA")
+        self.assertEqual(assignTAtoCourse(test_course1, None, 1, True), "Please select a TA")
+
+        self.assertEqual(assignTAtoCourse(test_course1, "testTAUser", "", True), "Please enter the number of labs")
+        self.assertEqual(assignTAtoCourse(test_course1, "testTAUser", None, True), "Please enter the number of labs")
+        self.assertEqual(assignTAtoCourse(test_course1, "testTAUser", -1, True), "Please enter the number of labs")
 
     def test_assignTAtoCourse_goodParam(self):
-        self.assertEqual(assignTAtoCourse("1", "testTA", "1", True), "")
+        test_TA_User = User.objects.create(username="testTAUser", name="testTAName", password="123",
+                                           email="testTA@uwm.edu", role="TA", phone="123-456-7890",
+                                           address="testTAAddress", officenumber="E253", officehoursStart="1:00",
+                                           officehoursEnd="2:00", officehoursDays=[], skills="")
+        test_course1 = Course.objects.create(courseid="361", name="Test Course 1", credits="3")
+        test_TA_TA = TA.objects.create(user=test_TA_User, graderstatus=False, numlabs=0, course=test_course1,
+                                       assignedlabs=0)
+        self.assertEqual(assignTAtoCourse(test_course1, "testTAUser", 1, True), "")
 
+    # ASSIGN TA SECTION
     def test_assignTAtoSection_badParam(self):
-        #not made yet, params are TA username and section ID
-        self.assertEqual(assignTAtoSection("", ""), "please select a user")
-        self.assertEqual(assignTAtoSection("", ))
+        test_TA_User = User.objects.create(username="testTAUser", name="testTAName", password="123",
+                                           email="testTA@uwm.edu", role="TA", phone="123-456-7890",
+                                           address="testTAAddress", officenumber="E253", officehoursStart="01:00",
+                                           officehoursEnd="02:00", officehoursDays=[], skills="")
+        test_course1 = Course.objects.create(courseid="361", name="Test Course 1", credits="3")
+        test_TA_TA = TA.objects.create(user=test_TA_User, graderstatus=False, numlabs=0, course=test_course1,
+                                       assignedlabs=0)
+        test_section1 = Section.objects.create(course=test_course1, sectionid="201", type="Lecture",
+                                               scheduleStart="11:00", scheduleEnd="12:45", scheduleDays="T",
+                                               TA_assigned=None)
+
+        self.assertEqual(assignTAtoSection("", ""), "Please select a section")
+        self.assertEqual(assignTAtoSection(None, None), "Please select a section")
+        self.assertEqual(assignTAtoSection("", "testTAUser"), "Please select a section")
+        self.assertEqual(assignTAtoSection(None, "testTAUser"), "Please select a section")
+        self.assertEqual(assignTAtoSection("201", ""), "Please select a TA")
+        self.assertEqual(assignTAtoSection("201", None), "Please select a TA")
+
+    def test_assignTAtoSection_goodParam(self):
+        test_TA_User = User.objects.create(username="testTAUser", name="testTAName", password="123",
+                                           email="testTA@uwm.edu", role="TA", phone="123-456-7890",
+                                           address="testTAAddress", officenumber="E253", officehoursStart="01:00",
+                                           officehoursEnd="02:00", officehoursDays=[], skills="")
+        test_course1 = Course.objects.create(courseid="361", name="Test Course 1", credits="3")
+        test_TA_TA = TA.objects.create(user=test_TA_User, graderstatus=False, numlabs=0, course=test_course1,
+                                       assignedlabs=0)
+        test_section1 = Section.objects.create(course=test_course1, sectionid="201", type="Lecture",
+                                               scheduleStart="11:00", scheduleEnd="12:45", scheduleDays="T",
+                                               TA_assigned=None)
+
+        self.assertEqual(assignTAtoSection("201", "testTAUser"), "")
 
