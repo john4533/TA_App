@@ -181,28 +181,32 @@ def deleteSection(sectionid=""):
     return string
 
 
-def assignInstructor(courseid="", instructor=""):
+def assignInstructor(courseObj="", instructorUsername=""):
     # precondition: coursid of a current course and a unique instructor
     # postcondition: instructor is assigned to the passed in course
-    if instructor is None:
-        string = "Please select an Instructor"
+    if not courseObj:
+        string = "Please select a course"
+    elif not instructorUsername:
+        string = "Please select an instructor"
     else:
         string = ""
-        courseid.Instructor = User.objects.get(username=instructor)
-        courseid.save()
+        courseObj.Instructor = User.objects.get(username=instructorUsername)
+        courseObj.save()
 
     return string
 
 
-def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
-    if not Username:
+def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=""):
+    if not courseObj:
+        message = "Please select a course"
+    elif not TAUsername:
         message = "Please select a TA"
     elif not numLabs or int(numLabs) < 0:
-        message = "Please enter number of labs"
+        message = "Please enter the number of labs"
     else:
         message = ""
-        ta = TA.objects.get(user__username=(User.objects.get(username=Username)).username)
-        ta.course = courseid
+        ta = TA.objects.get(user__username=(User.objects.get(username=TAUsername)).username)
+        ta.course = courseObj
         ta.numlabs = numLabs
         ta.assignedlabs = 0
         ta.save()
@@ -212,14 +216,15 @@ def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
     return message
 
 
-def assignTAtoSection(sectionid="", username=""):
-    if username is None:
+def assignTAtoSection(sectionid="", TAUsername=""):
+    if not sectionid:
+        message = "Please select a section"
+    elif not TAUsername:
         message = "Please select a TA"
-
     else:
         message = ""
         s = Section.objects.get(sectionid=sectionid)
-        ta = TA.objects.get(user__username=username)
+        ta = TA.objects.get(user__username=TAUsername)
         ta.assignedlabs += 1
         s.TA_assigned = ta
         s.save()
