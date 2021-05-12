@@ -51,7 +51,8 @@ class CourseTestCase(TestCase):
 
     def test_getCourses_success(self):
         course1 = Course.objects.create(courseid="337",name="Systems Programming",credits="3")
-        section= Section.objects.create(course=course1, sectionid="901", type="Lab 1",schedule="T @ 11:00 - 12:50")
+        section= Section.objects.create(course=course1, sectionid="901", type="Lab 1",scheduleStart="11:00", scheduleEnd="12:45", scheduleDays="T",
+                                               TA_assigned=None)
         self.assertEqual(getCourses(), {course1: [section]})
 
     # ASSIGN INSTRUCTOR TO A COURSE
