@@ -78,7 +78,7 @@ class CourseTestCase(TestCase):
 
         self.assertEqual(assignInstructor(test_course1, "testInsUser"), "")
 
-    # ASSIGN TA COURSE
+    # ASSIGN TA TO COURSE
     def test_assignTAtoCourse_badParam(self):
         test_TA_User = User.objects.create(username="testTAUser", name="testTAName", password="123",
                                            email="testTA@uwm.edu", role="TA", phone="123-456-7890",
@@ -110,7 +110,7 @@ class CourseTestCase(TestCase):
                                        assignedlabs=0)
         self.assertEqual(assignTAtoCourse(test_course1, "testTAUser", 1, True), "")
 
-    # ASSIGN TA SECTION
+    # ASSIGN TA TO SECTION
     def test_assignTAtoSection_badParam(self):
         test_TA_User = User.objects.create(username="testTAUser", name="testTAName", password="123",
                                            email="testTA@uwm.edu", role="TA", phone="123-456-7890",

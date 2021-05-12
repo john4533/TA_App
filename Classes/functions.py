@@ -216,15 +216,15 @@ def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=""):
     return message
 
 
-def assignTAtoSection(sectionid="", TAUsername=""):
-    if not sectionid:
+def assignTAtoSection(sectionID="", TAUsername=""):
+    if not sectionID:
         message = "Please select a section"
     elif not TAUsername:
         message = "Please select a TA"
 
     else:
         message = ""
-        s = Section.objects.get(sectionid=sectionid)
+        s = Section.objects.get(sectionid=sectionID)
         ta = TA.objects.get(user__username=TAUsername)
         ta.assignedlabs += 1
         s.TA_assigned = ta
