@@ -9,13 +9,13 @@ class Roles(models.TextChoices):
 
 
 class Days(models.TextChoices):
-    mon = "Monday"
-    tue = "Tuesday"
-    wed = "Wednesday"
-    thu = "Thursday"
-    fri = "Friday"
-    sat = "Saturday"
-    sun = "Sunday"
+    M = "Monday"
+    T = "Tuesday"
+    W = "Wednesday"
+    R = "Thursday"
+    F = "Friday"
+    S = "Saturday"
+    U = "Sunday"
 
 
 class Types(models.TextChoices):
@@ -33,9 +33,9 @@ class User(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     address = models.CharField(max_length=50, blank=True)
     officenumber = models.CharField(max_length=10, blank=True)
-    officehoursStart = models.TimeField(blank=True, null=True)
-    officehoursEnd = models.TimeField(blank=True, null=True)
-    officehoursDays = models.CharField(max_length=10, blank=True)
+    officehoursStart = models.TimeField(null=True, blank=True)
+    officehoursEnd = models.TimeField(null=True, blank=True)
+    officehoursDays = models.CharField(max_length=10)
     skills = models.CharField(max_length=200, blank=True)
 
 
@@ -60,5 +60,5 @@ class Section(models.Model):
     type = models.CharField(max_length=20, choices=Types.choices)
     scheduleStart = models.TimeField(blank=True, null=True)
     scheduleEnd = models.TimeField(blank=True, null=True)
-    scheduleDays = models.CharField(max_length=10, blank=True)
+    scheduleDays = models.CharField(max_length=10)
     TA_assigned = models.ForeignKey(TA, on_delete=models.SET_NULL, blank=True, null=True)

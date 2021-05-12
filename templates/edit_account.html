@@ -6,12 +6,13 @@
 
 {% block header %}
     <form action="/editAccount/" method="post">
-    {% csrf_token %}
-    <div class="group-row">
-        <div class="form" style="display: inline">
-            <h1>Edit Account</h1>
+        {% csrf_token %}
+        <div class="group-row">
+            <div class="form" style="display: inline">
+                <h1>Edit Account</h1>
+            </div>
         </div>
-    </div>
+    </form>
 {% endblock %}
 
 
@@ -27,67 +28,70 @@
                         <tr>
                             <td>
                                 <h3>Name:</h3>
-                                <input name="name" class="form-control"
-                                       value={{ user.name }}>
+                                <input name="name" class="form-control" type="text"
+                                       value="{{ user.name }}">
                             </td>
                             <td>
                                 <h3>Password:</h3>
-                                <input name="password" class="form-control"
-                                       value={{ user.password }}>
+                                <input name="password" class="form-control" type="password"
+                                       value="{{ user.password }}"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <h3>Address:</h3>
-                                <input name="address" class="form-control"
-                                       value={{ user.address }}>
+                                <input name="address" class="form-control" type="text"
+                                       value="{{ user.address }}">
                             </td>
                             <td>
                                 <h3>Phone Number:</h3>
                                 <input name="phone" class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                       value={{ user.phone }}>
+                                       value="{{ user.phone }}">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <h3>Office Number:</h3>
                                 <input name="officenumber" class="form-control"
-                                       value={{ user.officenumber }}>
+                                       value="{{ user.officenumber }}">
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <h3>Office Hours Start Time:</h3>
                                 <input name="officehoursStart" type="time" class="form-control"
-                                       value={{ user.officehoursStart }}>
+                                       value="{{ officeStart }}">
                                 <!-- Placeholder values not working -->
                             </td>
                             <td>
                                 <h3>Office Hours End Time:</h3>
                                 <input name="officehoursEnd" type="time" class="form-control"
-                                       value={{ user.officehoursEnd }}>
+                                       value="{{ officeEnd }}">
                                 <!-- Placeholder values not working -->
                             </td>
                             <td>
                                 <h3>Office Hours Days:</h3>
                                 <div class="form-control">
                                     {% for i in days %}
-                                    <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
+                                        {% if i.1 == True %}
+                                            <input type="checkbox" multiple name="selectedDays" checked value={{ i.0 }}>
+                                            {{ i.0 }}<br>
+                                        {% else %}
+                                            <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>
+                                            {{ i.0 }}<br>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td><h3>Skills:</h3>
-                                <input name="skills" class="form-control"
-                                       value={{ user.skills }}>
+                                <input name="skills" class="form-control" type="text"
+                                       value="{{ user.skills }}">
                             </td>
                         </tr>
                     </table>
                 </div>
-                {#                <div><h3>Skills</h3></div>#}
-                {#                <textarea name="skills" rows="5" cols="50" placeholder="Please enter a list of skills"#}
-                {#                          value={{ user.skills }}></textarea>#}
                 <br>
                 <div style="align-content: flex-end">
                     <button class="btn btn-warning" type="submit" name="update_account"
@@ -97,5 +101,5 @@
 
             </div>
         </div>
-    </form >
+    </form>
 {% endblock %}

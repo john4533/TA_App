@@ -40,8 +40,8 @@ def formatDays(daysList):
     return formattedDays
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart="",
-                  officehoursEnd="", officehoursDays=[], skills=""):
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart=None,
+                  officehoursEnd=None, officehoursDays=[], skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
     # and a phone number, address and officehours if provided, returns a message if user already exists or required entries are not filled out
@@ -50,7 +50,7 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
 
     formattedDays = formatDays(officehoursDays)
 
-    if username != '' and name != '' and password != '' and email != '' and role != '':
+    if username != '' and name != '' and password != '' and email != '' and role != '' and officehoursStart is not None and officehoursEnd is not None and formattedDays != '':
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
                                 address=address, officenumber=officenumber, officehoursStart=officehoursStart,
@@ -67,7 +67,7 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
 
 
 def editAccount(username="", name="", password="", address="", phone="", officenumber="",
-                officehoursStart="", officehoursEnd="", officehoursDays=[], skills=""):
+                officehoursStart=None, officehoursEnd=None, officehoursDays=[], skills=""):
     # precodition user must exist
     # post condition the users account information as been updated
 
@@ -119,7 +119,7 @@ def createCourse(courseId="", name="", credits=""):
     return string
 
 
-def createSection(course="", sectionid="", types="", scheduleStart="", scheduleEnd="", scheduleDays=[]):
+def createSection(course="", sectionid="", types="", scheduleStart=None, scheduleEnd=None, scheduleDays=[]):
     # precondition: course is given and exists, section with provided sectionid does not currently exist with sectionid, type, and sectionschedule entered
     # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
 
@@ -127,7 +127,7 @@ def createSection(course="", sectionid="", types="", scheduleStart="", scheduleE
 
     formattedDays = formatDays(scheduleDays)
 
-    if course != '' and sectionid != '' and types != '' and scheduleStart != '' and scheduleEnd != '' and formattedDays != '':
+    if course != '' and sectionid != '' and types != '' and scheduleStart is not None and scheduleEnd is not None and formattedDays != '':
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
             Section.objects.create(course=course, sectionid=sectionid, type=types, scheduleStart=scheduleStart,
                                    scheduleEnd=scheduleEnd, scheduleDays=formattedDays)
@@ -181,32 +181,28 @@ def deleteSection(sectionid=""):
     return string
 
 
-def assignInstructor(courseObj="", instructorUsername=""):
+def assignInstructor(courseid="", instructor=""):
     # precondition: coursid of a current course and a unique instructor
     # postcondition: instructor is assigned to the passed in course
-    if not courseObj:
-        string = "Please select a course"
-    elif not instructorUsername:
-        string = "Please select an instructor"
+    if instructor is None:
+        string = "Please select an Instructor"
     else:
         string = ""
-        courseObj.Instructor = User.objects.get(username=instructorUsername)
-        courseObj.save()
+        courseid.Instructor = User.objects.get(username=instructor)
+        courseid.save()
 
     return string
 
 
-def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=""):
-    if not courseObj:
-        message = "Please select a course"
-    elif not TAUsername:
+def assignTAtoCourse(courseid="", Username="", numLabs="", graderstatus=""):
+    if not Username:
         message = "Please select a TA"
     elif not numLabs or int(numLabs) < 0:
-        message = "Please enter the number of labs"
+        message = "Please enter number of labs"
     else:
         message = ""
-        ta = TA.objects.get(user__username=(User.objects.get(username=TAUsername)).username)
-        ta.course = courseObj
+        ta = TA.objects.get(user__username=(User.objects.get(username=Username)).username)
+        ta.course = courseid
         ta.numlabs = numLabs
         ta.assignedlabs = 0
         ta.save()
@@ -216,16 +212,14 @@ def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=""):
     return message
 
 
-def assignTAtoSection(sectionID="", TAUsername=""):
-    if not sectionID:
-        message = "Please select a section"
-    elif not TAUsername:
+def assignTAtoSection(sectionid="", username=""):
+    if username is None:
         message = "Please select a TA"
 
     else:
         message = ""
-        s = Section.objects.get(sectionid=sectionID)
-        ta = TA.objects.get(user__username=TAUsername)
+        s = Section.objects.get(sectionid=sectionid)
+        ta = TA.objects.get(user__username=username)
         ta.assignedlabs += 1
         s.TA_assigned = ta
         s.save()
@@ -253,6 +247,7 @@ def getTAsInCourse(sectionid):
 def unAssignTA(name):
     user1 = User.objects.get(username=name)
     ta = TA.objects.get(user=user1)
+    courseid = ta.course.courseid
     try:
         section = list(Section.objects.filter(TA_assigned=ta))
         for sect in section:
@@ -261,21 +256,24 @@ def unAssignTA(name):
         pass
     ta.course = None
     ta.save()
-    return "TA is Unassigned from this course"
+    return ta.user.name + " has been unassigned from course with ID " + courseid
 
 
 def unAssignTASection(sectionid):
     section = Section.objects.get(sectionid=sectionid)
     ta = TA.objects.get(course=section.course)
+    courseid = ta.course.courseid
+    taname = ta.user.name
     ta.assignedlabs -= 1
     ta.save()
     section.TA_assigned = None
     section.save()
-    return "TA has been unassigned from this section"
+    return taname +" has been unassigned from section with ID " + courseid + "-" + sectionid
 
 
 def unAssignInstructor(courseid):
     course = Course.objects.get(courseid=courseid)
+    instructor = course.Instructor.name
     course.Instructor = None
     course.save()
-    return "Instructor has been unassigned from this course"
+    return instructor + " has been unassigned from course with ID " + courseid
