@@ -90,12 +90,12 @@ def editAccount(username="", name="", password="", address="", phone="", officen
     # if officenumber:
     user.officenumber = officenumber
     user.save()
-    # if officehoursStart:
-    user.officehoursStart = officehoursStart
-    user.save()
-    # if officehoursEnd:
-    user.officehoursEnd = officehoursEnd
-    user.save()
+    if officehoursStart:
+        user.officehoursStart = officehoursStart
+        user.save()
+    if officehoursEnd:
+        user.officehoursEnd = officehoursEnd
+        user.save()
     # if officehoursDays:
     user.officehoursDays = formattedDays
     user.save()

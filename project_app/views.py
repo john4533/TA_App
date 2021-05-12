@@ -58,11 +58,15 @@ class EditAccount(View):
             elif c.__eq__("U"):
                 all_days["Sunday"] = True
 
-        return render(request, "edit_account.html", {"user": user, "days": all_days.items()})
+        print(user.address)
+
+        return render(request, "edit_account.html", {"user": user, "days": all_days.items(), "officeStart": user.officehoursStart.__str__(), "officeEnd": user.officehoursEnd.__str__()})
         # return render(request, "edit_account.html", {"user": user, "days": Days.choices})
 
 
     def post(self, request):
+
+        print(request.POST.get('name'))
 
         message = editAccount(request.POST['update_account'],
                             request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
@@ -87,8 +91,6 @@ class AccountDisplay(View):
 
     def post(self, request):
         if request.POST.get('edit_account'):
-            # user=User.objects.get(username=request.POST['edit_account'])
-            # user = User.objects.get(username=request.session["name"])
             request.session["account"] = request.POST['edit_account']
             return redirect('/editAccount/')
         if request.POST.get('delete_account'):
