@@ -24,7 +24,7 @@
             <div align="center">
                 <div class="content">
                     <table class="table1" cellspacing="50">
-                        <type name="username" value{{ user.username }}></type>
+                        <h2 name="username">{{ user.username }}</h2>
                         <tr>
                             <td>
                                 <h3>Name:</h3>
@@ -33,8 +33,7 @@
                             </td>
                             <td>
                                 <h3>Password:</h3>
-                                <input name="password" class="form-control" type="password"
-                                       value="{{ user.password }}"/>
+                                    <input type="password" name="password" class="form-control" value="{{ user.password }}">
                             </td>
                         </tr>
                         <tr>
