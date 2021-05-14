@@ -18,10 +18,10 @@
                      src="/static/images/create_lab.jpg">
                 <h3>Register Section</h3>
                 <tr>
-                    <td>
+
                         <label>*Section ID</label>
                         <div><input name="section_sectionid" type="text" placeholder="201" required/></div>
-                    </td>
+
                 </tr>
                 <tr>
                     <td>
@@ -32,16 +32,16 @@
                         <div><label>Schedule End Time</label></div>
                         <div><input name="scheduleEnd" type="time" required/></div>
                     </td>
-                    <td>
-                        <div><label>Schedule Days</label></div>
-                        <div>
-                            {% for i in days %}
-                                <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>{{ i.0 }}<br>
-                            {% endfor %}
-                        </div>
-                    </td>
                 </tr>
             </table>
+            <br>
+            <div><label>Schedule Days</label></div>
+            <div>
+                {% for i in days %}
+                    <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>  {{ i.0 }}
+                {% endfor %}
+            </div>
+            <br>
             <select align="center" name="type" required>
                 {% for i in types %}
                     <option value={{ i.0 }}>{{ i.0 }}</option>
