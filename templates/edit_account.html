@@ -39,17 +39,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <h3>Address:</h3>
-                                <input name="address" class="form-control" type="text"
-                                       value="{{ user.address }}">
-                            </td>
-                            <td>
                                 <h3>Phone Number:</h3>
                                 <input name="phone" class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                        value="{{ user.phone }}">
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <h3>Office Number:</h3>
                                 <input name="officenumber" class="form-control"
@@ -69,28 +62,26 @@
                                        value="{{ officeEnd }}">
                                 <!-- Placeholder values not working -->
                             </td>
-                            <td>
-                                <h3>Office Hours Days:</h3>
-                                <div class="form-control">
-                                    {% for i in days %}
-                                        {% if i.1 == True %}
-                                            <input type="checkbox" multiple name="selectedDays" checked value={{ i.0 }}>
-                                            {{ i.0 }}<br>
-                                        {% else %}
-                                            <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>
-                                            {{ i.0 }}<br>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h3>Skills:</h3>
-                                <input name="skills" class="form-control" type="text"
-                                       value="{{ user.skills }}">
-                            </td>
                         </tr>
                     </table>
+
+                    <h3>Office Hours Days:</h3><br>
+                        {% for i in days %}
+                            {% if i.1 == True %}
+                                <input type="checkbox" multiple name="selectedDays" checked value={{ i.0 }}>
+                                {{ i.0 }}
+                            {% else %}
+                                <input type="checkbox" multiple name="selectedDays" value={{ i.0 }}>
+                                {{ i.0 }}
+                            {% endif %}
+                        {% endfor %}
+
+                    <br><h3>Address:</h3><br>
+                    <textarea name="address" rows="1" cols="50">{{ user.address }}</textarea>
+
+
+                    <br><h3>Skills:</h3><br>
+                    <textarea name="skills" rows="5" cols="50">{{ user.skills }}</textarea>
                 </div>
                 <br>
                 <div style="align-content: flex-end">
