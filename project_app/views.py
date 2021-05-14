@@ -58,8 +58,6 @@ class EditAccount(View):
             elif c.__eq__("U"):
                 all_days["Sunday"] = True
 
-        print(user.address)
-
         return render(request, "edit_account.html", {"user": user, "days": all_days.items(), "officeStart": user.officehoursStart.__str__(), "officeEnd": user.officehoursEnd.__str__()})
         # return render(request, "edit_account.html", {"user": user, "days": Days.choices})
 
