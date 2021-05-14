@@ -40,6 +40,7 @@ h3{
 
 
 .form-control{
-    width: 80px;
+    width: 60px;
+    height: 30px;
     display: inline;
 }

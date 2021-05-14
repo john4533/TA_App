@@ -42,16 +42,22 @@
                             {% else %}
                                 <h3 align="center">Please select a TA</h3>
 
-                                <label>*Number of Labs:</label>
-                                <input class="form-control" name="numLabs" type="number" placeholder="Labs"/>
-                                <div class="form-check">
+
+                                <div style="display: inline; float: left">
+                                    <label>*Number of Labs: </label>
+                                    <input class="form-control" name="numLabs" type="number" placeholder="1">
+                                </div>
+
+                                <div style="display: inline; float: right">
                                     <label class="form-check-label" for="grader">
-                                        Select for grader status
+                                        Grader status:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="graderStatus" value="True"
+                                    <input class="form-check-input" type="checkbox" name="graderStatus"
+                                           value="True"
                                            id="grader">
                                 </div>
                             {% endif %}
+                            <br><br>
                             <ul class="list-group">
                                 {% for TA in TAs %}
                                     <li class="list-group-item rounded-0">
@@ -65,6 +71,7 @@
                                     </li>
                                 {% endfor %}
                             </ul>
+
                         </div>
                     </div>
                 </div>
