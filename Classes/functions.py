@@ -84,36 +84,6 @@ def editAccount(username="", name="", password="", address="", phone="", officen
                                                   officenumber=officenumber,
                                                   officehoursStart=officehoursStart, officehoursEnd=officehoursEnd,
                                                   officehoursDays=formattedDays, skills=skills)
-
-    # User.objects.get(username=username).update(name=name)
-    # # if name:
-    # user.name = name
-    # # user.save()
-    # # if password:
-    # user.password = password
-    # # user.save()
-    # # if address:
-    # user.address = address
-    # # user.save()
-    # # if phone:
-    # user.phone = phone
-    # # user.save()
-    # # if officenumber:
-    # user.officenumber = officenumber
-    # # user.save()
-    # # if officehoursStart:
-    # user.officehoursStart = officehoursStart
-    # # user.save()
-    # # if officehoursEnd:
-    # user.officehoursEnd = officehoursEnd
-    # # user.save()
-    # # if officehoursDays:
-    # user.officehoursDays = formattedDays
-    # # user.save()
-    # # if skills:
-    # user.skills = skills
-    # # user.save()
-
     return ""
 
 
@@ -228,23 +198,15 @@ def assignInstructor(courseObj="", instructorUsername=""):
     return string
 
 
-def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=""):
-    if not courseObj:
-        message = "Please select a course"
-    elif not TAUsername:
+def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=False):
+    if not TAUsername:
         message = "Please select a TA"
     elif not numLabs or int(numLabs) < 0:
         message = "Please enter the number of labs"
     else:
         message = ""
-        ta = TA.objects.get(user__username=(User.objects.get(username=TAUsername)).username)
-        ta.course = courseObj
-        ta.numlabs = numLabs
-        ta.assignedlabs = 0
-        ta.save()
-        if graderstatus:
-            ta.graderstatus = graderstatus
-            ta.save()
+        TA.objects.filter(user__username=(User.objects.get(username=TAUsername)).username).update(course=courseObj,
+                               numlabs=numLabs, assignedlabs=0, graderstatus=graderstatus)
     return message
 
 
@@ -255,12 +217,10 @@ def assignTAtoSection(sectionid="", TAUsername=""):
         message = "Please select a TA"
     else:
         message = ""
-        s = Section.objects.get(sectionid=sectionid)
         ta = TA.objects.get(user__username=TAUsername)
         ta.assignedlabs += 1
-        s.TA_assigned = ta
-        s.save()
         ta.save()
+        Section.objects.filter(sectionid=sectionid).update(TA_assigned=ta)
     return message
 
 
@@ -299,13 +259,11 @@ def unAssignTA(name):
 def unAssignTASection(sectionid):
     section = Section.objects.get(sectionid=sectionid)
     ta = TA.objects.get(course=section.course)
-    courseid = ta.course.courseid
-    taname = ta.user.name
     ta.assignedlabs -= 1
     ta.save()
     section.TA_assigned = None
     section.save()
-    return taname + " has been unassigned from section with ID " + courseid + "-" + sectionid
+    return ta.user.name + " has been unassigned from section with ID " + ta.course.courseid + "-" + sectionid
 
 
 def unAssignInstructor(courseid):

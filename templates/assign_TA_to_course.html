@@ -52,9 +52,9 @@
                                     <label class="form-check-label" for="grader">
                                         Grader status:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="graderStatus"
-                                           value="True"
-                                           id="grader">
+                                    <input name="graderStatus" type="hidden" value="False">
+                                    <input class="form-check-input" type="checkbox" name="graderStatus" value="True">
+
                                 </div>
                             {% endif %}
                             <br><br>
@@ -62,7 +62,7 @@
                                 {% for TA in TAs %}
                                     <li class="list-group-item rounded-0">
                                         <div class="custom-control custom-checkbox">
-                                            <input class="form-check-input" type="radio" name="UserName" id="select"
+                                            <input class="form-check-input" type="radio" name="UserName"
                                                    value={{ TA.user.username }}>
                                             <label class="cursor-pointer  custom-control-label"
                                                    value={{ TA.user.username }}

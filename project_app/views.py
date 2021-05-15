@@ -101,7 +101,6 @@ class Courses(View):
         user = User.objects.get(username=request.session["name"])
         return render(request, "all_courses.html", {"dictionary": getCourses(),
                                                     "TAs": list(TA.objects.all()), "user": user})
-
     def post(self, request):
         m=manage_registration(request)
         if m!=None:
