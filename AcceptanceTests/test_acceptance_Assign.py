@@ -38,7 +38,8 @@ class TestAssign(TestCase):
         self.client.post("/Courses/", {"register_section": "1"}, follow=True)
         response = self.client.post("/AssignTAToCourse/", {"section_sectionid": "902",
                                                            "type": "Lecture",
-                                                           "section_schedule": "R @ 11:00 - 12:50"})
+                                                           "section_scheduleStart":"11:00",
+                                                          "section_scheduleEnd":"12:00", "section_scheduleDays":"Thursday"})
         self.client.post("/Courses/", {"assign_TA_to_course": "1"})
         response = self.client.post("/AssignTAToCourse/", {"UserName": self.ta1.user.username, "numLabs": "1"})
         self.assertEqual(response.url, "/Courses/")

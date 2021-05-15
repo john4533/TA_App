@@ -7,14 +7,15 @@ class SupCourseTest(TestCase):
         self.client = Client()
         self.course = Course.objects.create(courseid="361", name="Software Engineering",credits=3)
         self.lab = Section.objects.create(course= self.course, sectionid="901", type="Lab",
-                                            schedule="T @ 11:00 - 12:50")
+                                            scheduleStart="11:00", scheduleEnd="12:00", scheduleDays="Thursday")
         self.loginuser = User.objects.create(username="user23", name="user23", password="123", email="nub@uwm.edu",
                                              role="supervisor")
 
     def test_SectionExists(self):
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
         response = self.client.post("/RegisterSection/", {"section_sectionid": self.lab.sectionid, "type": self.lab.type,
-                                                      "section_schedule": self.lab.schedule})
+                                                          "section_scheduleStart":self.lab.scheduleStart,"section_scheduleEnd":self.lab.scheduleEnd,
+                                                          "section_scheduleDays":self.lab.scheduleDays})
         self.assertEqual(response.context["message"], "Section with that ID already exists", msg="Section created twice")
 
     def test_createsection(self):
@@ -31,7 +32,8 @@ class SupCourseTest(TestCase):
 
     def test_emptySectionid(self):
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": "", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"})
+        response = self.client.post("/RegisterSection/", {
+                                            "section_sectionid": "", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"})
         self.assertEqual(response.context["message"], "Please fill out all required entries",
                          msg="Empty id, section created without id")
 
