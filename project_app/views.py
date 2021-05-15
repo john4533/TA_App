@@ -123,20 +123,33 @@ class Courses(View):
                                                     "TAs": list(TA.objects.all()), "user": user})
 
     def post(self, request):
-        if request.POST.get('add_course'):
-            return redirect('/RegisterCourses/')
-        elif request.POST.get('assign_instructor'):
-            request.session["course"] = request.POST["assign_instructor"]
-            return redirect('/AssignInstructor/')
-        elif request.POST.get('register_section'):
-            request.session["course"] = request.POST["register_section"]
-            return redirect('/RegisterSection/')
-        elif request.POST.get('assign_TA_to_course'):
-            request.session["course"] = request.POST["assign_TA_to_course"]
-            return redirect('/AssignTAToCourse/')
-        elif request.POST.get('assign_TA_to_Section'):
-            request.session["sectionid"] = request.POST["assign_TA_to_Section"]
-            return redirect('/AssignTAToSection/')
+        dict= {"add_course":'/RegisterCourses/', "assign_instructor":'/AssignInstructor/',
+               "register_section":'/RegisterSection/', "assign_TA_to_course":'/AssignTAToCourse/',
+                "assign_TA_to_Section":'/AssignTAToSection/'}
+
+
+        for key in dict:
+            if request.POST.get(key) and key!="assign_TA_to_Section":
+                request.session["course"] = request.POST[key]
+                return redirect(dict[key])
+            if key=="assign_TA_to_Section" and request.POST.get(key):
+                request.session["sectionid"] = request.POST["assign_TA_to_Section"]
+                return redirect(dict[key])
+
+        # if request.POST.get('add_course'):
+        #     return redirect('/RegisterCourses/')
+        # elif request.POST.get('assign_instructor'):
+        #     request.session["course"] = request.POST["assign_instructor"]
+        #     return redirect('/AssignInstructor/')
+        # elif request.POST.get('register_section'):
+        #     request.session["course"] = request.POST["register_section"]
+        #     return redirect('/RegisterSection/')
+        # elif request.POST.get('assign_TA_to_course'):
+        #     request.session["course"] = request.POST["assign_TA_to_course"]
+        #     return redirect('/AssignTAToCourse/')
+        # elif request.POST.get('assign_TA_to_Section'):
+        #     request.session["sectionid"] = request.POST["assign_TA_to_Section"]
+        #     return redirect('/AssignTAToSection/')
         else:
             message = ""
             if request.POST.get('delete_course'):
