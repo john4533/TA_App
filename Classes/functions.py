@@ -151,7 +151,6 @@ def createSection(course="", sectionid="", types="", scheduleStart=None, schedul
     # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
 
     # Handle the edge cases for the schedule...
-
     formattedDays = formatDays(scheduleDays)
     if course != '' and sectionid != '' and types != '' and scheduleStart is not None and scheduleEnd is not None and formattedDays != '':
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:

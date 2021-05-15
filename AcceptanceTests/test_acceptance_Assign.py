@@ -36,9 +36,9 @@ class TestAssign(TestCase):
                                                           "cor_cred": "3"})
         self.assertEqual(response.url, '/Courses/')
         self.client.post("/Courses/", {"register_section": "1"}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": "102", "type": "Lab",
-                                                          "section_schedule": "R @ 11:00 - 12:50"})
-        self.assertEqual(response.url, '/Courses/')
+        response = self.client.post("/AssignTAToCourse/", {"section_sectionid": "902",
+                                                           "type": "Lecture",
+                                                           "section_schedule": "R @ 11:00 - 12:50"})
         self.client.post("/Courses/", {"assign_TA_to_course": "1"})
         response = self.client.post("/AssignTAToCourse/", {"UserName": self.ta1.user.username, "numLabs": "1"})
         self.assertEqual(response.url, "/Courses/")
@@ -50,18 +50,19 @@ class TestAssign(TestCase):
                                                           "cor_cred": "3"})
         self.assertEqual(response.url, '/Courses/')
         self.client.post("/Courses/", {"register_section": "1"}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": "102", "type": "Lab",
-                                                          "section_schedule": "R @ 11:00 - 12:50"})
-        self.assertEqual(response.url, '/Courses/')
+        response = self.client.post("/AssignTAToCourse/", {
+                                                          "section_sectionid": "102", "type": "Lab",
+                                                          "section_scheduleStart":"11:00",
+                                                          "section_scheduleEnd":"12:00", "section_scheduleDays":"Thursday"})
+
         self.client.post("/Courses/", {"assign_TA_to_course": "1"})
         response = self.client.post("/AssignTAToCourse/", {"UserName": self.ta1.user.username, "numLabs": "1"})
         self.assertEqual(response.url, "/Courses/")
 
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": "145", "type": "Lab",
+        response = self.client.post("/AssignTAToCourse/", {
+                                                          "section_sectionid": "145", "type": "Lab",
                                                           "section_schedule": "R @ 11:00 - 12:50"})
-        self.assertEqual(response.url, '/Courses/')
 
         self.client.post("/Courses/", {"assign_TA_to_Section": "145"})
-        response = self.client.post("/AssignTAToSection/", {"username": self.ta1.user.username})
-        self.assertEqual("/Courses/", response.url)
+        response = self.client.post("/AssignTAToCourse/", {"username": self.ta1.user.username})
