@@ -14,15 +14,15 @@ class SectionTestCase(TestCase):
 
 #   CREATE COURSE TESTS
     def test_SectionIdexists(self):
-        self.assertEqual(createSection(self.course1, "902", "Lab", "11:00","12:00",["Monday,Tuesday"]),
+        self.assertEqual(createSection(self.course1, "902", "Lab", "11:00","12:00",["Monday","Tuesday"]),
                          "Section with that ID already exists")
 
     def test_SectionCreated(self):
-        createSection(self.course1, "901", "Lab","11:00","12:00",["Monday,Tuesday"])
+        createSection(self.course1, "901", "Lab","11:00:00","12:00:00",["Monday", "Tuesday"])
         b =Section.objects.get(sectionid="901")
         self.assertEqual("Lab", b.type)
-        self.assertEqual("11:00", b.scheduleStart)
-        self.assertEqual("12:00",b.scheduleEnd)
+        self.assertEqual("11:00:00", b.scheduleStart.__str__())
+        self.assertEqual("12:00:00",b.scheduleEnd.__str__())
 
     def test_noSectionid(self):
         self.assertEqual(createSection(self.course1, "", "Lab", "R @ 11:00 - 12:50"),
