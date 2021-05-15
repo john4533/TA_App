@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from project_app.models import User, Course,Section,TA
+from project_app.models import User, Course, Section, TA
 
 
 class TestAssign(TestCase):
@@ -12,22 +12,22 @@ class TestAssign(TestCase):
         self.lab = Section.objects.create(course=self.course, sectionid="901", type="Lab",
                                           )
         self.lec = Section.objects.create(course=self.course, sectionid="902", type="Lecture",
-                                          schedule="T @ 11:00 - 12:50")
+                                          scheduleStart="11:00", scheduleEnd="12:00", scheduleDays="Thursday")
         self.Ins1 = User.objects.create(username="user2", name="user2", password="123", email="nub@uwm.edu",
-                                             role="Instructor")
+                                        role="Instructor")
         self.ta = User.objects.create(username="user3", name="user3", password="123", email="nub@uwm.edu",
-                                        role="TA")
-        self.ta1=TA.objects.create(user=self.ta,graderstatus=False,numlabs="1")
+                                      role="TA")
+        self.ta1 = TA.objects.create(user=self.ta, graderstatus=False, numlabs="1")
 
     def test_AssignCourseInstructor(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})
         self.assertEqual(response.url, '/Home/')
         response = self.client.post("/RegisterCourses/", {"cor_name": "xya", "cor_id": "1",
                                                           "cor_cred": "3"})
-        self.assertEqual(response.url,'/Courses/')
-        self.client.post("/Courses/",{"assign_instructor":"1"})
-        response=self.client.post("/AssignInstructor/", {"instructor":self.Ins1.username})
-        self.assertEqual(response.url,"/Courses/")
+        self.assertEqual(response.url, '/Courses/')
+        self.client.post("/Courses/", {"assign_instructor": "1"})
+        response = self.client.post("/AssignInstructor/", {"instructor": self.Ins1.username})
+        self.assertEqual(response.url, "/Courses/")
 
     def test_AssignCourseTA(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})
@@ -40,7 +40,7 @@ class TestAssign(TestCase):
                                                           "section_schedule": "R @ 11:00 - 12:50"})
         self.assertEqual(response.url, '/Courses/')
         self.client.post("/Courses/", {"assign_TA_to_course": "1"})
-        response = self.client.post("/AssignTAToCourse/", {"UserName": self.ta1.user.username, "numLabs":"1"})
+        response = self.client.post("/AssignTAToCourse/", {"UserName": self.ta1.user.username, "numLabs": "1"})
         self.assertEqual(response.url, "/Courses/")
 
     def test_AssignTAToSection(self):
@@ -62,6 +62,6 @@ class TestAssign(TestCase):
                                                           "section_schedule": "R @ 11:00 - 12:50"})
         self.assertEqual(response.url, '/Courses/')
 
-        self.client.post("/Courses/",{"assign_TA_to_Section":"145" })
-        response=self.client.post("/AssignTAToSection/",{"username":self.ta1.user.username})
-        self.assertEqual("/Courses/",response.url)
+        self.client.post("/Courses/", {"assign_TA_to_Section": "145"})
+        response = self.client.post("/AssignTAToSection/", {"username": self.ta1.user.username})
+        self.assertEqual("/Courses/", response.url)
