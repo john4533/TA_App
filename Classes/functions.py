@@ -27,9 +27,8 @@ def formatDays(daysList):
     day_options = {"Monday": "M", "Tuesday": "T", "Wednesday": "W", "Thursday": "R", "Friday": "F", "Saturday": "S",
                    "Sunday": "U"}
 
-    if daysList is not []:
-        for day in daysList:
-            formattedDays += day_options[day]
+    for day in daysList:
+        formattedDays += day_options[day]
 
     return formattedDays
 
