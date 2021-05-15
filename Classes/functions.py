@@ -148,7 +148,6 @@ def createSection(course="", sectionid="", types="", scheduleStart=None, schedul
     # Handle the edge cases for the schedule...
 
     formattedDays = formatDays(scheduleDays)
-    print(scheduleDays)
     if course != '' and sectionid != '' and types != '' and scheduleStart is not None and scheduleEnd is not None and formattedDays != '':
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
             Section.objects.create(course=course, sectionid=sectionid, type=types, scheduleStart=scheduleStart,
