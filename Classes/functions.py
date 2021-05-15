@@ -40,6 +40,29 @@ def formatDays(daysList):
     return formattedDays
 
 
+def allDays(Days):
+    # precondition: a list is provided containing the letters corresponding to the days of the week
+    # postcondition: a list of key value pairs is returned for the days of the week and whether the day was provided or not (True/ False)
+    all_days = {"Monday": False, "Tuesday": False, "Wednesday": False, "Thursday": False, "Friday": False,
+                "Saturday": False, "Sunday": False}
+    for c in Days:
+        if c.__eq__("M"):
+            all_days["Monday"] = True
+        elif c.__eq__("T"):
+            all_days["Tuesday"] = True
+        elif c.__eq__("W"):
+            all_days["Wednesday"] = True
+        elif c.__eq__("R"):
+            all_days["Thursday"] = True
+        elif c.__eq__("F"):
+            all_days["Friday"] = True
+        elif c.__eq__("S"):
+            all_days["Saturday"] = True
+        elif c.__eq__("U"):
+            all_days["Sunday"] = True
+    return all_days.items()
+
+
 def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart=None,
                   officehoursEnd=None, officehoursDays=[], skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
