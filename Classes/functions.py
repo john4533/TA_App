@@ -74,7 +74,6 @@ def createAccount(username="", name="", password="", email="", role="", phone=""
     # Need to handle the edge cases for the office hours...
 
     formattedDays = formatDays(officehoursDays)
-
     if username != '' and name != '' and password != '' and email != '' and role != '' and officehoursStart is not None and officehoursEnd is not None and formattedDays != '':
         if len(list(User.objects.filter(username=username))) == 0:
             User.objects.create(username=username, name=name, password=password, email=email, role=role, phone=phone,
@@ -98,34 +97,37 @@ def editAccount(username="", name="", password="", address="", phone="", officen
 
     formattedDays = formatDays(officehoursDays)
 
-    user = User.objects.get(username=username)
-    if name:
-        user.name = name
-        user.save()
-    if password:
-        user.password = password
-        user.save()
-    if address:
-        user.address = address
-        user.save()
-    if phone:
-        user.phone = phone
-        user.save()
-    if officenumber:
-        user.officenumber = officenumber
-        user.save()
-    if officehoursStart:
-        user.officehoursStart = officehoursStart
-        user.save()
-    if officehoursEnd:
-        user.officehoursEnd = officehoursEnd
-        user.save()
-    if officehoursDays:
-        user.officehoursDays = formattedDays
-        user.save()
-    if skills:
-        user.skills = skills
-        user.save()
+    User.objects.filter(username=username).update(name=name, password=password, address=address, phone=phone, officenumber=officenumber,
+                officehoursStart=officehoursStart, officehoursEnd=officehoursEnd, officehoursDays=formattedDays, skills=skills)
+
+    # User.objects.get(username=username).update(name=name)
+    # # if name:
+    # user.name = name
+    # # user.save()
+    # # if password:
+    # user.password = password
+    # # user.save()
+    # # if address:
+    # user.address = address
+    # # user.save()
+    # # if phone:
+    # user.phone = phone
+    # # user.save()
+    # # if officenumber:
+    # user.officenumber = officenumber
+    # # user.save()
+    # # if officehoursStart:
+    # user.officehoursStart = officehoursStart
+    # # user.save()
+    # # if officehoursEnd:
+    # user.officehoursEnd = officehoursEnd
+    # # user.save()
+    # # if officehoursDays:
+    # user.officehoursDays = formattedDays
+    # # user.save()
+    # # if skills:
+    # user.skills = skills
+    # # user.save()
 
     return ""
 
@@ -151,7 +153,6 @@ def createSection(course="", sectionid="", types="", scheduleStart=None, schedul
     # Handle the edge cases for the schedule...
 
     formattedDays = formatDays(scheduleDays)
-
     if course != '' and sectionid != '' and types != '' and scheduleStart is not None and scheduleEnd is not None and formattedDays != '':
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
             Section.objects.create(course=course, sectionid=sectionid, type=types, scheduleStart=scheduleStart,
