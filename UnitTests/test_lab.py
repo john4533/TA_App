@@ -14,7 +14,7 @@ class SectionTestCase(TestCase):
 
 #   CREATE COURSE TESTS
     def test_SectionIdexists(self):
-        self.assertEqual(createSection(self.course1, "902", "Lab", "11:00","12:00",["Monday","Tuesday"]),
+        self.assertEqual(createSection(self.course1, "902", "Lab", "11:00:00","12:00:00",["Monday","Tuesday"]),
                          "Section with that ID already exists")
 
     def test_SectionCreated(self):
@@ -23,6 +23,7 @@ class SectionTestCase(TestCase):
         self.assertEqual("Lab", b.type)
         self.assertEqual("11:00:00", b.scheduleStart.__str__())
         self.assertEqual("12:00:00",b.scheduleEnd.__str__())
+        self.assertEqual("MT", b.scheduleDays)
 
     def test_noSectionid(self):
         self.assertEqual(createSection(self.course1, "", "Lab", "R @ 11:00 - 12:50"),

@@ -1,29 +1,35 @@
 from django.test import TestCase
 import os
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 import django
+
 django.setup()
 from Classes.functions import *
+
 
 class UserTestCase(TestCase):
 
     def setUp(self):
-        self.account1 = User.objects.create(username="xyz", password="password1", email="xyz@uwm.edu", role="Instructor")
+        self.account1 = User.objects.create(username="xyz", password="password1", email="xyz@uwm.edu",
+                                            role="Instructor")
 
-#   CREATE ACCOUNT TESTS
+    #   CREATE ACCOUNT TESTS
     def test_useralreadyexists(self):
-        self.assertEqual(createAccount("xyz", "password2", "abc@uwm.edu", "Supervisor"), "Please fill out all required entries")
+        self.assertEqual(createAccount("xyz", "password2", "abc@uwm.edu", "Supervisor"),
+                         "Please fill out all required entries")
 
     def test_usercreated(self):
-        createAccount("user","xys","password2", "user@uwm.edu", "Instructor")
+        createAccount("user", "xys", "password2", "user@uwm.edu", "Instructor", "123-456-7890", "EMS S117", "11:00:00",
+                      "12:00:00", ["Monday", "Tuesday"], "These Skills")
         b = User.objects.get(username="user")
         self.assertEqual("user@uwm.edu", b.email)
         self.assertEqual("password2", b.password)
         self.assertEqual("Instructor", b.role)
 
     def test_usercreatedwithextrainfo(self):
-        m=createAccount("user", "xvy", "password2", "user@uwm.edu", "Instructor", "1-(123)-456-7890",
-                      "20 Main Street", "123","T @ 3:00 - 3:50")
+        m = createAccount("user", "xvy", "password2", "user@uwm.edu", "Instructor", "1-(123)-456-7890",
+                          "20 Main Street", "123", "T @ 3:00 - 3:50")
         b = User.objects.get(username="user")
         self.assertEqual("user@uwm.edu", b.email)
         self.assertEqual("password2", b.password)
@@ -33,7 +39,8 @@ class UserTestCase(TestCase):
         self.assertEqual("T @ 3:00 - 3:50", b.officehours)
 
     def test_nousername(self):
-        self.assertEqual(createAccount("", "password1", "xyz@uwm.edu", "Instructor"), "Please fill out all required entries")
+        self.assertEqual(createAccount("", "password1", "xyz@uwm.edu", "Instructor"),
+                         "Please fill out all required entries")
 
     def test_nopassword(self):
         self.assertEqual(createAccount("xyz", "", "xyz@uwm.edu", "Instructor"), "Please fill out all required entries")
@@ -44,8 +51,7 @@ class UserTestCase(TestCase):
     def test_norole(self):
         self.assertEqual(createAccount("xyz", "password1", "xyz@uwm.edu", ""), "Please fill out all required entries")
 
-
-#   DELETE ACCOUNT TESTS
+    #   DELETE ACCOUNT TESTS
     def test_deletenoeusernameentered(self):
         self.assertEqual(deleteAccount(""), "Please enter a username")
 
@@ -56,7 +62,7 @@ class UserTestCase(TestCase):
         self.assertEqual(self.account1.username, "xyz")
         self.assertEqual(deleteAccount("xyz"), "User with username xyz has been deleted")
 
-#   LOGIN TESTS
+    #   LOGIN TESTS
     def test_invalidusername(self):
         self.assertFalse(login("abc", "password1"))
 
@@ -65,4 +71,3 @@ class UserTestCase(TestCase):
 
     def test_validlogin(self):
         self.assertTrue(login("xyz", "password1"))
-

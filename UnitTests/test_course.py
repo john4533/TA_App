@@ -88,11 +88,6 @@ class CourseTestCase(TestCase):
         test_course1 = Course.objects.create(courseid="361", name="Test Course 1", credits="3")
         test_TA_TA = TA.objects.create(user=test_TA_User, graderstatus=False, numlabs=0, course=test_course1,
                                        assignedlabs=0)
-        self.assertEqual(assignTAtoCourse("", "", "", ""), "Please select a course")
-        self.assertEqual(assignTAtoCourse(None, None, None, None), "Please select a course")
-
-        self.assertEqual(assignTAtoCourse("", "testTAUser", 1, True), "Please select a course")
-        self.assertEqual(assignTAtoCourse(None, "testTAUser", 1, True), "Please select a course")
 
         self.assertEqual(assignTAtoCourse(test_course1, "", 1, True), "Please select a TA")
         self.assertEqual(assignTAtoCourse(test_course1, None, 1, True), "Please select a TA")
