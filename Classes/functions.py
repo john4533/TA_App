@@ -22,50 +22,34 @@ def login(name, password):
 def formatDays(daysList):
     # precondition: a list is provided containing strings for the days of the week, or an empty list
     # postcondition: a string for the formatted days is returned, or an empty string if an empty list was provided
-    formattedDays = ''
+
+    formattedDays = ""
+    day_options = {"Monday": "M", "Tuesday": "T", "Wednesday": "W", "Thursday": "R", "Friday": "F", "Saturday": "S",
+                   "Sunday": "U"}
+
     if daysList is not []:
         for day in daysList:
-            if day.__eq__("Monday"):
-                formattedDays += "M"
-            elif day.__eq__("Tuesday"):
-                formattedDays += "T"
-            elif day.__eq__("Wednesday"):
-                formattedDays += "W"
-            elif day.__eq__("Thursday"):
-                formattedDays += "TR"
-            elif day.__eq__("Friday"):
-                formattedDays += "F"
-            elif day.__eq__("Saturday"):
-                formattedDays += "S"
-            elif day.__eq__("Sunday"):
-                formattedDays += "SU"
+            formattedDays += day_options[day]
+
     return formattedDays
 
 
 def allDays(Days):
     # precondition: a list is provided containing the letters corresponding to the days of the week
     # postcondition: a list of key value pairs is returned for the days of the week and whether the day was provided or not (True/ False)
+
+    day_options = {"M": "Monday", "T": "Tuesday", "W": "Wednesday", "R": "Thursday", "F": "Friday", "S": "Saturday",
+                   "U": "Sunday"}
     all_days = {"Monday": False, "Tuesday": False, "Wednesday": False, "Thursday": False, "Friday": False,
                 "Saturday": False, "Sunday": False}
     for c in Days:
-        if c.__eq__("M"):
-            all_days["Monday"] = True
-        elif c.__eq__("T"):
-            all_days["Tuesday"] = True
-        elif c.__eq__("W"):
-            all_days["Wednesday"] = True
-        elif c.__eq__("R"):
-            all_days["Thursday"] = True
-        elif c.__eq__("F"):
-            all_days["Friday"] = True
-        elif c.__eq__("S"):
-            all_days["Saturday"] = True
-        elif c.__eq__("U"):
-            all_days["Sunday"] = True
+        all_days[day_options[c]] = True
+
     return all_days.items()
 
 
-def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="", officehoursStart=None,
+def createAccount(username="", name="", password="", email="", role="", phone="", address="", officenumber="",
+                  officehoursStart=None,
                   officehoursEnd=None, officehoursDays=[], skills=""):
     # precondition: user with provided username does not currently exist with username, password, email, and role entered
     # postcondition: user account is created with a unique username, a password, an email, a role,
@@ -97,8 +81,10 @@ def editAccount(username="", name="", password="", address="", phone="", officen
 
     formattedDays = formatDays(officehoursDays)
 
-    User.objects.filter(username=username).update(name=name, password=password, address=address, phone=phone, officenumber=officenumber,
-                officehoursStart=officehoursStart, officehoursEnd=officehoursEnd, officehoursDays=formattedDays, skills=skills)
+    User.objects.filter(username=username).update(name=name, password=password, address=address, phone=phone,
+                                                  officenumber=officenumber,
+                                                  officehoursStart=officehoursStart, officehoursEnd=officehoursEnd,
+                                                  officehoursDays=formattedDays, skills=skills)
 
     # User.objects.get(username=username).update(name=name)
     # # if name:
@@ -321,7 +307,7 @@ def unAssignTASection(sectionid):
     ta.save()
     section.TA_assigned = None
     section.save()
-    return taname +" has been unassigned from section with ID " + courseid + "-" + sectionid
+    return taname + " has been unassigned from section with ID " + courseid + "-" + sectionid
 
 
 def unAssignInstructor(courseid):
