@@ -95,34 +95,37 @@ def editAccount(username="", name="", password="", address="", phone="", officen
 
     formattedDays = formatDays(officehoursDays)
 
-    user = User.objects.get(username=username)
-    if name:
-        user.name = name
-        user.save()
-    if password:
-        user.password = password
-        user.save()
-    if address:
-        user.address = address
-        user.save()
-    if phone:
-        user.phone = phone
-        user.save()
-    if officenumber:
-        user.officenumber = officenumber
-        user.save()
-    if officehoursStart:
-        user.officehoursStart = officehoursStart
-        user.save()
-    if officehoursEnd:
-        user.officehoursEnd = officehoursEnd
-        user.save()
-    if officehoursDays:
-        user.officehoursDays = formattedDays
-        user.save()
-    if skills:
-        user.skills = skills
-        user.save()
+    User.objects.filter(username=username).update(name=name, password=password, address=address, phone=phone, officenumber=officenumber,
+                officehoursStart=officehoursStart, officehoursEnd=officehoursEnd, officehoursDays=formattedDays, skills=skills)
+
+    # User.objects.get(username=username).update(name=name)
+    # # if name:
+    # user.name = name
+    # # user.save()
+    # # if password:
+    # user.password = password
+    # # user.save()
+    # # if address:
+    # user.address = address
+    # # user.save()
+    # # if phone:
+    # user.phone = phone
+    # # user.save()
+    # # if officenumber:
+    # user.officenumber = officenumber
+    # # user.save()
+    # # if officehoursStart:
+    # user.officehoursStart = officehoursStart
+    # # user.save()
+    # # if officehoursEnd:
+    # user.officehoursEnd = officehoursEnd
+    # # user.save()
+    # # if officehoursDays:
+    # user.officehoursDays = formattedDays
+    # # user.save()
+    # # if skills:
+    # user.skills = skills
+    # # user.save()
 
     return ""
 

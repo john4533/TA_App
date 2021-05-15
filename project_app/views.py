@@ -46,8 +46,6 @@ class EditAccount(View):
 
     def post(self, request):
 
-        print(request.POST.get('name'))
-
         message = editAccount(request.POST['update_account'],
                             request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
                             request.POST.get('phone'), request.POST.get('officenumber'),
