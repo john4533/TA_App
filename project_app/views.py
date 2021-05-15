@@ -40,25 +40,7 @@ class EditAccount(View):
         user = User.objects.get(username=request.session["account"])
         request.session["account"] = ""
 
-        # move into functions.py...
-        all_days = {"Monday": False, "Tuesday": False, "Wednesday": False, "Thursday": False, "Friday": False, "Saturday": False, "Sunday": False}
-        for c in user.officehoursDays:
-            if c.__eq__("M"):
-                all_days["Monday"] = True
-            elif c.__eq__("T"):
-                all_days["Tuesday"] = True
-            elif c.__eq__("W"):
-                all_days["Wednesday"] = True
-            elif c.__eq__("R"):
-                all_days["Thursday"] = True
-            elif c.__eq__("F"):
-                all_days["Friday"] = True
-            elif c.__eq__("S"):
-                all_days["Saturday"] = True
-            elif c.__eq__("U"):
-                all_days["Sunday"] = True
-
-        return render(request, "edit_account.html", {"user": user, "days": all_days.items(), "officeStart": user.officehoursStart.__str__(), "officeEnd": user.officehoursEnd.__str__()})
+        return render(request, "edit_account.html", {"user": user, "days": allDays(user.officehoursDays), "officeStart": user.officehoursStart.__str__(), "officeEnd": user.officehoursEnd.__str__()})
         # return render(request, "edit_account.html", {"user": user, "days": Days.choices})
 
 
