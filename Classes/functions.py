@@ -1,3 +1,5 @@
+from django.shortcuts import redirect
+
 from project_app.models import *
 
 
@@ -189,6 +191,28 @@ def deleteCourse(courseid=""):
         string = "Course with ID " + courseid + " has been deleted"
     return string
 
+def manage_registration(request):
+    dict = {"add_course": '/RegisterCourses/', "assign_instructor": '/AssignInstructor/',
+            "register_section": '/RegisterSection/', "assign_TA_to_course": '/AssignTAToCourse/',
+            "assign_TA_to_Section": '/AssignTAToSection/'}
+
+    for key in dict:
+        if request.POST.get(key) and key != "assign_TA_to_Section":
+            request.session["course"] = request.POST[key]
+            return redirect(dict[key])
+        if key == "assign_TA_to_Section" and request.POST.get(key):
+            request.session["sectionid"] = request.POST["assign_TA_to_Section"]
+            return redirect(dict[key])
+
+def manage_deletion(request):
+    dict2 = {"delete_course": deleteCourse,
+             "rem_TA": unAssignTA, "del_section": deleteSection,
+             "rem_TA_sec": unAssignTASection,
+             "rem_Ins": unAssignInstructor}
+    for key in dict2:
+        if request.POST.get(key):
+            message = dict2[key](request.POST.get(key))
+    return message
 
 def deleteSection(sectionid=""):
     # precondition: section with unique sectionid exists

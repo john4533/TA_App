@@ -105,50 +105,15 @@ class Courses(View):
                                                     "TAs": list(TA.objects.all()), "user": user})
 
     def post(self, request):
-        dict= {"add_course":'/RegisterCourses/', "assign_instructor":'/AssignInstructor/',
-               "register_section":'/RegisterSection/', "assign_TA_to_course":'/AssignTAToCourse/',
-                "assign_TA_to_Section":'/AssignTAToSection/'}
-
-
-        for key in dict:
-            if request.POST.get(key) and key!="assign_TA_to_Section":
-                request.session["course"] = request.POST[key]
-                return redirect(dict[key])
-            if key=="assign_TA_to_Section" and request.POST.get(key):
-                request.session["sectionid"] = request.POST["assign_TA_to_Section"]
-                return redirect(dict[key])
-
-        # if request.POST.get('add_course'):
-        #     return redirect('/RegisterCourses/')
-        # elif request.POST.get('assign_instructor'):
-        #     request.session["course"] = request.POST["assign_instructor"]
-        #     return redirect('/AssignInstructor/')
-        # elif request.POST.get('register_section'):
-        #     request.session["course"] = request.POST["register_section"]
-        #     return redirect('/RegisterSection/')
-        # elif request.POST.get('assign_TA_to_course'):
-        #     request.session["course"] = request.POST["assign_TA_to_course"]
-        #     return redirect('/AssignTAToCourse/')
-        # elif request.POST.get('assign_TA_to_Section'):
-        #     request.session["sectionid"] = request.POST["assign_TA_to_Section"]
-        #     return redirect('/AssignTAToSection/')
+        m=manage_registration(request)
+        if m!=None:
+            return m
         else:
-            message = ""
-            if request.POST.get('delete_course'):
-                message = deleteCourse(request.POST['delete_course'])
-            if request.POST.get('rem_TA'):
-                message = unAssignTA(request.POST['rem_TA'])
-            elif request.POST.get('del_section'):
-                message = deleteSection(request.POST['del_section'])
-            elif request.POST.get('rem_TA_sec'):
-                message = unAssignTASection(request.POST['rem_TA_sec'])
-            elif request.POST.get('rem_Ins'):
-                message = unAssignInstructor(request.POST['rem_Ins'])
-
+            message=manage_deletion(request)
             user = User.objects.get(username=request.session["name"])
             return render(request, "all_courses.html", {"dictionary": getCourses(),
-                                                        "TAs": list(TA.objects.all()), "message": message,
-                                                        "user": user})
+                                                            "TAs": list(TA.objects.all()), "message": message,
+                                                            "user": user})
 
 
 class RegisterCourses(View):
