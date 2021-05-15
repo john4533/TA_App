@@ -268,6 +268,7 @@ def unAssignTASection(sectionid):
 
 def unAssignInstructor(courseid):
     course = Course.objects.get(courseid=courseid)
+    instructor = course.Instructor.name
     course.Instructor = None
     course.save()
-    return course.Instructor.name + " has been unassigned from course with ID " + courseid
+    return instructor + " has been unassigned from course with ID " + courseid
