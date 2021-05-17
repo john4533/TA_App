@@ -240,10 +240,15 @@ def getCourses():
 
 
 def getTAsInCourse(sectionid):
-    # precndition: courseid
+    # precndition: sectionid
     # postcondition: returns a dictionary of TAs in a particular course
     s = Section.objects.get(sectionid=sectionid)
-    return list(TA.objects.filter(course__courseid=s.course.courseid))
+    total = list(TA.objects.filter(course__courseid=s.course.courseid))
+    available = []
+    for ta in total:
+        if ta.assignedlabs < ta.numlabs:
+            available.append(ta)
+    return available
 
 
 def unAssignTA(TAUsername):

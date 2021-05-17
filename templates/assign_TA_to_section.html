@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-lg-7 mx-auto">
                     <div class="card shadow border-0 mb-5" style="background-color: floralwhite">
-                        {% if totalTAs != 0 %}
+                        {% if courseTAs != 0 %}
                             <div align="center">
                                 <button class="btn btn-warning" type="submit" value="Submit">Assign TA to Section
                                 </button>
@@ -37,7 +37,7 @@
                         {% endif %}
                         <div class="card-body p-5">
 
-                            {% if totalTAs == 0 %}
+                            {% if courseTAs == 0 %}
                                 <h3 align="center">No TAs are available</h3>
                             {% else %}
                                 <h3 align="center">Please select a TA</h3>
@@ -45,7 +45,6 @@
 
                             <ul class="list-group">
                                 {% for TA in TAs %}
-                                    {% if TA.assignedlabs < TA.numlabs %}
                                         <li class="list-group-item rounded-0">
                                             <div class="custom-control custom-checkbox">
                                                 <input class="form-check-input" type="radio" name="username" id="select"
@@ -55,7 +54,6 @@
                                                                for="select"> &nbsp&nbsp{{ TA.user.name }}</label>
                                             </div>
                                         </li>
-                                    {% endif %}
                                 {% endfor %}
                             </ul>
                         </div>

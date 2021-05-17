@@ -176,7 +176,7 @@ class AssignTAToCourse(View):
 
 class AssignTAToSection(View):
     def get(self, request):
-        return render(request, "assign_TA_to_section.html", {"TAs": getTAsInCourse(request.session["sectionid"]), "totalTAs": len(getTAsInCourse(request.session["sectionid"]))})
+        return render(request, "assign_TA_to_section.html", {"TAs": getTAsInCourse(request.session["sectionid"]), "courseTAs": len(list(getTAsInCourse(request.session["sectionid"])))})
 
     def post(self, request):
         message = assignTAtoSection(request.session["sectionid"], request.POST.get('username'))
@@ -187,4 +187,4 @@ class AssignTAToSection(View):
 
         else:
             return render(request, "assign_TA_to_section.html",
-                          {"TAs": getTAsInCourse(request.session["sectionid"]),  "totalTAs": len(getTAsInCourse(request.session["sectionid"])), "message": message})
+                          {"TAs": getTAsInCourse(request.session["sectionid"]),  "courseTAs": len(list(getTAsInCourse(request.session["sectionid"]))), "message": message})
