@@ -90,7 +90,7 @@ def editAccount(username="", name="", password="", address="", phone="", officen
 def createCourse(courseId="", name="", credits=""):
     # precondition: course with provided courseid does not currently exist with courseid, coursename, courseschedule, and coursecredits entered
     # postcondition: course is created with unique ID and name, message is returned if course with the id exists or required entries are blank
-    if int(credits) < 1:
+    if credits < 1:
         string = "Please enter a valid credit amount"
     elif courseId != '' and name != '' and credits != '':
         if len(list(Course.objects.filter(courseid=courseId))) == 0:

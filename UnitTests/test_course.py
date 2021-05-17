@@ -38,13 +38,13 @@ class CourseTestCase(TestCase):
         self.assertEqual(createCourse("", "Software Engineering", "3"), "Please fill out all required entries")
 
     def test_nocoursename(self):
-        self.assertEqual(createCourse("361", "", "3"), "Please fill out all required entries")
+        self.assertEqual(createCourse("361", "", 3), "Please fill out all required entries")
 
     def test_nocoursecredits(self):
         self.assertEqual(createCourse("361", "Software Engineering", ""), "Please fill out all required entries")
 
     def test_invalidCredits(self):
-        self.assertEqual(createCourse("362", "Software Engineering", "-1"), "Please enter a valid credit amount")
+        self.assertEqual(createCourse("362", "Software Engineering", -1), "Please enter a valid credit amount")
 
 #   DELETE COURSE TESTS
     def test_deletenocourseidentered(self):
