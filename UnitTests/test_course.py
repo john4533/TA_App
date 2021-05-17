@@ -6,7 +6,6 @@ import django
 import project_app.models
 django.setup()
 
-
 class CourseTestCase(TestCase):
     def setUp(self):
         self.test_Ins = User.objects.create(username="testInsUser", name="testInsName", password="123",
@@ -40,7 +39,6 @@ class CourseTestCase(TestCase):
 
     def test_nocoursename(self):
         self.assertEqual(createCourse("361", "", "3"), "Please fill out all required entries")
-
 
     def test_nocoursecredits(self):
         self.assertEqual(createCourse("361", "Software Engineering", ""), "Please fill out all required entries")

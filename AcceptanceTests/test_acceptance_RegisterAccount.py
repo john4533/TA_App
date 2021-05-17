@@ -18,9 +18,11 @@ class SupAccountsTest(TestCase):
         response = self.client.post("/RegisterAccount/", {"username": "user1","name":"kad", "password": "password1",
                                                           "email": "user1@uwm.edu", "role": "instructor", "phone": "",
                                                           "address": "","officenumber":"23", "officehours": "","skills":""})
+        self.assertEqual(response.url, "/AccountDisplay/")
 
         response = self.client.post("/RegisterAccount/", {"username": "user2", "name":"mo","password": "password1",
                                     "email": "user1@uwm.edu", "role": "instructor", "phone": "", "address": "","officenumber":"124", "officehours": "","skills":""}, follow=True)
+        self.assertEqual(len(response.context["accounts"]), 4)
 
     def test_createAccountwithfullinfo(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})
@@ -30,11 +32,14 @@ class SupAccountsTest(TestCase):
                                     "email": "user1@uwm.edu", "role": "instructor", "phone": "1-(123)-456-7890",
                                     "address": "20 Main Street","officenumber":"43", "officehours": "T @ 3:00 - 3:50","skills":""})
 
+        self.assertEqual(response.url, '/AccountDisplay/')
+
         response = self.client.post("/RegisterAccount/", {"username": "user2", "name": "4wer","password": "password1",
                                                           "email": "user1@uwm.edu", "role": "instructor",
                                                           "phone": "1-(123)-456-7890",
                                                           "address": "20 Main Street","officenumber":"43",
                                                           "officehours": "T @ 3:00 - 3:50","skills":""}, follow=True)
+        self.assertEqual(len(response.context["accounts"]), 4)
 
     def test_emptyUsername(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})

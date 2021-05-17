@@ -40,11 +40,33 @@ class EditAccount(View):
         user = User.objects.get(username=request.session["account"])
         request.session["account"] = ""
 
-        return render(request, "edit_account.html", {"user": user, "days": allDays(user.officehoursDays), "officeStart": user.officehoursStart.__str__(), "officeEnd": user.officehoursEnd.__str__()})
+        # move into functions.py...
+        all_days = {"Monday": False, "Tuesday": False, "Wednesday": False, "Thursday": False, "Friday": False, "Saturday": False, "Sunday": False}
+        for c in user.officehoursDays:
+            if c.__eq__("M"):
+                all_days["Monday"] = True
+            elif c.__eq__("T"):
+                all_days["Tuesday"] = True
+            elif c.__eq__("W"):
+                all_days["Wednesday"] = True
+            elif c.__eq__("R"):
+                all_days["Thursday"] = True
+            elif c.__eq__("F"):
+                all_days["Friday"] = True
+            elif c.__eq__("S"):
+                all_days["Saturday"] = True
+            elif c.__eq__("U"):
+                all_days["Sunday"] = True
+
+        print(user.address)
+
+        return render(request, "edit_account.html", {"user": user, "days": all_days.items(), "officeStart": user.officehoursStart.__str__(), "officeEnd": user.officehoursEnd.__str__()})
         # return render(request, "edit_account.html", {"user": user, "days": Days.choices})
 
 
     def post(self, request):
+
+        print(request.POST.get('name'))
 
         message = editAccount(request.POST['update_account'],
                             request.POST.get('name'), request.POST.get('password'), request.POST.get('address'),
@@ -101,16 +123,39 @@ class Courses(View):
         user = User.objects.get(username=request.session["name"])
         return render(request, "all_courses.html", {"dictionary": getCourses(),
                                                     "TAs": list(TA.objects.all()), "user": user})
+
     def post(self, request):
-        m=manage_registration(request)
-        if m!=None:
-            return m
+        if request.POST.get('add_course'):
+            return redirect('/RegisterCourses/')
+        elif request.POST.get('assign_instructor'):
+            request.session["course"] = request.POST["assign_instructor"]
+            return redirect('/AssignInstructor/')
+        elif request.POST.get('register_section'):
+            request.session["course"] = request.POST["register_section"]
+            return redirect('/RegisterSection/')
+        elif request.POST.get('assign_TA_to_course'):
+            request.session["course"] = request.POST["assign_TA_to_course"]
+            return redirect('/AssignTAToCourse/')
+        elif request.POST.get('assign_TA_to_Section'):
+            request.session["sectionid"] = request.POST["assign_TA_to_Section"]
+            return redirect('/AssignTAToSection/')
         else:
-            message=manage_deletion(request)
+            message = ""
+            if request.POST.get('delete_course'):
+                message = deleteCourse(request.POST['delete_course'])
+            if request.POST.get('rem_TA'):
+                message = unAssignTA(request.POST['rem_TA'])
+            elif request.POST.get('del_section'):
+                message = deleteSection(request.POST['del_section'])
+            elif request.POST.get('rem_TA_sec'):
+                message = unAssignTASection(request.POST['rem_TA_sec'])
+            elif request.POST.get('rem_Ins'):
+                message = unAssignInstructor(request.POST['rem_Ins'])
+
             user = User.objects.get(username=request.session["name"])
             return render(request, "all_courses.html", {"dictionary": getCourses(),
-                                                            "TAs": list(TA.objects.all()), "message": message,
-                                                            "user": user})
+                                                        "TAs": list(TA.objects.all()), "message": message,
+                                                        "user": user})
 
 
 class RegisterCourses(View):
