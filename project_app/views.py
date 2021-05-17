@@ -188,3 +188,6 @@ class AssignTAToSection(View):
         else:
             return render(request, "assign_TA_to_section.html",
                           {"TAs": getTAsInCourse(request.session["sectionid"]),  "courseTAs": len(list(getTAsInCourse(request.session["sectionid"]))), "message": message})
+
+
+# the
