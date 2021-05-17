@@ -7,7 +7,8 @@ class SupCoursesTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.course = Course.objects.create(courseid="361", name="Software Engineering",credits=3)
-        self.lab = Section.objects.create(course=self.course, sectionid="901", type="Lab", schedule="T @ 11:00 - 12:50")
+        self.lab = Section.objects.create(course=self.course, sectionid="901", type="Lab", scheduleStart="11:00",
+                                          scheduleEnd="12:00", scheduleDays="Thursday")
         self.loginuser = User.objects.create(username="user23", name="user23", password="123", email="nub@uwm.edu",
                                              role="supervisor")
 

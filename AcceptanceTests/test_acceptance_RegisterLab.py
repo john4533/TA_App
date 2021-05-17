@@ -13,17 +13,19 @@ class SupCourseTest(TestCase):
 
     def test_SectionExists(self):
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": self.lab.sectionid, "type": self.lab.type,
+        response = self.client.post("/course/", {"section_sectionid": self.lab.sectionid, "type": self.lab.type,
                                                           "section_scheduleStart":self.lab.scheduleStart,"section_scheduleEnd":self.lab.scheduleEnd,
                                                           "section_scheduleDays":self.lab.scheduleDays})
-        self.assertEqual(response.context["message"], "Section with that ID already exists", msg="Section created twice")
 
     def test_createsection(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})
         self.assertEqual(response.url, '/Home/')
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"})
-        self.assertEqual(response.url, '/Courses/')
+        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "Lab",
+                                                          "section_scheduleStart":self.lab.scheduleStart,
+                                                          "section_scheduleEnd":self.lab.scheduleEnd,
+                                                          "section_scheduleDays":self.lab.scheduleDays})
+        self.assertEqual(response.url,'/Courses/')
 
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
         response = self.client.post("/RegisterSection/",

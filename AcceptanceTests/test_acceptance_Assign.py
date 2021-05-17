@@ -41,7 +41,8 @@ class TestAssign(TestCase):
                                                            "section_scheduleStart":"11:00",
                                                           "section_scheduleEnd":"12:00", "section_scheduleDays":"Thursday"})
         self.client.post("/Courses/", {"assign_TA_to_course": "1"})
-        response = self.client.post("/AssignTAToCourse/", {"UserName": self.ta1.user.username, "numLabs": "1"})
+        response = self.client.post("/AssignTAToCourse/", {"UserName": self.ta1.user.username,
+                                                           "numLabs": "1","graderstatus":""})
         self.assertEqual(response.url, "/Courses/")
 
     def test_AssignTAToSection(self):
