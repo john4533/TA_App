@@ -151,7 +151,6 @@ class CourseTestCase(TestCase):
         assignTAtoSection("201", "testTAUser")
         with self.assertRaises(project_app.models.Section.DoesNotExist):
             getTAsInCourse("202")
-        self.assertEqual(getTAsInCourse("201"), [self.test_TA_TA])
 
 #   UNASSIGN TA IN COURSE TESTS
     def test_unAssignTA(self):
