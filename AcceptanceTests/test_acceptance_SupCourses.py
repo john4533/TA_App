@@ -35,3 +35,4 @@ class SupCoursesTests(TestCase):
         response = self.client.post("/Courses/", {"del_section": self.lab.sectionid})
         self.assertEqual(len(list(Section.objects.all())), 0)
         self.assertEqual(response.context["message"], "Section with ID 901 has been deleted")
+

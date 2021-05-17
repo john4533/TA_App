@@ -57,3 +57,4 @@ class SupCourseTest(TestCase):
                                                           "scheduleEnd":self.lab.scheduleEnd,
                                                           "selectedDays":self.lab.scheduleDays})
         self.assertEqual(response.context["message"], "Please fill out all required entries")
+

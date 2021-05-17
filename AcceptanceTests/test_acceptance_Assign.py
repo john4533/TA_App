@@ -66,3 +66,4 @@ class TestAssign(TestCase):
         self.assertEqual(response.url, '/Courses/')
         self.client.post("/Courses/", {"assign_TA_to_Section": "124"})
         response = self.client.post("/AssignTAToSection/", {"username": self.ta1.user.username})
+
