@@ -6,7 +6,6 @@ import django
 import project_app.models
 django.setup()
 
-
 class CourseTestCase(TestCase):
     def setUp(self):
         self.test_Ins = User.objects.create(username="testInsUser", name="testInsName", password="123",

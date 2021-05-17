@@ -92,7 +92,6 @@ def createCourse(courseId="", name="", credits=""):
     # postcondition: course is created with unique ID and name, message is returned if course with the id exists or required entries are blank
     if int(credits) < 1:
         string = "Please enter a valid credit amount"
-
     elif courseId != '' and name != '' and credits != '':
         if len(list(Course.objects.filter(courseid=courseId))) == 0:
             Course.objects.create(courseid=courseId, name=name, credits=credits)
