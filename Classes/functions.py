@@ -199,9 +199,7 @@ def assignInstructor(courseObj="", instructorUsername=""):
 
 
 def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=False):
-    if not courseObj:
-        message = "Please select a course"
-    elif not TAUsername:
+    if not TAUsername:
         message = "Please select a TA"
     elif not numLabs or int(numLabs) < 0:
         message = "Please enter the number of labs"
