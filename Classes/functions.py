@@ -106,8 +106,11 @@ def createSection(course="", sectionid="", types="", scheduleStart=None, schedul
     # postcondition: section is created with unique sectionId and course, type, sectionschedule, message is returned if lab with the id exists or required entries are blank
 
     # Handle the edge cases for the schedule...
+    if not scheduleDays:
+        string = "Please fill out all required entries"
+        return string
     formattedDays = formatDays(scheduleDays)
-    if course != '' and sectionid != '' and types != '' and scheduleStart is not None and scheduleEnd is not None and formattedDays != '':
+    if not (not course) and not (not sectionid) and not (not types) and not (not scheduleStart) and not (not scheduleEnd) and not (not formattedDays):
         if len(list(Section.objects.filter(sectionid=sectionid))) == 0:
             Section.objects.create(course=course, sectionid=sectionid, type=types, scheduleStart=scheduleStart,
                                    scheduleEnd=scheduleEnd, scheduleDays=formattedDays)
@@ -173,7 +176,7 @@ def deleteSection(sectionid=""):
     # precondition: section with unique sectionid exists
     # postcondition: section with unique sectionid is removed from database and a message is returned if sectionid is not entered,
     # if section with that sectionid does not exist or if the section was successfully deleted
-    if sectionid == "":
+    if not sectionid:
         string = "Please enter a section ID"
     elif sectionid not in list(i["sectionid"] for i in Section.objects.all().values("sectionid")):
         string = "Section with that ID does not exist"
@@ -243,8 +246,8 @@ def getTAsInCourse(sectionid):
     return list(TA.objects.filter(course__courseid=s.course.courseid))
 
 
-def unAssignTA(name):
-    user1 = User.objects.get(username=name)
+def unAssignTA(TAUsername):
+    user1 = User.objects.get(username=TAUsername)
     ta = TA.objects.get(user=user1)
     courseid = ta.course.courseid
     try:
