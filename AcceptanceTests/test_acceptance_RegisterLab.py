@@ -7,7 +7,7 @@ class SupCourseTest(TestCase):
         self.client = Client()
         self.course = Course.objects.create(courseid="361", name="Software Engineering",credits=3)
         self.lab = Section.objects.create(course= self.course, sectionid="901", type="Lab",
-                                            scheduleStart="11:00", scheduleEnd="12:00", scheduleDays="Thursday")
+                                            scheduleStart="11:00", scheduleEnd="12:00", scheduleDays=["Thursday","Tuesday"])
         self.loginuser = User.objects.create(username="user23", name="user23", password="123", email="nub@uwm.edu",
                                              role="supervisor")
 
@@ -22,31 +22,38 @@ class SupCourseTest(TestCase):
         self.assertEqual(response.url, '/Home/')
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
         response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "Lab",
-                                                          "section_scheduleStart":self.lab.scheduleStart,
-                                                          "section_scheduleEnd":self.lab.scheduleEnd,
-                                                          "section_scheduleDays":self.lab.scheduleDays})
+                                                          "scheduleStart":self.lab.scheduleStart,
+                                                          "scheduleEnd":self.lab.scheduleEnd,
+                                                          "selectedDays":self.lab.scheduleDays})
         self.assertEqual(response.url,'/Courses/')
 
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
         response = self.client.post("/RegisterSection/",
-                                    {"section_sectionid": "903", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"}, follow=True)
+                                    {"section_sectionid": "903", "type": "Lab", "scheduleStart":self.lab.scheduleStart,
+                                                          "scheduleEnd":self.lab.scheduleEnd,
+                                                          "selectedDays":self.lab.scheduleDays}, follow=True)
         self.assertEqual(len(response.context["dictionary"][self.course]), 3)
 
     def test_emptySectionid(self):
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
         response = self.client.post("/RegisterSection/", {
-                                            "section_sectionid": "", "type": "Lab", "section_schedule": "R @ 11:00 - 12:50"})
+                                            "section_sectionid": "", "type": "Lab",  "scheduleStart":self.lab.scheduleStart,
+                                                          "scheduleEnd":self.lab.scheduleEnd,
+                                                          "scheduleDays":self.lab.scheduleDays})
         self.assertEqual(response.context["message"], "Please fill out all required entries",
                          msg="Empty id, section created without id")
 
-    def test_emptySectionname(self):
+    def test_emptySectionTyper(self):
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "", "section_schedule": "R @ 11:00 - 12:50"})
+        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "",  "scheduleStart":self.lab.scheduleStart,
+                                                          "scheduleEnd":self.lab.scheduleEnd,
+                                                          "selectedDays":self.lab.scheduleDays})
         self.assertEqual(response.context["message"], "Please fill out all required entries",
-                         msg="Empty name, lab created without name")
+                         msg="Please fill out all required entries")
 
     def test_emptySectionschedule(self):
         self.client.post("/Courses/", {"register_section": self.course.courseid}, follow=True)
-        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "lab", "section_schedule": ""})
-        self.assertEqual(response.context["message"], "Please fill out all required entries",
-                         msg="Empty schedule, lab created without schedule")
+        response = self.client.post("/RegisterSection/", {"section_sectionid": "902", "type": "lab","scheduleStart":"",
+                                                          "scheduleEnd":self.lab.scheduleEnd,
+                                                          "selectedDays":self.lab.scheduleDays})
+        self.assertEqual(response.context["message"], "Please fill out all required entries")

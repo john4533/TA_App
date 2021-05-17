@@ -17,7 +17,7 @@ class SupCoursesTests(TestCase):
         self.assertEqual(response.url, "/RegisterSection/")
 
     def test_add_course(self):
-        response = self.client.post("/Courses/", {"add_course": "add_course"})
+        response = self.client.post("/Courses/", {"add_course": "/RegisterCourses/"})
         self.assertEqual(response.url, "/RegisterCourses/")
 
     def test_delete_course(self):
