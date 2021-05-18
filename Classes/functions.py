@@ -280,7 +280,7 @@ def unAssignTASection(sectionid):
     # precondition: section id is provided
     # postcondition: confirmation message of removing the ta from the section is returned
     section = Section.objects.get(sectionid=sectionid)
-    ta = TA.objects.get(course=section.course)
+    ta = section.TA_assigned
     ta.assignedlabs -= 1
     ta.save()
     section.TA_assigned = None
