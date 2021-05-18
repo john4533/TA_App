@@ -12,6 +12,10 @@ class TestEditAccount(TestCase):
     def test_EditAccount_personal(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})
         self.assertEqual(response.url, '/Home/')
+
+        response = self.client.post("/Account/", {"edit_account": "user23"})
+        self.assertEqual(response.url, '/editAccount/')
+
         response = self.client.post("/editAccount/", {"update_account": "user23", "name": "user24", "password": "1234", "address": "address2",
                                                       "phone": "123-456-7890", "officenumber": "room",
                                                       "officehoursStart": "13:00", "officehoursEnd": "14:00",
@@ -21,6 +25,10 @@ class TestEditAccount(TestCase):
     def test_EditAccount_other(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})
         self.assertEqual(response.url, '/Home/')
+
+        response = self.client.post('/AccountDisplay/', {"edit_account": "user3"})
+        self.assertEqual(response.url, '/editAccount/')
+
         response = self.client.post("/editAccount/", {"update_account": "user3", "name": "user24", "password": "1234",
                                                       "address": "address2",
                                                       "phone": "123-456-7890", "officenumber": "room",
