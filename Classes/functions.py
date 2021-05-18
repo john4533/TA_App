@@ -185,7 +185,11 @@ def deleteSection(sectionid=""):
     elif sectionid not in list(i["sectionid"] for i in Section.objects.all().values("sectionid")):
         string = "Section with that ID does not exist"
     else:
-        Section.objects.get(sectionid=sectionid).delete()
+        section = Section.objects.get(sectionid=sectionid)
+        if section.TA_assigned:
+            section.TA_assigned.assignedlabs -= 1
+            section.TA_assigned.save()
+        section.delete()
         string = "Section with ID " + sectionid + " has been deleted"
     return string
 
