@@ -150,6 +150,8 @@ def deleteCourse(courseid=""):
     return string
 
 def manage_registration(request):
+    # precondition: request is provided
+    # postcondition: redirect is handled along with the proper session
     dict = {"add_course": '/RegisterCourses/', "assign_instructor": '/AssignInstructor/',
             "register_section": '/RegisterSection/', "assign_TA_to_course": '/AssignTAToCourse/',
             "assign_TA_to_Section": '/AssignTAToSection/'}
@@ -163,6 +165,8 @@ def manage_registration(request):
             return redirect(dict[key])
 
 def manage_deletion(request):
+    # precondition: request is provided
+    # postcondition: confirmation for the deletion is returned
     dict2 = {"delete_course": deleteCourse,
              "rem_TA": unAssignTA, "del_section": deleteSection,
              "rem_TA_sec": unAssignTASection,
@@ -202,6 +206,8 @@ def assignInstructor(courseObj="", instructorUsername=""):
 
 
 def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=False):
+    # precondition: course object, ta username, number of labs, and grader status is provided
+    # postcondition: confirmation message for the ta assignment is returned
     if not courseObj:
         message = "Please select a course"
     elif not TAUsername:
@@ -216,6 +222,8 @@ def assignTAtoCourse(courseObj="", TAUsername="", numLabs="", graderstatus=False
 
 
 def assignTAtoSection(sectionid="", TAUsername=""):
+    # precondition: section id, ta username is provided
+    # postcondition: confirmation message after the ta assignment is returned
     if not sectionid:
         message = "Please select a section"
     elif not TAUsername:
@@ -252,6 +260,8 @@ def getTAsInCourse(sectionid):
 
 
 def unAssignTA(TAUsername):
+    # precondition: ta username is provided
+    # postcondition: confirmation message after removing the given ta from the course is returned
     user1 = User.objects.get(username=TAUsername)
     ta = TA.objects.get(user=user1)
     courseid = ta.course.courseid
@@ -267,6 +277,8 @@ def unAssignTA(TAUsername):
 
 
 def unAssignTASection(sectionid):
+    # precondition: section id is provided
+    # postcondition: confirmation message of removing the ta from the section is returned
     section = Section.objects.get(sectionid=sectionid)
     ta = TA.objects.get(course=section.course)
     ta.assignedlabs -= 1
@@ -277,6 +289,8 @@ def unAssignTASection(sectionid):
 
 
 def unAssignInstructor(courseid):
+    # precondition: course id is provided
+    # postcondition: confirmation message of removing the instructor from the course is returned
     course = Course.objects.get(courseid=courseid)
     instructor = course.Instructor.name
     course.Instructor = None

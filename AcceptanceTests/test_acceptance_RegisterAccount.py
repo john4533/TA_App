@@ -16,13 +16,18 @@ class SupAccountsTest(TestCase):
         response = self.client.post("/", {"name": "user23", "password": "123"})
         self.assertEqual(response.url,'/Home/')
         response = self.client.post("/RegisterAccount/", {"username": "user1","name":"kad", "password": "password1",
-                                                          "email": "user1@uwm.edu", "role": "instructor", "phone": "",
-                                                          "address": "","officenumber":"23", "officehours": "","skills":""})
+                                                          "email": "user1@uwm.edu", "role": "Instructor", "phone": "",
+                                                          "address": "","officenumber":"23", "officehoursStart": "12:00",
+                                                          "officehoursEnd":"13:00","selectedDays":"Monday","skills":""})
+
         self.assertEqual(response.url, "/AccountDisplay/")
 
-        response = self.client.post("/RegisterAccount/", {"username": "user2", "name":"mo","password": "password1",
-                                    "email": "user1@uwm.edu", "role": "instructor", "phone": "", "address": "","officenumber":"124", "officehours": "","skills":""}, follow=True)
-        self.assertEqual(len(response.context["accounts"]), 4)
+        response = self.client.post("/RegisterAccount/", {"username": "user2","name":"mo", "password": "password1",
+                                                          "email": "user1@uwm.edu", "role": "Instructor", "phone": "",
+                                                          "address": "","officenumber":"124", "officehoursStart": "12:00",
+                                                          "officehoursEnd":"13:00","selectedDays":"Monday","skills":""}, follow=True)
+
+        self.assertEqual(len(response.context["accounts"]),4)
 
     def test_createAccountwithfullinfo(self):
         response = self.client.post("/", {"name": "user23", "password": "123"})
@@ -30,7 +35,8 @@ class SupAccountsTest(TestCase):
 
         response = self.client.post("/RegisterAccount/", {"username": "user1","name": "4er","password": "password1",
                                     "email": "user1@uwm.edu", "role": "instructor", "phone": "1-(123)-456-7890",
-                                    "address": "20 Main Street","officenumber":"43", "officehours": "T @ 3:00 - 3:50","skills":""})
+                                    "address": "20 Main Street","officenumber":"43", "officehoursStart": "12:00",
+                                                          "officehoursEnd":"13:00","selectedDays":"Monday","skills":""})
 
         self.assertEqual(response.url, '/AccountDisplay/')
 
@@ -38,7 +44,8 @@ class SupAccountsTest(TestCase):
                                                           "email": "user1@uwm.edu", "role": "instructor",
                                                           "phone": "1-(123)-456-7890",
                                                           "address": "20 Main Street","officenumber":"43",
-                                                          "officehours": "T @ 3:00 - 3:50","skills":""}, follow=True)
+                                                          "officehoursStart": "12:00",
+                                                          "officehoursEnd":"13:00","selectedDays":"Monday","skills":""}, follow=True)
         self.assertEqual(len(response.context["accounts"]), 4)
 
     def test_emptyUsername(self):
